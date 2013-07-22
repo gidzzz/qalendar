@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DayWindow</class>
+ <widget class="QMainWindow" name="DayWindow">
+  <widget class="QWidget" name="mainWidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="ComponentListWidget" name="componentList"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <widget class="QMenu" name="windowMenu">
+    <addaction name="prevAction"/>
+    <addaction name="nextAction"/>
+    <addaction name="todayAction"/>
+    <addaction name="jumpAction"/>
+   </widget>
+   <addaction name="windowMenu"/>
+  </widget>
+  <action name="prevAction">
+   <property name="text">
+    <string>Previous day</string>
+   </property>
+  </action>
+  <action name="nextAction">
+   <property name="text">
+    <string>Next day</string>
+   </property>
+  </action>
+  <action name="todayAction">
+   <property name="text">
+    <string>Jump to today</string>
+   </property>
+  </action>
+  <action name="jumpAction">
+   <property name="text">
+    <string>Jump to</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComponentListWidget</class>
+   <extends>QListWidget</extends>
+   <header>ComponentListWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

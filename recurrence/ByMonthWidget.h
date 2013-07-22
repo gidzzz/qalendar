@@ -1,0 +1,24 @@
+#ifndef BYMONTHWIDGET_H
+#define BYMONTHWIDGET_H
+
+#include <QFrame>
+
+#include <QGridLayout>
+
+#include <QList>
+
+class ByMonthWidget : public QFrame
+{
+    Q_OBJECT
+
+public:
+    ByMonthWidget(QWidget *parent);
+
+    QString rulePart() const;
+    void parseRulePart(QString rule);
+
+private:
+    QGridLayout *monthsLayout;
+};
+
+#endif // BYMONTHWIDGET_H

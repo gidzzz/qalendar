@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CalendarEditDialog</class>
+ <widget class="QDialog" name="CalendarEditDialog">
+  <property name="windowTitle">
+   <string>Edit calendar</string>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed"/>
+  </property>
+  <layout class="QGridLayout" name="dialogLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="mainLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="typeInfo">
+       <property name="indent">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="typeWidget">
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QPushButton" name="localTypeButton">
+          <property name="text">
+           <string>Local</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="birthdayTypeButton">
+          <property name="text">
+           <string>Birthday</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nameEdit"/>
+     </item>
+     <item>
+      <widget class="QMaemo5ValueButton" name="colorButton">
+       <property name="text">
+        <string>Color</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="visibleBox">
+       <property name="text">
+        <string>Visible</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

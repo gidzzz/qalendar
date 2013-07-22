@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TodoWindow</class>
+ <widget class="QMainWindow" name="TodoWindow">
+  <property name="windowTitle">
+   <string>Task</string>
+  </property>
+  <widget class="VerticalScrollArea" name="scrollArea">
+   <widget class="QWidget" name="mainWidget">
+    <layout class="QVBoxLayout" name="mainLayout">
+     <property name="spacing">
+      <number>16</number>
+     </property>
+     <property name="leftMargin">
+      <number>7</number>
+     </property>
+     <property name="rightMargin">
+      <number>7</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="summaryInfo">
+       <property name="font">
+        <font>
+         <pointsize>21</pointsize>
+        </font>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="doneBox">
+       <property name="text">
+        <string>Done</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="dueLayout">
+       <item>
+        <widget class="QLabel" name="dueLabel">
+         <property name="text">
+          <string>Due</string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="dueInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="rightMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="alarmLayout">
+       <item>
+        <widget class="QLabel" name="alarmLabel">
+         <property name="text">
+          <string>Alarm</string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="alarmInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="rightMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="calendarLayout">
+       <item>
+        <widget class="QLabel" name="calendarIcon">
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="calendarInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="rightMargin">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QFrame" name="descriptionFrame">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="descriptionInfo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+       </property>
+       <property name="alignment">
+        <enum>Qt::AlignTop</enum>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <widget class="QMenu" name="windowMenu">
+    <addaction name="editAction"/>
+    <addaction name="deleteAction"/>
+   </widget>
+   <addaction name="windowMenu"/>
+  </widget>
+  <action name="editAction">
+   <property name="text">
+    <string>Edit task</string>
+   </property>
+  </action>
+  <action name="deleteAction">
+   <property name="text">
+    <string>Delete task</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VerticalScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>VerticalScrollArea.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

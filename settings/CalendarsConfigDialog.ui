@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CalendarsConfigDialog</class>
+ <widget class="QDialog" name="CalendarsConfigDialog">
+  <property name="windowTitle">
+   <string>Edit calendars</string>
+  </property>
+  <layout class="QGridLayout" name="dialogLayout">
+   <property name="margin">
+     <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="ExpandingListWidget" name="calendarList">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ExpandingListWidget</class>
+   <extends>QListWidget</extends>
+   <header>ExpandingListWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

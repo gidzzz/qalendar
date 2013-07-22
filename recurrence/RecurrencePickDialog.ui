@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RecurrencePickDialog</class>
+ <widget class="QDialog" name="RecurrencePickDialog">
+  <property name="windowTitle">
+   <string>Recurrence</string>
+  </property>
+  <layout class="QGridLayout" name="dialogLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="VerticalScrollArea" name="mainArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum"/>
+     </property>
+     <widget class="QWidget" name="mainWidget">
+      <layout class="QVBoxLayout" name="mainLayout">
+       <property name="margin">
+        <number>5</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="enableBox">
+         <property name="text">
+          <string>Repeat</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="configWidget">
+         <layout class="QVBoxLayout" name="configLayout">
+          <item>
+           <widget class="QLabel" name="problemsInfo">
+            <property name="visible">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="basicsLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="frequencyLabel">
+              <property name="text">
+               <string>Frequency</string>
+              </property>
+              <property name="indent">
+               <number>8</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="frequencyBox">
+              <item>
+               <property name="text">
+                <string>Daily</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Weekly</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Monthly</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Yearly</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="intervalLabel">
+              <property name="text">
+               <string>Interval</string>
+              </property>
+              <property name="indent">
+               <number>8</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="intervalBox">
+              <property name="alignment">
+               <enum>Qt::AlignCenter</enum>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QComboBox" name="limitBox">
+              <item>
+               <property name="text">
+                <string>Forever</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Until</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Count</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QMaemo5ValueButton" name="untilBox">
+              <property name="visible">
+               <bool>false</bool>
+              </property>
+              <property name="valueLayout">
+               <enum>QMaemo5ValueButton::ValueBesideText</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="countBox">
+              <property name="visible">
+               <bool>false</bool>
+              </property>
+              <property name="alignment">
+               <enum>Qt::AlignCenter</enum>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>9999</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="ByWeekdayWidget" name="byWeekdayWidget"/>
+          </item>
+          <item>
+           <widget class="ByDayWidget" name="byMonthdayWidget">
+            <property name="maximum">
+             <number>31</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="ByDayWidget" name="byYeardayWidget">
+            <property name="maximum">
+             <number>366</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="ByDayWidget" name="byYearweekWidget">
+            <property name="maximum">
+             <number>53</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="ByMonthWidget" name="byMonthWidget"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="standardButtons">
+      <enum>QDialogButtonBox::Cancel | QDialogButtonBox::Ok</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VerticalScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>VerticalScrollArea.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ByDayWidget</class>
+   <extends>QWidget</extends>
+   <header>ByDayWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ByWeekdayWidget</class>
+   <extends>QWidget</extends>
+   <header>ByWeekdayWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ByMonthWidget</class>
+   <extends>QWidget</extends>
+   <header>ByMonthWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

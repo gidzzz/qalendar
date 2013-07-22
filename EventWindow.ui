@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EventWindow</class>
+ <widget class="QMainWindow" name="EventWindow">
+  <property name="windowTitle">
+   <string>Event</string>
+  </property>
+  <widget class="VerticalScrollArea" name="scrollArea">
+   <widget class="QWidget" name="mainWidget">
+    <layout class="QVBoxLayout" name="mainLayout">
+     <property name="spacing">
+      <number>16</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="summaryInfo">
+       <property name="font">
+        <font>
+         <pointsize>21</pointsize>
+        </font>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="locationInfo">
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="detailsFrame">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="timeLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="fromLabel">
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="fromInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="toLabel">
+         <property name="text">
+          <string>To</string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="toInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="repeatLayout">
+       <item>
+        <widget class="QLabel" name="repeatLabel">
+         <property name="text">
+          <string>Repeat</string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="repeatInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="alarmLayout">
+       <item>
+        <widget class="QLabel" name="alarmLabel">
+         <property name="text">
+          <string>Alarm</string>
+         </property>
+         <property name="alignment">
+          <enum>Qt::AlignTop</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="alarmInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="calendarLayout">
+       <item>
+        <widget class="QLabel" name="calendarIcon"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="calendarInfo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QFrame" name="descriptionFrame">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="descriptionInfo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <widget class="QMenu" name="windowMenu">
+    <addaction name="prevAction"/>
+    <addaction name="nextAction"/>
+    <addaction name="editAction"/>
+    <addaction name="deleteAction"/>
+   </widget>
+   <addaction name="windowMenu"/>
+  </widget>
+  <action name="prevAction">
+   <property name="text">
+    <string>Previous event</string>
+   </property>
+  </action>
+  <action name="nextAction">
+   <property name="text">
+    <string>Next event</string>
+   </property>
+  </action>
+  <action name="editAction">
+   <property name="text">
+    <string>Edit event</string>
+   </property>
+  </action>
+  <action name="deleteAction">
+   <property name="text">
+    <string>Delete event</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VerticalScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>VerticalScrollArea.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

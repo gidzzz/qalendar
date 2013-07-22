@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsDialog</class>
+ <widget class="QDialog" name="SettingsDialog">
+  <property name="windowTitle">
+   <string>Settings</string>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed"/>
+  </property>
+  <layout class="QGridLayout" name="dialogLayout">
+   <property name="leftMargin">
+    <number>5</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="settingsLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QMaemo5ValueButton" name="calendarsButton">
+       <property name="text">
+        <string>Edit calendars</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QMaemo5ValueButton" name="deleteEventsButton">
+       <property name="text">
+        <string>Delete events</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QMaemo5ValueButton" name="deleteTodosButton">
+       <property name="text">
+        <string>Delete tasks</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="standardButtons">
+      <enum>QDialogButtonBox::Cancel | QDialogButtonBox::Save</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

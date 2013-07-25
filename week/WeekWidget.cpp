@@ -346,7 +346,7 @@ void WeekWidget::renderRow(int hour, int baseY, QPainter &painter)
     // Draw hour label
     painter.drawText(0, baseY + 3, TimeWidth, cellH,
                      Qt::AlignTop|Qt::AlignHCenter,
-                     hour < 0 ? "All day" : QString("%1:00").arg(QString::number(hour), 2, '0'));
+                     hour < 0 ? tr("All day") : QString("%1:00").arg(QString::number(hour), 2, '0'));
 
     const int currentDay = QDate::currentDate().dayOfWeek();
     const bool isCurrentWeek = firstDate() <= QDate::currentDate() && QDate::currentDate() < lastDate();

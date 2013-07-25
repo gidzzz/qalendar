@@ -85,7 +85,7 @@ void ExpandingTextEdit::focusOutEvent(QFocusEvent *e)
         this->setPalette(palette);
 
         // Set the placeholder
-        this->setPlainText("Description");
+        this->setPlainText(tr("Description"));
         placeholderActive = true;
     }
 

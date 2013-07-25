@@ -18,7 +18,7 @@ ByMonthWidget::ByMonthWidget(QWidget *parent) :
     mainLayout->setContentsMargins(0, 0, 0, 0);
     /*mainLayout->setSpacing(0);*/
 
-    QLabel *titleLabel = new RecurrenceSectionLabel("By month", this);
+    QLabel *titleLabel = new RecurrenceSectionLabel(tr("By month"), this);
 
     monthsLayout = new QGridLayout();
     monthsLayout->setParent(mainLayout);

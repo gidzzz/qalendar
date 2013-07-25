@@ -11,6 +11,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(new QPushButton(tr("Save")), QDialogButtonBox::AcceptRole);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 

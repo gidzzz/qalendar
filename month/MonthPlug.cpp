@@ -44,9 +44,8 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     QFont font = this->font();
     font.setPointSize(13);
     font.setBold(true);
-    const char *days[] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     for (int i = 0; i < NumWeekdays; i++) {
-        QLabel *dayLabel = new QLabel(days[i]);
+        QLabel *dayLabel = new QLabel(QDate::shortDayName(i+1));
         dayLabel->setAlignment(Qt::AlignHCenter);
         dayLabel->setFont(font);
         dayLayout->addWidget(dayLabel);

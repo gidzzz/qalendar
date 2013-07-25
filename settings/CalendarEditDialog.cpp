@@ -23,9 +23,9 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     // Set up action buttons
-    QPushButton *exportButton = new QPushButton("Export");
-    QPushButton *deleteButton = new QPushButton("Delete");
-    QPushButton *saveButton   = new QPushButton("Save");
+    QPushButton *exportButton = new QPushButton(tr("Export"));
+    QPushButton *deleteButton = new QPushButton(tr("Delete"));
+    QPushButton *saveButton   = new QPushButton(tr("Save"));
     ui->buttonBox->addButton(exportButton, QDialogButtonBox::ActionRole);
     ui->buttonBox->addButton(deleteButton, QDialogButtonBox::ActionRole);
     ui->buttonBox->addButton(saveButton,   QDialogButtonBox::ActionRole);

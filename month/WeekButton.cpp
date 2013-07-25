@@ -28,7 +28,7 @@ void WeekButton::setDate(QDate date)
 {
     this->date = date;
 
-    this->setText(QString("w%1").arg(QString::number(date.weekNumber()), 2, '0'));
+    this->setText(QString(tr("w%1")).arg(QString::number(date.weekNumber()), 2, '0'));
 }
 
 void WeekButton::paintEvent(QPaintEvent *)

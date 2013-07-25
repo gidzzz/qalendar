@@ -21,7 +21,7 @@ JournalEditDialog::JournalEditDialog(QWidget *parent, CJournal *journal) :
     ui->calendarButton->setPickSelector(cps);
 
     if (journal) {
-        this->setWindowTitle("Edit note");
+        this->setWindowTitle(tr("Edit note"));
 
         // Load component data
         ui->summaryEdit->setPlainText(QString::fromUtf8(journal->getSummary().c_str()));
@@ -29,7 +29,7 @@ JournalEditDialog::JournalEditDialog(QWidget *parent, CJournal *journal) :
 
         this->setupDeleteButton(ui->buttonBox, SLOT(deleteJournal()));
     } else {
-        this->setWindowTitle("New note");
+        this->setWindowTitle(tr("New note"));
 
         journal = new CJournal();
 

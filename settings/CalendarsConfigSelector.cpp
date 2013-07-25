@@ -13,7 +13,7 @@ CalendarsConfigSelector::CalendarsConfigSelector(QObject *parent) : QMaemo5Abstr
 QString CalendarsConfigSelector::currentValueText() const
 {
     int error;
-    return QString("%1 visible").arg(CMulticalendar::MCInstance()->getVisibleCalendarCount(error));
+    return tr("%n visible", "", CMulticalendar::MCInstance()->getVisibleCalendarCount(error));
 }
 
 QWidget* CalendarsConfigSelector::widget(QWidget *parent)

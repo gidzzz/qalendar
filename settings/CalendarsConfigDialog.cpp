@@ -21,7 +21,7 @@ CalendarsConfigDialog::CalendarsConfigDialog(QWidget *parent) :
 
     ui->calendarList->setItemDelegate(new DetailedCalendarDelegate(ui->calendarList));
 
-    QPushButton *newButton = new QPushButton("New");
+    QPushButton *newButton = new QPushButton(tr("New"));
     ui->buttonBox->addButton(newButton, QDialogButtonBox::ActionRole);
     disconnect(newButton, SIGNAL(clicked()), ui->buttonBox, 0);
     connect(newButton, SIGNAL(clicked()), this, SLOT(newCalendar()));

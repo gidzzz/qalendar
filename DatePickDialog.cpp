@@ -23,11 +23,10 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     resizeCount(0)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
 
     // Make sure that the provided date is in the supported range
     date = qBound(QDate(minYear, 1, 1), date, QDate(maxYear, 12, 31));
-
-    ui->buttonBox->addButton(new QPushButton("Done"), QDialogButtonBox::AcceptRole);
 
     // Create the day list
     if (type == Day) {
@@ -177,7 +176,7 @@ void DatePickDialog::adjustWeeks()
                                               : (1 - weekday));
 
     for (int i = 0; i < targetWeeks; i++) {
-        lists[Week]->item(i)->setText(QString("Week %1 (%2 - %3)")
+        lists[Week]->item(i)->setText(QString(tr("Week %1 (%2 - %3)"))
                                      .arg(i+1)
                                      .arg(weekProbe.toString("dd/MM"))
                                      .arg(weekProbe.addDays(6).toString("dd/MM")));

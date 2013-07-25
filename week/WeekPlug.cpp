@@ -66,7 +66,7 @@ QString WeekPlug::title() const
 {
     int year;
     int week = date.weekNumber(&year);
-    return QString("Week %1 (%2)").arg(week).arg(year);
+    return QString(tr("Week %1 (%2)")).arg(week).arg(year);
 }
 
 void WeekPlug::onActivated()

@@ -66,7 +66,7 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     connect(tpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
 
     if (event) {
-        this->setWindowTitle("Edit event");
+        this->setWindowTitle(tr("Edit event"));
 
         this->event = event;
 
@@ -84,7 +84,7 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
         this->setupDeleteButton(ui->buttonBox, SLOT(deleteEvent()));
     } else {
-        this->setWindowTitle("New event");
+        this->setWindowTitle(tr("New event"));
 
         this->event = event = new CEvent();
 

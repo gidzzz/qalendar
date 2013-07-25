@@ -1,5 +1,7 @@
 #include "AlarmPickDialog.h"
 
+#include <QPushButton>
+
 #include "CWrapper.h"
 
 AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
@@ -7,6 +9,7 @@ AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
     ui(new Ui::AlarmPickDialog)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 

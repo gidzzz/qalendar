@@ -76,7 +76,7 @@ public:
                 QString timeText;
 
                 if (component->getAllDay()) {
-                    timeText = "All\nday";
+                    timeText = tr("All\nday");
                     if (startDate.date() < date)
                         timeText = "..." + timeText;
                     if (date < endDate.date())

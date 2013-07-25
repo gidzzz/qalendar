@@ -23,7 +23,7 @@ QString AlarmPickSelector::currentValueText() const
 
 QString AlarmPickSelector::textForSeconds(int seconds)
 {
-    if (seconds < 0) return "None";
+    if (seconds < 0) return tr("None");
 
     const int h = seconds / 3600;
     const int m = seconds % 3600 / 60;
@@ -34,15 +34,16 @@ QString AlarmPickSelector::textForSeconds(int seconds)
     const int numFieldsSet = (bool) h + (bool) m + (bool) s;
 
     if (numFieldsSet == 0) {
-        return "Exact";
+        return tr("Exact");
     } else if (numFieldsSet == 1) {
-        return h ? QString::number(h) + " hour(s) before" :
-               m ? QString::number(m) + " minute(s) before" :
-                   QString::number(s) + " second(s) before";
+        return h ? tr("%n hour(s) before", "", h) :
+               m ? tr("%n minute(s) before", "", m) :
+                   tr("%n second(s) before", "", s);
     } else {
-        return QString::number(h).rightJustified(2, '0') + ":" +
-               QString::number(m).rightJustified(2, '0') + ":" +
-               QString::number(s).rightJustified(2, '0') + " before";
+        return QString(tr("%1:%2:%3 before"))
+               .arg(QString::number(h), 2, '0')
+               .arg(QString::number(m), 2, '0')
+               .arg(QString::number(s), 2, '0');
     }
 }
 

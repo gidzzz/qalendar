@@ -33,7 +33,7 @@ DayWindow::DayWindow(QDate date, QWidget *parent) :
 
     // Create a button to add new tasks
     QPushButton *newEventButton = new QPushButton(ui->componentList);
-    newEventButton->setText("New event");
+    newEventButton->setText(tr("New event"));
     newEventButton->setIcon(QIcon::fromTheme("general_add"));
 
     // Place the button in the list
@@ -93,7 +93,7 @@ void DayWindow::reload()
     cleanup();
 
     // Update window title
-    this->setWindowTitle(date == QDate::currentDate() ? "Today" : date.toString("dddd d MMMM yyyy"));
+    this->setWindowTitle(date == QDate::currentDate() ? tr("Today") : date.toString("dddd d MMMM yyyy"));
 
     const time_t startStamp = QDateTime(date).toTime_t();
     const time_t   endStamp = QDateTime(date.addDays(1)).toTime_t() - 1;

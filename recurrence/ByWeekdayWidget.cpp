@@ -3,6 +3,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
+#include <QDate>
+
 #include "RecurrenceSectionLabel.h"
 
 ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
@@ -13,16 +15,15 @@ ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
 
-    QLabel *titleLabel = new RecurrenceSectionLabel("By day of week", this);
+    QLabel *titleLabel = new RecurrenceSectionLabel(tr("By day of week"), this);
 
     daysLayout = new QHBoxLayout();
     daysLayout->setParent(mainLayout);
     daysLayout->setSpacing(0);
 
     // Create a checkable button for each weekday
-    const char *weekdays[] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
     for (int i = 0; i < 7; i++) {
-        QPushButton *dayButton = new QPushButton(weekdays[i], this);
+        QPushButton *dayButton = new QPushButton(QDate::shortDayName(i+1), this);
         dayButton->setCheckable(true);
         daysLayout->addWidget(dayButton);
         connect(dayButton, SIGNAL(toggled(bool)), this, SLOT(onDayToggled(bool)));
@@ -32,8 +33,8 @@ ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
     negativeDaysWidget = new ByWeekdayCoreWidget(true, this);
 
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(positiveDaysWidget, "From beginning");
-    tabWidget->addTab(negativeDaysWidget, "From end");
+    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
+    tabWidget->addTab(negativeDaysWidget, tr("From end"));
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addItem(daysLayout);

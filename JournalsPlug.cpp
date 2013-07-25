@@ -25,7 +25,7 @@ JournalsPlug::JournalsPlug(QWidget *parent) :
 
     // Create a button to add new notes
     QPushButton *newJournalButton = new QPushButton(ui->journalList);
-    newJournalButton->setText("New note");
+    newJournalButton->setText(tr("New note"));
     newJournalButton->setIcon(QIcon::fromTheme("general_add"));
 
     // Place the button in the list
@@ -47,7 +47,7 @@ JournalsPlug::~JournalsPlug()
 
 QString JournalsPlug::title() const
 {
-    QString title = "Notes";
+    QString title = tr("Notes");
 
     // The first item is always the button
     if (ui->journalList->count() > 1)

@@ -25,23 +25,23 @@ QString RecurrencePickSelector::currentValueText() const
 
     switch (recurrence->getRtype()) {
         case E_DISABLED:
-            return "Never";
+            return tr("Never");
         case E_NONE:
-            return "External";
+            return tr("External");
         case E_DAILY:
-            return "Every day";
+            return tr("Every day");
         case E_WEEKDAY:
-            return "Every workday";
+            return tr("Every workday");
         case E_WEEKLY:
-            return "Every week";
+            return tr("Every week");
         case E_MONTHLY:
-            return "Every month";
+            return tr("Every month");
         case E_YEARLY:
-            return "Every year";
+            return tr("Every year");
         case E_COMPLEX:
-            return "Complex";
+            return tr("Complex");
         default:
-            return "(unknown)";
+            return "UNKNOWN";
     }
 }
 

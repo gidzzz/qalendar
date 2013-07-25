@@ -14,7 +14,7 @@ public:
     AgendaPlug(QDate date, QWidget *parent);
     ~AgendaPlug();
 
-    QString title() const { return "Agenda"; }
+    QString title() const { return tr("Agenda"); }
     bool isRotatable() const { return true; }
 
     void onActivated();

@@ -122,7 +122,7 @@ void AgendaPlug::reload()
                 todaysHeading = item;
                 // Create and add 'new event' button to the list
                 QPushButton *newEventButton = new QPushButton(ui->componentList);
-                newEventButton->setText("New event");
+                newEventButton->setText(tr("New event"));
                 newEventButton->setIcon(QIcon::fromTheme("general_add"));
                 item = new QListWidgetItem();
                 item->setData(DateRole, this->date);

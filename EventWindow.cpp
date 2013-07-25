@@ -127,7 +127,7 @@ void EventWindow::reload()
     const bool allDay = event->getAllDay();
     const bool multiDay = from.date() != to.date();
 
-    ui->fromLabel->setText(multiDay ? "From" : "On");
+    ui->fromLabel->setText(multiDay ? tr("From") : tr("On"));
     ui->toLabel->setVisible(multiDay);
     ui->toInfo->setVisible(multiDay);
 

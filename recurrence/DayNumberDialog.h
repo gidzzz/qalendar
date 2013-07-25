@@ -14,14 +14,14 @@ public:
     DayNumberDialog(int maximum, QWidget *parent) :
         QDialog(parent)
     {
-        this->setWindowTitle("Choose day number");
+        this->setWindowTitle("Enter day number");
 
         QHBoxLayout *mainLayout = new QHBoxLayout(this);
 
         numberBox = new QSpinBox(this);
         numberBox->setRange(1, maximum);
 
-        QPushButton *acceptButton = new QPushButton("Add", this);
+        QPushButton *acceptButton = new QPushButton(tr("Add"), this);
 
         mainLayout->addWidget(numberBox);
         mainLayout->addWidget(acceptButton);

@@ -31,7 +31,7 @@ TodosPlug::TodosPlug(QWidget *parent) :
 
     // Create a button to add new tasks
     QPushButton *newTodoButton = new QPushButton(ui->todoList);
-    newTodoButton->setText("New task");
+    newTodoButton->setText(tr("New task"));
     newTodoButton->setIcon(QIcon::fromTheme("general_add"));
 
     // Place the button in the list
@@ -79,7 +79,7 @@ QString TodosPlug::title() const
         status = " (" + status;
     }
 
-    return "Tasks" + status;
+    return tr("Tasks") + status;
 }
 
 void TodosPlug::onActivated()

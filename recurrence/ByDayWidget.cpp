@@ -19,8 +19,8 @@ ByDayWidget::ByDayWidget(QWidget *parent) :
     negativeDaysWidget = new ByDayCoreWidget(true, this);
 
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(positiveDaysWidget, "From beginning");
-    tabWidget->addTab(negativeDaysWidget, "From end");
+    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
+    tabWidget->addTab(negativeDaysWidget, tr("From end"));
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(tabWidget);
@@ -30,11 +30,11 @@ void ByDayWidget::setMaximum(int maximum)
 {
     // HACK, change it to something nicer
     if (maximum == 31)
-        titleLabel->setText("By day of month");
+        titleLabel->setText(tr("By day of month"));
     if (maximum == 53)
-        titleLabel->setText("By week of year");
+        titleLabel->setText(tr("By week of year"));
     if (maximum == 366)
-        titleLabel->setText("By day of year");
+        titleLabel->setText(tr("By day of year"));
 
     positiveDaysWidget->setMaximum(maximum);
     negativeDaysWidget->setMaximum(maximum);

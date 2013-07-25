@@ -9,6 +9,7 @@ ColorPickDialog::ColorPickDialog(int color, QWidget *parent) :
     ui(new Ui::ColorPickDialog)
 {
     ui->setupUi(this);
+    ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 

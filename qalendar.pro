@@ -3,17 +3,26 @@ QT += core gui maemo5
 TARGET = qalendar
 TEMPLATE = app
 
-INCLUDEPATH += recurrence settings
+INCLUDEPATH += month week recurrence settings
 
 SOURCES += main.cpp \
     MainWindow.cpp \
     \
     TemporalPlug.cpp \
     AgendaPlug.cpp \
-    MonthPlug.cpp \
-    WeekPlug.cpp \
     JournalsPlug.cpp \
     TodosPlug.cpp \
+    \
+    month/MonthPlug.cpp \
+    month/WeekButton.cpp \
+    month/MonthWidget.cpp \
+    \
+    week/WeekPlug.cpp \
+    week/WeekdayButton.cpp \
+    week/WeekArea.cpp \
+    week/WeekHintWidget.cpp \
+    week/WeekWidget.cpp \
+    week/ComponentWidget.cpp \
     \
     recurrence/RecurrencePickSelector.cpp \
     recurrence/RecurrencePickDialog.cpp \
@@ -41,14 +50,7 @@ SOURCES += main.cpp \
     ColorPickDialog.cpp \
     DatePickSelector.cpp \
     DatePickDialog.cpp \
-    MonthWidget.cpp \
     JournalEditDialog.cpp \
-    WeekButton.cpp \
-    WeekdayButton.cpp \
-    WeekArea.cpp \
-    WeekWidget.cpp \
-    WeekHintWidget.cpp \
-    ComponentWidget.cpp \
     EventWindow.cpp \
     TodoWindow.cpp \
     ComponentListWidget.cpp \
@@ -62,9 +64,22 @@ HEADERS += \
     TemporalPlug.h \
     AgendaPlug.h \
     TodosPlug.h \
-    MonthPlug.h \
-    WeekPlug.h \
     JournalsPlug.h \
+    \
+    month/MonthPlug.h \
+    month/WeekButton.h \
+    month/MonthWidget.h \
+    month/MonthLayoutWindow.h \
+    \
+    week/WeekPlug.h \
+    week/WeekdayButton.h \
+    week/WeekArea.h \
+    week/WeekHintWidget.h \
+    week/WeekHintProfile.h \
+    week/WeekWidget.h \
+    week/WeekProfile.h \
+    week/WeekLayoutWindow.h \
+    week/ComponentWidget.h \
     \
     recurrence/RecurrencePickSelector.h \
     recurrence/RecurrencePickDialog.h \
@@ -83,7 +98,9 @@ HEADERS += \
     settings/CalendarEditDialog.h \
     settings/DetailedCalendarDelegate.h \
     \
+    Metrics.h \
     Roles.h \
+    Theme.h \
     \
     ChangeManager.h \
     ChangeClient.h \
@@ -105,21 +122,8 @@ HEADERS += \
     ComponentListDelegate.h \
     DateHeadingWidget.h \
     CWrapper.h \
-    MonthWidget.h \
     JournalEditDialog.h \
     JournalDelegate.h \
-    MonthLayoutWindow.h \
-    WeekLayoutWindow.h \
-    WeekProfile.h \
-    WeekHintProfile.h \
-    Theme.h \
-    Metrics.h \
-    WeekButton.h \
-    WeekdayButton.h \
-    WeekArea.h \
-    WeekWidget.h \
-    WeekHintWidget.h \
-    ComponentWidget.h \
     EventWindow.h \
     TodoWindow.h \
     ComponentListWidget.h \

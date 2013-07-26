@@ -73,15 +73,15 @@ MainWindow::MainWindow()
     // Select the last used plug
     QString view = QSettings().value("View", "month").toString();
     if (view == "month")
-        monthAction->trigger();
+        showMonth();
     else if (view == "week")
-        weekAction->trigger();
+        showWeek();
     else if (view == "agenda")
-        agendaAction->trigger();
+        showAgenda();
     else if (view == "todos")
-        todosAction->trigger();
+        showTodos();
     else if (view == "journals")
-        journalsAction->trigger();
+        showJournals();
 }
 
 // Forward activation events to the current plug
@@ -150,6 +150,8 @@ void MainWindow::deleteOldComponents()
 // Switch to month view
 void MainWindow::showMonth()
 {
+    monthAction->setChecked(true);
+
     setPlug(monthPlug);
 
     QSettings().setValue("View", "month");
@@ -158,6 +160,8 @@ void MainWindow::showMonth()
 // Switch to week view
 void MainWindow::showWeek(QDate date)
 {
+    weekAction->setChecked(true);
+
     setPlug(weekPlug);
 
     if (date.isValid())
@@ -169,6 +173,8 @@ void MainWindow::showWeek(QDate date)
 // Switch to agenda view
 void MainWindow::showAgenda()
 {
+    agendaAction->setChecked(true);
+
     setPlug(agendaPlug);
 
     QSettings().setValue("View", "agenda");
@@ -177,6 +183,8 @@ void MainWindow::showAgenda()
 // Switch to tasks view
 void MainWindow::showTodos()
 {
+    todosAction->setChecked(true);
+
     setPlug(todosPlug);
 
     QSettings().setValue("View", "todos");
@@ -185,6 +193,8 @@ void MainWindow::showTodos()
 // Switch to notes view
 void MainWindow::showJournals()
 {
+    journalsAction->setChecked(true);
+
     setPlug(journalsPlug);
 
     QSettings().setValue("View", "journals");

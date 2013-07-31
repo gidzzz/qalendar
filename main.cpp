@@ -17,6 +17,8 @@
 **************************************************************************/
 
 #include <QApplication>
+#include <QTranslator>
+#include <QDebug>
 
 #include "MainWindow.h"
 
@@ -26,6 +28,15 @@ int main(int argc, char  *argv[])
     QApplication::setApplicationName("qalendar");
 
     QApplication app(argc, argv);
+
+    QString tsPath = PKGDATADIR "/translations/qalendar_";
+    QString lang = qgetenv("LANG");
+    qDebug() << "Detected language:" << lang;
+
+    QTranslator translator;
+    if (!translator.load(tsPath + lang))
+        translator.load(tsPath + "en");
+    app.installTranslator(&translator);
 
     MainWindow window;
 

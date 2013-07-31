@@ -159,21 +159,39 @@ FORMS += \
     EventWindow.ui \
     TodoWindow.ui
 
+TRANSLATIONS =
+
+isEmpty(QMAKE_LRELEASE) {
+    QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+}
+lrelease.input = TRANSLATIONS
+lrelease.output = ${QMAKE_FILE_BASE}.qm
+lrelease.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_BASE}.qm
+lrelease.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += lrelease
+
 isEmpty(PREFIX) {
     PREFIX = /usr
 }
-
 BINDIR = $$PREFIX/bin
 DATADIR = $$PREFIX/share
+PKGDATADIR = $$DATADIR/$$TARGET
 
-DEFINES += DATADIR=\\\"$$DATADIR\\\" PKGDATADIR=\\\"$$PKGDATADIR\\\"
+DEFINES += PKGDATADIR=\\\"$$PKGDATADIR\\\"
 
-INSTALLS += target desktop
+INSTALLS += target desktop translations
 
 target.path = $$BINDIR
 
 desktop.path = $$DATADIR/applications/hildon
 desktop.files += ../extra/$${TARGET}.desktop
+
+for(TSFILE, TRANSLATIONS) {
+    QMFILE = $$replace(TSFILE, ".ts", ".qm")
+    translations.files += $$OUT_PWD/$$basename(QMFILE)
+}
+translations.CONFIG += no_check_exist
+translations.path = $$PKGDATADIR/translations
 
 CONFIG += link_pkgconfig
 PKGCONFIG += calendar-backend

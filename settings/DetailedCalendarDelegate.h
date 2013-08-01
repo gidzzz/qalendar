@@ -27,9 +27,9 @@ public:
         QString name = index.data(NameRole).toString();
 
         QString details = QString(CWrapper::calendarType(index.data(TypeRole).toInt()))
-                          + ", " + tr("%n events", "", index.data(EventCountRole).toInt())
-                          + ", " + tr("%n tasks", "", index.data(TodoCountRole).toInt())
-                          + ", " + tr("%n notes", "", index.data(JournalCountRole).toInt());
+                          + ", " + tr("%n event(s)", "", index.data(EventCountRole).toInt())
+                          + ", " + tr("%n task(s)", "", index.data(TodoCountRole).toInt())
+                          + ", " + tr("%n note(s)", "", index.data(JournalCountRole).toInt());
 
         QFont f = painter->font();
         QRect r = option.rect.adjusted(Margin+IconSize+Margin, Margin+TextMargin, -Margin, -Margin-ValueMargin);

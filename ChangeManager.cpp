@@ -44,7 +44,7 @@ bool ChangeManager::edit(QWidget *parent, CComponent *component)
             break;
         case E_BDAY:
             // TODO: Editable birthdays?
-            QMaemo5InformationBox::information(parent, "Unable to edit birthdays");
+            QMaemo5InformationBox::information(parent, QObject::tr("Unable to edit birthdays"));
             break;
     }
 
@@ -54,7 +54,7 @@ bool ChangeManager::edit(QWidget *parent, CComponent *component)
 // Delete the component
 bool ChangeManager::drop(QWidget *parent, CComponent *component)
 {
-    if (QMessageBox::warning(parent, "Confirmation", "Delete component?",
+    if (QMessageBox::warning(parent, " ", QObject::tr("Delete component?"),
                              QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) != QMessageBox::Yes)
     {
         return false;

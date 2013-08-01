@@ -141,7 +141,7 @@ void CalendarEditDialog::exportCalendar()
 // Delete the calendar
 void CalendarEditDialog::deleteCalendar()
 {
-    if (QMessageBox::warning(this, "Confirmation", "Delete calendar?",
+    if (QMessageBox::warning(this, " ", tr("Delete this calendar and its events, tasks and notes?"),
                              QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) == QMessageBox::Yes)
     {
         int error;

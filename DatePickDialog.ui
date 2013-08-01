@@ -3,7 +3,7 @@
  <class>DatePickDialog</class>
  <widget class="QDialog" name="DatePickDialog">
   <property name="windowTitle">
-   <string>Jump to</string>
+   <string>Select date</string>
   </property>
   <layout class="QGridLayout" name="dialogLayout">
    <item row="0" column="0">

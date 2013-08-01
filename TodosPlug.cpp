@@ -225,7 +225,7 @@ void TodosPlug::hideDoneTodos(bool hide)
 
 void TodosPlug::cleanTodos()
 {
-    if (QMessageBox::warning(this, "Confirmation", "Delete completed tasks from all calendars?",
+    if (QMessageBox::warning(this, " ", tr("Delete completed tasks from all calendars?"),
                              QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) == QMessageBox::Yes)
     {
         // NOTE: It might be convenient to have an option to ignore invisible

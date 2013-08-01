@@ -93,7 +93,7 @@ void DayWindow::reload()
     cleanup();
 
     // Update window title
-    this->setWindowTitle(date == QDate::currentDate() ? tr("Today") : date.toString("dddd d MMMM yyyy"));
+    this->setWindowTitle(date.toString("dddd d MMMM yyyy"));
 
     const time_t startStamp = QDateTime(date).toTime_t();
     const time_t   endStamp = QDateTime(date.addDays(1)).toTime_t() - 1;

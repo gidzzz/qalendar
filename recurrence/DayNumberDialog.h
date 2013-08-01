@@ -14,7 +14,7 @@ public:
     DayNumberDialog(int maximum, QWidget *parent) :
         QDialog(parent)
     {
-        this->setWindowTitle("Enter day number");
+        this->setWindowTitle(tr("Enter day number"));
 
         QHBoxLayout *mainLayout = new QHBoxLayout(this);
 

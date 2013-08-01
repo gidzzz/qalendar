@@ -201,6 +201,11 @@
         <source>Save file</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="144"/>
+        <source>Delete this calendar and its events, tasks and notes?</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>CalendarPickDialog</name>
@@ -298,11 +303,6 @@ day</source>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.ui" line="6"/>
-        <source>Jump to</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../DatePickDialog.cpp" line="26"/>
         <source>Done</source>
         <translation></translation>
@@ -312,9 +312,19 @@ day</source>
         <source>Week %1 (%2 - %3)</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../DatePickDialog.ui" line="6"/>
+        <source>Select date</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>DayNumberDialog</name>
+    <message>
+        <location filename="../recurrence/DayNumberDialog.h" line="17"/>
+        <source>Enter day number</source>
+        <translation></translation>
+    </message>
     <message>
         <location filename="../recurrence/DayNumberDialog.h" line="24"/>
         <source>Add</source>
@@ -346,11 +356,6 @@ day</source>
     <message>
         <location filename="../DayWindow.cpp" line="36"/>
         <source>New event</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../DayWindow.cpp" line="96"/>
-        <source>Today</source>
         <translation></translation>
     </message>
 </context>
@@ -599,6 +604,19 @@ day</source>
     <message>
         <location filename="../month/MonthPlug.cpp" line="63"/>
         <source>New event</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../ChangeManager.cpp" line="47"/>
+        <source>Unable to edit birthdays</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ChangeManager.cpp" line="57"/>
+        <source>Delete component?</source>
         <translation></translation>
     </message>
 </context>
@@ -858,6 +876,11 @@ day</source>
     <message>
         <location filename="../TodosPlug.cpp" line="203"/>
         <source>Delete</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../TodosPlug.cpp" line="228"/>
+        <source>Delete completed tasks from all calendars?</source>
         <translation></translation>
     </message>
 </context>

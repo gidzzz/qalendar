@@ -85,7 +85,7 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
 
 QString MonthPlug::title() const
 {
-    return date.toString("MMMM yyyy");
+    return QDate::longMonthName(date.month()) + date.toString(" yyyy");
 }
 
 void MonthPlug::onActivated()

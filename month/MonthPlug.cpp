@@ -79,6 +79,8 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
 
     connect(new QShortcut(QKeySequence(Qt::Key_Up), this), SIGNAL(activated()), this, SLOT(gotoPrevMonth()));
     connect(new QShortcut(QKeySequence(Qt::Key_Down), this), SIGNAL(activated()), this, SLOT(gotoNextMonth()));
+    connect(new QShortcut(QKeySequence(Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(gotoPrevYear()));
+    connect(new QShortcut(QKeySequence(Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(gotoNextYear()));
 }
 
 QString MonthPlug::title() const

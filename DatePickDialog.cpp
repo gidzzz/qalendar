@@ -8,6 +8,7 @@
 #include "ExpandingListWidget.h"
 #include "DateDayDelegate.h"
 
+#include "Date.h"
 #include "Roles.h"
 
 const int minYear = 1970; // WARNING: This might be too low for some time zones
@@ -45,7 +46,7 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     if (type == Month || type == Day) {
         lists[Month] = new ExpandingListWidget(this);
         for (int m = 1; m <= 12; m++)
-            lists[Month]->addItem(QDate::longMonthName(m));
+            lists[Month]->addItem(QLocale().standaloneMonthName(m));
         ui->listLayout->addWidget(lists[Month]);
         connect(lists[Month], SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     }
@@ -178,8 +179,8 @@ void DatePickDialog::adjustWeeks()
     for (int i = 0; i < targetWeeks; i++) {
         lists[Week]->item(i)->setText(QString(tr("Week %1 (%2 - %3)"))
                                      .arg(i+1)
-                                     .arg(weekProbe.toString("dd/MM"))
-                                     .arg(weekProbe.addDays(6).toString("dd/MM")));
+                                     .arg(Date::toString(weekProbe, Date::Partial))
+                                     .arg(Date::toString(weekProbe.addDays(6), Date::Partial)));
         weekProbe = weekProbe.addDays(7);
     }
 }

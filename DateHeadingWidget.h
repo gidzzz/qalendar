@@ -6,6 +6,8 @@
 #include <QPainter>
 #include <QDate>
 
+#include "Date.h"
+
 class DateHeadingWidget : public QWidget
 {
     Q_OBJECT
@@ -33,7 +35,7 @@ public:
         painter.fillRect(rect, QPalette().color(QPalette::Window));
 
         painter.drawText(rect, Qt::AlignHCenter|Qt::AlignVCenter,
-                         date.toString("dddd d MMMM yyyy"));
+                         Date::toString(date, Date::Full));
     }
 
 private:

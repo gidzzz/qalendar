@@ -16,6 +16,8 @@
 
 #include "ChangeManager.h"
 
+#include "Date.h"
+
 using namespace Metrics::MonthWidget;
 
 MonthPlug::MonthPlug(QDate date, QWidget *parent) :
@@ -45,7 +47,7 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     font.setPointSize(13);
     font.setBold(true);
     for (int i = 0; i < NumWeekdays; i++) {
-        QLabel *dayLabel = new QLabel(QDate::shortDayName(i+1));
+        QLabel *dayLabel = new QLabel(QLocale().standaloneDayName(i+1, QLocale::ShortFormat));
         dayLabel->setAlignment(Qt::AlignHCenter);
         dayLabel->setFont(font);
         dayLayout->addWidget(dayLabel);
@@ -85,7 +87,7 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
 
 QString MonthPlug::title() const
 {
-    return QDate::longMonthName(date.month()) + date.toString(" yyyy");
+    return QLocale().standaloneMonthName(date.month()) + date.toString(" yyyy");
 }
 
 void MonthPlug::onActivated()

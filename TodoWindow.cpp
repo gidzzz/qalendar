@@ -9,6 +9,7 @@
 #include <CAlarm.h>
 
 #include "CWrapper.h"
+#include "Date.h"
 
 #include "ChangeManager.h"
 
@@ -89,7 +90,7 @@ void TodoWindow::reload()
 
     // Deadline
     QDate due = QDateTime::fromTime_t(todo->getDue()).date();
-    ui->dueInfo->setText(due.toString("dddd d MMMM yyyy"));
+    ui->dueInfo->setText(Date::toString(due, Date::Full));
 
     // Deadline color
     QPalette palette;
@@ -108,7 +109,7 @@ void TodoWindow::reload()
     if (alarm) {
         ui->alarmLabel->show();
         ui->alarmInfo->show();
-        ui->alarmInfo->setText(QDateTime::fromTime_t(alarm->getTrigger()).toString("dddd d MMMM yyyy, hh:mm"));
+        ui->alarmInfo->setText(Date::toString(QDateTime::fromTime_t(alarm->getTrigger()), Date::Full, true));
     } else {
         ui->alarmLabel->hide();
         ui->alarmInfo->hide();

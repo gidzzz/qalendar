@@ -14,6 +14,8 @@
 
 #include "ChangeManager.h"
 
+#include "Date.h"
+
 EventWindow::EventWindow(ComponentInstance *instance, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::EventWindow),
@@ -132,12 +134,14 @@ void EventWindow::reload()
     ui->toInfo->setVisible(multiDay);
 
     if (multiDay) {
-        ui->fromInfo->setText(from.toString(allDay ? "dddd d MMMM yyyy" : "dddd d MMMM yyyy, hh:mm"));
-        ui->  toInfo->setText(  to.toString(allDay ? "dddd d MMMM yyyy" : "dddd d MMMM yyyy, hh:mm"));
+        ui->fromInfo->setText(Date::toString(from, Date::Full, !allDay));
+        ui->  toInfo->setText(Date::toString(  to, Date::Full, !allDay));
     } else {
-        ui->fromInfo->setText(allDay ? from.toString("dddd d MMMM yyyy")
-                                     : from.toString("dddd d MMMM yyyy, hh:mm")
-                              + (from.time() != to.time() ? to.toString("-hh:mm") : QString()));
+        ui->fromInfo->setText(Date::toString(from, Date::Full)
+                              + (allDay ? QString()
+                                        : from.toString(", hh:mm")
+                                          + (from.time() == to.time() ? QString()
+                                                                      : to.toString("-hh:mm"))));
     }
 
     vector<CRecurrenceRule*> recurrenceRules = event->retrieveRecurreceRuleObject();

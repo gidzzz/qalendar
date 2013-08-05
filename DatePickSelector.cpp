@@ -4,6 +4,8 @@
 
 #include "DatePickDialog.h"
 
+#include "Date.h"
+
 DatePickSelector::DatePickSelector(QObject *parent) : QMaemo5AbstractPickSelector(parent)
 {
     date = QDate::currentDate();
@@ -24,7 +26,7 @@ void DatePickSelector::setCurrentDate(const QDate &date)
 
 QString DatePickSelector::currentValueText() const
 {
-    return date.toString("dddd d MMMM yyyy");
+    return Date::toString(date, Date::Full);
 }
 
 QWidget* DatePickSelector::widget(QWidget *parent)

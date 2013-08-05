@@ -11,6 +11,7 @@
 #include <QDateTime>
 
 #include "CWrapper.h"
+#include "Date.h"
 #include "Roles.h"
 #include "Metrics.h"
 
@@ -57,7 +58,7 @@ public:
         painter->setFont(f);
         painter->setPen(QMaemo5Style::standardColor("SecondaryTextColor"));
         painter->drawText(r, Qt::AlignBottom|Qt::AlignLeft,
-                          QFontMetrics(f).elidedText(date.toString("dddd d MMMM yyyy, hh:mm"), Qt::ElideRight, r.width()));
+                          QFontMetrics(f).elidedText(Date::toString(date, Date::Full, true), Qt::ElideRight, r.width()));
 
         painter->restore();
     }

@@ -17,6 +17,7 @@
 #include "ComponentListWidget.h"
 
 #include "Roles.h"
+#include "Date.h"
 
 DayWindow::DayWindow(QDate date, QWidget *parent) :
     QMainWindow(parent),
@@ -93,7 +94,7 @@ void DayWindow::reload()
     cleanup();
 
     // Update window title
-    this->setWindowTitle(date.toString("dddd d MMMM yyyy"));
+    this->setWindowTitle(Date::toString(date, Date::Full));
 
     const time_t startStamp = QDateTime(date).toTime_t();
     const time_t   endStamp = QDateTime(date.addDays(1)).toTime_t() - 1;

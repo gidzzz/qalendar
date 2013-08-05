@@ -38,6 +38,8 @@ int main(int argc, char  *argv[])
         translator.load(tsPath + "en");
     app.installTranslator(&translator);
 
+    QLocale::setDefault(lang);
+
     MainWindow window;
 
     window.show();

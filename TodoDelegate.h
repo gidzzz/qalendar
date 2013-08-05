@@ -11,6 +11,7 @@
 
 #include "CWrapper.h"
 
+#include "Date.h"
 #include "Theme.h"
 #include "Metrics.h"
 
@@ -62,7 +63,7 @@ public:
         painter->setFont(f);
         painter->setPen(secondaryColor);
         painter->drawText(r, Qt::AlignBottom|Qt::AlignLeft,
-                          QFontMetrics(f).elidedText(due.toString("dddd d MMMM yyyy"), Qt::ElideRight, r.width()));
+                          QFontMetrics(f).elidedText(Date::toString(due, Date::Full), Qt::ElideRight, r.width()));
 
         // Draw alarm indicator
         if (alarm) {

@@ -23,7 +23,7 @@ ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
 
     // Create a checkable button for each weekday
     for (int i = 0; i < 7; i++) {
-        QPushButton *dayButton = new QPushButton(QDate::shortDayName(i+1), this);
+        QPushButton *dayButton = new QPushButton(QLocale().standaloneDayName(i+1, QLocale::ShortFormat), this);
         dayButton->setCheckable(true);
         daysLayout->addWidget(dayButton);
         connect(dayButton, SIGNAL(toggled(bool)), this, SLOT(onDayToggled(bool)));

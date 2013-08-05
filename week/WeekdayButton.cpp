@@ -6,6 +6,7 @@
 
 #include "DayWindow.h"
 
+#include "Date.h"
 #include "Theme.h"
 
 WeekdayButton::WeekdayButton(QWidget *parent) :
@@ -46,7 +47,9 @@ void WeekdayButton::paintEvent(QPaintEvent *)
     const int margin = 3;
 
     // Draw the day name
-    painter.drawText(0, margin, this->width(), this->height(), Qt::AlignHCenter|Qt::AlignTop, date.toString("ddd"));
+    painter.drawText(0, margin, this->width(), this->height(),
+                     Qt::AlignHCenter|Qt::AlignTop,
+                     QLocale().standaloneDayName(date.dayOfWeek(), QLocale::ShortFormat));
 
     // Set font size for the date
     QFont font = painter.font();
@@ -57,7 +60,9 @@ void WeekdayButton::paintEvent(QPaintEvent *)
         painter.setPen(QMaemo5Style::standardColor("SecondaryTextColor"));
 
     // Draw the date
-    painter.drawText(0, 0, this->width(), this->height()-margin, Qt::AlignHCenter|Qt::AlignBottom, date.toString("dd/MM"));
+    painter.drawText(0, 0, this->width(), this->height()-margin,
+                     Qt::AlignHCenter|Qt::AlignBottom,
+                     Date::toString(date, Date::Partial));
 }
 
 void WeekdayButton::onClicked()

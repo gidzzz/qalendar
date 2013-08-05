@@ -26,7 +26,7 @@ ByMonthWidget::ByMonthWidget(QWidget *parent) :
     monthsLayout->setSpacing(0);
 
     for (int m = 0; m < 12; m++) {
-        QPushButton *monthButton = new QPushButton(QDate::shortMonthName(m+1), this);
+        QPushButton *monthButton = new QPushButton(QLocale().standaloneMonthName(m+1, QLocale::ShortFormat), this);
         monthButton->setCheckable(true);
         monthsLayout->addWidget(monthButton, m/6, m%6);
     }

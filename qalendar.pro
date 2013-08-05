@@ -101,6 +101,7 @@ HEADERS += \
     Metrics.h \
     Roles.h \
     Theme.h \
+    Date.h \
     \
     ChangeManager.h \
     ChangeClient.h \

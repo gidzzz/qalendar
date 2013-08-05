@@ -41,7 +41,7 @@ public:
         painter->setFont(f);
         painter->setPen(QMaemo5Style::standardColor("SecondaryTextColor"));
         painter->drawText(r, Qt::AlignBottom|Qt::AlignHCenter,
-                          QDate::shortDayName(date.dayOfWeek()));
+                          QLocale().standaloneDayName(date.dayOfWeek(), QLocale::ShortFormat));
 
         painter->restore();
     }

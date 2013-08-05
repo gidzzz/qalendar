@@ -154,6 +154,10 @@ public:
             frames.push_back(frame);
         }
 
+        // Moving on from the frame on which the component begins guarantees
+        // that the ending frame for zero-length components will be created.
+        i++;
+
         // Insert end point
         for (; i < frames.size(); i++) {
             if (frames[i].stamp == endPoint.stamp) {

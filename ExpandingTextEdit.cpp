@@ -34,6 +34,19 @@ void ExpandingTextEdit::setPlainText(QString text)
     inhibitAutoscroll = false;
 }
 
+void ExpandingTextEdit::resizeEvent(QResizeEvent *e)
+{
+    // Change the width of the document to match the widget
+    this->document()->setTextWidth(this->contentsRect().width());
+
+    // Adjust height of the widget
+    inhibitAutoscroll = true;
+    adjust();
+    inhibitAutoscroll = false;
+
+    QTextEdit::resizeEvent(e);
+}
+
 void ExpandingTextEdit::showEvent(QShowEvent *e)
 {
     // NOTE: If focus-out is called from the constructor, widget's palette
@@ -95,11 +108,9 @@ void ExpandingTextEdit::focusOutEvent(QFocusEvent *e)
 
 void ExpandingTextEdit::adjust()
 {
-    this->document()->adjustSize();
-
     this->setMinimumHeight(qMax(105, (int) this->document()->size().height()
-                                            + this->frameRect().height()
-                                            - this->contentsRect().height()));
+                                           + this->frameRect().height()
+                                           - this->contentsRect().height()));
 
     if (inhibitAutoscroll) return;
 

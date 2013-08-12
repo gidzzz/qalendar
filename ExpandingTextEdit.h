@@ -18,6 +18,7 @@ private:
     bool inhibitAutoscroll;
     bool placeholderActive;
 
+    void resizeEvent(QResizeEvent *e);
     void showEvent(QShowEvent *e);
     void inputMethodEvent(QInputMethodEvent *e);
     void focusInEvent(QFocusEvent *e);

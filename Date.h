@@ -17,8 +17,10 @@ namespace Date
         switch (format) {
             case Full:
                 return "dddd d MMMM yyyy";
-            case Partial:
-                return "dd/MM";
+            case Partial: {
+                const QString localeShortFormat = QLocale().dateFormat(QLocale::ShortFormat);
+                return localeShortFormat.indexOf('M') < localeShortFormat.indexOf('d') ? "MM/dd" : "dd/MM";
+            }
         }
     }
 

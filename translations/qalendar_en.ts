@@ -162,16 +162,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="30"/>
-        <source>Local</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="40"/>
-        <source>Birthday</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../settings/CalendarEditDialog.ui" line="56"/>
         <source>Color</source>
         <translation></translation>
@@ -303,12 +293,12 @@ day</source>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.cpp" line="26"/>
+        <location filename="../DatePickDialog.cpp" line="27"/>
         <source>Done</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="179"/>
+        <location filename="../DatePickDialog.cpp" line="180"/>
         <source>Week %1 (%2 - %3)</source>
         <translation></translation>
     </message>
@@ -354,7 +344,7 @@ day</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../DayWindow.cpp" line="36"/>
+        <location filename="../DayWindow.cpp" line="37"/>
         <source>New event</source>
         <translation></translation>
     </message>
@@ -420,16 +410,11 @@ day</source>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="128"/>
-        <source>Until</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../EventEditDialog.ui" line="141"/>
         <source>Calendar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../EventEditDialog.ui" line="148"/>
+        <location filename="../EventEditDialog.ui" line="135"/>
         <source>Alarm</source>
         <translation></translation>
     </message>
@@ -487,12 +472,12 @@ day</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="130"/>
+        <location filename="../EventWindow.cpp" line="132"/>
         <source>From</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="130"/>
+        <location filename="../EventWindow.cpp" line="132"/>
         <source>On</source>
         <translation></translation>
     </message>
@@ -500,7 +485,7 @@ day</source>
 <context>
     <name>ExpandingTextEdit</name>
     <message>
-        <location filename="../ExpandingTextEdit.cpp" line="88"/>
+        <location filename="../ExpandingTextEdit.cpp" line="101"/>
         <source>Description</source>
         <translation></translation>
     </message>
@@ -582,27 +567,27 @@ day</source>
 <context>
     <name>MonthPlug</name>
     <message>
-        <location filename="../month/MonthPlug.cpp" line="59"/>
+        <location filename="../month/MonthPlug.cpp" line="61"/>
         <source>Previous month</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../month/MonthPlug.cpp" line="60"/>
+        <location filename="../month/MonthPlug.cpp" line="62"/>
         <source>Next month</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../month/MonthPlug.cpp" line="61"/>
+        <location filename="../month/MonthPlug.cpp" line="63"/>
         <source>Jump to today</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../month/MonthPlug.cpp" line="62"/>
+        <location filename="../month/MonthPlug.cpp" line="64"/>
         <source>Jump to</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../month/MonthPlug.cpp" line="63"/>
+        <location filename="../month/MonthPlug.cpp" line="65"/>
         <source>New event</source>
         <translation></translation>
     </message>
@@ -758,25 +743,30 @@ day</source>
         <source>Never</source>
         <translation></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../settings/SettingsDialog.cpp" line="45"/>
-        <source>Older than 1 week</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../settings/SettingsDialog.cpp" line="47"/>
-        <source>Older than 2 weeks</source>
-        <translation></translation>
+        <source>Older than %n week(s)</source>
+        <translation>
+            <numerusform>Older than %n week</numerusform>
+            <numerusform>Older than %n weeks</numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../settings/SettingsDialog.cpp" line="49"/>
-        <source>Older than 1 month</source>
-        <translation></translation>
+        <source>Older than %n month(s)</source>
+        <translation>
+            <numerusform>Older than %n month</numerusform>
+            <numerusform>Older than %n months</numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../settings/SettingsDialog.cpp" line="51"/>
-        <source>Older than 1 year</source>
-        <translation></translation>
+        <source>Older than %n year(s)</source>
+        <translation>
+            <numerusform>Older than %n year</numerusform>
+            <numerusform>Older than %n years</numerusform>
+        </translation>
     </message>
 </context>
 <context>

@@ -123,19 +123,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QMaemo5ValueButton" name="untilButton">
-         <property name="text">
-          <string>Until</string>
-         </property>
-         <property name="valueLayout">
-          <enum>QMaemo5ValueButton::ValueBesideText</enum>
-         </property>
-         <property name="visible">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QMaemo5ValueButton" name="calendarButton">
          <property name="text">
           <string>Calendar</string>

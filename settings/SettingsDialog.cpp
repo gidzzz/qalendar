@@ -42,13 +42,13 @@ QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
     model = new QStandardItemModel(0, 1, selector);
     item = new QStandardItem(tr("Never")); item->setData(0, Qt::UserRole);
     model->appendRow(item);
-    item = new QStandardItem(tr("Older than 1 week")); item->setData(60*60*24*7, Qt::UserRole);
+    item = new QStandardItem(tr("Older than %n week(s)", "", 1)); item->setData(60*60*24*7, Qt::UserRole);
     model->appendRow(item);
-    item = new QStandardItem(tr("Older than 2 weeks")); item->setData(60*60*24*7*2, Qt::UserRole);
+    item = new QStandardItem(tr("Older than %n week(s)", "", 2)); item->setData(60*60*24*7*2, Qt::UserRole);
     model->appendRow(item);
-    item = new QStandardItem(tr("Older than 1 month")); item->setData(60*60*24*31, Qt::UserRole);
+    item = new QStandardItem(tr("Older than %n month(s)", "", 1)); item->setData(60*60*24*31, Qt::UserRole);
     model->appendRow(item);
-    item = new QStandardItem(tr("Older than 1 year")); item->setData(60*60*24*366, Qt::UserRole);
+    item = new QStandardItem(tr("Older than %n year(s)", "", 1)); item->setData(60*60*24*366, Qt::UserRole);
     model->appendRow(item);
     selector->setModel(model);
 

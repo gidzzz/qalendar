@@ -161,7 +161,12 @@ FORMS += \
     TodoWindow.ui
 
 TRANSLATIONS = \
-    translations/qalendar_en.ts
+    translations/qalendar_en.ts \
+    translations/qalendar_fi.ts \
+    translations/qalendar_it.ts \
+    translations/qalendar_nl.ts \
+    translations/qalendar_pl.ts \
+    translations/qalendar_uk.ts
 
 isEmpty(QMAKE_LRELEASE) {
     QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease

@@ -33,11 +33,7 @@ DayWindow::DayWindow(QDate date, QWidget *parent) :
     this->setAttribute(Qt::WA_Maemo5PortraitOrientation, false);
 
     // Create a button to add new tasks
-    QPushButton *newEventButton = new QPushButton(ui->componentList);
-    newEventButton->setText(tr("New event"));
-    newEventButton->setIcon(QIcon::fromTheme("general_add"));
-
-    // Place the button in the list
+    QPushButton *newEventButton = new QPushButton(QIcon::fromTheme("general_add"), tr("New event"));
     QListWidgetItem *item = new QListWidgetItem(ui->componentList);
     ui->componentList->setItemWidget(item, newEventButton);
 

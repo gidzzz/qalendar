@@ -30,11 +30,7 @@ TodosPlug::TodosPlug(QWidget *parent) :
     this->setAttribute(Qt::WA_Maemo5StackedWindow);
 
     // Create a button to add new tasks
-    QPushButton *newTodoButton = new QPushButton(ui->todoList);
-    newTodoButton->setText(tr("New task"));
-    newTodoButton->setIcon(QIcon::fromTheme("general_add"));
-
-    // Place the button in the list
+    QPushButton *newTodoButton = new QPushButton(QIcon::fromTheme("general_add"), tr("New task"));
     QListWidgetItem *item = new QListWidgetItem(ui->todoList);
     ui->todoList->setItemWidget(item, newTodoButton);
 

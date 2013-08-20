@@ -71,48 +71,46 @@ void AgendaPlug::reload()
 
     QDateTime date = QDateTime(this->date).addDays(-daysBack);
 
+    const time_t startStamp = date.toTime_t();
+    const time_t   endStamp = date.addDays(totalDays).toTime_t() - 1;
+    vector<ComponentInstance*> instances;
+
     CMulticalendar *mc = CMulticalendar::MCInstance();
     vector<CCalendar*> calendars = mc->getListCalFromMc();
     map<int,int> palette;
 
-    // Get events for each day
-    for (int d = 0; d < totalDays; d++) {
-        const time_t dayStartStamp = date.toTime_t();
-        const time_t   dayEndStamp = date.addDays(1).toTime_t() - 1;
-        vector<ComponentInstance*> instances;
+    // Get components from each calendar
+    for (unsigned int i = 0; i < calendars.size(); i++) {
+        CCalendar *calendar = calendars[i];
+        if (!calendar->IsShown()) continue;
 
-        // Get events from each calendar
-        for (unsigned int i = 0; i < calendars.size(); i++) {
-            CCalendar *calendar = calendars[i];
-            if (!calendar->IsShown()) continue;
+        palette[calendar->getCalendarId()] = calendar->getCalendarColor();
 
-            palette[calendar->getCalendarId()] = calendar->getCalendarColor();
+        int offset = 0;
+        int error;
+        vector<CComponent*> componentsPart = calendar->getAllEventsTodos(startStamp, endStamp, 1024, offset, error);
 
-            int offset = 0;
-            int error;
-            vector<CComponent*> componentsPart = calendar->getAllEventsTodos(dayStartStamp, dayEndStamp, 1024, offset, error);
-
-            for (unsigned int c = 0; c < componentsPart.size(); c++) {
-                if (componentsPart[c]->getType() == E_TODO
-                && (QDateTime::fromTime_t(componentsPart[c]->getDateStart()).date() != date.date() ||
-                    static_cast<CTodo*>(componentsPart[c])->getStatus()))
-                {
-                    delete componentsPart[c];
-                    componentsPart[c] = NULL;
-                } else {
-                    components.push_back(componentsPart[c]);
-                }
+        for (unsigned int c = 0; c < componentsPart.size(); c++) {
+            if (componentsPart[c]->getType() == E_TODO
+            &&  static_cast<CTodo*>(componentsPart[c])->getStatus())
+            {
+                delete componentsPart[c];
+            } else {
+                components.push_back(componentsPart[c]);
             }
-
-            CWrapper::expand(componentsPart, instances, dayStartStamp, dayEndStamp);
         }
+    }
 
-        CWrapper::sort(instances);
+    CWrapper::expand(components, instances, startStamp, endStamp);
+    CWrapper::sort(instances);
 
+    // Populate the list day by day
+    for (int d = 0; d < totalDays; d++) {
         const bool onToday = date.date() == this->date;
+        const time_t nextDayStamp = date.addDays(1).toTime_t();
 
-        // Add day heading
-        if (onToday || !instances.empty()) {
+        if (onToday || !instances.empty() && instances.front()->stamp < nextDayStamp) {
+            // Add date heading
             QListWidgetItem *item = new QListWidgetItem();
             item->setData(DateRole, date.date());
             item->setData(HeadingRole, true);
@@ -120,10 +118,8 @@ void AgendaPlug::reload()
 
             if (onToday) {
                 todaysHeading = item;
-                // Create and add 'new event' button to the list
-                QPushButton *newEventButton = new QPushButton(ui->componentList);
-                newEventButton->setText(tr("New event"));
-                newEventButton->setIcon(QIcon::fromTheme("general_add"));
+                // Add 'new event' button
+                QPushButton *newEventButton = new QPushButton(QIcon::fromTheme("general_add"), tr("New event"));
                 item = new QListWidgetItem();
                 item->setData(DateRole, this->date);
                 ui->componentList->addItem(item);
@@ -132,16 +128,26 @@ void AgendaPlug::reload()
             }
         }
 
-        // Add the components for the day
-        for (unsigned int i = 0; i < instances.size(); i++) {
+        unsigned int i = 0;
+        while (i < instances.size() && instances[i]->stamp < nextDayStamp) {
+            // Add the intance to the list
             QListWidgetItem *item = new QListWidgetItem();
             item->setData(ComponentRole, QVariant::fromValue(instances[i]));
             item->setData(ColorRole, palette[instances[i]->component->getCalendarId()]);
             item->setData(DateRole, date.date());
             ui->componentList->addItem(item);
+
+            if (instances[i]->end() < nextDayStamp) {
+                // If this is the last day of this instance, remove it from the list...
+                instances.erase(instances.begin() + i);
+            } else {
+                // ...otherwise replace it with a copy to use for the next day
+                if (nextDayStamp < endStamp)
+                    instances[i] = new ComponentInstance(instances[i]->component, instances[i]->stamp);
+                i++;
+            }
         }
 
-        // Go to the next day
         date = date.addDays(1);
     }
 

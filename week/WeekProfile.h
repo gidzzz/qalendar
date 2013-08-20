@@ -111,6 +111,12 @@ public:
 
     std::vector<Frame> frames;
 
+    // Remove all frames from the profile
+    void clear()
+    {
+        frames.clear();
+    }
+
     // Try to add a component to the profile
     void add(ComponentInstance *event)
     {

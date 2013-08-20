@@ -98,7 +98,12 @@ public:
         dnView.clear();
     }
 
-    static bool widgetComparator(ComponentWidget *w1, ComponentWidget *w2)
+    static bool widgetDnComparator(ComponentWidget *w1, ComponentWidget *w2)
+    {
+        return w1->frameGeometry().top() < w2->frameGeometry().top();
+    }
+
+    static bool widgetUpComparator(ComponentWidget *w1, ComponentWidget *w2)
     {
         return w1->frameGeometry().bottom() > w2->frameGeometry().bottom();
     }
@@ -107,6 +112,10 @@ public:
     {
         Frame frame;
         frame.y = std::numeric_limits<int>::max();
+
+        // Sort the widgets ascending by y coordinate of the top edge, as if we
+        // were looking at them from above.
+        std::sort(widgets.begin(), widgets.end(), widgetDnComparator);
 
         // Add a hint for each widget
         for (int w = widgets.size()-1; w >= 0; w--) {
@@ -129,8 +138,9 @@ public:
         // Add the final frame
         dnView.push_front(frame);
 
-        // Sprt the
-        std::sort(widgets.begin(), widgets.end(), widgetComparator);
+        // Sort the widgets descending by y coordinate of the bottom edge, as if
+        // we were looking at them from below.
+        std::sort(widgets.begin(), widgets.end(), widgetUpComparator);
 
         frame.hints.clear();
         frame.y = frame.y = std::numeric_limits<int>::min();

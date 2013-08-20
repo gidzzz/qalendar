@@ -78,7 +78,8 @@ void WeekWidget::reload()
 {
     // Clear collections
     palette.clear();
-    profile.frames.clear();
+    weekProfile.clear();
+    hintProfile.clear();
 
     // Delete all component widgets
     QList<ComponentWidget*> widgets = this->findChildren<ComponentWidget*>();
@@ -87,10 +88,6 @@ void WeekWidget::reload()
 
     // Free allocated resources
     cleanup();
-
-    // Clear hints
-    for (int i = 0; i < NumWeekdays; i++)
-        hintProfiles[i].clear();
 
     // Determine the first and last visible timestamp
     const time_t startStamp = QDateTime(WeekWidget::firstDate()).toTime_t();
@@ -138,7 +135,7 @@ void WeekWidget::reload()
     CWrapper::expand(components, instances, startStamp, endStamp);
     CWrapper::sort(instances);
     for (unsigned int i = 0; i < instances.size(); i++)
-        profile.add(instances[i]);
+        weekProfile.add(instances[i]);
 
     populateAllDay();
     populate();
@@ -188,7 +185,9 @@ void WeekWidget::populateAllDay()
 
                 const int color = palette[window.instances[i]->component->getCalendarId()];
 
-                (new ComponentWidget(window.instances[i], color, eventX, eventY, eventW, AllDayHeight, this))->show();
+                ComponentWidget *widget = new ComponentWidget(window.instances[i], color, eventX, eventY, eventW, AllDayHeight, this);
+                componentWidgets.push_back(widget);
+                widget->show();
             }
         }
 
@@ -210,18 +209,16 @@ void WeekWidget::populate()
         const time_t dayStartStamp = QDateTime(firstDate().addDays(d)).toTime_t();
         const time_t   dayEndStamp = QDateTime(firstDate().addDays(d+1)).toTime_t() - 1;
 
-        vector<ComponentWidget*> widgets;
-
         bool dayFirstFrame = true;
 
         // Analyze the profile frame by frame
-        for (unsigned int f = 0; f < profile.frames.size()-1; f++) {
+        for (unsigned int f = 0; f < weekProfile.frames.size()-1; f++) {
             // A frame which is on the previous day can onyl be useful if it is
             // the first one to cover another day
-            if (profile.frames[f+1].stamp <= dayStartStamp) continue;
+            if (weekProfile.frames[f+1].stamp <= dayStartStamp) continue;
 
             // Take a frame from which events will be built
-            WeekProfile::Frame frame = profile.frames[f];
+            WeekProfile::Frame frame = weekProfile.frames[f];
 
             // End this pass if a frame from the next day is encountered
             if (frame.stamp > dayEndStamp) break;
@@ -246,20 +243,20 @@ void WeekWidget::populate()
 
                     // Look for opprtunities to take more than one slot with
                     // this component by peeking into future frames
-                    for (unsigned int ff = f; ff < profile.frames.size(); ff++) {
+                    for (unsigned int ff = f; ff < weekProfile.frames.size(); ff++) {
                         // There is only a need to look as far as this component reaches
-                        if (profile.frames[ff].components[c] != frame.components[c]) break;
+                        if (weekProfile.frames[ff].components[c] != frame.components[c]) break;
                         // Width on each day can be different, look no further than this day
-                        if (profile.frames[ff].stamp > dayEndStamp) break;
+                        if (weekProfile.frames[ff].stamp > dayEndStamp) break;
 
                         // The greatest frame width will be the denominator for component width
-                        maxPofileWidth = qMax(maxPofileWidth, profile.frames[ff].width());
+                        maxPofileWidth = qMax(maxPofileWidth, weekProfile.frames[ff].width());
 
-                        minProfileIndent = qMin(minProfileIndent, profile.frames[ff].indent());
+                        minProfileIndent = qMin(minProfileIndent, weekProfile.frames[ff].indent());
 
                         // Find the first occupied slot to the right
                         for (int cc = c+1; cc < FrameSize; cc++) {
-                            if (profile.frames[ff].components[cc]) {
+                            if (weekProfile.frames[ff].components[cc]) {
                                 // The amount of minimum free space will be the component width numerator
                                 const int freeSlots = cc - c;
                                 if (freeSlots < minFreeSlots)
@@ -283,7 +280,7 @@ void WeekWidget::populate()
                     const int color = palette[instances->component->getCalendarId()];
 
                     ComponentWidget *widget = new ComponentWidget(instances, color, eventX, eventY, eventW, eventH, this);
-                    widgets.push_back(widget);
+                    componentWidgets.push_back(widget);
                     widget->show();
 
                     // Create a master-slave relationship if necessary
@@ -297,9 +294,11 @@ void WeekWidget::populate()
 
             dayFirstFrame = false;
         }
-
-        hintProfiles[d].populate(widgets);
     }
+
+    // Create a hint profile from the accumulated widgets
+    hintProfile.populate(componentWidgets);
+    componentWidgets.clear();
 }
 
 // Returns the first day shown by the widget

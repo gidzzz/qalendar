@@ -57,8 +57,8 @@ private:
     QDate date;
 
     int allDaySlots;
-    WeekProfile profile;
-    WeekHintProfile hintProfiles[Metrics::WeekWidget::NumWeekdays];
+    WeekProfile weekProfile;
+    WeekHintProfile hintProfile;
 
     QDateTime pressedDate;
     QPoint pressedPoint;
@@ -86,6 +86,7 @@ private:
     vector<CComponent*> allDayComponents;
     vector<ComponentInstance*> instances;
     vector<ComponentInstance*> allDayInstances;
+    vector<ComponentWidget*> componentWidgets;
     map<int,int> palette;
 };
 

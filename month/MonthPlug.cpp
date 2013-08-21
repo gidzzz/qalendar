@@ -48,10 +48,12 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     font.setBold(true);
     for (int i = 0; i < NumWeekdays; i++) {
         QLabel *dayLabel = new QLabel(QLocale().standaloneDayName(i+1, QLocale::ShortFormat));
-        dayLabel->setAlignment(Qt::AlignHCenter);
+        dayLabel->setAlignment(Qt::AlignCenter);
+        dayLabel->setFixedWidth(CellWidth);
         dayLabel->setFont(font);
         dayLayout->addWidget(dayLabel);
     }
+    dayLayout->addStretch();
 
     mainLayout->addLayout(dayLayout, 0, 1);
     mainLayout->addLayout(weekLayout, 1, 0);

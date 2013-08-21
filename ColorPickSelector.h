@@ -3,7 +3,7 @@
 
 #include <QMaemo5AbstractPickSelector>
 
-#include <ColorPickDialog.h>
+#include "ColorPickDialog.h"
 
 class ColorPickSelector : public QMaemo5AbstractPickSelector
 {

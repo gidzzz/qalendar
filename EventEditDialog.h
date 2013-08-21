@@ -3,7 +3,7 @@
 
 #include "ui_EventEditDialog.h"
 
-#include <ComponentEditDialog.h>
+#include "ComponentEditDialog.h"
 
 #include <QDateTime>
 

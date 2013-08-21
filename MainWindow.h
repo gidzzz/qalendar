@@ -1,22 +1,17 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
 #include <QMainWindow>
 
-#include <QVBoxLayout>
-#include <QMenuBar>
 #include <QMenu>
 
 #include <QDate>
-
-#include <QSettings>
-
-#include <calendar-backend/CMulticalendar.h>
 
 #include "MonthPlug.h"
 #include "WeekPlug.h"
 #include "AgendaPlug.h"
 #include "TodosPlug.h"
 #include "JournalsPlug.h"
-
-#include "SettingsDialog.h"
 
 class MainWindow : public QMainWindow
 {
@@ -69,3 +64,5 @@ private slots:
 
     void openSettings();
 };
+
+#endif // MAINWINDOW_H

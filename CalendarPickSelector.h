@@ -3,7 +3,7 @@
 
 #include <QMaemo5AbstractPickSelector>
 
-#include <CalendarPickDialog.h>
+#include "CalendarPickDialog.h"
 
 class CalendarPickSelector : public QMaemo5AbstractPickSelector
 {

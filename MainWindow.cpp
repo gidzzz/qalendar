@@ -1,6 +1,14 @@
 #include "MainWindow.h"
 
+#include <QVBoxLayout>
+#include <QMenuBar>
+
 #include <QDBusConnection>
+#include <QSettings>
+
+#include <CMulticalendar.h>
+
+#include "SettingsDialog.h"
 
 #include "Rotator.h"
 

@@ -25,6 +25,7 @@ public:
 
 public slots:
     Q_SCRIPTABLE void top_application();
+    Q_SCRIPTABLE void launch_view(uint type, int, QString componentId, int calendarId = 0);
 
 private:
     QMenu *windowMenu;

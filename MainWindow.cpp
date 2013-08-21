@@ -240,3 +240,24 @@ void MainWindow::top_application()
     this->raise();
     this->activateWindow();
 }
+
+void MainWindow::launch_view(uint type, int, QString componentId, int calendarId)
+{
+    // Some tests show that the second argument can have following values:
+    // * launching from desktop widget -> current timestamp
+    // * viewing an event from alarm dialog -> -1
+    // * viewing a todo from alarm dialog -> -2
+
+    Q_UNUSED(componentId);
+    Q_UNUSED(calendarId);
+
+    switch (type) {
+        case 1: showMonth(); break;
+        case 2: showWeek(); break;
+        case 3: showAgenda(); break;
+        case 4: showAgenda(); break; // TODO: Open EventWindow
+        case 5: showTodos(); break;  // TODO: Open TodoWindow
+    }
+
+    top_application();
+}

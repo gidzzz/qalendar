@@ -24,8 +24,6 @@ AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->minutesBox, SLOT(setEnabled(bool)));
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->secondsBox, SLOT(setEnabled(bool)));
 
-    ui->enableBox->setChecked(seconds >= 0);
-
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);

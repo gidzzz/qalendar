@@ -40,9 +40,7 @@ int main(int argc, char  *argv[])
 
     QLocale::setDefault(lang);
 
-    MainWindow window;
-
-    window.show();
+    MainWindow window(argc > 1 && QString(argv[1]) == "--background");
 
     return app.exec();
 }

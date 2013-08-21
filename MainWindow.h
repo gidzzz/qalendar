@@ -21,11 +21,15 @@
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "com.nokia.calendar")
 
 public:
-    MainWindow();
+    MainWindow(bool runInBackground);
 
     void setPlug(Plug *plug);
+
+public slots:
+    Q_SCRIPTABLE void top_application();
 
 private:
     QMenu *windowMenu;
@@ -49,6 +53,9 @@ private:
 
     QLayout *mainLayout;
 
+    bool runInBackground;
+
+    void closeEvent(QCloseEvent *e);
     void changeEvent(QEvent *e);
 
     void deleteOldComponents();

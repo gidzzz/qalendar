@@ -1,8 +1,11 @@
 #include "MainWindow.h"
 
+#include <QDBusConnection>
+
 #include "Rotator.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(bool runInBackground) :
+    runInBackground(runInBackground)
 {
     this->setAttribute(Qt::WA_Maemo5StackedWindow);
 
@@ -82,6 +85,23 @@ MainWindow::MainWindow()
         showTodos();
     else if (view == "journals")
         showJournals();
+
+    if (runInBackground) {
+        QDBusConnection::sessionBus().registerService("com.nokia.calendar");
+        QDBusConnection::sessionBus().registerObject("/com/nokia/calendar", this, QDBusConnection::ExportScriptableSlots);
+    } else {
+        show();
+    }
+}
+
+void MainWindow::closeEvent(QCloseEvent *e)
+{
+    if (runInBackground) {
+        this->hide();
+        e->ignore();
+    } else {
+        QMainWindow::closeEvent(e);
+    }
 }
 
 // Forward activation events to the current plug
@@ -204,4 +224,11 @@ void MainWindow::showJournals()
 void MainWindow::openSettings()
 {
     (new SettingsDialog(this))->exec();
+}
+
+void MainWindow::top_application()
+{
+    this->show();
+    this->raise();
+    this->activateWindow();
 }

@@ -1,4 +1,4 @@
-QT += core gui maemo5
+QT += core gui maemo5 dbus
 
 TARGET = qalendar
 TEMPLATE = app

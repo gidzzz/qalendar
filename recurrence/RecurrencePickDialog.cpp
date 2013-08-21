@@ -36,20 +36,13 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *recurre
     DatePickSelector *dpsUntil = new DatePickSelector();
     ui->untilBox->setPickSelector(dpsUntil);
 
-    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setVisible(bool)));
-    connect(ui->enableBox, SIGNAL(toggled(bool)), this, SLOT(autoResize()));
+    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setEnabled(bool)));
     connect(ui->frequencyBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onFrequencyChanged(int)));
     connect(ui->limitBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onLimitTypeChanged(int)));
 
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 
     onFrequencyChanged(0);
-
-    if (recurrence->getRtype() == E_DISABLED){
-        ui->configWidget->hide();
-    } else {
-        ui->enableBox->setChecked(true);
-    }
 
     QStringList problems;
 

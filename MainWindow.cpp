@@ -10,6 +10,7 @@
 
 #include "SettingsDialog.h"
 
+#include "ChangeManager.h"
 #include "Rotator.h"
 
 MainWindow::MainWindow(bool runInBackground) :
@@ -236,6 +237,12 @@ void MainWindow::openSettings()
 
 void MainWindow::top_application()
 {
+    // As long as checking for external updates to the database is not
+    // implemented, scheduling a refresh each time the window is shown is
+    // probably a good idea.
+    if (this->isHidden())
+        ChangeManager::bump();
+
     this->show();
     this->raise();
     this->activateWindow();

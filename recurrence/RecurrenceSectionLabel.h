@@ -26,7 +26,11 @@ private:
     void init()
     {
         QPalette palette = this->palette();
-        palette.setColor(QPalette::Foreground, QMaemo5Style::standardColor("ActiveTextColor"));
+        const QColor  enabledColor = QMaemo5Style::standardColor("ActiveTextColor");
+        const QColor disabledColor = QMaemo5Style::standardColor("DisabledTextColor");
+        palette.setColor(QPalette::Active,   QPalette::Foreground, enabledColor);
+        palette.setColor(QPalette::Inactive, QPalette::Foreground, enabledColor);
+        palette.setColor(QPalette::Disabled, QPalette::Foreground, disabledColor);
         this->setPalette(palette);
 
         this->setIndent(5);

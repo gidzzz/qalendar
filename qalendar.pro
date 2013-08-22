@@ -163,6 +163,7 @@ FORMS += \
 TRANSLATIONS = \
     translations/qalendar_en.ts \
     translations/qalendar_fi.ts \
+    translations/qalendar_fr.ts \
     translations/qalendar_it.ts \
     translations/qalendar_nl.ts \
     translations/qalendar_pl.ts \

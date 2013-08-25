@@ -96,8 +96,8 @@ MainWindow::MainWindow(bool runInBackground) :
         showJournals();
 
     if (runInBackground) {
-        QDBusConnection::sessionBus().registerService("com.nokia.calendar");
-        QDBusConnection::sessionBus().registerObject("/com/nokia/calendar", this, QDBusConnection::ExportScriptableSlots);
+        QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
+        QDBusConnection::sessionBus().registerObject(DBUS_PATH, this, QDBusConnection::ExportScriptableSlots);
     } else {
         show();
     }

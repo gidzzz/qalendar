@@ -16,6 +16,10 @@
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+    #define DBUS_SERVICE "com.nokia.calendar"
+    #define DBUS_PATH "/com/nokia/calendar"
+    #define DBUS_INTERFACE "com.nokia.calendar"
     Q_CLASSINFO("D-Bus Interface", "com.nokia.calendar")
 
 public:

@@ -68,7 +68,7 @@
     <message>
         <location filename="../AlarmPickSelector.cpp" line="37"/>
         <source>Exact</source>
-        <translation type="unfinished"></translation>
+        <translation>Exactement</translation>
     </message>
     <message numerus="yes">
         <location filename="../AlarmPickSelector.cpp" line="39"/>
@@ -213,7 +213,7 @@
         <translation>Modifier les calendriers</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="24"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
@@ -679,7 +679,7 @@ journée</translation>
     <message>
         <location filename="../recurrence/RecurrencePickSelector.cpp" line="30"/>
         <source>External</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickSelector.cpp" line="32"/>
@@ -709,7 +709,7 @@ journée</translation>
     <message>
         <location filename="../recurrence/RecurrencePickSelector.cpp" line="42"/>
         <source>Complex</source>
-        <translation type="unfinished"></translation>
+        <translation>Complexe</translation>
     </message>
 </context>
 <context>
@@ -880,7 +880,7 @@ journée</translation>
     <message>
         <location filename="../month/WeekButton.cpp" line="31"/>
         <source>w%1</source>
-        <translation type="unfinished"></translation>
+        <translation>w%1</translation>
     </message>
 </context>
 <context>

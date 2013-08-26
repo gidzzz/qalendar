@@ -216,7 +216,7 @@
         <translation>Змінити календарі</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="24"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>

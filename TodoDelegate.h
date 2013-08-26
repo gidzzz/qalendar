@@ -33,7 +33,7 @@ public:
 
         if (!todo) return;
 
-        QString summary = QString::fromUtf8(todo->getSummary().c_str());
+        QString summary = CWrapper::simplify(todo->getSummary(), TextMaxChars);
         QDateTime due = QDateTime::QDateTime::fromTime_t(todo->getDue());
         bool alarm = todo->getAlarm();
 

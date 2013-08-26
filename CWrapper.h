@@ -162,6 +162,14 @@ namespace CWrapper
         return journal;
     }
 
+    // Adapt the given string to be displayed in one line of a limited length.
+    // The purpose of the limit is to prevent wasting too much time
+    // on impractical amounts of data that cannot fit on the screen anyway.
+    inline QString simplify(const string &std_str, size_t limit)
+    {
+        return QString::fromUtf8(std_str.c_str(), qMin(std_str.length(), limit)).replace('\n', ' ');
+    }
+
     inline const char* calendarType(const int type)
     {
         switch (type)

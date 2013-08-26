@@ -33,8 +33,7 @@ public:
 
         if (!journal) return;
 
-        const int maxLength = 160;
-        QString summary = QString::fromUtf8(journal->getSummary().c_str()).left(maxLength).replace("\n", " ");
+        QString summary = CWrapper::simplify(journal->getSummary(), TextMaxChars);
         QDateTime date = QDateTime::QDateTime::fromTime_t(journal->getDateStart());
         QIcon background = QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt()));
 

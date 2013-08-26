@@ -4,6 +4,7 @@
 #include <CCalendar.h>
 
 #include "CWrapper.h"
+#include "Metrics.h"
 
 #include "DetailedCalendarDelegate.h"
 
@@ -48,10 +49,11 @@ void CalendarsConfigDialog::reload()
     CWrapper::sort(calendars);
 
     for (unsigned int c = 0; c < calendars.size(); c++) {
+        using namespace Metrics::Item;
+
         QListWidgetItem *item = new QListWidgetItem();
-        QString name = QString::fromUtf8(calendars[c]->getCalendarName().c_str());
         item->setData(IdRole, calendars[c]->getCalendarId());
-        item->setData(NameRole, name);
+        item->setData(NameRole, CWrapper::simplify(calendars[c]->getCalendarName(), TextMaxChars));
         item->setData(TypeRole, calendars[c]->getCalendarType());
         item->setData(ColorRole, calendars[c]->getCalendarColor());
 

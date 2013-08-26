@@ -11,6 +11,8 @@ namespace Metrics
         const int Margin      = 3;
         const int TextMargin  = 3;
         const int ValueMargin = 6;
+        const size_t TextMaxChars  = 160;
+        const size_t ValueMaxChars = 240;
     }
 
     namespace Pixmap

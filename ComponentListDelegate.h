@@ -48,8 +48,8 @@ public:
             QRect r = option.rect.adjusted(Margin, Margin, -Margin, -Margin);
 
             // Get info about the component
-            QString summary = QString::fromUtf8(component->getSummary().c_str());
-            QString location = QString::fromUtf8(component->getLocation().c_str());
+            QString summary = CWrapper::simplify(component->getSummary(), TextMaxChars);
+            QString location = CWrapper::simplify(component->getLocation(), ValueMaxChars);
             QDateTime startDate = QDateTime::fromTime_t(instance->stamp);
             QDateTime endDate   = QDateTime::fromTime_t(instance->end());
             bool alarm = component->getAlarm();

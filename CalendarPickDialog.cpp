@@ -7,6 +7,7 @@
 #include <CCalendar.h>
 
 #include "CWrapper.h"
+#include "Metrics.h"
 #include "Roles.h"
 
 #include "CalendarDelegate.h"
@@ -27,12 +28,14 @@ CalendarPickDialog::CalendarPickDialog(QWidget *parent) :
 
     // Add an item for each calendar found
     for (unsigned int c = 0; c < calendars.size(); c++) {
+        using namespace Metrics::Item;
+
         // Do not show the birthday calendar
         if (calendars[c]->getCalendarType() == BIRTHDAY_CALENDAR) continue;
 
         QListWidgetItem *item = new QListWidgetItem();
         item->setData(IdRole, calendars[c]->getCalendarId());
-        item->setData(NameRole, QString::fromUtf8(calendars[c]->getCalendarName().c_str()));
+        item->setData(NameRole, CWrapper::simplify(calendars[c]->getCalendarName(), TextMaxChars));
         item->setData(TypeRole, calendars[c]->getCalendarType());
         item->setData(ColorRole, calendars[c]->getCalendarColor());
 

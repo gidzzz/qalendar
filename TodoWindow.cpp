@@ -120,12 +120,12 @@ void TodoWindow::reload()
     CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(todo->getCalendarId(), error);
     QIcon calendarIcon = QIcon::fromTheme(CWrapper::colorIcon(calendar->getCalendarColor()));
     QString calendarName = QString::fromUtf8(calendar->getCalendarName().c_str());
-    // TODO: Calendar type
+    CalendarType calendarType = calendar->getCalendarType();
     delete calendar;
 
     // Calendar info
     ui->calendarIcon->setPixmap(calendarIcon.pixmap(calendarIcon.availableSizes().first()));
-    ui->calendarInfo->setText(calendarName);
+    ui->calendarInfo->setText(calendarName + " (" + CWrapper::calendarType(calendarType) + ")");
 }
 
 void TodoWindow::editTodo()

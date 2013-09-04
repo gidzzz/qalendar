@@ -175,10 +175,11 @@ void EventWindow::reload()
     CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(event->getCalendarId(), error);
     QIcon calendarIcon = QIcon::fromTheme(CWrapper::colorIcon(calendar->getCalendarColor()));
     QString calendarName = QString::fromUtf8(calendar->getCalendarName().c_str());
+    CalendarType calendarType = calendar->getCalendarType();
     delete calendar;
 
     ui->calendarIcon->setPixmap(calendarIcon.pixmap(calendarIcon.availableSizes().first()));
-    ui->calendarInfo->setText(calendarName);
+    ui->calendarInfo->setText(calendarName + " (" + CWrapper::calendarType(calendarType) + ")");
 }
 
 void EventWindow::gotoPrevEvent()

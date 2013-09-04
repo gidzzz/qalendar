@@ -140,6 +140,13 @@ void WeekWidget::reload()
     populateAllDay();
     populate();
 
+    // Create a hint profile from the accumulated widgets
+    hintProfile.populate(componentWidgets);
+    componentWidgets.clear();
+
+    // The proper height can change depending on the number of all-day widgets
+    this->setFixedHeight(sizeHint().height());
+
     this->update();
 }
 
@@ -147,12 +154,14 @@ void WeekWidget::populateAllDay()
 {
     allDaySlots = 1;
 
+    if (allDayInstances.empty()) return;
+
     WeekLayoutWindow window;
     unsigned int currentComponent = 0;
     QDate date = firstDate();
     const QDate lastDate = this->lastDate();
 
-    // Iterate over weekday rows
+    // Iterate over weekday columns
     for (int d = 0; d < NumWeekdays; d++) {
         // Move to a new day
         window.move(date);
@@ -193,13 +202,11 @@ void WeekWidget::populateAllDay()
 
         allDaySlots = qMax(allDaySlots, (int) window.instances.size());
     }
-
-    this->setFixedHeight(sizeHint().height());
 }
 
 void WeekWidget::populate()
 {
-    if (components.empty()) return;
+    if (instances.empty()) return;
 
     QHash<ComponentInstance*,ComponentWidget*> masterWidgets;
     masterWidgets.reserve(components.size());
@@ -295,10 +302,6 @@ void WeekWidget::populate()
             dayFirstFrame = false;
         }
     }
-
-    // Create a hint profile from the accumulated widgets
-    hintProfile.populate(componentWidgets);
-    componentWidgets.clear();
 }
 
 // Returns the first day shown by the widget

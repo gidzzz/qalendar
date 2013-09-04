@@ -13,7 +13,7 @@ class CalendarPickDialog : public RotatingDialog
     Q_OBJECT
 
 public:
-    CalendarPickDialog(QWidget *parent);
+    CalendarPickDialog(QWidget *parent, int currentId);
     ~CalendarPickDialog();
 
 signals:
@@ -21,6 +21,8 @@ signals:
 
 private:
     Ui::CalendarPickDialog *ui;
+
+    void resizeEvent(QResizeEvent *e);
 
 private slots:
     void onCalendarActivated(QListWidgetItem *item);

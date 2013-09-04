@@ -48,7 +48,7 @@ int CalendarPickSelector::currentId() const
 
 QWidget* CalendarPickSelector::widget(QWidget *parent)
 {
-    CalendarPickDialog *dialog = new CalendarPickDialog(parent);
+    CalendarPickDialog *dialog = new CalendarPickDialog(parent, currentId());
 
     connect(dialog, SIGNAL(selected(int)), this, SLOT(onSelected(int)));
 

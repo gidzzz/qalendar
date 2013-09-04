@@ -12,7 +12,7 @@
 
 #include "CalendarDelegate.h"
 
-CalendarPickDialog::CalendarPickDialog(QWidget *parent) :
+CalendarPickDialog::CalendarPickDialog(QWidget *parent, int currentId) :
     RotatingDialog(parent),
     ui(new Ui::CalendarPickDialog)
 {
@@ -40,6 +40,9 @@ CalendarPickDialog::CalendarPickDialog(QWidget *parent) :
         item->setData(ColorRole, calendars[c]->getCalendarColor());
 
         ui->calendarList->addItem(item);
+
+        if (calendars[c]->getCalendarId() == currentId)
+            ui->calendarList->setCurrentItem(item);
     }
 
     mc->releaseListCalendars(calendars);
@@ -52,6 +55,13 @@ CalendarPickDialog::CalendarPickDialog(QWidget *parent) :
 CalendarPickDialog::~CalendarPickDialog()
 {
     delete ui;
+}
+
+void CalendarPickDialog::resizeEvent(QResizeEvent *e)
+{
+    ui->calendarList->scrollToItem(ui->calendarList->currentItem(), QAbstractItemView::PositionAtCenter);
+
+    RotatingDialog::resizeEvent(e);
 }
 
 void CalendarPickDialog::onCalendarActivated(QListWidgetItem *item)

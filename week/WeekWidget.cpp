@@ -220,9 +220,10 @@ void WeekWidget::populate()
 
         // Analyze the profile frame by frame
         for (unsigned int f = 0; f < weekProfile.frames.size()-1; f++) {
-            // A frame which is on the previous day can onyl be useful if it is
-            // the first one to cover another day
-            if (weekProfile.frames[f+1].stamp <= dayStartStamp) continue;
+            // A frame which is on the previous day can only be useful if it is
+            // the first one to cover another day. This can be determined by
+            // checking if its successor is on the second day.
+            if (weekProfile.frames[f+1].stamp < dayStartStamp) continue;
 
             // Take a frame from which events will be built
             WeekProfile::Frame frame = weekProfile.frames[f];

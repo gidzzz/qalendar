@@ -235,19 +235,19 @@ void WeekWidget::populate()
             if (frame.stamp > dayEndStamp) break;
 
             // Look at each component in the selected frame
-            for (int c = 0; c < FrameSize; c++) {
+            for (int i = 0; i < FrameSize; i++) {
                 // Take a look at a slot, check if it is occupied and if a new widget should be created
-                if (frame.components[c] && (dayFirstFrame || frame.initial[c])) {
-                    ComponentInstance *instances = frame.components[c];
+                if (frame.instances[i] && (dayFirstFrame || frame.initial[i])) {
+                    ComponentInstance *instance = frame.instances[i];
 
                     // Ignore components which do not reach this day
-                    if (instances->end() < dayStartStamp
-                    ||  instances->end() == dayStartStamp && instances->duration() > 0)
+                    if (instance->end() < dayStartStamp
+                    ||  instance->end() == dayStartStamp && instance->duration() > 0)
                         continue;
 
                     // Calculate the key moments of the component, relative to this day
-                    const int eventStart  = qMax((time_t) 0, (instances->stamp - dayStartStamp));
-                    const int eventLength = qMin((time_t) NumHours*60*60 - eventStart, instances->end() - qMax(dayStartStamp, instances->stamp));
+                    const int eventStart  = qMax((time_t) 0, (instance->stamp - dayStartStamp));
+                    const int eventLength = qMin((time_t) NumHours*60*60 - eventStart, instance->end() - qMax(dayStartStamp, instance->stamp));
 
                     // Initialize component size parameters to the worst case
                     int maxPofileWidth = 1;
@@ -258,7 +258,7 @@ void WeekWidget::populate()
                     // this component by peeking into future frames
                     for (unsigned int ff = f; ff < weekProfile.frames.size(); ff++) {
                         // There is only a need to look as far as this component reaches
-                        if (weekProfile.frames[ff].components[c] != frame.components[c]) break;
+                        if (weekProfile.frames[ff].instances[i] != frame.instances[i]) break;
                         // Width on each day can be different, look no further than this day
                         if (weekProfile.frames[ff].stamp > dayEndStamp) break;
 
@@ -268,10 +268,10 @@ void WeekWidget::populate()
                         minProfileIndent = qMin(minProfileIndent, weekProfile.frames[ff].indent());
 
                         // Find the first occupied slot to the right
-                        for (int cc = c+1; cc < FrameSize; cc++) {
-                            if (weekProfile.frames[ff].components[cc]) {
+                        for (int ii = i+1; ii < FrameSize; ii++) {
+                            if (weekProfile.frames[ff].instances[ii]) {
                                 // The amount of minimum free space will be the component width numerator
-                                const int freeSlots = cc - c;
+                                const int freeSlots = ii - i;
                                 if (freeSlots < minFreeSlots)
                                     minFreeSlots = freeSlots;
                                 break;
@@ -280,27 +280,27 @@ void WeekWidget::populate()
                     }
 
                     // Make sure that the amount of free slots does not take unoccupied border slots into account
-                    minFreeSlots = qMin(minFreeSlots, maxPofileWidth-c);
+                    minFreeSlots = qMin(minFreeSlots, maxPofileWidth-i);
 
                     // Take the indent into account to get the real usable width
                     maxPofileWidth -= minProfileIndent;
 
-                    const int eventX = eventBaseX + (c-minProfileIndent) * CellWidth / maxPofileWidth;
+                    const int eventX = eventBaseX + (i-minProfileIndent) * CellWidth / maxPofileWidth;
                     const int eventY = (allDayRowHeight() + SpacingHeight) + (CellHeight + SpacingHeight) * eventStart/60/60;
                     const int eventW = CellWidth * minFreeSlots / maxPofileWidth;
                     const int eventH = qMax(CellHeight / 2, (CellHeight + SpacingHeight) * eventLength/60/60 - SpacingHeight);
 
-                    const int color = palette[instances->component->getCalendarId()];
+                    const int color = palette[instance->component->getCalendarId()];
 
-                    ComponentWidget *widget = new ComponentWidget(instances, color, eventX, eventY, eventW, eventH, this);
+                    ComponentWidget *widget = new ComponentWidget(instance, color, eventX, eventY, eventW, eventH, this);
                     componentWidgets.push_back(widget);
                     widget->show();
 
                     // Create a master-slave relationship if necessary
-                    if (ComponentWidget *master = masterWidgets.value(instances)) {
+                    if (ComponentWidget *master = masterWidgets.value(instance)) {
                         master->addSlave(widget);
                     } else {
-                        masterWidgets[instances] = widget;
+                        masterWidgets[instance] = widget;
                     }
                 }
             }

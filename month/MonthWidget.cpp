@@ -220,16 +220,16 @@ QPixmap MonthWidget::render()
             // Draw event stripes
             for (int i = 0; i < WindowSize; i++) {
                 for (int j = 0; j < WindowColumns; j++) {
-                    if (window.components[i][j]) {
+                    if (window.instances[i][j]) {
                         // Determine the shape characteristics of the stripe
-                        const bool extendsLeft = window.components[i][j]->stamp < thisDayStamp;
-                        const bool extendsRight = window.components[i][j]->end() > nextDayStamp;
-                        const bool doubleWidth = window.components[i][0] == window.components[i][1];
+                        const bool extendsLeft = window.instances[i][j]->stamp < thisDayStamp;
+                        const bool extendsRight = window.instances[i][j]->end() > nextDayStamp;
+                        const bool doubleWidth = window.instances[i][0] == window.instances[i][1];
 
                         // Obtain stripe pixmap
                         QIcon eventIcon = QIcon::fromTheme(selectedMonth ?
-                                                           CWrapper::colorStripe(palette[window.components[i][j]->component->getCalendarId()]) :
-                                                           CWrapper::colorStripeDim(palette[window.components[i][j]->component->getCalendarId()]));
+                                                           CWrapper::colorStripe(palette[window.instances[i][j]->component->getCalendarId()]) :
+                                                           CWrapper::colorStripeDim(palette[window.instances[i][j]->component->getCalendarId()]));
                         QPixmap eventPixmap = eventIcon.pixmap(eventIcon.availableSizes().first());
 
                         // Determine the horizontal coordinate of the stripe

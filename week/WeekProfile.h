@@ -33,7 +33,7 @@ public:
     // Structure representing state of the profile at a specific moment
     struct Frame
     {
-        ComponentInstance *components[Metrics::WeekProfile::FrameSize];
+        ComponentInstance *instances[Metrics::WeekProfile::FrameSize];
         bool initial[Metrics::WeekProfile::FrameSize];
 
         int stamp;
@@ -44,7 +44,7 @@ public:
             using namespace Metrics::WeekProfile;
 
             for (int i = 0; i < FrameSize; i++) {
-                components[i] = NULL;
+                instances[i] = NULL;
                 initial[i] = false;
             }
         }
@@ -55,7 +55,7 @@ public:
             using namespace Metrics::WeekProfile;
 
             for (int i = 0; i < FrameSize; i++) {
-                components[i] = other.components[i];
+                instances[i] = other.instances[i];
                 initial[i] = false;
             }
         }
@@ -68,8 +68,8 @@ public:
             if (point.change > 0) {
                 // Add
                 for (int i = 0; i < FrameSize; i++) {
-                    if (components[i] == NULL) {
-                        components[i] = point.component;
+                    if (instances[i] == NULL) {
+                        instances[i] = point.component;
                         initial[i] = true;
                         return i;
                     }
@@ -77,8 +77,8 @@ public:
             } else {
                 // Remove
                 for (int i = 0; i < FrameSize; i++) {
-                    if (components[i] == point.component) {
-                        components[i] = NULL;
+                    if (instances[i] == point.component) {
+                        instances[i] = NULL;
                         return i;
                     }
                 }
@@ -91,7 +91,7 @@ public:
             using namespace Metrics::WeekProfile;
 
             for (int i = 0; i < FrameSize; i++)
-                if (components[i])
+                if (instances[i])
                     return i;
 
             return FrameSize;
@@ -102,7 +102,7 @@ public:
             using namespace Metrics::WeekProfile;
 
             for (int i = FrameSize; i > 1; i--)
-                if (components[i-1])
+                if (instances[i-1])
                     return i;
 
             return 0;
@@ -172,12 +172,12 @@ public:
             } else if (frames[i].stamp > endPoint.stamp) {
                 // Insert a new frame at i
                 Frame frame = Frame(frames[(int)i-1], endPoint.stamp);
-                frame.components[slot] = NULL;
+                frame.instances[slot] = NULL;
                 frames.insert(frames.begin()+i, frame);
                 break;
             } else {
                 // Update passed frames
-                frames[i].components[slot] = startPoint.component;
+                frames[i].instances[slot] = startPoint.component;
             }
         }
         if (i == frames.size()) {

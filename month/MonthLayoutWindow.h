@@ -18,7 +18,7 @@ namespace Metrics
 class MonthLayoutWindow
 {
 public:
-    ComponentInstance *components[Metrics::MonthLayoutWindow::WindowSize][Metrics::MonthLayoutWindow::WindowColumns];
+    ComponentInstance *instances[Metrics::MonthLayoutWindow::WindowSize][Metrics::MonthLayoutWindow::WindowColumns];
 
     // Create an empty window
     MonthLayoutWindow()
@@ -27,27 +27,27 @@ public:
 
         for (int i = 0; i < WindowSize; i++)
             for (int j = 0; j < WindowColumns; j++)
-                components[i][j] = NULL;
+                instances[i][j] = NULL;
     }
 
     // Try to add a component to the window
-    void add(ComponentInstance *component)
+    void add(ComponentInstance *instance)
     {
         using namespace Metrics::MonthLayoutWindow;
 
-        if (QDateTime::fromTime_t(component->stamp).date() < QDateTime::fromTime_t(component->end()).addSecs(-1).date()) {
+        if (QDateTime::fromTime_t(instance->stamp).date() < QDateTime::fromTime_t(instance->end()).addSecs(-1).date()) {
             // Multi-day event, fits only in a whole row in a multi-day slot
             for (int i = 0; i < MultiDayWindoSize; i++) {
-                if (!components[i][0] && !components[i][1]) {
-                    components[i][0] = components[i][1] = component;
+                if (!instances[i][0] && !instances[i][1]) {
+                    instances[i][0] = instances[i][1] = instance;
                     return;
                 }
             }
-        } else if (component->component->getAllDay()) {
+        } else if (instance->component->getAllDay()) {
             // All-day event, fits only in a whole row
             for (int i = 0; i < WindowSize; i++) {
-                if (!components[i][0] && !components[i][1]) {
-                    components[i][0] = components[i][1] = component;
+                if (!instances[i][0] && !instances[i][1]) {
+                    instances[i][0] = instances[i][1] = instance;
                     return;
                 }
             }
@@ -55,8 +55,8 @@ public:
             // Minor event, fits everywhere
             for (int j = 0; j < WindowColumns; j++) {
                 for (int i = 0; i < WindowSize; i++) {
-                    if (!components[i][j]) {
-                        components[i][j] = component;
+                    if (!instances[i][j]) {
+                        instances[i][j] = instance;
                         return;
                     }
                 }
@@ -73,11 +73,11 @@ public:
 
         for (int i = 0; i < WindowSize; i++) {
             for (int j = 0; j < WindowColumns; j++) {
-                if (components[i][j]) {
-                    if (components[i][j]->end() < start
-                    ||  components[i][j]->end() == start && components[i][j]->duration() > 0)
+                if (instances[i][j]) {
+                    if (instances[i][j]->end() < start
+                    ||  instances[i][j]->end() == start && instances[i][j]->duration() > 0)
                     {
-                        components[i][j] = NULL;
+                        instances[i][j] = NULL;
                     }
                 }
             }

@@ -35,7 +35,7 @@ public:
     {
         using namespace Metrics::MonthLayoutWindow;
 
-        if (QDateTime::fromTime_t(component->stamp).date() != QDateTime::fromTime_t(component->end()).date()) {
+        if (QDateTime::fromTime_t(component->stamp).date() < QDateTime::fromTime_t(component->end()).addSecs(-1).date()) {
             // Multi-day event, fits only in a whole row in a multi-day slot
             for (int i = 0; i < MultiDayWindoSize; i++) {
                 if (!components[i][0] && !components[i][1]) {
@@ -71,10 +71,17 @@ public:
 
         time_t start = QDateTime(date).toTime_t();
 
-        for (int i = 0; i < WindowSize; i++)
-            for (int j = 0; j < WindowColumns; j++)
-                if (components[i][j] && (components[i][j]->end() < start))
-                    components[i][j] = NULL;
+        for (int i = 0; i < WindowSize; i++) {
+            for (int j = 0; j < WindowColumns; j++) {
+                if (components[i][j]) {
+                    if (components[i][j]->end() < start
+                    ||  components[i][j]->end() == start && components[i][j]->duration() > 0)
+                    {
+                        components[i][j] = NULL;
+                    }
+                }
+            }
+        }
     }
 };
 

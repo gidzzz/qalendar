@@ -80,14 +80,14 @@ public:
                     timeText = tr("All\nday");
                     if (startDate.date() < date)
                         timeText = "..." + timeText;
-                    if (date < endDate.date())
+                    if (endDate.addSecs(-1).date() > date)
                         timeText = timeText + "...";
                 } else {
-                    if (startDate.date() < date && date < endDate.date()) {
+                    if (startDate.date() < date && endDate.addSecs(-1).date() > date) {
                         timeText = "...";
                     } else if (startDate.date() < date) {
                         timeText = "...\n" + endDate.toString("hh:mm");
-                    } else if (date < endDate.date()) {
+                    } else if (endDate.addSecs(-1).date() > date) {
                         timeText = startDate.toString("hh:mm") + "\n...";
                     } else {
                         timeText = startDate.toString("hh:mm") + "\n" + endDate.toString("hh:mm");

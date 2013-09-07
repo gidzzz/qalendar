@@ -137,7 +137,9 @@ void AgendaPlug::reload()
             item->setData(DateRole, date.date());
             ui->componentList->addItem(item);
 
-            if (instances[i]->end() < nextDayStamp) {
+            if (instances[i]->end() < nextDayStamp
+            ||  instances[i]->end() == nextDayStamp && instances[i]->duration() > 0)
+            {
                 // If this is the last day of this instance, remove it from the list...
                 instances.erase(instances.begin() + i);
             } else {

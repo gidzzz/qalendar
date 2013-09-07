@@ -181,8 +181,11 @@ void WeekWidget::populateAllDay()
                 // Calculate how many days of the component are visible
                 int componentLength;
                 if (window.instances[i]->component->getType() == E_EVENT) {
-                    const QDate endDate = QDateTime::fromTime_t(window.instances[i]->end()).date();
-                    componentLength = 1 + qMin(date.daysTo(endDate) + 1,
+                    QDateTime endDate = QDateTime::fromTime_t(window.instances[i]->end());
+                    if (window.instances[i]->duration() > 0)
+                        endDate = endDate.addSecs(-1);
+
+                    componentLength = 1 + qMin(date.daysTo(endDate.date()) + 1,
                                                date.daysTo(lastDate));
                 } else {
                     componentLength = 1;
@@ -238,7 +241,9 @@ void WeekWidget::populate()
                     ComponentInstance *instances = frame.components[c];
 
                     // Ignore components which do not reach this day
-                    if (instances->end() < dayStartStamp) continue;
+                    if (instances->end() < dayStartStamp
+                    ||  instances->end() == dayStartStamp && instances->duration() > 0)
+                        continue;
 
                     // Calculate the key moments of the component, relative to this day
                     const int eventStart  = qMax((time_t) 0, (instances->stamp - dayStartStamp));

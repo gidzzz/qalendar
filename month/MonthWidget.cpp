@@ -223,7 +223,7 @@ QPixmap MonthWidget::render()
                     if (window.components[i][j]) {
                         // Determine the shape characteristics of the stripe
                         const bool extendsLeft = window.components[i][j]->stamp < thisDayStamp;
-                        const bool extendsRight = window.components[i][j]->end() >= nextDayStamp;
+                        const bool extendsRight = window.components[i][j]->end() > nextDayStamp;
                         const bool doubleWidth = window.components[i][0] == window.components[i][1];
 
                         // Obtain stripe pixmap

@@ -103,6 +103,8 @@ namespace CWrapper
     // Expand a component to specific instances
     inline void expand(CComponent *component, vector<ComponentInstance*> &instances, const time_t startStamp, const time_t endStamp)
     {
+        const time_t duration = component->getDateEnd() - component->getDateStart();
+
         if (component->getRecurrence()) {
             vector<time_t> stamps;
             component->getInstanceTimes(startStamp, endStamp, stamps);
@@ -112,12 +114,23 @@ namespace CWrapper
                 // recurrence is present, components are fetched also from
                 // outside of the requested range (one day before). Below is
                 // a workaround for that.
-                if (stamps[s] > endStamp || component->getDateEnd() - component->getDateStart() + stamps[s] < startStamp)
+                if (stamps[s] > endStamp || stamps[s] + duration < startStamp)
+                    continue;
+
+                // When calendar-backend is fetching components from a certain
+                // range, it treats the component bounds inclusively. However,
+                // this is not what we want, so an additional filtering step
+                // is required.
+                if (stamps[s] + duration == startStamp && duration != 0)
                     continue;
 
                 instances.push_back(new ComponentInstance(component, stamps[s]));
             }
         } else {
+            // Interpret the end date as non-inclusive (see above)
+            if (component->getDateEnd() == startStamp && duration != 0)
+                return;
+
             instances.push_back(new ComponentInstance(component, component->getDateStart()));
         }
     }

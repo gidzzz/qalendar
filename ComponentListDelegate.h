@@ -83,7 +83,9 @@ public:
                     if (endDate.addSecs(-1).date() > date)
                         timeText = timeText + "...";
                 } else {
-                    if (startDate.date() < date && endDate.addSecs(-1).date() > date) {
+                    if (startDate == endDate) {
+                        timeText = startDate.toString("hh:mm");
+                    } else if (startDate.date() < date && endDate.addSecs(-1).date() > date) {
                         timeText = "...";
                     } else if (startDate.date() < date) {
                         timeText = "...\n" + endDate.toString("hh:mm");

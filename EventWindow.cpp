@@ -1,5 +1,6 @@
 #include "EventWindow.h"
 
+#include <QMaemo5InformationBox>
 #include <QMaemo5Style>
 
 #include <QDateTime>
@@ -198,6 +199,8 @@ void EventWindow::gotoPrevEvent()
         instance.component = component;
         instance.stamp = stamp;
         reload();
+    } else {
+        QMaemo5InformationBox::information(this, tr("No more events"), 1000);
     }
 }
 
@@ -217,6 +220,8 @@ void EventWindow::gotoNextEvent()
         instance.component = component;
         instance.stamp = stamp;
         reload();
+    } else {
+        QMaemo5InformationBox::information(this, tr("No more events"), 1000);
     }
 }
 

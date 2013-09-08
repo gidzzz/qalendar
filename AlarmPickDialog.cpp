@@ -1,6 +1,7 @@
 #include "AlarmPickDialog.h"
 
 #include <QPushButton>
+#include <QMaemo5Style>
 
 #include "CWrapper.h"
 
@@ -12,6 +13,10 @@ AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
     ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, QMaemo5Style::standardColor("SecondaryTextColor"));
+    ui->timeLabel->setPalette(palette);
 
     ui->hoursBox->setValue(seconds / 3600);
     ui->minutesBox->setValue(seconds % 3600 / 60);

@@ -34,16 +34,21 @@
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="27"/>
+        <source>Time in advance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../AlarmPickDialog.ui" line="37"/>
         <source>Hours</source>
         <translation>Година</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.ui" line="47"/>
+        <location filename="../AlarmPickDialog.ui" line="57"/>
         <source>Minutes</source>
         <translation>Хвилина</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.ui" line="67"/>
+        <location filename="../AlarmPickDialog.ui" line="77"/>
         <source>Seconds</source>
         <translation>Секунда</translation>
     </message>
@@ -53,7 +58,7 @@
         <translation>Активне</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.cpp" line="12"/>
+        <location filename="../AlarmPickDialog.cpp" line="13"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -480,14 +485,20 @@ day</source>
         <translation>Видалити подію</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="132"/>
+        <location filename="../EventWindow.cpp" line="133"/>
         <source>From</source>
         <translation>Від</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="132"/>
+        <location filename="../EventWindow.cpp" line="133"/>
         <source>On</source>
-        <translation>Кожен</translation>
+        <translation>Дата</translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.cpp" line="203"/>
+        <location filename="../EventWindow.cpp" line="224"/>
+        <source>No more events</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -929,7 +940,7 @@ day</source>
 <context>
     <name>WeekWidget</name>
     <message>
-        <location filename="../week/WeekWidget.cpp" line="348"/>
+        <location filename="../week/WeekWidget.cpp" line="357"/>
         <source>All day</source>
         <translation>Весь день</translation>
     </message>

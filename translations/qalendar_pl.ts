@@ -34,16 +34,21 @@
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="27"/>
+        <source>Time in advance</source>
+        <translation>Wyprzedzenie</translation>
+    </message>
+    <message>
+        <location filename="../AlarmPickDialog.ui" line="37"/>
         <source>Hours</source>
         <translation>Godziny</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.ui" line="47"/>
+        <location filename="../AlarmPickDialog.ui" line="57"/>
         <source>Minutes</source>
         <translation>Minuty</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.ui" line="67"/>
+        <location filename="../AlarmPickDialog.ui" line="77"/>
         <source>Seconds</source>
         <translation>Sekundy</translation>
     </message>
@@ -53,7 +58,7 @@
         <translation>Włączony</translation>
     </message>
     <message>
-        <location filename="../AlarmPickDialog.cpp" line="12"/>
+        <location filename="../AlarmPickDialog.cpp" line="13"/>
         <source>Done</source>
         <translation>Gotowe</translation>
     </message>
@@ -480,14 +485,20 @@ dzień</translation>
         <translation>Usuń zdarzenie</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="132"/>
+        <location filename="../EventWindow.cpp" line="133"/>
         <source>From</source>
         <translation>Od</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="132"/>
+        <location filename="../EventWindow.cpp" line="133"/>
         <source>On</source>
         <translation>Dnia</translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.cpp" line="203"/>
+        <location filename="../EventWindow.cpp" line="224"/>
+        <source>No more events</source>
+        <translation>Nie ma więcej zdarzeń</translation>
     </message>
 </context>
 <context>
@@ -929,7 +940,7 @@ dzień</translation>
 <context>
     <name>WeekWidget</name>
     <message>
-        <location filename="../week/WeekWidget.cpp" line="348"/>
+        <location filename="../week/WeekWidget.cpp" line="357"/>
         <source>All day</source>
         <translation>Cały dzień</translation>
     </message>

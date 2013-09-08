@@ -186,15 +186,17 @@ void EventWindow::gotoPrevEvent()
 {
     int error;
     int calendarId;
+    time_t stamp;
 
     CComponent *component = CMulticalendar::MCInstance()->getPrevNextComponent(instance.event->getId(),
                                                                                instance.stamp,
                                                                                true,
-                                                                               calendarId, instance.stamp, error);
+                                                                               calendarId, stamp, error);
 
     if (component) {
         delete instance.component;
         instance.component = component;
+        instance.stamp = stamp;
         reload();
     }
 }
@@ -203,15 +205,17 @@ void EventWindow::gotoNextEvent()
 {
     int error;
     int calendarId;
+    time_t stamp;
 
     CComponent *component = CMulticalendar::MCInstance()->getPrevNextComponent(instance.event->getId(),
                                                                                instance.stamp,
                                                                                false,
-                                                                               calendarId, instance.stamp, error);
+                                                                               calendarId, stamp, error);
 
     if (component) {
         delete instance.component;
         instance.component = component;
+        instance.stamp = stamp;
         reload();
     }
 }

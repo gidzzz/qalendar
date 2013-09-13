@@ -22,7 +22,7 @@ signals:
 private:
     Ui::TunePickDialog *ui;
 
-    void addTune(QString path);
+    void addTune(QString path, bool front = false);
 
 private slots:
     void accept();

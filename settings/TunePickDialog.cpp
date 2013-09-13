@@ -23,10 +23,19 @@ TunePickDialog::TunePickDialog(QWidget *parent, QString currentPath) :
     addTune("/usr/share/sounds/ui-calendar_alarm_3.aac");
     addTune("/usr/share/sounds/Beep.aac");
 
-    // Highlight the selected sound
-    for (int i = 0; i < ui->tuneList->count(); i++)
-        if (ui->tuneList->item(i)->data(PathRole).toString() == currentPath)
-            ui->tuneList->item(i)->setSelected(true);
+    // Try to locate the selected sound in the default list
+    int i = 0;
+    while (i < ui->tuneList->count()
+       &&  ui->tuneList->item(i)->data(PathRole).toString() != currentPath)
+           i++;
+
+    // If the sound is not in the default list, one more item will be added
+    if (i == ui->tuneList->count()) {
+        addTune(currentPath, true);
+        ui->tuneList->item(0)->setSelected(true);
+    } else {
+        ui->tuneList->item(i)->setSelected(true);
+    }
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
 }
@@ -36,12 +45,12 @@ TunePickDialog::~TunePickDialog()
     delete ui;
 }
 
-void TunePickDialog::addTune(QString path)
+void TunePickDialog::addTune(QString path, bool front)
 {
     QListWidgetItem *item = new QListWidgetItem();
     item->setText(TunePickSelector::nameForPath(path));
     item->setData(PathRole, path);
-    ui->tuneList->addItem(item);
+    ui->tuneList->insertItem(front ? 0 : ui->tuneList->count(), item);
 }
 
 void TunePickDialog::accept()

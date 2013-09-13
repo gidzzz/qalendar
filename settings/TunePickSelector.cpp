@@ -1,7 +1,5 @@
 #include "TunePickSelector.h"
 
-#include <QFileInfo>
-
 #include "TunePickDialog.h"
 
 TunePickSelector::TunePickSelector(QString path, QObject *parent) :
@@ -32,7 +30,10 @@ QString TunePickSelector::nameForPath(QString path)
     if (path == "/usr/share/sounds/Beep.aac")
         return "Beep";
 
-    return QFileInfo(path).baseName();
+    // Extract the base name
+    const int nameStart = path.lastIndexOf('/') + 1;
+    const int nameEnd   = path.lastIndexOf('.');
+    return path.mid(nameStart, nameEnd-nameStart);
 }
 
 QWidget* TunePickSelector::widget(QWidget *parent)

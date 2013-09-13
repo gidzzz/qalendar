@@ -22,9 +22,12 @@ signals:
 private:
     Ui::TunePickDialog *ui;
 
+    QListWidgetItem *customItem;
+
     void addTune(QString path, bool front = false);
 
 private slots:
+    void browse();
     void accept();
 };
 

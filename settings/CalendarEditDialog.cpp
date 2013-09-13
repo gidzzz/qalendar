@@ -29,9 +29,6 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
     ui->buttonBox->addButton(exportButton, QDialogButtonBox::ActionRole);
     ui->buttonBox->addButton(deleteButton, QDialogButtonBox::ActionRole);
     ui->buttonBox->addButton(saveButton,   QDialogButtonBox::ActionRole);
-    disconnect(exportButton, SIGNAL(clicked()), ui->buttonBox, 0);
-    disconnect(deleteButton, SIGNAL(clicked()), ui->buttonBox, 0);
-    disconnect(saveButton, SIGNAL(clicked()), ui->buttonBox, 0);
     connect(exportButton, SIGNAL(clicked()), this, SLOT(exportCalendar()));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
     connect(saveButton,   SIGNAL(clicked()), this, SLOT(saveCalendar()));

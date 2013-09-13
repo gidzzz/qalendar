@@ -9,6 +9,7 @@ enum DataRole
     ColorRole,
     HeadingRole,
     DateRole,
+    PathRole,
     ComponentRole,
     TodoRole,
     JournalRole,

@@ -34,6 +34,8 @@ SOURCES += main.cpp \
     recurrence/ByMonthWidget.cpp \
     \
     settings/SettingsDialog.cpp \
+    settings/TunePickSelector.cpp \
+    settings/TunePickDialog.cpp \
     settings/CalendarsConfigSelector.cpp \
     settings/CalendarsConfigDialog.cpp \
     settings/CalendarEditDialog.cpp \
@@ -93,6 +95,8 @@ HEADERS += \
     recurrence/RecurrenceSectionLabel.h \
     \
     settings/SettingsDialog.h \
+    settings/TunePickSelector.h \
+    settings/TunePickDialog.h \
     settings/CalendarsConfigSelector.h \
     settings/CalendarsConfigDialog.h \
     settings/CalendarEditDialog.h \
@@ -146,6 +150,7 @@ FORMS += \
     recurrence/RecurrencePickDialog.ui \
     \
     settings/SettingsDialog.ui \
+    settings/TunePickDialog.ui \
     settings/CalendarsConfigDialog.ui \
     settings/CalendarEditDialog.ui \
     \
@@ -202,4 +207,4 @@ translations.CONFIG += no_check_exist
 translations.path = $$PKGDATADIR/translations
 
 CONFIG += link_pkgconfig
-PKGCONFIG += calendar-backend
+PKGCONFIG += calendar-backend gq-gconf

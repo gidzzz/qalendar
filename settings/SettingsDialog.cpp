@@ -1,10 +1,12 @@
 #include "SettingsDialog.h"
 
 #include <QStandardItemModel>
-
 #include <QSettings>
 
+#include <GConfItem>
+
 #include "CalendarsConfigSelector.h"
+#include "TunePickSelector.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     RotatingDialog(parent),
@@ -16,6 +18,8 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     ui->calendarsButton->setPickSelector(new CalendarsConfigSelector());
+
+    ui->tuneButton->setPickSelector(new TunePickSelector(GConfItem("/apps/calendar/calendar-alarm-tone").value().toString()));
 
     QSettings settings;
     ui->deleteEventsButton->setPickSelector(buildDeleteSelector(settings.value("DeleteEventsAfter", 0).toInt()));
@@ -29,7 +33,6 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 SettingsDialog::~SettingsDialog()
 {
     delete ui;
-
 }
 
 QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
@@ -64,8 +67,11 @@ QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
 
 void SettingsDialog::saveSettings()
 {
+    TunePickSelector *tps = static_cast<TunePickSelector*>(ui->tuneButton->pickSelector());
     QMaemo5ListPickSelector *des = static_cast<QMaemo5ListPickSelector*>(ui->deleteEventsButton->pickSelector());
     QMaemo5ListPickSelector *dts = static_cast<QMaemo5ListPickSelector*>(ui->deleteTodosButton->pickSelector());
+
+    GConfItem("/apps/calendar/calendar-alarm-tone").set(tps->currentPath());
 
     QSettings settings;
     settings.setValue("DeleteEventsAfter", des->model()->index(des->currentIndex(), 0).data(Qt::UserRole).toInt());

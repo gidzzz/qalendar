@@ -37,6 +37,16 @@
       </widget>
      </item>
      <item>
+      <widget class="QMaemo5ValueButton" name="tuneButton">
+       <property name="text">
+        <string>Alarm tone</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QMaemo5ValueButton" name="deleteEventsButton">
        <property name="text">
         <string>Delete events</string>

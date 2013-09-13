@@ -54,6 +54,7 @@ TunePickDialog::~TunePickDialog()
 void TunePickDialog::addTune(QString path, bool front)
 {
     QListWidgetItem *item = new QListWidgetItem();
+    item->setTextAlignment(Qt::AlignCenter);
     item->setText(TunePickSelector::nameForPath(path));
     item->setData(PathRole, path);
     ui->tuneList->insertItem(front ? 0 : ui->tuneList->count(), item);

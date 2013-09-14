@@ -22,12 +22,17 @@
 #include <QTranslator>
 #include <QDebug>
 
+#include <CMulticalendar.h>
+
 #include "MainWindow.h"
 
 int main(int argc, char  *argv[])
 {
     QApplication::setOrganizationName("qalendar");
     QApplication::setApplicationName("qalendar");
+
+    // This name is used when emitting dbChange on D-Bus
+    CMulticalendar::MCInstance()->setApplicationName("QALENDAR");
 
     QApplication app(argc, argv);
 

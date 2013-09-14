@@ -3,6 +3,8 @@
 #include <QMessageBox>
 #include <QMaemo5InformationBox>
 
+#include <QDBusConnection>
+
 #include <CalendarErrors.h>
 
 #include "EventEditDialog.h"
@@ -11,6 +13,7 @@
 
 #include "ChangeClient.h"
 
+#include "MainWindow.h"
 #include "CWrapper.h"
 
 Version ChangeManager::m_version = 1;
@@ -26,6 +29,9 @@ ChangeManager::ChangeManager()
     dateCheckTimer = new QTimer(this);
     dateCheckTimer->setInterval(10000);
     connect(dateCheckTimer, SIGNAL(timeout()), this, SLOT(checkDate()));
+
+    QDBusConnection::sessionBus().connect("", "", DBUS_INTERFACE, "dbChange",
+                                          this, SLOT(onDbChange(QString,QString)));
 }
 
 // Start delivering change notifications to the specified client
@@ -61,6 +67,19 @@ void ChangeManager::checkDate()
         m_date = currentDate;
         bump();
     }
+}
+
+// Handle a database change notification from D-Bus
+void ChangeManager::onDbChange(QString details, QString appName)
+{
+    Q_UNUSED(details);
+
+    // Do not react to updates originating from this application, as they are
+    // handled internally.
+    // NOTE: This check will not recognize updates coming from a different
+    // instance of this application.
+    if (appName != CMulticalendar::MCInstance()->getApplicationName().c_str())
+        bump();
 }
 
 // Bump the database state version

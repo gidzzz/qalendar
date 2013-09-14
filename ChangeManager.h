@@ -58,6 +58,8 @@ private:
 
 private slots:
     static void checkDate();
+
+    static void onDbChange(QString details, QString appName);
 };
 
 #endif // CHANGEMANAGER_H

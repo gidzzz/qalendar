@@ -9,9 +9,42 @@
 #include "TodoEditDialog.h"
 #include "JournalEditDialog.h"
 
+#include "ChangeClient.h"
+
 #include "CWrapper.h"
 
 Version ChangeManager::m_version = 1;
+QDate ChangeManager::m_date = QDate::currentDate();
+
+ChangeClient* ChangeManager::activeClient = NULL;
+QTimer* ChangeManager::dateCheckTimer;
+
+ChangeManager* ChangeManager::instance = new ChangeManager();
+
+ChangeManager::ChangeManager()
+{
+    dateCheckTimer = new QTimer(this);
+    dateCheckTimer->setInterval(10000);
+    connect(dateCheckTimer, SIGNAL(timeout()), this, SLOT(checkDate()));
+}
+
+// Start delivering change notifications to the specified client
+void ChangeManager::activateClient(ChangeClient *client)
+{
+    activeClient = client;
+
+    checkDate();
+    dateCheckTimer->start();
+}
+
+// Stop change notification delivery
+void ChangeManager::deactivateClient(ChangeClient *client)
+{
+    if (activeClient == client) {
+        activeClient = NULL;
+        dateCheckTimer->stop();
+    }
+}
 
 // Return the version of tracked database state
 Version ChangeManager::version()
@@ -19,10 +52,24 @@ Version ChangeManager::version()
     return m_version;
 }
 
+// Check if an update should occur due to passing time
+void ChangeManager::checkDate()
+{
+    const QDate currentDate = QDate::currentDate();
+
+    if (m_date != currentDate) {
+        m_date = currentDate;
+        bump();
+    }
+}
+
 // Bump the database state version
 void ChangeManager::bump()
 {
     m_version++;
+
+    if (activeClient)
+        activeClient->onChange();
 }
 
 // Open the component in the appropriate editor

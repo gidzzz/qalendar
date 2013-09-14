@@ -12,6 +12,8 @@ public:
     TodoWindow(CTodo *todo, QWidget *parent);
     ~TodoWindow();
 
+    void onChange();
+
 private:
     Ui::TodoWindow *ui;
 

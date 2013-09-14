@@ -21,10 +21,10 @@
 using namespace Metrics::MonthWidget;
 
 MonthPlug::MonthPlug(QDate date, QWidget *parent) :
-    TemporalPlug(parent),
-    date(date)
+    TemporalPlug(parent)
 {
     this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
 
     QGridLayout *mainLayout = new QGridLayout(this);
     QHBoxLayout *dayLayout  = new QHBoxLayout();
@@ -95,16 +95,20 @@ QString MonthPlug::title() const
 void MonthPlug::onActivated()
 {
     if (this->isOutdated()
-    ||  this->globalDate() != fromGlobalDate(date))
+    ||  this->globalDate() != date)
     {
         setDate(this->globalDate()); // Reload
     }
+
+    Plug::onActivated();
 }
 
 void MonthPlug::setDate(QDate date)
 {
     this->sync();
+
     this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
 
     monthWidget->setDate(date);
 
@@ -186,8 +190,6 @@ void MonthPlug::onWeekClicked(QDate date)
 QDate MonthPlug::toGlobalDate(QDate date)
 {
     QDate currentDate = QDate::currentDate();
-
-        this->date = QDate(date.year(), date.month(), qMin(date.daysInMonth(), QDate::currentDate().day()));
 
     return date.year() == currentDate.year() && date.month() == currentDate.month()
          ? currentDate

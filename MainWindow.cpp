@@ -116,8 +116,13 @@ void MainWindow::closeEvent(QCloseEvent *e)
 // Forward activation events to the current plug
 void MainWindow::changeEvent(QEvent *e)
 {
-    if (e->type() == QEvent::ActivationChange && this->isActiveWindow())
-        currentPlug->onActivated();
+    if (e->type() == QEvent::ActivationChange) {
+        if (this->isActiveWindow()) {
+            currentPlug->onActivated();
+        } else {
+            currentPlug->onDeactivated();
+        }
+    }
 
     QMainWindow::changeEvent(e);
 }

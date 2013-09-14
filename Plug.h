@@ -15,9 +15,24 @@ public:
     QList<QAction*> actions;
 
     virtual QString title() const = 0;
-    virtual bool isRotatable() const { return false; };
+    virtual bool isRotatable() const { return false; }
 
-    virtual void onActivated() { };
+    virtual void onActivated()
+    {
+        this->activate();
+    }
+
+    virtual void onDeactivated()
+    {
+        this->deactivate();
+    }
+
+    virtual void onChange()
+    {
+        // In conjunction with a version bump perfromed by ChangeManager,
+        // this is a simple way to refresh the view.
+        onActivated();
+    }
 
 signals:
     void titleChanged(QString title);

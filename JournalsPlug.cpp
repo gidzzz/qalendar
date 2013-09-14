@@ -56,6 +56,8 @@ void JournalsPlug::onActivated()
 {
     if (this->isOutdated())
         reload();
+
+    Plug::onActivated();
 }
 
 void JournalsPlug::reload()

@@ -15,12 +15,12 @@
 
 AgendaPlug::AgendaPlug(QDate date, QWidget *parent) :
     TemporalPlug(parent),
-    ui(new Ui::AgendaPlug),
-    date(date)
+    ui(new Ui::AgendaPlug)
 {
     ui->setupUi(this);
 
     this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
 
     // Set up menu actions
     QAction *todayAction = new QAction(tr("Jump to today"), this);
@@ -42,10 +42,12 @@ AgendaPlug::~AgendaPlug()
 void AgendaPlug::onActivated()
 {
     if (this->isOutdated()
-    ||  this->globalDate() != fromGlobalDate(date))
+    ||  this->globalDate() != date)
     {
         setDate(this->globalDate()); // Reload
     }
+
+    Plug::onActivated();
 }
 
 void AgendaPlug::cleanup()
@@ -62,6 +64,8 @@ void AgendaPlug::cleanup()
 void AgendaPlug::reload()
 {
     cleanup();
+
+    ui->componentList->setDate(date);
 
     const int daysBack = 7;
     const int daysForward = 14;
@@ -161,10 +165,10 @@ void AgendaPlug::reload()
 void AgendaPlug::setDate(QDate date)
 {
     this->sync();
-    this->setGlobalDate(date);
 
-    this->date = date;
-    ui->componentList->setDate(date);
+    this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
+
     reload();
 }
 

@@ -82,6 +82,8 @@ void TodosPlug::onActivated()
 {
     if (this->isOutdated())
         reload();
+
+    Plug::onActivated();
 }
 
 void TodosPlug::reload()

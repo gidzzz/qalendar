@@ -66,41 +66,50 @@ EventWindow::~EventWindow()
 
 void EventWindow::changeEvent(QEvent *e)
 {
-    if (e->type() == QEvent::ActivationChange
-    &&  this->isActiveWindow()
-    &&  this->isOutdated())
-    {
-        CEvent *outdatedEvent = instance.event;
-        instance.event = CWrapper::details(instance.event);
-        delete outdatedEvent;
+    if (e->type() == QEvent::ActivationChange) {
+        if (this->isActiveWindow()) {
+            if (this->isOutdated())
+                onChange();
 
-        if (instance.event) {
-            // If the event was edited, it could have moved elsewhere, so a fresh
-            // list of instances is needed
-            vector<ComponentInstance*> instances;
-            CWrapper::expand(instance.component, instances, instance.stamp, instance.stamp);
-
-            // Go through the list and try to find the current instance
-            bool instanceLost = true;
-            for (unsigned int i = 0; i < instances.size(); i++) {
-                if (instance.stamp == instances[i]->stamp)
-                    instanceLost = false;
-                delete instances[i];
-            }
-
-            // If the current instance is no more, fall back to the base instance
-            if (instanceLost)
-                instance.stamp = instance.event->getDateStart();
-
-            // NOTE: A more refined heuristic to find the edited instance might be
-            // a useful addition, because this one is as basic and ineffective as it
-            // can get.
+            this->activate();
+        } else {
+            this->deactivate();
         }
-
-        reload();
     }
 
     QMainWindow::changeEvent(e);
+}
+
+void EventWindow::onChange()
+{
+    CEvent *outdatedEvent = instance.event;
+    instance.event = CWrapper::details(instance.event);
+    delete outdatedEvent;
+
+    if (instance.event) {
+        // If the event was edited, it could have moved elsewhere, so a fresh
+        // list of instances is needed
+        vector<ComponentInstance*> instances;
+        CWrapper::expand(instance.component, instances, instance.stamp, instance.stamp);
+
+        // Go through the list and try to find the current instance
+        bool instanceLost = true;
+        for (unsigned int i = 0; i < instances.size(); i++) {
+            if (instance.stamp == instances[i]->stamp)
+                instanceLost = false;
+            delete instances[i];
+        }
+
+        // If the current instance is no more, fall back to the base instance
+        if (instanceLost)
+            instance.stamp = instance.event->getDateStart();
+
+        // NOTE: A more refined heuristic to find the edited instance might be
+        // a useful addition, because this one is as basic and ineffective as it
+        // can get.
+    }
+
+    reload();
 }
 
 void EventWindow::reload()

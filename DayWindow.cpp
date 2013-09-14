@@ -59,14 +59,23 @@ DayWindow::~DayWindow()
 
 void DayWindow::changeEvent(QEvent *e)
 {
-    if (e->type() == QEvent::ActivationChange
-    &&  this->isActiveWindow()
-    &&  this->isOutdated())
-    {
-            reload();
+    if (e->type() == QEvent::ActivationChange) {
+        if (this->isActiveWindow()) {
+            if (this->isOutdated())
+                onChange();
+
+            this->activate();
+        } else {
+            this->deactivate();
+        }
     }
 
     QMainWindow::changeEvent(e);
+}
+
+void DayWindow::onChange()
+{
+    reload();
 }
 
 void DayWindow::cleanup()

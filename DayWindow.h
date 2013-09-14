@@ -16,6 +16,8 @@ public:
 
     void setDate(QDate date);
 
+    void onChange();
+
 private:
     Ui::DayWindow *ui;
 

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+#include <QTimer>
 #include <QDateTime>
 #include <QDate>
 
@@ -14,14 +15,20 @@
 
 typedef unsigned int Version;
 
-class ChangeManager
+class ChangeClient;
+
+class ChangeManager : public QObject
 {
+    Q_OBJECT
+
 public:
     static Version version();
     static void bump();
 
-    static bool edit(QWidget *parent, CComponent *component);
+    static void activateClient(ChangeClient *client);
+    static void deactivateClient(ChangeClient *client);
 
+    static bool edit(QWidget *parent, CComponent *component);
     static bool drop(QWidget *parent, CComponent *component);
 
     static bool newEvent(QWidget *parent);
@@ -35,11 +42,22 @@ public:
     static bool save(CComponent *component, int calendarId = -1);
 
 private:
+    ChangeManager();
+
+    static ChangeManager *instance;
+
     static Version m_version;
+    static QDate m_date;
+
+    static ChangeClient *activeClient;
+    static QTimer *dateCheckTimer;
 
     static void addComponent(CCalendar* calendar, CComponent *component, int &error);
     static void modifyComponent(CCalendar* calendar, CComponent *component, int &error);
     static void deleteComponent(CCalendar *calendar, CComponent *component, int &error);
+
+private slots:
+    static void checkDate();
 };
 
 #endif // CHANGEMANAGER_H

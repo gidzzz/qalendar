@@ -53,18 +53,27 @@ TodoWindow::~TodoWindow()
 
 void TodoWindow::changeEvent(QEvent *e)
 {
-    if (e->type() == QEvent::ActivationChange
-    &&  this->isActiveWindow()
-    &&  this->isOutdated())
-    {
-        CTodo *outdatedTodo = todo;
-        todo = CWrapper::details(todo);
-        delete outdatedTodo;
+    if (e->type() == QEvent::ActivationChange) {
+        if (this->isActiveWindow()) {
+            if (this->isOutdated())
+                onChange();
 
-        reload();
+            this->activate();
+        } else {
+            this->deactivate();
+        }
     }
 
     QMainWindow::changeEvent(e);
+}
+
+void TodoWindow::onChange()
+{
+    CTodo *outdatedTodo = todo;
+    todo = CWrapper::details(todo);
+    delete outdatedTodo;
+
+    reload();
 }
 
 void TodoWindow::reload()

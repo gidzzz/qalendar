@@ -15,10 +15,10 @@
 using namespace Metrics::WeekWidget;
 
 WeekPlug::WeekPlug(QDate date, QWidget *parent) :
-    TemporalPlug(parent),
-    date(date)
+    TemporalPlug(parent)
 {
     this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
 
     QGridLayout *mainLayout = new QGridLayout(this);
     weekdayLayout = new QHBoxLayout();
@@ -79,15 +79,18 @@ void WeekPlug::onActivated()
 
     // This is supposed to refresh the time indicator
     weekWidget->update();
+
+    Plug::onActivated();
 }
 
 void WeekPlug::setDate(QDate date)
 {
     this->sync();
+
     this->setGlobalDate(date);
+    this->date = fromGlobalDate(date);
     // TODO: Set global date only when a date change was explicit (same for other plugs)
 
-    this->date = date;
     weekWidget->setDate(date);
 
     QDate weekdayProbe = weekWidget->firstDate();
@@ -136,7 +139,9 @@ QDate WeekPlug::toGlobalDate(QDate date)
 {
     QDate currentDate = QDate::currentDate();
 
-    return date.year() == currentDate.year() && date.weekNumber() == currentDate.weekNumber()
+    int year, currentYear;
+
+    return date.weekNumber(&year) == currentDate.weekNumber(&currentYear) && year == currentYear
          ? currentDate
          : fromGlobalDate(date);
 }

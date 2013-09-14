@@ -12,6 +12,8 @@ public:
     EventWindow(ComponentInstance *instance, QWidget *parent);
     ~EventWindow();
 
+    void onChange();
+
 private:
     Ui::EventWindow *ui;
 

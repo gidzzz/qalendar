@@ -67,12 +67,13 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     }
     // Set up the week list
     if (type == Week) {
-        adjustWeeks();
         int year;
         int week = date.weekNumber(&year);
 
-        lists[Week]->setCurrentRow(week-1);
         lists[Year]->setCurrentRow(year-minYear);
+
+        adjustWeeks();
+        lists[Week]->setCurrentRow(week-1);
 
         connect(lists[Year], SIGNAL(itemSelectionChanged()), this, SLOT(adjustWeeks()));
     }

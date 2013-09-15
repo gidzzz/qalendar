@@ -52,9 +52,9 @@ private:
     static ChangeClient *activeClient;
     static QTimer *dateCheckTimer;
 
-    static void addComponent(CCalendar* calendar, CComponent *component, int &error);
-    static void modifyComponent(CCalendar* calendar, CComponent *component, int &error);
-    static void deleteComponent(CCalendar *calendar, CComponent *component, int &error);
+    static void addComponent(CComponent *component, int calendarId, int &error);
+    static void modifyComponent(CComponent *component, int calendarId, int &error);
+    static void deleteComponent(CComponent *component, int calendarId, int &error);
 
 private slots:
     static void checkDate();

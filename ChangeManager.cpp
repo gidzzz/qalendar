@@ -128,27 +128,11 @@ bool ChangeManager::drop(QWidget *parent, CComponent *component)
 
     int error;
 
-    CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(component->getCalendarId(), error);
-
-    if (error == CALENDAR_OPERATION_SUCCESSFUL) {
-        switch (component->getType()) {
-            case E_EVENT:
-                calendar->deleteEvent(component->getId(), error);
-                break;
-            case E_TODO:
-                calendar->deleteTodo(component->getId(), error);
-                break;
-            case E_JOURNAL:
-                calendar->deleteJournal(component->getId(), error);
-                break;
-        }
-    }
-
-    delete calendar;
+    deleteComponent(component, component->getCalendarId(), error);
 
     bump();
 
-    return error == CALENDAR_OPERATION_SUCCESSFUL;
+    return true;
 }
 
 // Show editor with a new event
@@ -206,23 +190,18 @@ bool ChangeManager::save(CComponent *component, int calendarId)
 
     // Check if the component already exists in the database
     if (component->getCalendarId()) {
-        CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(component->getCalendarId(), error);
         if (calendarId == component->getCalendarId()) {
             // Simply save chages
-            modifyComponent(calendar, component, error);
+            modifyComponent(component, component->getCalendarId(), error);
         } else {
             // Move the component between calendars, start by removing it from the old one
-            deleteComponent(calendar, component, error);
+            deleteComponent(component, component->getCalendarId(), error);
         }
-        delete calendar;
     }
 
     // Add the component to a calendar if it is a fresh one or has to be moved
-    if (!component->getCalendarId()) {
-        CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(calendarId, error);
-        addComponent(calendar, component, error);
-        delete calendar;
-    }
+    if (!component->getCalendarId())
+        addComponent(component, calendarId, error);
 
     bump();
 
@@ -230,53 +209,59 @@ bool ChangeManager::save(CComponent *component, int calendarId)
     return true;
 }
 
-// Add the component to the calendar (helper for the low-level save)
-void ChangeManager::addComponent(CCalendar* calendar, CComponent *component, int &error)
+// Add the component to the calendar (low-level helper)
+void ChangeManager::addComponent(CComponent *component, int calendarId, int &error)
 {
-    component->setCalendarId(calendar->getCalendarId());
+    component->setCalendarId(calendarId);
+
+    CMulticalendar *mc = CMulticalendar::MCInstance();
 
     switch (component->getType()) {
         case E_EVENT:
-            calendar->addEvent(static_cast<CEvent*>(component), error);
+            mc->addEvent(static_cast<CEvent*>(component), calendarId, error);
             break;
         case E_TODO:
-            calendar->addTodo(static_cast<CTodo*>(component), error);
+            mc->addTodo(static_cast<CTodo*>(component), calendarId, error);
             break;
         case E_JOURNAL:
-            calendar->addJournal(static_cast<CJournal*>(component), error);
+            mc->addJournal(static_cast<CJournal*>(component), calendarId, error);
             break;
         // TODO: Set error if the type cannot be handled?
     }
 }
 
-// Modify the component belonging the calendar (helper for the low-level save)
-void ChangeManager::modifyComponent(CCalendar* calendar, CComponent *component, int &error)
+// Modify the component belonging to the calendar (low-level helper)
+void ChangeManager::modifyComponent(CComponent *component, int calendarId, int &error)
 {
+    CMulticalendar *mc = CMulticalendar::MCInstance();
+
     switch (component->getType()) {
         case E_EVENT:
-            calendar->modifyEvent(static_cast<CEvent*>(component), error);
+            mc->modifyEvent(static_cast<CEvent*>(component), calendarId, error);
             break;
         case E_TODO:
-            calendar->modifyTodo(static_cast<CTodo*>(component), error);
+            mc->modifyTodo(static_cast<CTodo*>(component), calendarId, error);
             break;
         case E_JOURNAL:
-            calendar->modifyJournal(static_cast<CJournal*>(component), error);
+            mc->modifyJournal(static_cast<CJournal*>(component), calendarId, error);
             break;
     }
 }
 
-// Delete the component from the calendar (helper for the low-level save)
-void ChangeManager::deleteComponent(CCalendar *calendar, CComponent *component, int &error)
+// Delete the component from the calendar (low-level helper)
+void ChangeManager::deleteComponent(CComponent *component, int calendarId, int &error)
 {
+    CMulticalendar *mc = CMulticalendar::MCInstance();
+
     switch (component->getType()) {
         case E_EVENT:
-            calendar->deleteEvent(component->getId(), error);
+            mc->deleteEvent(calendarId, component->getId(), error);
             break;
         case E_TODO:
-            calendar->deleteTodo(component->getId(), error);
+            mc->deleteTodo(calendarId, component->getId(), error);
             break;
         case E_JOURNAL:
-            calendar->deleteJournal(component->getId(), error);
+            mc->deleteJournal(calendarId, component->getId(), error);
             break;
     }
 

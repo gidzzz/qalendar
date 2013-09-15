@@ -240,7 +240,7 @@ void TodosPlug::cleanTodos()
             vector<CTodo*> todos = calendars[i]->getTodos(error);
             for (unsigned int t = 0; t < todos.size(); t++) {
                 if (todos[t]->getStatus())
-                    calendars[i]->deleteTodo(todos[t]->getId(), error);
+                    mc->deleteTodo(calendars[i]->getCalendarId(), todos[t]->getId(), error);
                 delete todos[t];
             }
         }

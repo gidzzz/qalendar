@@ -22,7 +22,7 @@ public:
     QString title() const;
     bool isRotatable() const { return true; }
 
-    void onActivated();
+    void onChange();
 
 private:
     Ui::TodosPlug *ui;

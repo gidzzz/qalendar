@@ -8,7 +8,14 @@ class TemporalPlug : public Plug
     Q_OBJECT
 
 protected:
+    QDate date;
+
     TemporalPlug(QWidget *parent) : Plug(parent) { }
+
+    bool isOutdated()
+    {
+        return Plug::isOutdated() || globalDate() != fromGlobalDate(date);
+    }
 
     // Convert the given date to a date that can be presented to the outside
     // world as the single date shown by this plug.
@@ -22,17 +29,17 @@ protected:
     // Process and share a date
     void setGlobalDate(QDate date)
     {
-        this->date = toGlobalDate(date);
+        sharedDate = toGlobalDate(date);
     }
 
     // Read and interpret the shared date
     QDate globalDate()
     {
-        return fromGlobalDate(this->date);
+        return fromGlobalDate(sharedDate);
     }
 
 private:
-    static QDate date;
+    static QDate sharedDate;
 };
 
 #endif // TEMPORALPLUG_H

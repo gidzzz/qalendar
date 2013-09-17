@@ -65,22 +65,21 @@ WeekPlug::WeekPlug(QDate date, QWidget *parent) :
 QString WeekPlug::title() const
 {
     int year;
-    int week = date.weekNumber(&year);
+    int week = this->date.weekNumber(&year);
     return QString(tr("Week %1 (%2)")).arg(week).arg(year);
 }
 
 void WeekPlug::onActivated()
 {
-    if (this->isOutdated()
-    ||  this->globalDate() != fromGlobalDate(date))
-    {
-        setDate(this->globalDate()); // Reload
-    }
-
     // This is supposed to refresh the time indicator
     weekWidget->update();
 
     Plug::onActivated();
+}
+
+void WeekPlug::onChange()
+{
+    setDate(this->globalDate());
 }
 
 void WeekPlug::setDate(QDate date)
@@ -91,7 +90,7 @@ void WeekPlug::setDate(QDate date)
     this->date = fromGlobalDate(date);
     // TODO: Set global date only when a date change was explicit (same for other plugs)
 
-    weekWidget->setDate(date);
+    weekWidget->setDate(this->date);
 
     QDate weekdayProbe = weekWidget->firstDate();
     for (int i = 0; i < weekdayLayout->count()-1; i++) {
@@ -105,7 +104,7 @@ void WeekPlug::setDate(QDate date)
 
 void WeekPlug::selectWeek()
 {
-    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Week, date, this);
+    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Week, this->date, this);
     if (dpd->exec() == QDialog::Accepted)
         setDate(dpd->date());
     delete dpd;
@@ -113,18 +112,18 @@ void WeekPlug::selectWeek()
 
 void WeekPlug::gotoPrevWeek()
 {
-    setDate(date.addDays(-7));
+    setDate(this->date.addDays(-7));
 }
 
 void WeekPlug::gotoNextWeek()
 {
-    setDate(date.addDays(7));
+    setDate(this->date.addDays(7));
 }
 
 void WeekPlug::gotoToday()
 {
     if (this->globalDate() == fromGlobalDate(QDate::currentDate())) {
-        (new DayWindow(toGlobalDate(date), this))->show();
+        (new DayWindow(toGlobalDate(this->date), this))->show();
     } else {
         setDate(QDate::currentDate());
     }
@@ -132,7 +131,7 @@ void WeekPlug::gotoToday()
 
 void WeekPlug::newEvent()
 {
-    ChangeManager::newEvent(this, QDateTime(toGlobalDate(date), QTime::currentTime()));
+    ChangeManager::newEvent(this, QDateTime(toGlobalDate(this->date), QTime::currentTime()));
 }
 
 QDate WeekPlug::toGlobalDate(QDate date)

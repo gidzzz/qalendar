@@ -61,9 +61,6 @@ void DayWindow::changeEvent(QEvent *e)
 {
     if (e->type() == QEvent::ActivationChange) {
         if (this->isActiveWindow()) {
-            if (this->isOutdated())
-                onChange();
-
             this->activate();
         } else {
             this->deactivate();

@@ -27,13 +27,6 @@ public:
         this->deactivate();
     }
 
-    virtual void onChange()
-    {
-        // In conjunction with a version bump perfromed by ChangeManager,
-        // this is a simple way to refresh the view.
-        onActivated();
-    }
-
 signals:
     void titleChanged(QString title);
 };

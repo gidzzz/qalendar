@@ -78,12 +78,9 @@ QString TodosPlug::title() const
     return tr("Tasks") + status;
 }
 
-void TodosPlug::onActivated()
+void TodosPlug::onChange()
 {
-    if (this->isOutdated())
-        reload();
-
-    Plug::onActivated();
+    reload();
 }
 
 void TodosPlug::reload()

@@ -52,12 +52,9 @@ QString JournalsPlug::title() const
     return title;
 }
 
-void JournalsPlug::onActivated()
+void JournalsPlug::onChange()
 {
-    if (this->isOutdated())
-        reload();
-
-    Plug::onActivated();
+    reload();
 }
 
 void JournalsPlug::reload()

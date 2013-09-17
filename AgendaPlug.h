@@ -17,14 +17,12 @@ public:
     QString title() const { return tr("Agenda"); }
     bool isRotatable() const { return true; }
 
-    void onActivated();
+    void onChange();
 
     void setDate(QDate date);
 
 private:
     Ui::AgendaPlug *ui;
-
-    QDate date;
 
     vector<CComponent*> components;
 

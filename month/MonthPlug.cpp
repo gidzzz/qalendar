@@ -89,18 +89,12 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
 
 QString MonthPlug::title() const
 {
-    return QLocale().standaloneMonthName(date.month()) + date.toString(" yyyy");
+    return QLocale().standaloneMonthName(this->date.month()) + this->date.toString(" yyyy");
 }
 
-void MonthPlug::onActivated()
+void MonthPlug::onChange()
 {
-    if (this->isOutdated()
-    ||  this->globalDate() != date)
-    {
-        setDate(this->globalDate()); // Reload
-    }
-
-    Plug::onActivated();
+    setDate(this->globalDate());
 }
 
 void MonthPlug::setDate(QDate date)
@@ -110,7 +104,7 @@ void MonthPlug::setDate(QDate date)
     this->setGlobalDate(date);
     this->date = fromGlobalDate(date);
 
-    monthWidget->setDate(date);
+    monthWidget->setDate(this->date);
 
     // Update week buttons
     QDate weekProbe = monthWidget->firstDate();
@@ -124,7 +118,7 @@ void MonthPlug::setDate(QDate date)
     const char *months[] = { "jan", "feb", "mar", "apr", "may", "jun",
                              "jul", "aug", "sep", "oct", "nov", "dec" };
     QString filename = QString("/etc/hildon/theme/calendar/qgn_calendar_bg_%1.jpg")
-                       .arg(months[date.month()-1]);
+                       .arg(months[this->date.month()-1]);
     background = QPixmap(filename);
     // Looks like the format of png files with jpg extension cannot be detected, try manually
     if (background.isNull())
@@ -137,7 +131,7 @@ void MonthPlug::setDate(QDate date)
 
 void MonthPlug::selectMonth()
 {
-    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Month, date, this);
+    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Month, this->date, this);
     if (dpd->exec() == QDialog::Accepted)
         setDate(dpd->date());
     delete dpd;
@@ -145,28 +139,28 @@ void MonthPlug::selectMonth()
 
 void MonthPlug::gotoPrevMonth()
 {
-    setDate(date.addMonths(-1));
+    setDate(this->date.addMonths(-1));
 }
 
 void MonthPlug::gotoNextMonth()
 {
-    setDate(date.addMonths(1));
+    setDate(this->date.addMonths(1));
 }
 
 void MonthPlug::gotoPrevYear()
 {
-    setDate(date.addYears(-1));
+    setDate(this->date.addYears(-1));
 }
 
 void MonthPlug::gotoNextYear()
 {
-    setDate(date.addYears(1));
+    setDate(this->date.addYears(1));
 }
 
 void MonthPlug::gotoToday()
 {
     if (this->globalDate() == fromGlobalDate(QDate::currentDate())) {
-        (new DayWindow(toGlobalDate(date), this))->show();
+        (new DayWindow(toGlobalDate(this->date), this))->show();
     } else {
         setDate(QDate::currentDate());
     }
@@ -174,7 +168,7 @@ void MonthPlug::gotoToday()
 
 void MonthPlug::newEvent()
 {
-    ChangeManager::newEvent(this, QDateTime(toGlobalDate(date), QTime::currentTime()));
+    ChangeManager::newEvent(this, QDateTime(toGlobalDate(this->date), QTime::currentTime()));
 }
 
 void MonthPlug::paintEvent(QPaintEvent *)

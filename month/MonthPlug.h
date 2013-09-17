@@ -16,7 +16,7 @@ public:
 
     QString title() const;
 
-    void onActivated();
+    void onChange();
 
 signals:
     void weekActivated(QDate date);

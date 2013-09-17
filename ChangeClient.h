@@ -16,6 +16,12 @@ public:
         deactivate();
     }
 
+    // Check if this client should be updated
+    virtual bool isOutdated()
+    {
+        return version != ChangeManager::version();
+    }
+
     // The change manager will call this when an update might be required
     virtual void onChange() = 0;
 
@@ -24,12 +30,6 @@ protected:
     void sync()
     {
         version = ChangeManager::version();
-    }
-
-    // Check if this client needs to update itself
-    bool isOutdated()
-    {
-        return version != ChangeManager::version();
     }
 
     // Register with the change manager to receive updates

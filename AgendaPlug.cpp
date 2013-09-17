@@ -39,15 +39,9 @@ AgendaPlug::~AgendaPlug()
     cleanup();
 }
 
-void AgendaPlug::onActivated()
+void AgendaPlug::onChange()
 {
-    if (this->isOutdated()
-    ||  this->globalDate() != date)
-    {
-        setDate(this->globalDate()); // Reload
-    }
-
-    Plug::onActivated();
+    setDate(this->globalDate());
 }
 
 void AgendaPlug::cleanup()
@@ -65,7 +59,7 @@ void AgendaPlug::reload()
 {
     cleanup();
 
-    ui->componentList->setDate(date);
+    ui->componentList->setDate(this->date);
 
     const int daysBack = 7;
     const int daysForward = 14;
@@ -174,7 +168,7 @@ void AgendaPlug::setDate(QDate date)
 
 void AgendaPlug::selectDay()
 {
-    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Day, date, this);
+    DatePickDialog *dpd = new DatePickDialog(DatePickDialog::Day, this->date, this);
     if (dpd->exec() == QDialog::Accepted)
         setDate(dpd->date());
     delete dpd;

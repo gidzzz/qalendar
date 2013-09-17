@@ -39,8 +39,15 @@ void ChangeManager::activateClient(ChangeClient *client)
 {
     activeClient = client;
 
+    // Check the date, which might result in version bumping
     checkDate();
     dateCheckTimer->start();
+
+    // If the date check did not result in a bump and the associated onChange(),
+    // the client still might have old data, in which case onChange() still
+    // needs to be called.
+    if (client->isOutdated())
+        client->onChange();
 }
 
 // Stop change notification delivery

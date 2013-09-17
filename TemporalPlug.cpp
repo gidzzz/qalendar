@@ -1,3 +1,3 @@
 #include "TemporalPlug.h"
 
-QDate TemporalPlug::date;
+QDate TemporalPlug::sharedDate;

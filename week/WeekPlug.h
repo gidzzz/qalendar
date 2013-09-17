@@ -19,12 +19,11 @@ public:
     QString title() const;
 
     void onActivated();
+    void onChange();
 
     void setDate(QDate date);
 
 private:
-    QDate date;
-
     QHBoxLayout *weekdayLayout;
     WeekWidget *weekWidget;
 

@@ -34,6 +34,11 @@ void ExpandingTextEdit::setPlainText(QString text)
     inhibitAutoscroll = false;
 }
 
+void ExpandingTextEdit::setPlaceholderText(QString text)
+{
+    placeholderText = text;
+}
+
 void ExpandingTextEdit::resizeEvent(QResizeEvent *e)
 {
     // Change the width of the document to match the widget
@@ -89,7 +94,7 @@ void ExpandingTextEdit::focusInEvent(QFocusEvent *e)
 void ExpandingTextEdit::focusOutEvent(QFocusEvent *e)
 {
     // Insert the placeholder if there is no other text to show
-    if (this->document()->isEmpty()) {
+    if (!placeholderText.isEmpty() && this->document()->isEmpty()) {
         // Make the text half-tranparent to indicate that this is a placeholder
         QPalette palette = this->palette();
         QColor textColor = palette.color(QPalette::Text);
@@ -98,7 +103,7 @@ void ExpandingTextEdit::focusOutEvent(QFocusEvent *e)
         this->setPalette(palette);
 
         // Set the placeholder
-        this->setPlainText(tr("Description"));
+        this->setPlainText(placeholderText);
         placeholderActive = true;
     }
 

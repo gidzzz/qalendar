@@ -87,7 +87,11 @@
         </layout>
        </item>
        <item>
-        <widget class="ExpandingTextEdit" name="descriptionEdit"/>
+        <widget class="ExpandingTextEdit" name="descriptionEdit">
+         <property name="placeholderText">
+          <string>Description</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

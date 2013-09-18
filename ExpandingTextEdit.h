@@ -13,8 +13,11 @@ public:
     QString toPlainText();
 
     void setPlainText(QString text);
+    void setPlaceholderText(QString text);
 
 private:
+    QString placeholderText;
+
     bool inhibitAutoscroll;
     bool placeholderActive;
 

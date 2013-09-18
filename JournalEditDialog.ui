@@ -4,21 +4,31 @@
  <widget class="QDialog" name="JournalEditDialog">
   <layout class="QGridLayout" name="dialogLayout">
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="mainLayout">
-     <property name="spacing">
-      <number>0</number>
+    <widget class="QScrollArea" name="mainArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-     <item>
-      <widget class="QTextEdit" name="summaryEdit"/>
-     </item>
-     <item>
-      <widget class="QMaemo5ValueButton" name="calendarButton">
-       <property name="text">
-        <string>Calendar</string>
+     <widget class="QWidget" name="mainWidget">
+      <layout class="QVBoxLayout" name="mainLayout">
+       <property name="margin">
+        <number>0</number>
        </property>
-      </widget>
-     </item>
-    </layout>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QMaemo5ValueButton" name="calendarButton">
+         <property name="text">
+          <string>Calendar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="ExpandingTextEdit" name="summaryEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
    <item row="0" column="1">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -29,6 +39,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ExpandingTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>ExpandingTextEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

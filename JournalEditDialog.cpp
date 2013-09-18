@@ -39,6 +39,9 @@ JournalEditDialog::JournalEditDialog(QWidget *parent, CJournal *journal) :
         cps->setCalendar(settings.value("Calendar", 1).toInt());
     }
 
+    // An unsophisticated way to fill the available screen space
+    this->setMinimumHeight(800);
+
     this->setupSaveButton(ui->buttonBox, SLOT(saveJournal()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);

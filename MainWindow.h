@@ -7,6 +7,9 @@
 
 #include <QDate>
 
+#include <CMulticalendar.h>
+#include <CCalendar.h>
+
 #include "MonthPlug.h"
 #include "WeekPlug.h"
 #include "AgendaPlug.h"
@@ -59,6 +62,32 @@ private:
     void changeEvent(QEvent *e);
 
     void deleteOldComponents();
+
+    QMainWindow *topWindow();
+
+    void showComponent(CEvent *event, QMainWindow *parent);
+    void showComponent(CTodo *todo, QMainWindow *parent);
+
+    // Display component C obtained using function Getter
+    template<class C, C* (CCalendar::*Getter)(string, int&)> void showComponent(int calendarId, QString componentId)
+    {
+        // Check if there is a window which could be used as a parent
+        if (QMainWindow *topWindow = this->topWindow()) {
+            int error;
+
+            // Get the calendar
+            if (CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(calendarId, error)) {
+                // Get the component
+                if (C *component = (calendar->*Getter)(componentId.toAscii().data(), error)) {
+                    // Fix up and display the component
+                    component->setCalendarId(calendarId);
+                    showComponent(component, topWindow);
+                    delete component;
+                }
+                delete calendar;
+            }
+        }
+    }
 
 private slots:
     void showMonth();

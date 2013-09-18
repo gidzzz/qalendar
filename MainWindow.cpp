@@ -6,8 +6,8 @@
 #include <QDBusConnection>
 #include <QSettings>
 
-#include <CMulticalendar.h>
-
+#include "EventWindow.h"
+#include "TodoWindow.h"
 #include "SettingsDialog.h"
 
 #include "ChangeManager.h"
@@ -240,6 +240,24 @@ void MainWindow::openSettings()
     (new SettingsDialog(this))->exec();
 }
 
+// Try to find the topmost visible window
+QMainWindow* MainWindow::topWindow()
+{
+    // Assume that dialogs are always at the top
+    foreach (QDialog *dialog, this->findChildren<QDialog*>())
+        if (dialog->isVisible())
+            return NULL;
+
+    // Assume that windows are properly stacked, so there can be only one window
+    // at the top and it can be recognized by the lack of children.
+    foreach (QMainWindow *window, this->findChildren<QMainWindow*>())
+        if (window->isVisible()
+        &&  window->findChildren<QMainWindow*>().isEmpty())
+            return window;
+
+    return this;
+}
+
 void MainWindow::top_application()
 {
     // As long as checking for external updates to the database is not
@@ -263,13 +281,27 @@ void MainWindow::launch_view(uint type, int, QString componentId, int calendarId
     Q_UNUSED(componentId);
     Q_UNUSED(calendarId);
 
+    top_application();
+
     switch (type) {
         case 1: showMonth(); break;
         case 2: showWeek(); break;
         case 3: showAgenda(); break;
-        case 4: showAgenda(); break; // TODO: Open EventWindow
-        case 5: showTodos(); break;  // TODO: Open TodoWindow
+        case 4: showComponent<CEvent, &CCalendar::getEvent>(calendarId, componentId); break;
+        case 5: showComponent<CTodo, &CCalendar::getTodo>(calendarId, componentId); break;
     }
+}
 
-    top_application();
+// Helper for the main showComponent()
+void MainWindow::showComponent(CEvent *event, QMainWindow *parent)
+{
+    ComponentInstance *instance = new ComponentInstance(event, event->getDateStart());
+    (new EventWindow(instance, parent))->show();
+    delete instance;
+}
+
+// Helper for the main showComponent()
+void MainWindow::showComponent(CTodo *todo, QMainWindow *parent)
+{
+    (new TodoWindow(todo, parent))->show();
 }

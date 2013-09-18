@@ -1,3 +1,6 @@
+#ifndef TODOWINDOW_H
+#define TODOWINDOW_H
+
 #include "ui_TodoWindow.h"
 
 #include <CTodo.h>
@@ -28,3 +31,5 @@ private slots:
     void editTodo();
     void deleteTodo();
 };
+
+#endif // TODOWINDOW_H

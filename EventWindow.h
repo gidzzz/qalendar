@@ -1,3 +1,6 @@
+#ifndef EVENTWINDOW_H
+#define EVENTWINDOW_H
+
 #include "ui_EventWindow.h"
 
 #include "ChangeClient.h"
@@ -30,3 +33,5 @@ private slots:
     void editEvent();
     void deleteEvent();
 };
+
+#endif // EVENTWINDOW_H

@@ -1,3 +1,6 @@
+#ifndef AGENDAPLUG_H
+#define AGENDAPLUG_H
+
 #include "ui_AgendaPlug.h"
 
 #include <QDate>
@@ -33,3 +36,5 @@ private slots:
     void selectDay();
     void gotoToday();
 };
+
+#endif // AGENDAPLUG_H

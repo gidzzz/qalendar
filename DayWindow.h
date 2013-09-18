@@ -1,3 +1,6 @@
+#ifndef DAYWINDOW_H
+#define DAYWINDOW_H
+
 #include "ui_DayWindow.h"
 
 #include <QDate>
@@ -36,3 +39,5 @@ private slots:
     void gotoNextDay();
     void gotoToday();
 };
+
+#endif // DAYWINDOW_H

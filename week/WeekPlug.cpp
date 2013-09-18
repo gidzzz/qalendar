@@ -79,7 +79,7 @@ void WeekPlug::onActivated()
 
 void WeekPlug::onChange()
 {
-    setDate(this->globalDate());
+    setDate(currentDateLock ? QDate::currentDate() : this->globalDate());
 }
 
 void WeekPlug::setDate(QDate date)
@@ -89,6 +89,8 @@ void WeekPlug::setDate(QDate date)
     this->setGlobalDate(date);
     this->date = fromGlobalDate(date);
     // TODO: Set global date only when a date change was explicit (same for other plugs)
+
+    currentDateLock = this->date == fromGlobalDate(QDate::currentDate());
 
     weekWidget->setDate(this->date);
 

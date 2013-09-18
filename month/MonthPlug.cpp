@@ -94,7 +94,7 @@ QString MonthPlug::title() const
 
 void MonthPlug::onChange()
 {
-    setDate(this->globalDate());
+    setDate(currentDateLock ? QDate::currentDate() : this->globalDate());
 }
 
 void MonthPlug::setDate(QDate date)
@@ -103,6 +103,8 @@ void MonthPlug::setDate(QDate date)
 
     this->setGlobalDate(date);
     this->date = fromGlobalDate(date);
+
+    currentDateLock = this->date == fromGlobalDate(QDate::currentDate());
 
     monthWidget->setDate(this->date);
 

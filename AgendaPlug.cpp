@@ -41,7 +41,7 @@ AgendaPlug::~AgendaPlug()
 
 void AgendaPlug::onChange()
 {
-    setDate(this->globalDate());
+    setDate(currentDateLock ? QDate::currentDate() : this->globalDate());
 }
 
 void AgendaPlug::cleanup()
@@ -162,6 +162,8 @@ void AgendaPlug::setDate(QDate date)
 
     this->setGlobalDate(date);
     this->date = fromGlobalDate(date);
+
+    currentDateLock = this->date == fromGlobalDate(QDate::currentDate());;
 
     reload();
 }

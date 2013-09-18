@@ -38,6 +38,8 @@ protected:
         return fromGlobalDate(sharedDate);
     }
 
+    static bool currentDateLock;
+
 private:
     static QDate sharedDate;
 };

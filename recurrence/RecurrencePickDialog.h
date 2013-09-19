@@ -6,10 +6,6 @@
 
 #include <CRecurrence.h>
 
-namespace Ui {
-    class RecurrencePickDialog;
-}
-
 class RecurrencePickDialog : public RotatingDialog
 {
     Q_OBJECT
@@ -35,8 +31,6 @@ private:
 private slots:
     void onFrequencyChanged(int index);
     void onLimitTypeChanged(int index);
-
-    void autoResize();
 };
 
 #endif // RECURRENCEPICKDIALOG_H

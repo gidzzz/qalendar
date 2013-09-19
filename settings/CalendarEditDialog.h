@@ -8,10 +8,6 @@
 
 #include "CCalendar.h"
 
-namespace Ui {
-    class CalendarEditDialog;
-}
-
 class CalendarEditDialog : public RotatingDialog
 {
     Q_OBJECT

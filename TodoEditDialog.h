@@ -6,10 +6,6 @@
 
 #include <CTodo.h>
 
-namespace Ui {
-    class TodoEditDialog;
-}
-
 class TodoEditDialog : public ComponentEditDialog
 {
     Q_OBJECT

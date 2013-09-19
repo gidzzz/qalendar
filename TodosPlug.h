@@ -7,10 +7,6 @@
 
 #include "ChangeManager.h"
 
-namespace Ui {
-    class TodosPlug;
-}
-
 class TodosPlug : public Plug
 {
     Q_OBJECT

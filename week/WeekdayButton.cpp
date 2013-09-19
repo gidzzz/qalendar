@@ -9,6 +9,11 @@
 #include "Date.h"
 #include "Theme.h"
 
+// TODO: Make sure that the highlighted (current) day is in sync with the week
+// widget? On the second thought, keeping them perfectly synchronized might be
+// not worth the complications, as the automatic date-based refresh will kick in
+// a few seconds after midnight anyway.
+
 WeekdayButton::WeekdayButton(QWidget *parent) :
     QAbstractButton(parent)
 {
@@ -41,8 +46,6 @@ void WeekdayButton::paintEvent(QPaintEvent *)
 
     if (currentDay)
         painter.setPen(QMaemo5Style::standardColor("ReversedTextColor"));
-
-    // TODO: Make sure that the highlighted (current) day is in sync with the week widget
 
     const int margin = 3;
 

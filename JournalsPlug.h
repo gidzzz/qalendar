@@ -5,10 +5,6 @@
 
 #include "ui_JournalsPlug.h"
 
-namespace Ui {
-    class JournalsPlug;
-}
-
 class JournalsPlug : public Plug
 {
     Q_OBJECT

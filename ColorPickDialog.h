@@ -8,10 +8,6 @@
 
 #include <CCalendar.h>
 
-namespace Ui {
-    class ColorPickDialog;
-}
-
 class ColorPickDialog : public RotatingDialog
 {
     Q_OBJECT

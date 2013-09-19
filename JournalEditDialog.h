@@ -6,10 +6,6 @@
 
 #include <CJournal.h>
 
-namespace Ui {
-    class JournalEditDialog;
-}
-
 class JournalEditDialog : public ComponentEditDialog
 {
     Q_OBJECT

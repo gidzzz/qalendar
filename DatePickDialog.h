@@ -8,10 +8,6 @@
 
 #include <QDate>
 
-namespace Ui {
-    class DatePickDialog;
-}
-
 class DatePickDialog : public RotatingDialog
 {
     Q_OBJECT

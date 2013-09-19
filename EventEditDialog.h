@@ -1,17 +1,12 @@
 #ifndef EVENTEDITDIALOG_H
 #define EVENTEDITDIALOG_H
 
-#include "ui_EventEditDialog.h"
-
 #include "ComponentEditDialog.h"
+#include "ui_EventEditDialog.h"
 
 #include <QDateTime>
 
 #include <CEvent.h>
-
-namespace Ui {
-    class EventEditDialog;
-}
 
 class EventEditDialog : public ComponentEditDialog
 {

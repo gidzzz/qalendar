@@ -92,13 +92,6 @@ RecurrencePickDialog::~RecurrencePickDialog()
     delete ui;
 }
 
-void RecurrencePickDialog::autoResize()
-{
-    // TODO: Remove flickering here and in subwidgets and make the dialog shrink properly
-    this->setMinimumHeight(ui->mainArea->widget()->minimumSizeHint().height());
-    this->adjustSize();
-}
-
 void RecurrencePickDialog::parseRule(QString rule)
 {
     QStringList ruleParts = rule.split(';');

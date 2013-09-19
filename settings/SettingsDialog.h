@@ -6,10 +6,6 @@
 
 #include <QMaemo5ListPickSelector>
 
-namespace Ui {
-    class SettingsDialog;
-}
-
 class SettingsDialog : public RotatingDialog
 {
     Q_OBJECT

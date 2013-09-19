@@ -4,10 +4,6 @@
 #include "RotatingDialog.h"
 #include "ui_CalendarsConfigDialog.h"
 
-namespace Ui {
-    class CalendarsConfigDialog;
-}
-
 class CalendarsConfigDialog : public RotatingDialog
 {
     Q_OBJECT

@@ -20,7 +20,9 @@
 
 #include "ChangeManager.h"
 
-// TODO: Refresh the time indicator from time to time
+// TODO: Refresh the time indicator from time to time? It can become outdated
+// when staring at the screen for a long time, but it is pretty hard to not
+// refresh it accidentally.
 
 using namespace Metrics::WeekWidget;
 using namespace Metrics::WeekProfile;
@@ -332,7 +334,11 @@ void WeekWidget::renderRow(int hour, int baseY, QPainter &painter)
 {
     const int cellH = hour < 0 ? allDayRowHeight() : CellHeight;
 
-    //QPixmap pixHourLine(PIX_WEEK_HOUR_LINE); // TODO: Use this as the vertical spacer?
+    // TODO: Use this as the vertical spacer? Theme authors should be deciding
+    // how the spacer looks like, but I think the widget looks better without
+    // the spacer image and this is one thing less to draw.
+    /* QPixmap pixHourLine(PIX_WEEK_HOUR_LINE); */
+
     QPixmap pixDayShade(PIX_WEEK_DAY_SHADE);
     QPixmap pixDayShadeCurrent(PIX_WEEK_DAY_SHADE_CURRENT);
     QPixmap pixDayPressed(PIX_GENERIC_PRESSED);

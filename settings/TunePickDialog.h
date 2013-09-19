@@ -4,10 +4,6 @@
 #include "RotatingDialog.h"
 #include "ui_TunePickDialog.h"
 
-namespace Ui {
-    class TunePickDialog;
-}
-
 class TunePickDialog : public RotatingDialog
 {
     Q_OBJECT

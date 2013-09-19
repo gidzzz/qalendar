@@ -4,10 +4,6 @@
 #include "RotatingDialog.h"
 #include "ui_AlarmPickDialog.h"
 
-namespace Ui {
-    class AlarmPickDialog;
-}
-
 class AlarmPickDialog : public RotatingDialog
 {
     Q_OBJECT

@@ -30,7 +30,8 @@ public:
         font.setPointSize(13);
         painter.setFont(font);
 
-        painter.setPen(QMaemo5Style::standardColor("SecondaryTextColor"));
+        painter.setPen(QMaemo5Style::standardColor(date == QDate::currentDate() ? "ActiveTextColor"
+                                                                                : "SecondaryTextColor"));
 
         painter.fillRect(rect, QPalette().color(QPalette::Window));
 

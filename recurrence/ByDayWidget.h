@@ -22,12 +22,15 @@ public:
     QString rulePart() const;
 
     void parseRulePart(QString rule);
+    void clear();
 
 private:
     QLabel *titleLabel;
     QTabWidget *tabWidget;
     ByDayCoreWidget *positiveDaysWidget;
     ByDayCoreWidget *negativeDaysWidget;
+
+    int maximum;
 };
 
 #endif // BYDAYWIDGET_H

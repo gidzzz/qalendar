@@ -54,3 +54,9 @@ void ByMonthWidget::parseRulePart(QString rule)
     foreach (QString part, rule.split(','))
         qobject_cast<QPushButton*>(monthsLayout->itemAt(part.toInt()-1)->widget())->setChecked(true);
 }
+
+void ByMonthWidget::clear()
+{
+    for (int m = 0; m < 12; m++)
+        qobject_cast<QPushButton*>(monthsLayout->itemAt(m)->widget())->setChecked(false);
+}

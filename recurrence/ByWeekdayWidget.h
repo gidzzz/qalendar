@@ -17,6 +17,7 @@ public:
 
     QString rulePart() const;
     void parseRulePart(QString rule);
+    void clear();
 
 signals:
     void dayToggled(int day, bool checked);

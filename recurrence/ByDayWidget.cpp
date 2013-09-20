@@ -5,7 +5,10 @@
 #include "RecurrenceSectionLabel.h"
 
 ByDayWidget::ByDayWidget(QWidget *parent) :
-    QFrame(parent)
+    QFrame(parent),
+    positiveDaysWidget(NULL),
+    negativeDaysWidget(NULL),
+    maximum(0)
 {
     this->setFrameStyle(QFrame::StyledPanel);
 
@@ -15,19 +18,32 @@ ByDayWidget::ByDayWidget(QWidget *parent) :
     titleLabel = new RecurrenceSectionLabel(this);
     titleLabel->setIndent(5);
 
-    positiveDaysWidget = new ByDayCoreWidget(false, this);
-    negativeDaysWidget = new ByDayCoreWidget(true, this);
-
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
-    tabWidget->addTab(negativeDaysWidget, tr("From end"));
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addWidget(tabWidget);
+
+    clear();
+}
+
+void ByDayWidget::clear()
+{
+    delete positiveDaysWidget;
+    delete negativeDaysWidget;
+
+    positiveDaysWidget = new ByDayCoreWidget(false, this);
+    negativeDaysWidget = new ByDayCoreWidget(true, this);
+
+    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
+    tabWidget->addTab(negativeDaysWidget, tr("From end"));
+
+    setMaximum(maximum);
 }
 
 void ByDayWidget::setMaximum(int maximum)
 {
+    this->maximum = maximum;
+
     // HACK, change it to something nicer
     if (maximum == 31)
         titleLabel->setText(tr("By day of month"));

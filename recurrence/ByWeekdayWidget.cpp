@@ -8,7 +8,9 @@
 #include "RecurrenceSectionLabel.h"
 
 ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
-    QFrame(parent)
+    QFrame(parent),
+    positiveDaysWidget(NULL),
+    negativeDaysWidget(NULL)
 {
     this->setFrameStyle(QFrame::StyledPanel);
 
@@ -29,16 +31,28 @@ ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
         connect(dayButton, SIGNAL(toggled(bool)), this, SLOT(onDayToggled(bool)));
     }
 
-    positiveDaysWidget = new ByWeekdayCoreWidget(false, this);
-    negativeDaysWidget = new ByWeekdayCoreWidget(true, this);
-
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
-    tabWidget->addTab(negativeDaysWidget, tr("From end"));
 
     mainLayout->addWidget(titleLabel);
     mainLayout->addItem(daysLayout);
     mainLayout->addWidget(tabWidget);
+
+    clear();
+}
+
+void ByWeekdayWidget::clear()
+{
+    for (int i = 0; i < daysLayout->count(); i++)
+        qobject_cast<QPushButton*>(daysLayout->itemAt(i)->widget())->setChecked(false);
+
+    delete positiveDaysWidget;
+    delete negativeDaysWidget;
+
+    positiveDaysWidget = new ByWeekdayCoreWidget(false, this);
+    negativeDaysWidget = new ByWeekdayCoreWidget(true, this);
+
+    tabWidget->addTab(positiveDaysWidget, tr("From beginning"));
+    tabWidget->addTab(negativeDaysWidget, tr("From end"));
 }
 
 QString ByWeekdayWidget::rulePart() const

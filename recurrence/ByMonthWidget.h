@@ -16,6 +16,7 @@ public:
 
     QString rulePart() const;
     void parseRulePart(QString rule);
+    void clear();
 
 private:
     QGridLayout *monthsLayout;

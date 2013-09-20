@@ -124,7 +124,18 @@ namespace CWrapper
                 if (stamps[s] + duration == startStamp && duration != 0)
                     continue;
 
-                instances.push_back(new ComponentInstance(component, stamps[s]));
+                // NOTE: There is yet another bug in the backend. If multiple
+                // recurrence rules with different frequencies are specified and
+                // they happen to produce duplicate results, the duplicates will
+                // not be removed. We have to find them on our own.
+                unsigned int i = 0;
+                while (i < instances.size()
+                   && (instances[i]->stamp != stamps[s] || instances[i]->component != component))
+                       i++;
+
+                // Add the considered instance only if there are no duplicates
+                if (i == instances.size())
+                    instances.push_back(new ComponentInstance(component, stamps[s]));
             }
         } else {
             // Interpret the end date as non-inclusive (see above)

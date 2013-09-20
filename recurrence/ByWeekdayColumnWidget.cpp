@@ -47,7 +47,7 @@ void ByWeekdayColumnWidget::showAddDialog()
     if (dnd->exec() == QDialog::Accepted)
         addDay(reverse ? -dnd->value() : dnd->value());
 
-    dnd->deleteLater();
+    delete dnd;
 }
 
 void ByWeekdayColumnWidget::addDay(int day)

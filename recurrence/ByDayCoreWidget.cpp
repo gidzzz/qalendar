@@ -60,7 +60,7 @@ void ByDayCoreWidget::showAddDialog()
     if (dnd->exec() == QDialog::Accepted)
         addDay(reverse ? -dnd->value() : dnd->value());
 
-    dnd->deleteLater();
+    delete dnd;
 }
 
 // React to a click on a day button, by removing it from the list
@@ -69,13 +69,14 @@ void ByDayCoreWidget::onDayClicked()
     QPushButton *dayButton = qobject_cast<QPushButton*>(this->sender());
 
     // Temporarily remove the add button
-    QWidget *addButton = listLayout->takeAt(listLayout->count()-1)->widget();
+    QLayoutItem *addButtonItem = listLayout->takeAt(listLayout->count()-1);
 
-    // Remove the number button at the end if the lits, not the one clicked,
+    // Remove the number button at the end if the list, not the one clicked,
     // to avoid empty spaces in the grid layout
-    QWidget *buttonToRemove = listLayout->takeAt(listLayout->count()-1)->widget();
-    buttonToRemove->hide();
-    buttonToRemove->deleteLater();
+    QLayoutItem *itemToRemove = listLayout->takeAt(listLayout->count()-1);
+    itemToRemove->widget()->hide();
+    itemToRemove->widget()->deleteLater();
+    delete itemToRemove;
 
     // Remove the day from the internal list and update labels on the buttons
     // to make it look like the clicked button was removed
@@ -85,7 +86,7 @@ void ByDayCoreWidget::onDayClicked()
 
     // Reinsert the add button
     QPoint pos = mapToGrid(listLayout->count());
-    listLayout->addWidget(addButton, pos.y(), pos.x(), Qt::AlignTop);
+    listLayout->addItem(addButtonItem, pos.y(), pos.x(), 1, 1, Qt::AlignTop);
 }
 
 void ByDayCoreWidget::addDay(int day)
@@ -104,7 +105,7 @@ void ByDayCoreWidget::addDay(int day)
     }
 
     // Temporarily remove the add button
-    QWidget *addButton = listLayout->takeAt(listLayout->count()-1)->widget();
+    QLayoutItem *addButtonItem = listLayout->takeAt(listLayout->count()-1);
 
     // Create a day button
     QPushButton *dayButton = new QPushButton(this);
@@ -117,7 +118,7 @@ void ByDayCoreWidget::addDay(int day)
 
     // Put the add button back
     pos = mapToGrid(listLayout->count());
-    listLayout->addWidget(addButton, pos.y(), pos.x(), Qt::AlignTop);
+    listLayout->addItem(addButtonItem, pos.y(), pos.x(), 1, 1, Qt::AlignTop);
 
     // Insert the day number into the internal list and update labels on all
     // buttons, as many of them might be wrong due to sorting

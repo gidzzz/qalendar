@@ -36,6 +36,7 @@ public:
     static bool newEvent(QWidget *parent, QDateTime from, QDateTime to, bool allDay);
 
     static bool newTodo(QWidget *parent);
+    static bool newTodo(QWidget *parent, QDate due);
 
     static bool newJournal(QWidget *parent);
 

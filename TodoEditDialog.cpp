@@ -94,6 +94,11 @@ TodoEditDialog::~TodoEditDialog()
     delete ui;
 }
 
+void TodoEditDialog::setDue(QDate due)
+{
+    qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector())->setCurrentDate(due);
+}
+
 void TodoEditDialog::onDateChanged()
 {
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());

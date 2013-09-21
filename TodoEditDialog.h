@@ -14,6 +14,8 @@ public:
     TodoEditDialog(QWidget *parent, CTodo *todo = NULL);
     ~TodoEditDialog();
 
+    void setDue(QDate due);
+
 private:
     Ui::TodoEditDialog *ui;
 

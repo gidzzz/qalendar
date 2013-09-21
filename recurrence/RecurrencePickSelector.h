@@ -11,6 +11,7 @@ class RecurrencePickSelector : public QMaemo5AbstractPickSelector
 
 public:
     RecurrencePickSelector(QObject *parent = 0);
+    ~RecurrencePickSelector();
 
     QString currentValueText() const;
     CRecurrence *currentRecurrence() const;

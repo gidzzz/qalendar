@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QStringList>
 
+#include "RulePickDialog.h"
 #include "DatePickSelector.h"
 #include "CWrapper.h"
 
@@ -23,10 +24,12 @@ enum Limit
     Count
 };
 
-RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *recurrence) :
+RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *&recurrence) :
     RotatingDialog(parent),
     ui(new Ui::RecurrencePickDialog),
-    recurrence(recurrence)
+    recurrence(recurrence),
+    rules(recurrence->getRrule()),
+    currentRule(0)
 {
     ui->setupUi(this);
     ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
@@ -37,8 +40,10 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *recurre
     ui->untilBox->setPickSelector(dpsUntil);
 
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setEnabled(bool)));
+    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->ruleButton,   SLOT(setEnabled(bool)));
+    connect(ui->ruleButton, SIGNAL(clicked()), this, SLOT(selectRule()));
     connect(ui->frequencyBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onFrequencyChanged(int)));
-    connect(ui->limitBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onLimitTypeChanged(int)));
+    connect(ui->limitBox,     SIGNAL(currentIndexChanged(int)), this, SLOT(onLimitTypeChanged(int)));
 
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 
@@ -50,33 +55,30 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *recurre
     if (recurrence->getRtype() == E_NONE)
         problems.append("This is an external recurrence, I have no idea what happens if you mess with it.");
 
-    vector<CRecurrenceRule*> rules = recurrence->getRecurrenceRule();
-    if (!rules.empty()) {
-        CRecurrenceRule *rule = rules.front();
-        QString ruleString = rule->getRrule().c_str();
-        qDebug() << rule->toString().c_str();
-
-        // TODO: Add a list of rules to edit
-        if (rules.size() > 1)
-            problems.append("Only the first rule can be edited here.");
+    if (rules.empty()) {
+        // Make sure that there is at least one rule, corresponding to the state
+        // of the controls.
+        rules.push_back(string());
+    } else {
+        const string &firstRule = rules.front();
 
         // TODO: Support for exceptions
         if (!recurrence->getErule().empty())
             problems.append("Exception rules cannot be edited here.");
 
         // TODO: Support for BYSETPOS
-        if (ruleString.contains("BYSETPOS"))
+        if (string::npos != firstRule.find("BYSETPOS"))
             problems.append("BYSETPOS part will be discarder from the rule.");
 
         // TODO: Optional HMS editor?
-        if (ruleString.contains("BYSECOND")
-        ||  ruleString.contains("BYMINUTE")
-        ||  ruleString.contains("BYHOUR"))
+        if (string::npos != firstRule.find("BYSECOND")
+        ||  string::npos != firstRule.find("BYMINUTE")
+        ||  string::npos != firstRule.find("BYHOUR"))
         {
             problems.append("Hours, minutes and seconds will be discarded from the rule.");
         }
 
-        parseRule(ruleString);
+        parseRule(firstRule);
     }
 
     if (!problems.isEmpty()) {
@@ -92,9 +94,25 @@ RecurrencePickDialog::~RecurrencePickDialog()
     delete ui;
 }
 
-void RecurrencePickDialog::parseRule(QString rule)
+void RecurrencePickDialog::clear()
 {
-    QStringList ruleParts = rule.split(';');
+    // Clear only the complex widgets, as there is a reasonable chance that
+    // values from the basic widgets at the top can be reused.
+    ui->byWeekdayWidget->clear();
+    ui->byMonthdayWidget->clear();
+    ui->byYeardayWidget->clear();
+    ui->byYearweekWidget->clear();
+    ui->byMonthWidget->clear();
+}
+
+void RecurrencePickDialog::parseRule(const string &rule)
+{
+    if (rule.empty()) {
+        clear();
+        return;
+    }
+
+    QStringList ruleParts = QString(rule.c_str()).split(';');
 
     foreach (QString part, ruleParts) {
         if (part.startsWith("FREQ=")) {
@@ -187,94 +205,104 @@ void RecurrencePickDialog::onLimitTypeChanged(int index)
     }
 }
 
+void RecurrencePickDialog::selectRule()
+{
+    // Update the current rule before it goes to the rule picker
+    rules[currentRule] = buildRule().toAscii().data();
+
+    // Open the rule picker and check the results
+    if ((new RulePickDialog(this, rules, currentRule))->exec() == QDialog::Accepted) {
+        // Even if the selected rule is not empty, clearing is still required so
+        // that the controls are fresh before parsing.
+        clear();
+
+        // There is a possibility that the user has deleted all rules, but this
+        // dialog requires at least one to work properly.
+        if (rules.empty()) {
+            ui->enableBox->setChecked(false);
+            rules.push_back(string());
+            currentRule = 0;
+        } else {
+            // Set the controls to reflect the content of the selected rule
+            parseRule(rules[currentRule]);
+        }
+    }
+}
+
+QString RecurrencePickDialog::buildRule()
+{
+    QStringList ruleParts;
+
+    // Frequency
+    QString freqString = freqToStr(ui->frequencyBox->currentIndex());
+    if (!freqString.isEmpty())
+        ruleParts.append(QString("FREQ=") + freqToStr(ui->frequencyBox->currentIndex()));
+
+    // Limit
+    QString limitString;
+    switch (ui->limitBox->currentIndex()) {
+        case 1: { // Until
+            DatePickSelector *dpsUntil = qobject_cast<DatePickSelector*>(ui->untilBox->pickSelector());
+            // NOTE: As long as the editor does not support HMS, date-only
+            // format could be sufficient, but calendar-backend may parse
+            // that incorrectly.
+            ruleParts.append(QString("UNTIL=") + QDateTime(dpsUntil->currentDate(), QTime(23,59)).toUTC().toString("yyyyMMddThhmmssZ"));
+            break;
+        }
+        case 2: { //Count
+            ruleParts.append(QString("COUNT=") + QString::number(ui->countBox->value()));
+            break;
+        }
+    }
+
+    // Interval
+    if (ui->intervalBox->value() > 1)
+        ruleParts.append(QString("INTERVAL=") + QString::number(ui->intervalBox->value()));
+
+    // Day of week
+    QString byWeekdayString = ui->byWeekdayWidget->rulePart();
+    if (!byWeekdayString.isEmpty())
+        ruleParts.append(QString("BYDAY=") + byWeekdayString);
+
+    // Day of month
+    QString byMonthdayString = ui->byMonthdayWidget->rulePart();
+    if (!byMonthdayString.isEmpty())
+        ruleParts.append(QString("BYMONTHDAY=") + byMonthdayString);
+
+    // Day of year
+    QString byYeardayString = ui->byYeardayWidget->rulePart();
+    if (!byYeardayString.isEmpty())
+        ruleParts.append(QString("BYYEARDAY=") + byYeardayString);
+
+    // Week of year
+    QString byYearweekString = ui->byYearweekWidget->rulePart();
+    if (!byYearweekString.isEmpty())
+        ruleParts.append(QString("BYWEEKNO=") + byYearweekString);
+
+    // Month
+    QString byMonthString = ui->byMonthWidget->rulePart();
+    if (!byMonthString.isEmpty())
+        ruleParts.append(QString("BYMONTH=") + byMonthString);
+
+    // Combine all of the above to form the final rule
+    return ruleParts.join(";");
+}
+
 void RecurrencePickDialog::accept()
 {
-    if (ui->enableBox->isChecked()) {
-        QStringList ruleParts;
+    // Update the current rule using data from the controls before saving
+    rules[currentRule] = buildRule().toAscii().data();
 
-        // Frequency
-        QString freqString = freqToStr(ui->frequencyBox->currentIndex());
-        if (!freqString.isEmpty())
-            ruleParts.append(QString("FREQ=") + freqToStr(ui->frequencyBox->currentIndex()));
+    // It is impossible to remove rules from CRecurrence once they have been
+    // added there. Put all the data into a new object instead.
+    CRecurrence *recurrence = new CRecurrence();
+    recurrence->setRrule(rules);
+    recurrence->setRtype(ui->enableBox->isChecked() ? recurrenceType(recurrence)
+                                                    : E_DISABLED);
 
-        // Limit
-        QString limitString;
-        switch (ui->limitBox->currentIndex()) {
-            case 1: { // Until
-                DatePickSelector *dpsUntil = qobject_cast<DatePickSelector*>(ui->untilBox->pickSelector());
-                // NOTE: As long as the editor does not support HMS, date-only
-                // format could be sufficient, but calendar-backend may parse
-                // that incorrectly.
-                ruleParts.append(QString("UNTIL=") + QDateTime(dpsUntil->currentDate(), QTime(23,59)).toUTC().toString("yyyyMMddThhmmssZ"));
-                break;
-            }
-            case 2: { //Count
-                ruleParts.append(QString("COUNT=") + QString::number(ui->countBox->value()));
-                break;
-            }
-        }
-
-        // Interval
-        if (ui->intervalBox->value() > 1)
-            ruleParts.append(QString("INTERVAL=") + QString::number(ui->intervalBox->value()));
-
-        // Day of week
-        QString byWeekdayString = ui->byWeekdayWidget->rulePart();
-        if (!byWeekdayString.isEmpty())
-            ruleParts.append(QString("BYDAY=") + byWeekdayString);
-
-        // Day of month
-        QString byMonthdayString = ui->byMonthdayWidget->rulePart();
-        if (!byMonthdayString.isEmpty())
-            ruleParts.append(QString("BYMONTHDAY=") + byMonthdayString);
-
-        // Day of year
-        QString byYeardayString = ui->byYeardayWidget->rulePart();
-        if (!byYeardayString.isEmpty())
-            ruleParts.append(QString("BYYEARDAY=") + byYeardayString);
-
-        // Week of year
-        QString byYearweekString = ui->byYearweekWidget->rulePart();
-        if (!byYearweekString.isEmpty())
-            ruleParts.append(QString("BYWEEKNO=") + byYearweekString);
-
-        // Month
-        QString byMonthString = ui->byMonthWidget->rulePart();
-        if (!byMonthString.isEmpty())
-            ruleParts.append(QString("BYMONTH=") + byMonthString);
-
-        // Combine all of the above to form the final rule
-        QString ruleString = ruleParts.join(";");
-        qDebug() << ruleString;
-
-        // Make sure that there is a rule to modify
-        if (recurrence->getRecurrenceRule().empty()) {
-            vector<CRecurrenceRule*> rules;
-            rules.push_back(new CRecurrenceRule());
-            recurrence->setRecurrenceRule(rules);
-        }
-
-        CRecurrenceRule *rule = recurrence->getRecurrenceRule().front();
-        rule->rruleParser(ruleString.toAscii().data());
-        rule->setRrule(ruleString.toAscii().data());
-
-        qDebug() << "aftercheck:" << rule->getRrule().c_str() << rule->getFrequency();
-
-        recurrence->setRtype(recurrenceType(recurrence));
-    } else {
-        // NOTE: The main reason why the rule is cleared here is that this is
-        // the only way to quickly start afresh. If there was a dedicated clear
-        // button, it might be more convenient for the user to have this rule
-        // preserved.
-        vector<CRecurrenceRule*> rules = recurrence->getRecurrenceRule();
-        if (!rules.empty()) {
-            rules.front()->rruleParser("");
-            rules.front()->setRrule("");
-        }
-
-        // Mark the rule for deletion
-        recurrence->setRtype(E_DISABLED);
-    }
+    // Replace the old recurrence
+    delete this->recurrence;
+    this->recurrence = recurrence;
 
     QDialog::accept();
 }

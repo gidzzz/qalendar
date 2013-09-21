@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     \
     recurrence/RecurrencePickSelector.cpp \
     recurrence/RecurrencePickDialog.cpp \
+    recurrence/RulePickDialog.cpp \
     recurrence/ByDayWidget.cpp \
     recurrence/ByDayCoreWidget.cpp \
     recurrence/ByWeekdayWidget.cpp \
@@ -85,6 +86,7 @@ HEADERS += \
     \
     recurrence/RecurrencePickSelector.h \
     recurrence/RecurrencePickDialog.h \
+    recurrence/RulePickDialog.h \
     recurrence/ByDayWidget.h \
     recurrence/ByDayCoreWidget.h \
     recurrence/ByWeekdayWidget.h \
@@ -148,6 +150,7 @@ FORMS += \
     TodosPlug.ui \
     \
     recurrence/RecurrencePickDialog.ui \
+    recurrence/RulePickDialog.ui \
     \
     settings/SettingsDialog.ui \
     settings/TunePickDialog.ui \

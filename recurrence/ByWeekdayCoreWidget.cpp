@@ -41,7 +41,7 @@ QString ByWeekdayCoreWidget::disabledRulePart() const
     // Create a rule for each disabled column
     for (int i = 0; i < 7; i++) {
         ByWeekdayColumnWidget *columnWidget = qobject_cast<ByWeekdayColumnWidget*>(columnLayout->itemAt(i)->widget());
-        if (!columnWidget->isEnabled()) {
+        if (!columnWidget->isEnabledTo(this->parentWidget())) {
             if (!result.isEmpty()) result += ',';
             result += columnWidget->id();
         }

@@ -6,14 +6,23 @@
 
 #include "CWrapper.h"
 
-RecurrencePickSelector::RecurrencePickSelector(QObject *parent) : QMaemo5AbstractPickSelector(parent)
+RecurrencePickSelector::RecurrencePickSelector(QObject *parent) :
+    QMaemo5AbstractPickSelector(parent),
+    recurrence(NULL)
 {
-    recurrence = NULL;
+}
+
+RecurrencePickSelector::~RecurrencePickSelector()
+{
+    delete recurrence;
 }
 
 void RecurrencePickSelector::setRecurrence(CRecurrence *recurrence)
 {
-    this->recurrence = recurrence;
+    delete this->recurrence;
+
+    this->recurrence = new CRecurrence();
+    *this->recurrence = *recurrence;
 
     emit selected(currentValueText());
 }

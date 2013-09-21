@@ -101,13 +101,13 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     this->setupSaveButton(ui->buttonBox, SLOT(saveEvent()));
 
     // Make sure that the recurrence exists, as required by the recurrence edit dialog
-    if (!event->getRecurrence()) {
+    if (event->getRecurrence()) {
+        rps->setRecurrence(event->getRecurrence());
+    } else {
         CRecurrence emptyRecurrence;
         emptyRecurrence.setRtype(E_DISABLED);
-        event->setRecurrence(&emptyRecurrence);
+        rps->setRecurrence(&emptyRecurrence);
     }
-
-    rps->setRecurrence(event->getRecurrence());
 
     ui->mainArea->widget()->layout()->activate();
 
@@ -182,6 +182,7 @@ void EventEditDialog::saveEvent()
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
     QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
     QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
+    RecurrencePickSelector *rps = qobject_cast<RecurrencePickSelector*>(ui->repeatButton->pickSelector());
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
@@ -207,17 +208,16 @@ void EventEditDialog::saveEvent()
     // NOTE: It might be a good idea to notify the user if the alarm was in the
     // past and impossible to set, or add some constraints in the alarm picker
 
-    const int recurrenceType = event->getRecurrence()->getRtype();
-    if (recurrenceType == E_DISABLED) {
+    // Set recurrence
+    CRecurrence *recurrence = rps->currentRecurrence();
+    if (recurrence->getRtype() == E_DISABLED) {
         // Remove the recurrence, as it has been marked for deletion
         event->removeRecurrence();
     } else {
-        if (recurrenceType != E_COMPLEX) {
-            // Save the UNTIL part of the recurrence for compatibility with the default Maemo calendar
-            event->setUntil(event->getRecurrence()->getRecurrenceRule().front()->getUntil());
-        } else {
-            event->setUntil(-1);
-        }
+        event->setRecurrence(recurrence);
+        // NOTE: The stock Maemo calendar saves the UNTIL part of the recurrence
+        // also in the event, but the lack of it does not appear to break
+        // anything, so do not bother.
     }
 
     ChangeManager::save(event, cps->currentId());

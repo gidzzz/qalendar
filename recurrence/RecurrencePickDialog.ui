@@ -23,14 +23,25 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QCheckBox" name="enableBox">
-         <property name="text">
-          <string>Repeat</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="controlLayout">
+         <item>
+          <widget class="QCheckBox" name="enableBox">
+           <property name="text">
+            <string>Repeat</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ruleButton">
+           <property name="text">
+            <string>Rules</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QWidget" name="configWidget">

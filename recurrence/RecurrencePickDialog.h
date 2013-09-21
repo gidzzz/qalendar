@@ -11,7 +11,7 @@ class RecurrencePickDialog : public RotatingDialog
     Q_OBJECT
 
 public:
-    RecurrencePickDialog(QWidget *parent, CRecurrence *recurrence);
+    RecurrencePickDialog(QWidget *parent, CRecurrence *&recurrence);
     ~RecurrencePickDialog();
 
 public slots:
@@ -20,17 +20,23 @@ public slots:
 private:
     Ui::RecurrencePickDialog *ui;
 
-    CRecurrence *recurrence;
+    CRecurrence *&recurrence;
+    vector<string> rules;
+    unsigned int currentRule;
 
     static QString freqToStr(int frequency);
     static int freqFromStr(QString frequency);
     static int recurrenceType(CRecurrence *recurrence);
 
-    void parseRule(QString rule);
+    void clear();
+    void parseRule(const string &rule);
+    QString buildRule();
 
 private slots:
     void onFrequencyChanged(int index);
     void onLimitTypeChanged(int index);
+
+    void selectRule();
 };
 
 #endif // RECURRENCEPICKDIALOG_H

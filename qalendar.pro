@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     \
     recurrence/RecurrencePickSelector.cpp \
     recurrence/RecurrencePickDialog.cpp \
+    recurrence/RulePickSelector.cpp \
     recurrence/RulePickDialog.cpp \
     recurrence/ByDayWidget.cpp \
     recurrence/ByDayCoreWidget.cpp \
@@ -86,6 +87,7 @@ HEADERS += \
     \
     recurrence/RecurrencePickSelector.h \
     recurrence/RecurrencePickDialog.h \
+    recurrence/RulePickSelector.h \
     recurrence/RulePickDialog.h \
     recurrence/ByDayWidget.h \
     recurrence/ByDayCoreWidget.h \

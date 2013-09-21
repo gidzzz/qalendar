@@ -15,6 +15,9 @@ public:
     RulePickDialog(QWidget *parent, std::vector<std::string> &rules, unsigned int &currentRule);
     ~RulePickDialog();
 
+signals:
+    void rulesUpdated();
+
 public slots:
     void accept();
 

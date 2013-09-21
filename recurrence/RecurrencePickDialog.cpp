@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include <QStringList>
 
-#include "RulePickDialog.h"
+#include "RulePickSelector.h"
 #include "DatePickSelector.h"
 #include "CWrapper.h"
 
@@ -40,8 +40,7 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *&recurr
     ui->untilBox->setPickSelector(dpsUntil);
 
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setEnabled(bool)));
-    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->ruleButton,   SLOT(setEnabled(bool)));
-    connect(ui->ruleButton, SIGNAL(clicked()), this, SLOT(selectRule()));
+    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->viewButton,   SLOT(setEnabled(bool)));
     connect(ui->frequencyBox, SIGNAL(currentIndexChanged(int)), this, SLOT(onFrequencyChanged(int)));
     connect(ui->limitBox,     SIGNAL(currentIndexChanged(int)), this, SLOT(onLimitTypeChanged(int)));
 
@@ -85,6 +84,12 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *&recurr
         ui->problemsInfo->show();
         ui->problemsInfo->setText(problems.join(" "));
     }
+
+    // Set up the rule selector
+    RulePickSelector *rps = new RulePickSelector(rules, currentRule);
+    ui->viewButton->setPickSelector(rps);
+    connect(rps, SIGNAL(creatingWidget()), this, SLOT(exportRule()));
+    connect(rps, SIGNAL(rulesUpdated()),   this, SLOT(importRule()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
 }
@@ -205,27 +210,25 @@ void RecurrencePickDialog::onLimitTypeChanged(int index)
     }
 }
 
-void RecurrencePickDialog::selectRule()
+void RecurrencePickDialog::exportRule()
 {
-    // Update the current rule before it goes to the rule picker
     rules[currentRule] = buildRule().toAscii().data();
+}
 
-    // Open the rule picker and check the results
-    if ((new RulePickDialog(this, rules, currentRule))->exec() == QDialog::Accepted) {
-        // Even if the selected rule is not empty, clearing is still required so
-        // that the controls are fresh before parsing.
-        clear();
+void RecurrencePickDialog::importRule()
+{
+    // Even if the selected rule is not empty, clearing is still required so
+    // that the controls are fresh before parsing.
+    clear();
 
-        // There is a possibility that the user has deleted all rules, but this
-        // dialog requires at least one to work properly.
-        if (rules.empty()) {
-            ui->enableBox->setChecked(false);
-            rules.push_back(string());
-            currentRule = 0;
-        } else {
-            // Set the controls to reflect the content of the selected rule
-            parseRule(rules[currentRule]);
-        }
+    // There is a possibility that the user has deleted all rules, but the list
+    // should contain at least one.
+    if (rules.empty()) {
+        ui->enableBox->setChecked(false);
+        rules.push_back(string());
+    } else {
+        // Set the controls to reflect the content of the selected rule
+        parseRule(rules[currentRule]);
     }
 }
 

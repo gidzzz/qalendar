@@ -35,9 +35,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="ruleButton">
+          <widget class="QMaemo5ValueButton" name="viewButton">
            <property name="text">
-            <string>Rules</string>
+            <string>View</string>
            </property>
           </widget>
          </item>

@@ -25,7 +25,7 @@ RulePickDialog::RulePickDialog(QWidget *parent, std::vector<std::string> &rules,
 
     // Add an item for each rule
     for (unsigned int r = 0; r < rules.size(); r++)
-        QListWidgetItem *item = new QListWidgetItem(rules[r].c_str(), ui->ruleList);
+        new QListWidgetItem(rules[r].c_str(), ui->ruleList);
 
     // Select the current rule and mark the row as current to prevent the
     // selection from disappearing when deleting the bottommost item.
@@ -81,6 +81,8 @@ void RulePickDialog::accept()
     // Export the index of the current rule
     QList<QListWidgetItem*> selection = ui->ruleList->selectedItems();
     currentRule = selection.isEmpty() ? 0 : ui->ruleList->row(selection.first());
+
+    emit rulesUpdated();
 
     QDialog::accept();
 }

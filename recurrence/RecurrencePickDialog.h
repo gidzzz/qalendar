@@ -36,7 +36,8 @@ private slots:
     void onFrequencyChanged(int index);
     void onLimitTypeChanged(int index);
 
-    void selectRule();
+    void exportRule();
+    void importRule();
 };
 
 #endif // RECURRENCEPICKDIALOG_H

@@ -4,23 +4,22 @@
 <context>
     <name>AgendaPlug</name>
     <message>
-        <location filename="../AgendaPlug.cpp" line="26"/>
+        <location filename="../AgendaPlug.cpp" line="27"/>
         <source>Jump to today</source>
         <translation>Aller à aujourd&apos;hui</translation>
     </message>
     <message>
-        <location filename="../AgendaPlug.cpp" line="27"/>
+        <location filename="../AgendaPlug.cpp" line="28"/>
         <source>Jump to</source>
         <translation>Aller à</translation>
     </message>
     <message>
-        <location filename="../AgendaPlug.cpp" line="28"/>
-        <location filename="../AgendaPlug.cpp" line="122"/>
+        <location filename="../AgendaPlug.cpp" line="29"/>
         <source>New event</source>
         <translation>Nouvel évènement</translation>
     </message>
     <message>
-        <location filename="../AgendaPlug.h" line="17"/>
+        <location filename="../AgendaPlug.h" line="20"/>
         <source>Agenda</source>
         <translation>Agenda</translation>
     </message>
@@ -35,7 +34,7 @@
     <message>
         <location filename="../AlarmPickDialog.ui" line="27"/>
         <source>Time in advance</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps en avance</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="37"/>
@@ -66,17 +65,17 @@
 <context>
     <name>AlarmPickSelector</name>
     <message>
-        <location filename="../AlarmPickSelector.cpp" line="26"/>
+        <location filename="../AlarmPickSelector.cpp" line="24"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../AlarmPickSelector.cpp" line="37"/>
+        <location filename="../AlarmPickSelector.cpp" line="35"/>
         <source>Exact</source>
         <translation>Exactement</translation>
     </message>
     <message numerus="yes">
-        <location filename="../AlarmPickSelector.cpp" line="39"/>
+        <location filename="../AlarmPickSelector.cpp" line="37"/>
         <source>%n hour(s) before</source>
         <translation>
             <numerusform>%n heure avant</numerusform>
@@ -84,7 +83,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../AlarmPickSelector.cpp" line="40"/>
+        <location filename="../AlarmPickSelector.cpp" line="38"/>
         <source>%n minute(s) before</source>
         <translation>
             <numerusform>%n minute avant</numerusform>
@@ -92,7 +91,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../AlarmPickSelector.cpp" line="41"/>
+        <location filename="../AlarmPickSelector.cpp" line="39"/>
         <source>%n second(s) before</source>
         <translation>
             <numerusform>%n seconde avant</numerusform>
@@ -100,7 +99,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../AlarmPickSelector.cpp" line="43"/>
+        <location filename="../AlarmPickSelector.cpp" line="41"/>
         <source>%1:%2:%3 before</source>
         <translation>%1:%2:%3 avant</translation>
     </message>
@@ -108,27 +107,27 @@
 <context>
     <name>ByDayWidget</name>
     <message>
-        <location filename="../recurrence/ByDayWidget.cpp" line="22"/>
+        <location filename="../recurrence/ByDayWidget.cpp" line="37"/>
         <source>From beginning</source>
         <translation>Depuis le début</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByDayWidget.cpp" line="23"/>
+        <location filename="../recurrence/ByDayWidget.cpp" line="38"/>
         <source>From end</source>
         <translation>Depuis la fin</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByDayWidget.cpp" line="33"/>
+        <location filename="../recurrence/ByDayWidget.cpp" line="49"/>
         <source>By day of month</source>
         <translation>Par jours du mois</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByDayWidget.cpp" line="35"/>
+        <location filename="../recurrence/ByDayWidget.cpp" line="51"/>
         <source>By week of year</source>
         <translation>Par semaine de l&apos;année</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByDayWidget.cpp" line="37"/>
+        <location filename="../recurrence/ByDayWidget.cpp" line="53"/>
         <source>By day of year</source>
         <translation>Par jour de l&apos;année</translation>
     </message>
@@ -144,17 +143,17 @@
 <context>
     <name>ByWeekdayWidget</name>
     <message>
-        <location filename="../recurrence/ByWeekdayWidget.cpp" line="18"/>
+        <location filename="../recurrence/ByWeekdayWidget.cpp" line="20"/>
         <source>By day of week</source>
         <translation>Par jours de la semaine</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByWeekdayWidget.cpp" line="36"/>
+        <location filename="../recurrence/ByWeekdayWidget.cpp" line="54"/>
         <source>From beginning</source>
         <translation>Depuis le début</translation>
     </message>
     <message>
-        <location filename="../recurrence/ByWeekdayWidget.cpp" line="37"/>
+        <location filename="../recurrence/ByWeekdayWidget.cpp" line="55"/>
         <source>From end</source>
         <translation>Depuis la fin</translation>
     </message>
@@ -192,12 +191,12 @@
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="131"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
         <source>Save file</source>
         <translation>Sauvegarder le fichier</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="144"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
         <translation>Supprimer ce calendrier ainsi que ses évènements, tâches et notes?</translation>
     </message>
@@ -304,7 +303,7 @@ journée</translation>
         <translation>Effectué</translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="180"/>
+        <location filename="../DatePickDialog.cpp" line="181"/>
         <source>Week %1 (%2 - %3)</source>
         <translation>Semaine %1 (%2 - %3)</translation>
     </message>
@@ -348,11 +347,6 @@ journée</translation>
         <location filename="../DayWindow.ui" line="50"/>
         <source>Jump to</source>
         <translation>Aller à</translation>
-    </message>
-    <message>
-        <location filename="../DayWindow.cpp" line="36"/>
-        <source>New event</source>
-        <translation>Nouvel évènement</translation>
     </message>
 </context>
 <context>
@@ -425,6 +419,11 @@ journée</translation>
         <translation>Alarme</translation>
     </message>
     <message>
+        <location filename="../EventEditDialog.ui" line="145"/>
+        <source>Description</source>
+        <translation>Description</translation>
+    </message>
+    <message>
         <location filename="../EventEditDialog.cpp" line="69"/>
         <source>Edit event</source>
         <translation>Modifier l&apos;évènement</translation>
@@ -478,34 +477,26 @@ journée</translation>
         <translation>Supprimer l&apos;évènement</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="133"/>
+        <location filename="../EventWindow.cpp" line="139"/>
         <source>From</source>
         <translation>Du</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="133"/>
+        <location filename="../EventWindow.cpp" line="139"/>
         <source>On</source>
         <translation>Le</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="203"/>
-        <location filename="../EventWindow.cpp" line="224"/>
+        <location filename="../EventWindow.cpp" line="209"/>
+        <location filename="../EventWindow.cpp" line="230"/>
         <source>No more events</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ExpandingTextEdit</name>
-    <message>
-        <location filename="../ExpandingTextEdit.cpp" line="101"/>
-        <source>Description</source>
-        <translation>Description</translation>
+        <translation>Plus d&apos;évènements</translation>
     </message>
 </context>
 <context>
     <name>JournalEditDialog</name>
     <message>
-        <location filename="../JournalEditDialog.ui" line="17"/>
+        <location filename="../JournalEditDialog.ui" line="22"/>
         <source>Calendar</source>
         <translation>Calendrier</translation>
     </message>
@@ -533,12 +524,12 @@ journée</translation>
         <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../JournalsPlug.cpp" line="120"/>
+        <location filename="../JournalsPlug.cpp" line="119"/>
         <source>Edit</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../JournalsPlug.cpp" line="121"/>
+        <location filename="../JournalsPlug.cpp" line="120"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -605,14 +596,22 @@ journée</translation>
     </message>
 </context>
 <context>
+    <name>NewComponentWidget</name>
+    <message>
+        <location filename="../NewComponentWidget.h" line="24"/>
+        <source>New event</source>
+        <translation>Nouvel évènement</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="../ChangeManager.cpp" line="47"/>
+        <location filename="../ChangeManager.cpp" line="120"/>
         <source>Unable to edit birthdays</source>
         <translation>Impossible de modifier les anniversaires</translation>
     </message>
     <message>
-        <location filename="../ChangeManager.cpp" line="57"/>
+        <location filename="../ChangeManager.cpp" line="130"/>
         <source>Delete component?</source>
         <translation>Supprimer l&apos;élément?</translation>
     </message>
@@ -625,57 +624,62 @@ journée</translation>
         <translation>Récurrence</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="28"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="30"/>
         <source>Repeat</source>
         <translation>Répéter</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="50"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="40"/>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
         <source>Frequency</source>
         <translation>Fréquence</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="72"/>
         <source>Daily</source>
         <translation>Quotidien</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="66"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="77"/>
         <source>Weekly</source>
         <translation>Hebdomadaire</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="71"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="82"/>
         <source>Monthly</source>
         <translation>Mensuel</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="76"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="87"/>
         <source>Yearly</source>
         <translation>Annuel</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="84"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="95"/>
         <source>Interval</source>
         <translation>Intervalle</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="108"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="119"/>
         <source>Forever</source>
         <translation>Pour toujours</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="113"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="124"/>
         <source>Until</source>
         <translation>Jusqu&apos;au</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.ui" line="118"/>
+        <location filename="../recurrence/RecurrencePickDialog.ui" line="129"/>
         <source>Count</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickDialog.cpp" line="32"/>
+        <location filename="../recurrence/RecurrencePickDialog.cpp" line="35"/>
         <source>Done</source>
         <translation>Effectué</translation>
     </message>
@@ -683,44 +687,75 @@ journée</translation>
 <context>
     <name>RecurrencePickSelector</name>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="28"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="37"/>
         <source>Never</source>
         <translation>Jamais</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="30"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="39"/>
         <source>External</source>
         <translation>Externe</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="32"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="41"/>
         <source>Every day</source>
         <translation>Tous les jours</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="34"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="43"/>
         <source>Every workday</source>
         <translation>Tous les jours travaillés</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="36"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="45"/>
         <source>Every week</source>
         <translation>Toutes les semaines</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="38"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="47"/>
         <source>Every month</source>
         <translation>Tous les mois</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="40"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="49"/>
         <source>Every year</source>
         <translation>Tous les ans</translation>
     </message>
     <message>
-        <location filename="../recurrence/RecurrencePickSelector.cpp" line="42"/>
+        <location filename="../recurrence/RecurrencePickSelector.cpp" line="51"/>
         <source>Complex</source>
         <translation>Complexe</translation>
+    </message>
+</context>
+<context>
+    <name>RulePickDialog</name>
+    <message>
+        <location filename="../recurrence/RulePickDialog.ui" line="6"/>
+        <source>Select rule</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
+        <source>Done</source>
+        <translation>Effectué</translation>
+    </message>
+</context>
+<context>
+    <name>RulePickSelector</name>
+    <message>
+        <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
+        <source>Rule %1 of %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -737,27 +772,32 @@ journée</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="42"/>
+        <source>Alarm tone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/SettingsDialog.ui" line="52"/>
         <source>Delete events</source>
         <translation>Supprimer les évènements</translation>
     </message>
     <message>
-        <location filename="../settings/SettingsDialog.ui" line="52"/>
+        <location filename="../settings/SettingsDialog.ui" line="62"/>
         <source>Delete tasks</source>
         <translation>Supprimer les tâches</translation>
     </message>
     <message>
-        <location filename="../settings/SettingsDialog.cpp" line="14"/>
+        <location filename="../settings/SettingsDialog.cpp" line="16"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../settings/SettingsDialog.cpp" line="43"/>
+        <location filename="../settings/SettingsDialog.cpp" line="46"/>
         <source>Never</source>
         <translation>Jamais</translation>
     </message>
     <message numerus="yes">
-        <location filename="../settings/SettingsDialog.cpp" line="45"/>
-        <location filename="../settings/SettingsDialog.cpp" line="47"/>
+        <location filename="../settings/SettingsDialog.cpp" line="48"/>
+        <location filename="../settings/SettingsDialog.cpp" line="50"/>
         <source>Older than %n week(s)</source>
         <translation>
             <numerusform>Plus vieux que %n semaine</numerusform>
@@ -765,7 +805,7 @@ journée</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../settings/SettingsDialog.cpp" line="49"/>
+        <location filename="../settings/SettingsDialog.cpp" line="52"/>
         <source>Older than %n month(s)</source>
         <translation>
             <numerusform>Plus vieux que %n mois</numerusform>
@@ -773,7 +813,7 @@ journée</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../settings/SettingsDialog.cpp" line="51"/>
+        <location filename="../settings/SettingsDialog.cpp" line="54"/>
         <source>Older than %n year(s)</source>
         <translation>
             <numerusform>Plus vieux que %n an</numerusform>
@@ -805,12 +845,17 @@ journée</translation>
         <translation>Alarme</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="44"/>
+        <location filename="../TodoEditDialog.ui" line="92"/>
+        <source>Description</source>
+        <translation>Description</translation>
+    </message>
+    <message>
+        <location filename="../TodoEditDialog.cpp" line="45"/>
         <source>Edit task</source>
         <translation>Modifier la tâche</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="61"/>
+        <location filename="../TodoEditDialog.cpp" line="62"/>
         <source>New task</source>
         <translation>Nouvelle tâche</translation>
     </message>
@@ -871,19 +916,42 @@ journée</translation>
         <translation>Tâches</translation>
     </message>
     <message>
-        <location filename="../TodosPlug.cpp" line="198"/>
+        <location filename="../TodosPlug.cpp" line="197"/>
         <source>Edit</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../TodosPlug.cpp" line="199"/>
+        <location filename="../TodosPlug.cpp" line="198"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../TodosPlug.cpp" line="224"/>
+        <location filename="../TodosPlug.cpp" line="223"/>
         <source>Delete completed tasks from all calendars?</source>
         <translation>Supprimer les tâches terminées de tous les calendrier?</translation>
+    </message>
+</context>
+<context>
+    <name>TunePickDialog</name>
+    <message>
+        <location filename="../settings/TunePickDialog.ui" line="6"/>
+        <source>Choose alarm tone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/TunePickDialog.cpp" line="17"/>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/TunePickDialog.cpp" line="18"/>
+        <source>Done</source>
+        <translation>Effectué</translation>
+    </message>
+    <message>
+        <location filename="../settings/TunePickDialog.cpp" line="67"/>
+        <source>Add alarm tone</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,7 +998,7 @@ journée</translation>
 <context>
     <name>WeekWidget</name>
     <message>
-        <location filename="../week/WeekWidget.cpp" line="357"/>
+        <location filename="../week/WeekWidget.cpp" line="363"/>
         <source>All day</source>
         <translation>Toute la journée</translation>
     </message>

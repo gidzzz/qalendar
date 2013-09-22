@@ -4,16 +4,14 @@
 
 #include <CMulticalendar.h>
 
+#include "CalendarPickDialog.h"
+
 #include "CWrapper.h"
 
 CalendarPickSelector::CalendarPickSelector(QObject *parent) : QMaemo5AbstractPickSelector(parent)
 {
     // This is the ID of the default calendar, so it should always be valid
     setCalendar(1);
-}
-
-CalendarPickSelector::~CalendarPickSelector()
-{
 }
 
 void CalendarPickSelector::setCalendar(int calendarId)

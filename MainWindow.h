@@ -69,7 +69,8 @@ private:
     void showComponent(CTodo *todo, QMainWindow *parent);
 
     // Display component C obtained using function Getter
-    template<class C, C* (CCalendar::*Getter)(string, int&)> void showComponent(int calendarId, QString componentId)
+    template<class C, C* (CCalendar::*Getter)(string, int&)>
+    void showComponent(int calendarId, QString componentId)
     {
         // Check if there is a window which could be used as a parent
         if (QMainWindow *topWindow = this->topWindow()) {

@@ -1,7 +1,5 @@
 #include "DatePickSelector.h"
 
-#include <QMaemo5ValueButton>
-
 #include "DatePickDialog.h"
 
 #include "Date.h"

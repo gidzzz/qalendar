@@ -1,7 +1,5 @@
 #include "AlarmPickSelector.h"
 
-#include <QMaemo5ValueButton>
-
 #include "AlarmPickDialog.h"
 
 AlarmPickSelector::AlarmPickSelector(QObject *parent) : QMaemo5AbstractPickSelector(parent)

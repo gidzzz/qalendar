@@ -11,7 +11,7 @@ public:
     {
     }
 
-    ~ChangeClient()
+    virtual ~ChangeClient()
     {
         deactivate();
     }

@@ -1,7 +1,5 @@
 #include "CalendarPickDialog.h"
 
-#include <QScrollBar>
-
 #include <vector>
 #include <CMulticalendar.h>
 #include <CCalendar.h>

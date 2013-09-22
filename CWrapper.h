@@ -149,8 +149,7 @@ namespace CWrapper
     inline void expand(const vector<CComponent*> &components, vector<ComponentInstance*> &instances, const time_t startStamp, const time_t endStamp)
     {
         for (unsigned int i = 0; i < components.size(); i++)
-            if (components[i])
-                expand(components[i], instances, startStamp, endStamp);
+            expand(components[i], instances, startStamp, endStamp);
     }
 
     // Some functions in the API retrieve incomplete component representations

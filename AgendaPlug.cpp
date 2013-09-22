@@ -123,6 +123,7 @@ void AgendaPlug::reload()
                 item = new QListWidgetItem();
                 item->setData(DateRole, this->date);
                 ui->componentList->addItem(item);
+                ui->componentList->setCurrentItem(item);
                 ui->componentList->setItemWidget(item, ncw);
 
                 connect(ncw->eventButton, SIGNAL(clicked()), ui->componentList, SLOT(newEvent()));

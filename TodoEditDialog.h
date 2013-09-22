@@ -21,6 +21,7 @@ private:
 
     CTodo *todo;
 
+    bool defaultDue;
     time_t alarmOffset;
 
 private slots:

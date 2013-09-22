@@ -16,7 +16,8 @@
 
 TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     ComponentEditDialog(parent),
-    ui(new Ui::TodoEditDialog)
+    ui(new Ui::TodoEditDialog),
+    defaultDue(true)
 {
     ui->setupUi(this);
 
@@ -36,7 +37,7 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
 
     connect(ui->alarmBox, SIGNAL(toggled(bool)), ui->alarmDateButton, SLOT(setVisible(bool)));
     connect(ui->alarmBox, SIGNAL(toggled(bool)), ui->alarmTimeButton, SLOT(setVisible(bool)));
-    connect(dps, SIGNAL(selected(QString)), this, SLOT(onDateChanged()));
+    connect(dps,  SIGNAL(selected(QString)), this, SLOT(onDateChanged()));
     connect(adps, SIGNAL(selected(QString)), this, SLOT(onAlarmChanged()));
     connect(atps, SIGNAL(selected(QString)), this, SLOT(onAlarmChanged()));
 
@@ -66,6 +67,23 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         QSettings settings;
         settings.beginGroup("TodoEditDialog");
         cps->setCalendar(settings.value("Calendar", 1).toInt());
+
+        // Prepre to calculate the due date
+        const time_t dueOffset = settings.value("DueOffset", 0).toInt() * 24*60*60;
+        const time_t currentStamp = QDateTime::currentDateTime().toTime_t();
+        QDateTime due;
+
+        // Calculate the due date in an under/overflow-proof way
+        if (dueOffset > 0) {
+            due = QDateTime::fromTime_t(currentStamp > std::numeric_limits<time_t>::max() - dueOffset
+                                      ? std::numeric_limits<time_t>::max()
+                                      : currentStamp + dueOffset);
+        } else {
+            due = QDateTime::fromTime_t(currentStamp < -dueOffset
+                                      ? 0
+                                      : currentStamp + dueOffset);
+        }
+        dps->setCurrentDate(due.date());
 
         ui->doneBox->hide();
 
@@ -97,6 +115,8 @@ TodoEditDialog::~TodoEditDialog()
 void TodoEditDialog::setDue(QDate due)
 {
     qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector())->setCurrentDate(due);
+
+    defaultDue = false;
 }
 
 void TodoEditDialog::onDateChanged()
@@ -114,7 +134,7 @@ void TodoEditDialog::onDateChanged()
                                     ? std::numeric_limits<time_t>::max()
                                     : due.toTime_t() + alarmOffset);
     } else {
-        alarm = QDateTime::fromTime_t((time_t) due.toTime_t() < alarmOffset
+        alarm = QDateTime::fromTime_t((time_t) due.toTime_t() < -alarmOffset
                                     ? 0
                                     : due.toTime_t() + alarmOffset);
     }
@@ -164,6 +184,8 @@ void TodoEditDialog::saveTodo()
     QSettings settings;
     settings.beginGroup("TodoEditDialog");
     settings.setValue("Calendar", cps->currentId());
+    if (defaultDue)
+        settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));
     // TODO: Save alarm settings? What date/time to use?
 
     this->accept();

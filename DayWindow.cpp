@@ -8,14 +8,13 @@
 #include <QPushButton>
 #include <QShortcut>
 
-#include "DatePickDialog.h"
-
 #include <CMulticalendar.h>
 #include <CTodo.h>
+
+#include "NewComponentWidget.h"
+#include "DatePickDialog.h"
+
 #include "CWrapper.h"
-
-#include "ComponentListWidget.h"
-
 #include "Roles.h"
 #include "Date.h"
 
@@ -32,12 +31,12 @@ DayWindow::DayWindow(QDate date, QWidget *parent) :
     this->setAttribute(Qt::WA_Maemo5LandscapeOrientation, false);
     this->setAttribute(Qt::WA_Maemo5PortraitOrientation, false);
 
-    // Create a button to add new tasks
-    QPushButton *newEventButton = new QPushButton(QIcon::fromTheme("general_add"), tr("New event"));
+    NewComponentWidget *ncw = new NewComponentWidget();
     QListWidgetItem *item = new QListWidgetItem(ui->componentList);
-    ui->componentList->setItemWidget(item, newEventButton);
+    ui->componentList->setItemWidget(item, ncw);
 
-    connect(newEventButton, SIGNAL(clicked()), ui->componentList, SLOT(onComponentActivated()));
+    connect(ncw->eventButton, SIGNAL(clicked()), ui->componentList, SLOT(newEvent()));
+    connect(ncw->todoButton,  SIGNAL(clicked()), ui->componentList, SLOT(newTodo()));
 
     connect(ui->prevAction, SIGNAL(triggered()), this, SLOT(gotoPrevDay()));
     connect(ui->nextAction, SIGNAL(triggered()), this, SLOT(gotoNextDay()));

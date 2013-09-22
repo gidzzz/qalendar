@@ -130,6 +130,7 @@ HEADERS += \
     DatePickDialog.h \
     ComponentListDelegate.h \
     DateHeadingWidget.h \
+    NewComponentWidget.h \
     CWrapper.h \
     JournalEditDialog.h \
     JournalDelegate.h \

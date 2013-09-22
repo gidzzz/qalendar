@@ -18,6 +18,10 @@ public:
 
     void setDate(QDate date);
 
+public slots:
+    void newEvent();
+    void newTodo();
+
 private:
     bool viewportEvent(QEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
@@ -28,8 +32,7 @@ private:
 
 private slots:
     void onContextMenuRequested(const QPoint &pos);
-
-    void onComponentActivated(QListWidgetItem *item = NULL);
+    void onComponentActivated(QListWidgetItem *item);
 
     void onScrolled(int position);
 

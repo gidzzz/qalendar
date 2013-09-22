@@ -9,9 +9,10 @@
 #include "CWrapper.h"
 #include "ComponentInstance.h"
 
-#include "Roles.h"
-
+#include "NewComponentWidget.h"
 #include "DatePickDialog.h"
+
+#include "Roles.h"
 
 AgendaPlug::AgendaPlug(QDate date, QWidget *parent) :
     TemporalPlug(parent),
@@ -31,7 +32,7 @@ AgendaPlug::AgendaPlug(QDate date, QWidget *parent) :
     actions.append(eventAction);
     connect(todayAction, SIGNAL(triggered()), this, SLOT(gotoToday()));
     connect(jumpAction, SIGNAL(triggered()), this, SLOT(selectDay()));
-    connect(eventAction, SIGNAL(triggered()), ui->componentList, SLOT(onComponentActivated()));
+    connect(eventAction, SIGNAL(triggered()), ui->componentList, SLOT(newEvent()));
 }
 
 AgendaPlug::~AgendaPlug()
@@ -116,13 +117,16 @@ void AgendaPlug::reload()
 
             if (onToday) {
                 todaysHeading = item;
-                // Add 'new event' button
-                QPushButton *newEventButton = new QPushButton(QIcon::fromTheme("general_add"), tr("New event"));
+
+                // Add component creation buttons
+                NewComponentWidget *ncw = new NewComponentWidget();
                 item = new QListWidgetItem();
                 item->setData(DateRole, this->date);
                 ui->componentList->addItem(item);
-                ui->componentList->setItemWidget(item, newEventButton);
-                connect(newEventButton, SIGNAL(clicked()), ui->componentList, SLOT(onComponentActivated()));
+                ui->componentList->setItemWidget(item, ncw);
+
+                connect(ncw->eventButton, SIGNAL(clicked()), ui->componentList, SLOT(newEvent()));
+                connect(ncw->todoButton,  SIGNAL(clicked()), ui->componentList, SLOT(newTodo()));
             }
         }
 

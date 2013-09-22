@@ -76,17 +76,12 @@ void ComponentListWidget::onContextMenuRequested(const QPoint &pos)
 
 void ComponentListWidget::onComponentActivated(QListWidgetItem *item)
 {
-    ComponentInstance *instance = NULL;
+    // Ignore day headings
+    if (item->data(HeadingRole).toBool()) return;
 
-    if (item) {
-        // Ignore day headings
-        if (item->data(HeadingRole).toBool()) return;
-
-        // Obtain the component instance
-        instance = qvariant_cast<ComponentInstance*>(item->data(ComponentRole));
-    }
-
-    if (instance) {
+    // Check if the activated item holds a component
+    if (ComponentInstance *instance = qvariant_cast<ComponentInstance*>(item->data(ComponentRole))) {
+        // Perform an action which depends on the type of the component
         switch (instance->component->getType()) {
             case E_EVENT:
             case E_BDAY:
@@ -96,9 +91,6 @@ void ComponentListWidget::onComponentActivated(QListWidgetItem *item)
                 (new TodoWindow(instance->todo, this))->show();
                 break;
         }
-    } else {
-        // Create a new event with the selected date
-        ChangeManager::newEvent(this, QDateTime(date, QTime::currentTime()));
     }
 }
 
@@ -114,6 +106,16 @@ void ComponentListWidget::onScrolled(int position)
         headingWidget->move(0, firstBelow->data(HeadingRole).isNull() ? 0 : this->visualItemRect(firstBelow).top() - HeadingHeight);
         headingWidget->show();
     }
+}
+
+void ComponentListWidget::newEvent()
+{
+    ChangeManager::newEvent(this, QDateTime(date, QTime::currentTime()));
+}
+
+void ComponentListWidget::newTodo()
+{
+    ChangeManager::newTodo(this, date);
 }
 
 void ComponentListWidget::editCurrentComponent()

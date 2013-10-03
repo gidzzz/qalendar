@@ -178,7 +178,8 @@ TRANSLATIONS = \
     translations/qalendar_it.ts \
     translations/qalendar_nl.ts \
     translations/qalendar_pl.ts \
-    translations/qalendar_uk.ts
+    translations/qalendar_uk.ts \
+    translations/qalendar_vi.ts
 
 isEmpty(QMAKE_LRELEASE) {
     QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease

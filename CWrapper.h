@@ -71,7 +71,7 @@ namespace CWrapper
 
     inline bool journalComparator(CJournal *j1, CJournal *j2)
     {
-        return j1->getDateStart() < j2->getDateStart();
+        return j1->getDateStart() > j2->getDateStart();
     }
 
     inline bool calendarComparator(CCalendar *c1, CCalendar *c2)

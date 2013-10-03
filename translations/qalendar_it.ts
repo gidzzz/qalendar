@@ -631,7 +631,7 @@ giorno</translation>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="40"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualizza</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
@@ -732,17 +732,17 @@ giorno</translation>
     <message>
         <location filename="../recurrence/RulePickDialog.ui" line="6"/>
         <source>Select rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona metodo</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
@@ -755,7 +755,7 @@ giorno</translation>
     <message>
         <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
         <source>Rule %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Metodo %1 di %2</translation>
     </message>
 </context>
 <context>
@@ -773,7 +773,7 @@ giorno</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="42"/>
         <source>Alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tono allarme</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="52"/>
@@ -936,12 +936,12 @@ giorno</translation>
     <message>
         <location filename="../settings/TunePickDialog.ui" line="6"/>
         <source>Choose alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli tono allarme</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="17"/>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Altro</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="18"/>
@@ -951,7 +951,7 @@ giorno</translation>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="67"/>
         <source>Add alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi tono allarme</translation>
     </message>
 </context>
 <context>

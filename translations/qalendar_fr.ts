@@ -631,7 +631,7 @@ journée</translation>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="40"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
@@ -732,17 +732,17 @@ journée</translation>
     <message>
         <location filename="../recurrence/RulePickDialog.ui" line="6"/>
         <source>Select rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la règle</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
@@ -755,7 +755,7 @@ journée</translation>
     <message>
         <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
         <source>Rule %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Règle %1 sur %2</translation>
     </message>
 </context>
 <context>
@@ -773,7 +773,7 @@ journée</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="42"/>
         <source>Alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Son de l&apos;alarme</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="52"/>
@@ -936,12 +936,12 @@ journée</translation>
     <message>
         <location filename="../settings/TunePickDialog.ui" line="6"/>
         <source>Choose alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir le son de l&apos;alarme</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="17"/>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="18"/>
@@ -951,7 +951,7 @@ journée</translation>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="67"/>
         <source>Add alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des sons pour l&apos;alarme</translation>
     </message>
 </context>
 <context>

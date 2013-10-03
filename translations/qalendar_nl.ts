@@ -630,7 +630,7 @@ day</source>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="40"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekijk</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
@@ -731,17 +731,17 @@ day</source>
     <message>
         <location filename="../recurrence/RulePickDialog.ui" line="6"/>
         <source>Select rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer regel</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
@@ -754,7 +754,7 @@ day</source>
     <message>
         <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
         <source>Rule %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel %1 van %2</translation>
     </message>
 </context>
 <context>
@@ -772,7 +772,7 @@ day</source>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="42"/>
         <source>Alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm signaal</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="52"/>
@@ -935,12 +935,12 @@ day</source>
     <message>
         <location filename="../settings/TunePickDialog.ui" line="6"/>
         <source>Choose alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies alarm signaal</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="17"/>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Meer</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="18"/>
@@ -950,7 +950,7 @@ day</source>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="67"/>
         <source>Add alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg alarm signaal toe</translation>
     </message>
 </context>
 <context>

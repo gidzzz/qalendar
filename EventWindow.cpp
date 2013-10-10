@@ -3,6 +3,7 @@
 #include <QMaemo5InformationBox>
 #include <QMaemo5Style>
 
+#include <QSettings>
 #include <QDateTime>
 #include <QShortcut>
 #include <QTimer>
@@ -51,10 +52,14 @@ EventWindow::EventWindow(ComponentInstance *instance, QWidget *parent) :
     connect(ui->editAction, SIGNAL(triggered()), this, SLOT(editEvent()));
     connect(ui->deleteAction, SIGNAL(triggered()), this, SLOT(deleteEvent()));
 
+    connect(ui->linksAction, SIGNAL(toggled(bool)), this, SLOT(enableLinks(bool)));
+
     connect(new QShortcut(QKeySequence(Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(gotoPrevEvent()));
     connect(new QShortcut(QKeySequence(Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(gotoNextEvent()));
 
     connect(new QShortcut(QKeySequence(Qt::Key_Backspace), this), SIGNAL(activated()), this, SLOT(close()));
+
+    ui->linksAction->setChecked(QSettings().value("AutomaticLinks", false).toBool());
 
     reload();
 }
@@ -239,4 +244,11 @@ void EventWindow::editEvent()
 void EventWindow::deleteEvent()
 {
     ChangeManager::drop(this, instance.event);
+}
+
+void EventWindow::enableLinks(bool enable)
+{
+    QSettings().setValue("AutomaticLinks", enable);
+
+    ui->descriptionInfo->enableLinks(enable);
 }

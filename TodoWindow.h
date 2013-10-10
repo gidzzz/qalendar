@@ -30,6 +30,8 @@ private:
 private slots:
     void editTodo();
     void deleteTodo();
+
+    void enableLinks(bool enable);
 };
 
 #endif // TODOWINDOW_H

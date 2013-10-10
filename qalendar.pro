@@ -58,6 +58,7 @@ SOURCES += main.cpp \
     EventWindow.cpp \
     TodoWindow.cpp \
     ComponentListWidget.cpp \
+    LinkLabel.cpp \
     ExpandingTextEdit.cpp \
     Rotator.cpp
 
@@ -138,6 +139,7 @@ HEADERS += \
     TodoWindow.h \
     ComponentListWidget.h \
     ChainedSpinBox.h \
+    LinkLabel.h \
     ExpandingTextEdit.h \
     ComponentInstance.h \
     VerticalScrollArea.h \

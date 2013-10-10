@@ -32,6 +32,8 @@ private slots:
 
     void editEvent();
     void deleteEvent();
+
+    void enableLinks(bool enalbe);
 };
 
 #endif // EVENTWINDOW_H

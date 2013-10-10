@@ -151,7 +151,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="descriptionInfo">
+      <widget class="LinkLabel" name="descriptionInfo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
        </property>
@@ -169,6 +169,7 @@
     <addaction name="nextAction"/>
     <addaction name="editAction"/>
     <addaction name="deleteAction"/>
+    <addaction name="linksAction"/>
    </widget>
    <addaction name="windowMenu"/>
   </widget>
@@ -192,12 +193,25 @@
     <string>Delete event</string>
    </property>
   </action>
+  <action name="linksAction">
+   <property name="text">
+    <string>Automatic links</string>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>VerticalScrollArea</class>
    <extends>QScrollArea</extends>
    <header>VerticalScrollArea.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LinkLabel</class>
+   <extends>QLabel</extends>
+   <header>LinkLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

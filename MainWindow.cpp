@@ -292,6 +292,15 @@ void MainWindow::launch_view(uint type, int, QString componentId, int calendarId
     }
 }
 
+// Close the application on the next appropriate occasion
+void MainWindow::deferred_close()
+{
+    runInBackground = false;
+
+    if (this->isHidden())
+        this->close();
+}
+
 // Helper for the main showComponent()
 void MainWindow::showComponent(CEvent *event, QMainWindow *parent)
 {

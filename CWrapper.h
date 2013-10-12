@@ -80,6 +80,17 @@ namespace CWrapper
                                            QString::fromUtf8(c2->getCalendarName().c_str())) < 0;
     }
 
+    inline bool calendarVisibilityComparator(CCalendar *c1, CCalendar *c2)
+    {
+        if (c1->IsShown() && !c2->IsShown())
+            return true;
+
+        if (c2->IsShown() && !c1->IsShown())
+            return false;
+
+        return calendarComparator(c1, c2);
+    }
+
     inline void sort(vector<ComponentInstance*> &instances)
     {
         sort(instances.begin(), instances.end(), instanceComparator);
@@ -95,9 +106,10 @@ namespace CWrapper
        sort(journals.begin(), journals.end(), journalComparator);
     }
 
-    inline void sort(vector<CCalendar*> &calendars)
+    inline void sort(vector<CCalendar*> &calendars, bool visibilityMatters)
     {
-        sort(calendars.begin(), calendars.end(), calendarComparator);
+        sort(calendars.begin(), calendars.end(), visibilityMatters ? calendarVisibilityComparator
+                                                                   : calendarComparator);
     }
 
     // Expand a component to specific instances

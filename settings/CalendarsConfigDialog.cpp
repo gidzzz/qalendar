@@ -45,7 +45,7 @@ void CalendarsConfigDialog::reload()
 
     CMulticalendar *mc = CMulticalendar::MCInstance();
     vector<CCalendar*> calendars = mc->getListCalFromMc();
-    CWrapper::sort(calendars);
+    CWrapper::sort(calendars, false);
 
     for (unsigned int c = 0; c < calendars.size(); c++) {
         using namespace Metrics::Item;

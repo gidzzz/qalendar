@@ -22,7 +22,7 @@ CalendarPickDialog::CalendarPickDialog(QWidget *parent, int currentId) :
 
     CMulticalendar *mc = CMulticalendar::MCInstance();
     vector<CCalendar*> calendars = mc->getListCalFromMc();
-    CWrapper::sort(calendars);
+    CWrapper::sort(calendars, true);
 
     // Add an item for each calendar found
     for (unsigned int c = 0; c < calendars.size(); c++) {

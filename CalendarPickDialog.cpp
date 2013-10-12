@@ -36,6 +36,7 @@ CalendarPickDialog::CalendarPickDialog(QWidget *parent, int currentId) :
         item->setData(NameRole, CWrapper::simplify(calendars[c]->getCalendarName(), TextMaxChars));
         item->setData(TypeRole, calendars[c]->getCalendarType());
         item->setData(ColorRole, calendars[c]->getCalendarColor());
+        item->setData(VisibilityRole, calendars[c]->IsShown());
 
         ui->calendarList->addItem(item);
 

@@ -7,6 +7,7 @@ enum DataRole
     NameRole,
     TypeRole,
     ColorRole,
+    VisibilityRole,
     HeadingRole,
     DateRole,
     PathRole,

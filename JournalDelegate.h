@@ -35,7 +35,7 @@ public:
 
         QString summary = CWrapper::simplify(journal->getSummary(), TextMaxChars);
         QDateTime date = QDateTime::QDateTime::fromTime_t(journal->getDateStart());
-        QIcon background = QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt()));
+        QIcon icon = QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt()));
 
         QRect r = option.rect.adjusted(Margin, Margin, -Margin, -Margin);
         QFont f = painter->font();
@@ -44,7 +44,7 @@ public:
 
         painter->drawPixmap(r.left(),
                             r.top() + (r.height() - BulletSize) / 2,
-                            background.pixmap(IconSize, IconSize).scaled(BulletSize, BulletSize));
+                            icon.pixmap(IconSize, IconSize).scaled(BulletSize, BulletSize));
 
         r.adjust(BulletSize+Margin*3, TextMargin, 0, -ValueMargin);
 

@@ -159,6 +159,7 @@
    <widget class="QMenu" name="windowMenu">
     <addaction name="editAction"/>
     <addaction name="deleteAction"/>
+    <addaction name="cloneAction"/>
     <addaction name="linksAction"/>
    </widget>
    <addaction name="windowMenu"/>
@@ -171,6 +172,11 @@
   <action name="deleteAction">
    <property name="text">
     <string>Delete task</string>
+   </property>
+  </action>
+  <action name="cloneAction">
+   <property name="text">
+    <string>Clone task</string>
    </property>
   </action>
   <action name="linksAction">

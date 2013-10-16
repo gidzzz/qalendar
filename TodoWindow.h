@@ -29,6 +29,7 @@ private:
 
 private slots:
     void editTodo();
+    void cloneTodo();
     void deleteTodo();
 
     void enableLinks(bool enable);

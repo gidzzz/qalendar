@@ -169,6 +169,7 @@
     <addaction name="nextAction"/>
     <addaction name="editAction"/>
     <addaction name="deleteAction"/>
+    <addaction name="cloneAction"/>
     <addaction name="linksAction"/>
    </widget>
    <addaction name="windowMenu"/>
@@ -191,6 +192,11 @@
   <action name="deleteAction">
    <property name="text">
     <string>Delete event</string>
+   </property>
+  </action>
+  <action name="cloneAction">
+   <property name="text">
+    <string>Clone event</string>
    </property>
   </action>
   <action name="linksAction">

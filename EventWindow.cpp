@@ -50,6 +50,7 @@ EventWindow::EventWindow(ComponentInstance *instance, QWidget *parent) :
     connect(ui->nextAction, SIGNAL(triggered()), this, SLOT(gotoNextEvent()));
 
     connect(ui->editAction, SIGNAL(triggered()), this, SLOT(editEvent()));
+    connect(ui->cloneAction, SIGNAL(triggered()), this, SLOT(cloneEvent()));
     connect(ui->deleteAction, SIGNAL(triggered()), this, SLOT(deleteEvent()));
 
     connect(ui->linksAction, SIGNAL(toggled(bool)), this, SLOT(enableLinks(bool)));
@@ -239,6 +240,11 @@ void EventWindow::gotoNextEvent()
 void EventWindow::editEvent()
 {
     ChangeManager::edit(this, instance.event);
+}
+
+void EventWindow::cloneEvent()
+{
+    ChangeManager::clone(this, instance.event);
 }
 
 void EventWindow::deleteEvent()

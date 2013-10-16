@@ -124,6 +124,34 @@ bool ChangeManager::edit(QWidget *parent, CComponent *component)
     return ed && ed->exec() == QDialog::Accepted;
 }
 
+// Open a copy of the component in the appropriate editor
+bool ChangeManager::clone(QWidget *parent, CComponent *component)
+{
+    CComponent *clone = NULL;
+
+    switch (component->getType()) {
+        case E_EVENT:
+            clone = new CEvent(*static_cast<CEvent*>(component));
+            break;
+        case E_TODO:
+            clone = new CTodo(*static_cast<CTodo*>(component));
+            break;
+        case E_JOURNAL:
+            clone = new CJournal(*static_cast<CJournal*>(component));
+            break;
+        case E_BDAY:
+            QMaemo5InformationBox::information(parent, QObject::tr("Unable to edit birthdays"));
+            break;
+    }
+
+    if (clone) {
+        clone->setId(string());
+        return edit(parent, clone);
+    } else {
+        return false;
+    }
+}
+
 // Delete the component
 bool ChangeManager::drop(QWidget *parent, CComponent *component)
 {
@@ -206,7 +234,7 @@ bool ChangeManager::save(CComponent *component, int calendarId)
         calendarId = component->getCalendarId();
 
     // Check if the component already exists in the database
-    if (component->getCalendarId()) {
+    if (!component->getId().empty()) {
         if (calendarId == component->getCalendarId()) {
             // Simply save chages
             modifyComponent(component, component->getCalendarId(), error);
@@ -217,7 +245,7 @@ bool ChangeManager::save(CComponent *component, int calendarId)
     }
 
     // Add the component to a calendar if it is a fresh one or has to be moved
-    if (!component->getCalendarId())
+    if (component->getId().empty())
         addComponent(component, calendarId, error);
 
     bump();

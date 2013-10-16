@@ -21,7 +21,14 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
 {
     ui->setupUi(this);
 
-    if (todo) todo = CWrapper::details(todo);
+    if (todo && !todo->getId().empty()) {
+        todo = CWrapper::details(todo);
+
+        this->setWindowTitle(tr("Edit task"));
+        this->setupDeleteButton(ui->buttonBox, SLOT(deleteTodo()));
+    } else {
+        this->setWindowTitle(tr("New task"));
+    }
 
     DatePickSelector *dps = new DatePickSelector();
     ui->dateButton->setPickSelector(dps);
@@ -42,8 +49,6 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     connect(atps, SIGNAL(selected(QString)), this, SLOT(onAlarmChanged()));
 
     if (todo) {
-        this->setWindowTitle(tr("Edit task"));
-
         ui->summaryEdit->setText(QString::fromUtf8(todo->getSummary().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(todo->getDescription().c_str()));
         ui->doneBox->setChecked(todo->getStatus());
@@ -56,11 +61,7 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
             atps->setCurrentTime(trigger.time());
             ui->alarmBox->setChecked(true);
         }
-
-        this->setupDeleteButton(ui->buttonBox, SLOT(deleteTodo()));
     } else {
-        this->setWindowTitle(tr("New task"));
-
         todo = new CTodo();
 
         // Load last used settings

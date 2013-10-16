@@ -29,6 +29,7 @@ public:
     static void deactivateClient(ChangeClient *client);
 
     static bool edit(QWidget *parent, CComponent *component);
+    static bool clone(QWidget *parent, CComponent *component);
     static bool drop(QWidget *parent, CComponent *component);
 
     static bool newEvent(QWidget *parent);

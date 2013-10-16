@@ -40,6 +40,7 @@ TodoWindow::TodoWindow(CTodo *todo, QWidget *parent) :
     ui->descriptionInfo->setPalette(palette);
 
     connect(ui->editAction, SIGNAL(triggered()), this, SLOT(editTodo()));
+    connect(ui->cloneAction, SIGNAL(triggered()), this, SLOT(cloneTodo()));
     connect(ui->deleteAction, SIGNAL(triggered()), this, SLOT(deleteTodo()));
 
     connect(ui->linksAction, SIGNAL(toggled(bool)), this, SLOT(enableLinks(bool)));
@@ -142,6 +143,11 @@ void TodoWindow::reload()
 void TodoWindow::editTodo()
 {
     ChangeManager::edit(this, todo);
+}
+
+void TodoWindow::cloneTodo()
+{
+    ChangeManager::clone(this, todo);
 }
 
 void TodoWindow::deleteTodo()

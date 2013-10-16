@@ -23,7 +23,14 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 {
     ui->setupUi(this);
 
-    if (event) event = CWrapper::details(event);
+    if (event && !event->getId().empty()) {
+        event = CWrapper::details(event);
+
+        this->setWindowTitle(tr("Edit event"));
+        this->setupDeleteButton(ui->buttonBox, SLOT(deleteEvent()));
+    } else {
+        this->setWindowTitle(tr("New event"));
+    }
 
     // 'From' and 'to' are by default the same, equal to current time
     QDateTime currentDateTime = QDateTime::currentDateTime();
@@ -66,8 +73,6 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     connect(tpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
 
     if (event) {
-        this->setWindowTitle(tr("Edit event"));
-
         this->event = event;
 
         ui->summaryEdit->setText(QString::fromUtf8(event->getSummary().c_str()));
@@ -81,11 +86,7 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
         cps->setCalendar(event->getCalendarId());
         aps->setSecondsBefore(event->getAlarmBefore());
-
-        this->setupDeleteButton(ui->buttonBox, SLOT(deleteEvent()));
     } else {
-        this->setWindowTitle(tr("New event"));
-
         this->event = event = new CEvent();
 
         // Load last used settings

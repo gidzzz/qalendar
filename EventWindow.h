@@ -31,6 +31,7 @@ private slots:
     void gotoNextEvent();
 
     void editEvent();
+    void cloneEvent();
     void deleteEvent();
 
     void enableLinks(bool enalbe);

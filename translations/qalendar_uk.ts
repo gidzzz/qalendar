@@ -431,12 +431,12 @@ day</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../EventEditDialog.cpp" line="69"/>
+        <location filename="../EventEditDialog.cpp" line="29"/>
         <source>Edit event</source>
         <translation>Змінити подію</translation>
     </message>
     <message>
-        <location filename="../EventEditDialog.cpp" line="87"/>
+        <location filename="../EventEditDialog.cpp" line="32"/>
         <source>New event</source>
         <translation>Нова подія</translation>
     </message>
@@ -464,38 +464,48 @@ day</source>
         <translation>Сповіщення</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="177"/>
+        <location filename="../EventWindow.ui" line="179"/>
         <source>Previous event</source>
         <translation>Попередня подія</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="182"/>
+        <location filename="../EventWindow.ui" line="184"/>
         <source>Next event</source>
         <translation>Наступна подія</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="187"/>
+        <location filename="../EventWindow.ui" line="189"/>
         <source>Edit event</source>
         <translation>Змінити подію</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="192"/>
+        <location filename="../EventWindow.ui" line="194"/>
         <source>Delete event</source>
         <translation>Видалити подію</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="139"/>
+        <location filename="../EventWindow.ui" line="199"/>
+        <source>Clone event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.ui" line="204"/>
+        <source>Automatic links</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.cpp" line="145"/>
         <source>From</source>
         <translation>Від</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="139"/>
+        <location filename="../EventWindow.cpp" line="145"/>
         <source>On</source>
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="209"/>
-        <location filename="../EventWindow.cpp" line="230"/>
+        <location filename="../EventWindow.cpp" line="215"/>
+        <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
         <translation>Більше немає подій</translation>
     </message>
@@ -614,11 +624,12 @@ day</source>
     <name>QObject</name>
     <message>
         <location filename="../ChangeManager.cpp" line="120"/>
+        <location filename="../ChangeManager.cpp" line="143"/>
         <source>Unable to edit birthdays</source>
         <translation>Редагування днів народжень недоступне</translation>
     </message>
     <message>
-        <location filename="../ChangeManager.cpp" line="130"/>
+        <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
         <translation>Видалити компонент?</translation>
     </message>
@@ -860,12 +871,12 @@ day</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="45"/>
+        <location filename="../TodoEditDialog.cpp" line="27"/>
         <source>Edit task</source>
         <translation>Змінити завдання</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="62"/>
+        <location filename="../TodoEditDialog.cpp" line="30"/>
         <source>New task</source>
         <translation>Нове завдання</translation>
     </message>
@@ -893,14 +904,24 @@ day</source>
         <translation>Сповіщення</translation>
     </message>
     <message>
-        <location filename="../TodoWindow.ui" line="167"/>
+        <location filename="../TodoWindow.ui" line="169"/>
         <source>Edit task</source>
         <translation>Змінити завдання</translation>
     </message>
     <message>
-        <location filename="../TodoWindow.ui" line="172"/>
+        <location filename="../TodoWindow.ui" line="174"/>
         <source>Delete task</source>
         <translation>Видалити завдання</translation>
+    </message>
+    <message>
+        <location filename="../TodoWindow.ui" line="179"/>
+        <source>Clone task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../TodoWindow.ui" line="184"/>
+        <source>Automatic links</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

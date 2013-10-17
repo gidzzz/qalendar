@@ -423,12 +423,12 @@ day</source>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../EventEditDialog.cpp" line="69"/>
+        <location filename="../EventEditDialog.cpp" line="29"/>
         <source>Edit event</source>
         <translation>Gebeurtenis bewerken</translation>
     </message>
     <message>
-        <location filename="../EventEditDialog.cpp" line="87"/>
+        <location filename="../EventEditDialog.cpp" line="32"/>
         <source>New event</source>
         <translation>Nieuwe gebeurtenis</translation>
     </message>
@@ -456,38 +456,48 @@ day</source>
         <translation>Alarm</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="177"/>
+        <location filename="../EventWindow.ui" line="179"/>
         <source>Previous event</source>
         <translation>Vorige gebeurtenis</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="182"/>
+        <location filename="../EventWindow.ui" line="184"/>
         <source>Next event</source>
         <translation>Volgende gebeurtenis</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="187"/>
+        <location filename="../EventWindow.ui" line="189"/>
         <source>Edit event</source>
         <translation>Gebeurtenis bewerken</translation>
     </message>
     <message>
-        <location filename="../EventWindow.ui" line="192"/>
+        <location filename="../EventWindow.ui" line="194"/>
         <source>Delete event</source>
         <translation>Gebeurtenis verwijderen</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="139"/>
+        <location filename="../EventWindow.ui" line="199"/>
+        <source>Clone event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.ui" line="204"/>
+        <source>Automatic links</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../EventWindow.cpp" line="145"/>
         <source>From</source>
         <translation>Van</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="139"/>
+        <location filename="../EventWindow.cpp" line="145"/>
         <source>On</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="209"/>
-        <location filename="../EventWindow.cpp" line="230"/>
+        <location filename="../EventWindow.cpp" line="215"/>
+        <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
         <translation>Geen gebeurtenissen meer</translation>
     </message>
@@ -606,11 +616,12 @@ day</source>
     <name>QObject</name>
     <message>
         <location filename="../ChangeManager.cpp" line="120"/>
+        <location filename="../ChangeManager.cpp" line="143"/>
         <source>Unable to edit birthdays</source>
         <translation>Niet mogelijk geboortedatum te wijzigen</translation>
     </message>
     <message>
-        <location filename="../ChangeManager.cpp" line="130"/>
+        <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
         <translation>Onderdeel verwijderen?</translation>
     </message>
@@ -849,12 +860,12 @@ day</source>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="45"/>
+        <location filename="../TodoEditDialog.cpp" line="27"/>
         <source>Edit task</source>
         <translation>Taak bewerken</translation>
     </message>
     <message>
-        <location filename="../TodoEditDialog.cpp" line="62"/>
+        <location filename="../TodoEditDialog.cpp" line="30"/>
         <source>New task</source>
         <translation>Nieuwe taak</translation>
     </message>
@@ -882,14 +893,24 @@ day</source>
         <translation>Alarm</translation>
     </message>
     <message>
-        <location filename="../TodoWindow.ui" line="167"/>
+        <location filename="../TodoWindow.ui" line="169"/>
         <source>Edit task</source>
         <translation>Taak bewerken</translation>
     </message>
     <message>
-        <location filename="../TodoWindow.ui" line="172"/>
+        <location filename="../TodoWindow.ui" line="174"/>
         <source>Delete task</source>
         <translation>Taak verwijderen</translation>
+    </message>
+    <message>
+        <location filename="../TodoWindow.ui" line="179"/>
+        <source>Clone task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../TodoWindow.ui" line="184"/>
+        <source>Automatic links</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

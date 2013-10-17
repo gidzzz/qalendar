@@ -174,6 +174,7 @@ FORMS += \
     TodoWindow.ui
 
 TRANSLATIONS = \
+    translations/qalendar_de.ts \
     translations/qalendar_en.ts \
     translations/qalendar_fi.ts \
     translations/qalendar_fr.ts \

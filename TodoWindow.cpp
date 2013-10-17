@@ -159,6 +159,7 @@ void TodoWindow::enableLinks(bool enable)
 {
     QSettings().setValue("AutomaticLinks", enable);
 
+    ui->summaryInfo->enableLinks(enable);
     ui->descriptionInfo->enableLinks(enable);
 }
 

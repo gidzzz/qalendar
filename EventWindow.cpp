@@ -256,5 +256,7 @@ void EventWindow::enableLinks(bool enable)
 {
     QSettings().setValue("AutomaticLinks", enable);
 
+    ui->summaryInfo->enableLinks(enable);
+    ui->locationInfo->enableLinks(enable);
     ui->descriptionInfo->enableLinks(enable);
 }

@@ -20,12 +20,12 @@ void LinkLabel::setText(QString text)
 {
     originalText = text;
 
+    // Disable HTML tags
+    text.replace("<", "&lt;");
+
     if (linksEnabled) {
         // One expression to rule them all
         QRegExp pattern("(" LINK_PATTERN ")|(" EMAIL_PATTERN ")|(" PHONE_PATTERN ")");
-
-        // Disable HTML tags
-        text.replace("<", "&lt;");
 
         // Transform each matched string into a hyperlink
         int index = 0;

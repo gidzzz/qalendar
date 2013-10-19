@@ -38,14 +38,26 @@ private slots:
         if (dialogLayout && buttonBox) {
             dialogLayout->removeWidget(buttonBox);
 
+            // QGridLayout::row-/columnCount() does not return what could
+            // be expected of it. Calculate the real dimensions manually.
+            int rowCount = 0;
+            int colCount = 0;
+            for (int i = 0; i < dialogLayout->count(); i++) {
+                int row, rowSpan;
+                int col, colSpan;
+                dialogLayout->getItemPosition(i, &row, &col, &rowSpan, &colSpan);
+                rowCount = qMax(rowCount, row + rowSpan);
+                colCount = qMax(colCount, col + colSpan);
+            }
+
             if (w < h) { // Portrait
-                dialogLayout->addWidget(buttonBox, 1, 0);
+                dialogLayout->addWidget(buttonBox, rowCount, 0, 1, colCount);
                 buttonBox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
                 buttonBox->setContentsMargins(0, 0, 0, 0);
                 buttonBox->layout()->setSpacing(0);
                 dialogLayout->setContentsMargins(5, 0, 5, 0);
             } else { // Landscape
-                dialogLayout->addWidget(buttonBox, 0, 1);
+                dialogLayout->addWidget(buttonBox, 0, colCount, rowCount, 1);
                 buttonBox->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
                 buttonBox->setContentsMargins(0, 5, 0, 5);
                 buttonBox->layout()->setSpacing(5);

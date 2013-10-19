@@ -19,7 +19,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="ExpandingListWidget" name="calendarList">
+    <widget class="CalendarListWidget" name="calendarList">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -29,9 +29,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ExpandingListWidget</class>
+   <class>CalendarListWidget</class>
    <extends>QListWidget</extends>
-   <header>ExpandingListWidget.h</header>
+   <header>CalendarListWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

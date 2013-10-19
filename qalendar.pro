@@ -57,6 +57,7 @@ SOURCES += main.cpp \
     JournalEditDialog.cpp \
     EventWindow.cpp \
     TodoWindow.cpp \
+    CalendarListWidget.cpp \
     ComponentListWidget.cpp \
     LinkLabel.cpp \
     ExpandingTextEdit.cpp \
@@ -137,6 +138,7 @@ HEADERS += \
     JournalDelegate.h \
     EventWindow.h \
     TodoWindow.h \
+    CalendarListWidget.h \
     ComponentListWidget.h \
     ChainedSpinBox.h \
     LinkLabel.h \

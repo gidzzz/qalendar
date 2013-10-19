@@ -33,7 +33,7 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
     ui->colorButton->setPickSelector(cps);
 
     if (calendarId) {
-        // Edit calendar
+        // Load an existing calendar
         int error;
         calendar = CMulticalendar::MCInstance()->getCalendarById(calendarId, error);
         ui->typeInfo->setText(CWrapper::calendarType(calendar->getCalendarType()));
@@ -49,8 +49,10 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
         ui->buttonBox->addButton(deleteButton, QDialogButtonBox::ActionRole);
         connect(exportButton, SIGNAL(clicked()), this, SLOT(exportCalendar()));
         connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
+
+        this->setWindowTitle(tr("Edit calendar"));
     } else {
-        // New calendar
+        // Create a new calendar
         calendar = new CCalendar();
         ui->visibleBox->setChecked(true);
 
@@ -71,6 +73,8 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
         cps->setColor(rarestColor);
 
         ui->typeInfo->hide();
+
+        this->setWindowTitle(tr("New calendar"));
     }
 
     // Set up the save button

@@ -89,6 +89,16 @@ CalendarEditDialog::~CalendarEditDialog()
     delete ui;
 }
 
+int CalendarEditDialog::calendarId()
+{
+    return calendar->getCalendarId();
+}
+
+void CalendarEditDialog::setCalendarName(QString name)
+{
+    ui->nameEdit->setText(name);
+}
+
 // Create a new calendar or save changes to the existing one
 void CalendarEditDialog::saveCalendar()
 {

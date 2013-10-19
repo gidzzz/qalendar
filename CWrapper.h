@@ -43,6 +43,11 @@ enum RecurrenceType
     E_COMPLEX
 };
 
+enum CalendarColourExtra
+{
+    COLOUR_NEW = -1
+};
+
 namespace CWrapper
 {
     inline bool instanceComparator(ComponentInstance *i1, ComponentInstance *i2)
@@ -227,6 +232,8 @@ namespace CWrapper
     inline const char* colorIcon(const int color)
     {
         switch (color) {
+            case COLOUR_NEW:
+                return "general_add";
             case COLOUR_DARKBLUE:
                 return "calendar_colors_darkblue";
             case COLOUR_DARKGREEN:

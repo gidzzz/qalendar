@@ -5,9 +5,11 @@
 
 #include <QDBusConnection>
 #include <QSettings>
+#include <QUrl>
 
 #include "EventWindow.h"
 #include "TodoWindow.h"
+#include "ImportDialog.h"
 #include "SettingsDialog.h"
 
 #include "ChangeManager.h"
@@ -290,6 +292,14 @@ void MainWindow::launch_view(uint type, int, QString componentId, int calendarId
         case 4: showComponent<CEvent, &CCalendar::getEvent>(calendarId, componentId); break;
         case 5: showComponent<CTodo, &CCalendar::getTodo>(calendarId, componentId); break;
     }
+}
+
+void MainWindow::mime_open(QString uri)
+{
+    top_application();
+
+    if (QMainWindow *topWindow = this->topWindow())
+        (new ImportDialog(topWindow, QUrl(uri).toLocalFile()))->show();
 }
 
 // Close the application on the next appropriate occasion

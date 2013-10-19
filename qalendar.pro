@@ -44,6 +44,7 @@ SOURCES += main.cpp \
     \
     ChangeManager.cpp \
     DayWindow.cpp \
+    ImportDialog.cpp \
     TodoEditDialog.cpp \
     EventEditDialog.cpp \
     AlarmPickSelector.cpp \
@@ -117,6 +118,7 @@ HEADERS += \
     ChangeClient.h \
     DayWindow.h \
     ColorCheckDelegate.h \
+    ImportDialog.h \
     TodoEditDialog.h \
     TodoDelegate.h \
     EventEditDialog.h \
@@ -165,6 +167,7 @@ FORMS += \
     settings/CalendarEditDialog.ui \
     \
     DayWindow.ui \
+    ImportDialog.ui \
     TodoEditDialog.ui \
     EventEditDialog.ui \
     JournalEditDialog.ui \

@@ -16,6 +16,10 @@ public:
     CalendarEditDialog(int calendarId, QWidget *parent);
     ~CalendarEditDialog();
 
+    int calendarId();
+
+    void setCalendarName(QString name);
+
 private:
     Ui::CalendarEditDialog *ui;
 

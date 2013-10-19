@@ -21,21 +21,12 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    // Set up action buttons
-    QPushButton *exportButton = new QPushButton(tr("Export"));
-    QPushButton *deleteButton = new QPushButton(tr("Delete"));
-    QPushButton *saveButton   = new QPushButton(tr("Save"));
-    ui->buttonBox->addButton(exportButton, QDialogButtonBox::ActionRole);
-    ui->buttonBox->addButton(deleteButton, QDialogButtonBox::ActionRole);
-    ui->buttonBox->addButton(saveButton,   QDialogButtonBox::ActionRole);
-    connect(exportButton, SIGNAL(clicked()), this, SLOT(exportCalendar()));
-    connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
-    connect(saveButton,   SIGNAL(clicked()), this, SLOT(saveCalendar()));
-
     typeGroup = new QButtonGroup(this);
     typeGroup->addButton(ui->localTypeButton, LOCAL_CALENDAR);
     typeGroup->addButton(ui->birthdayTypeButton, BIRTHDAY_CALENDAR);
     ui->localTypeButton->setChecked(true);
+
+    ui->typeWidget->hide();
 
     // Set up the color button
     ColorPickSelector *cps = new ColorPickSelector();
@@ -51,13 +42,17 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
 
         cps->setColor(calendar->getCalendarColor());
 
-        ui->typeWidget->hide();
+        // Set up action buttons
+        QPushButton *exportButton = new QPushButton(tr("Export"));
+        QPushButton *deleteButton = new QPushButton(tr("Delete"));
+        ui->buttonBox->addButton(exportButton, QDialogButtonBox::ActionRole);
+        ui->buttonBox->addButton(deleteButton, QDialogButtonBox::ActionRole);
+        connect(exportButton, SIGNAL(clicked()), this, SLOT(exportCalendar()));
+        connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
     } else {
         // New calendar
         calendar = new CCalendar();
         ui->visibleBox->setChecked(true);
-        exportButton->setEnabled(false);
-        deleteButton->setEnabled(false);
 
         // Count color occurences
         CMulticalendar *mc = CMulticalendar::MCInstance();
@@ -75,9 +70,13 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
 
         cps->setColor(rarestColor);
 
-        /*ui->typeInfo->hide();*/
-        ui->typeWidget->hide();
+        ui->typeInfo->hide();
     }
+
+    // Set up the save button
+    QPushButton *saveButton = new QPushButton(tr("Save"));
+    ui->buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
+    connect(saveButton, SIGNAL(clicked()), this, SLOT(saveCalendar()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
 }

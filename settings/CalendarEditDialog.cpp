@@ -2,17 +2,16 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QMaemo5InformationBox>
 
+#include <CalendarErrors.h>
 #include <CMulticalendar.h>
 #include <CCalendar.h>
-
-#include "CWrapper.h"
 
 #include "ColorPickSelector.h"
 
 #include "ChangeManager.h"
-
-#include <QDebug>
+#include "CWrapper.h"
 
 CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
     RotatingDialog(parent),
@@ -52,12 +51,10 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
 
         cps->setColor(calendar->getCalendarColor());
 
-        qDebug() << calendar->toString().c_str();
-
         ui->typeWidget->hide();
     } else {
         // New calendar
-        calendar = NULL;
+        calendar = new CCalendar();
         ui->visibleBox->setChecked(true);
         exportButton->setEnabled(false);
         deleteButton->setEnabled(false);
@@ -95,29 +92,29 @@ CalendarEditDialog::~CalendarEditDialog()
 // Create a new calendar or save changes to the existing one
 void CalendarEditDialog::saveCalendar()
 {
-    const bool create = !calendar;
-
-    if (create) {
-        calendar = new CCalendar();
-        // TODO: Make it possible to add the birthday calendar
-        /*if (typeGroup->checkedId() == BIRTHDAY_CALENDAR)
-            calendar->setCalendarType(BIRTHDAY_CALENDAR);*/
-    }
+    // TODO: Make it possible to add the birthday calendar
+    /*if (typeGroup->checkedId() == BIRTHDAY_CALENDAR)
+        calendar->setCalendarType(BIRTHDAY_CALENDAR);*/
 
     calendar->setCalendarName(ui->nameEdit->text().toUtf8().data());
     calendar->setCalendarColor((CalendarColour) static_cast<ColorPickSelector*>(ui->colorButton->pickSelector())->currentColor());
     calendar->setCalendarShown(ui->visibleBox->isChecked());
 
     int error;
-    if (create) {
-        CMulticalendar::MCInstance()->addCalendar(calendar, error);
-    } else {
+
+    if (calendar->getCalendarId() > 0) {
         CMulticalendar::MCInstance()->modifyCalendar(calendar, error);
+    } else {
+        CMulticalendar::MCInstance()->addCalendar(calendar, error);
     }
 
     ChangeManager::bump();
 
-    this->accept();
+    if (error == CALENDAR_OPERATION_SUCCESSFUL) {
+        this->accept();
+    } else {
+        QMaemo5InformationBox::information(this->parentWidget(), tr("Error occurred"));
+    }
 }
 
 // Show file saving dialog and export the calendar

@@ -184,11 +184,14 @@ void MainWindow::deleteOldComponents()
 }
 
 // Switch to month view
-void MainWindow::showMonth()
+void MainWindow::showMonth(QDate date)
 {
     monthAction->setChecked(true);
 
     setPlug(monthPlug);
+
+    if (date.isValid())
+        monthPlug->setDate(date);
 
     QSettings().setValue("View", "month");
 }
@@ -207,11 +210,14 @@ void MainWindow::showWeek(QDate date)
 }
 
 // Switch to agenda view
-void MainWindow::showAgenda()
+void MainWindow::showAgenda(QDate date)
 {
     agendaAction->setChecked(true);
 
     setPlug(agendaPlug);
+
+    if (date.isValid())
+        agendaPlug->setDate(date);
 
     QSettings().setValue("View", "agenda");
 }
@@ -273,7 +279,7 @@ void MainWindow::top_application()
     this->activateWindow();
 }
 
-void MainWindow::launch_view(uint type, int, QString componentId, int calendarId)
+void MainWindow::launch_view(uint type, int stamp, QString componentId, int calendarId)
 {
     // Some tests show that the second argument can have following values:
     // * launching from desktop widget -> current timestamp
@@ -285,10 +291,12 @@ void MainWindow::launch_view(uint type, int, QString componentId, int calendarId
 
     top_application();
 
+    QDate date = stamp < 0 ? QDate() : QDateTime::fromTime_t(stamp).date();
+
     switch (type) {
-        case 1: showMonth(); break;
-        case 2: showWeek(); break;
-        case 3: showAgenda(); break;
+        case 1: if (topWindow() == this) showMonth(date); break;
+        case 2: if (topWindow() == this) showWeek(date); break;
+        case 3: if (topWindow() == this) showAgenda(date); break;
         case 4: showComponent<CEvent, &CCalendar::getEvent>(calendarId, componentId); break;
         case 5: showComponent<CTodo, &CCalendar::getTodo>(calendarId, componentId); break;
     }

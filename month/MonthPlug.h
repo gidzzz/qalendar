@@ -18,6 +18,8 @@ public:
 
     void onChange();
 
+    void setDate(QDate date);
+
 signals:
     void weekActivated(QDate date);
 
@@ -29,8 +31,6 @@ private:
     QPixmap background;
 
     void paintEvent(QPaintEvent *);
-
-    void setDate(QDate date);
 
     QDate toGlobalDate(QDate date);
     QDate fromGlobalDate(QDate globalDate);

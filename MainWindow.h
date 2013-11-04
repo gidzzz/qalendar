@@ -32,7 +32,7 @@ public:
 
 public slots:
     Q_SCRIPTABLE void top_application();
-    Q_SCRIPTABLE void launch_view(uint type, int, QString componentId, int calendarId = 0);
+    Q_SCRIPTABLE void launch_view(uint type, int stamp, QString componentId, int calendarId = 0);
     Q_SCRIPTABLE void mime_open(QString uri);
     Q_SCRIPTABLE void deferred_close();
 
@@ -93,9 +93,9 @@ private:
     }
 
 private slots:
-    void showMonth();
+    void showMonth(QDate date = QDate());
     void showWeek(QDate date = QDate());
-    void showAgenda();
+    void showAgenda(QDate date = QDate());
     void showTodos();
     void showJournals();
 

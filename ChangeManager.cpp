@@ -311,4 +311,5 @@ void ChangeManager::deleteComponent(CComponent *component, int calendarId, int &
     }
 
     component->setCalendarId(0);
+    component->setId(string());
 }

@@ -21,7 +21,7 @@ void CalendarPickSelector::setCalendar(int calendarId)
 
     if (calendar) {
         currentCalendarId = calendarId;
-        currentCalendarName = QString::fromUtf8(calendar->getCalendarName().c_str());
+        currentCalendarName = CWrapper::calendarName(calendar->getCalendarName());
 
         QMaemo5ValueButton *button = qobject_cast<QMaemo5ValueButton*>(this->parent());
 

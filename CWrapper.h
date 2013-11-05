@@ -50,6 +50,17 @@ enum CalendarColourExtra
 
 namespace CWrapper
 {
+    inline QString calendarName(const string &name)
+    {
+        // Handle translatable names
+        if (name == "cal_ti_calendar_private")
+            return QObject::tr("Private");
+        if (name == "cal_ti_smart_birthdays")
+            return QObject::tr("Birthdays");
+
+        return QString::fromUtf8(name.c_str());
+    }
+
     inline bool instanceComparator(ComponentInstance *i1, ComponentInstance *i2)
     {
         if (i1->stamp < i2->stamp)
@@ -81,8 +92,8 @@ namespace CWrapper
 
     inline bool calendarComparator(CCalendar *c1, CCalendar *c2)
     {
-        return QString::localeAwareCompare(QString::fromUtf8(c1->getCalendarName().c_str()),
-                                           QString::fromUtf8(c2->getCalendarName().c_str())) < 0;
+        return QString::localeAwareCompare(calendarName(c1->getCalendarName()),
+                                           calendarName(c2->getCalendarName())) < 0;
     }
 
     inline bool calendarVisibilityComparator(CCalendar *c1, CCalendar *c2)

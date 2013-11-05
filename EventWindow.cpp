@@ -187,7 +187,7 @@ void EventWindow::reload()
     int error;
     CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(event->getCalendarId(), error);
     QIcon calendarIcon = QIcon::fromTheme(CWrapper::colorIcon(calendar->getCalendarColor()));
-    QString calendarName = QString::fromUtf8(calendar->getCalendarName().c_str());
+    QString calendarName = CWrapper::calendarName(calendar->getCalendarName());
     CalendarType calendarType = calendar->getCalendarType();
     delete calendar;
 

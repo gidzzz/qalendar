@@ -52,7 +52,7 @@ void CalendarsConfigDialog::reload()
 
         QListWidgetItem *item = new QListWidgetItem();
         item->setData(IdRole, calendars[c]->getCalendarId());
-        item->setData(NameRole, CWrapper::simplify(calendars[c]->getCalendarName(), TextMaxChars));
+        item->setData(NameRole, CWrapper::simplify(CWrapper::calendarName(calendars[c]->getCalendarName()).toUtf8().data(), TextMaxChars));
         item->setData(TypeRole, calendars[c]->getCalendarType());
         item->setData(ColorRole, calendars[c]->getCalendarColor());
 

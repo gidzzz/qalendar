@@ -161,42 +161,52 @@
 <context>
     <name>CalendarEditDialog</name>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="6"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="53"/>
         <source>Edit calendar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="56"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="53"/>
         <source>Color</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="66"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="63"/>
         <source>Visible</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="26"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="46"/>
         <source>Export</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="27"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="47"/>
         <source>Delete</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="28"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="77"/>
+        <source>New calendar</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="81"/>
         <source>Save</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="129"/>
+        <source>Error occurred</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="138"/>
         <source>Save file</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="151"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
         <translation></translation>
     </message>
@@ -217,7 +227,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="27"/>
         <source>New</source>
         <translation></translation>
     </message>
@@ -503,6 +513,64 @@ day</source>
     </message>
 </context>
 <context>
+    <name>ImportDialog</name>
+    <message>
+        <location filename="../ImportDialog.ui" line="6"/>
+        <source>Select calendar</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="44"/>
+        <source>Import</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="50"/>
+        <source>New calendar</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="77"/>
+        <source>Importing aborted</source>
+        <translation></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="112"/>
+        <source>%n event(s)</source>
+        <translation>
+            <numerusform>%n event</numerusform>
+            <numerusform>%n events</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="113"/>
+        <source>%n task(s)</source>
+        <translation>
+            <numerusform>%n task</numerusform>
+            <numerusform>%n tasks</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="114"/>
+        <source>%n note(s)</source>
+        <translation>
+            <numerusform>%n note</numerusform>
+            <numerusform>%n notes</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="126"/>
+        <location filename="../ImportDialog.cpp" line="194"/>
+        <source>Error occurred</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="187"/>
+        <source>Some items already in calendar</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>JournalEditDialog</name>
     <message>
         <location filename="../JournalEditDialog.ui" line="22"/>
@@ -546,32 +614,32 @@ day</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="56"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>Month</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="59"/>
         <source>Week</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="58"/>
+        <location filename="../MainWindow.cpp" line="60"/>
         <source>Agenda</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="59"/>
+        <location filename="../MainWindow.cpp" line="61"/>
         <source>Tasks</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="60"/>
+        <location filename="../MainWindow.cpp" line="62"/>
         <source>Notes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="61"/>
+        <location filename="../MainWindow.cpp" line="63"/>
         <source>Settings</source>
         <translation></translation>
     </message>
@@ -623,6 +691,16 @@ day</source>
     <message>
         <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="57"/>
+        <source>Private</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="59"/>
+        <source>Birthdays</source>
         <translation></translation>
     </message>
 </context>

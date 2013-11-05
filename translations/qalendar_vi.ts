@@ -158,42 +158,52 @@
 <context>
     <name>CalendarEditDialog</name>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="6"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="53"/>
         <source>Edit calendar</source>
         <translation>Chỉnh sửa lịch</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="56"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="53"/>
         <source>Color</source>
         <translation>Màu sắc</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="66"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="63"/>
         <source>Visible</source>
         <translation>Hiển thị</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="26"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="46"/>
         <source>Export</source>
         <translation>Xuất dữ liệu</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="27"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="47"/>
         <source>Delete</source>
         <translation>Xóa</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="28"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="77"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="81"/>
         <source>Save</source>
         <translation>Lưu lại</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="129"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="138"/>
         <source>Save file</source>
         <translation>Lưu vào tập ti</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="151"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
         <translation>Xóa phần lịch này và các sự kiện, tác vụ, ghi chú kèm theo?</translation>
     </message>
@@ -214,7 +224,7 @@
         <translation>Chỉnh sửa lịch</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="27"/>
         <source>New</source>
         <translation>Tạo mới</translation>
     </message>
@@ -472,12 +482,12 @@ ngày</translation>
     <message>
         <location filename="../EventWindow.ui" line="199"/>
         <source>Clone event</source>
-        <translation type="unfinished"></translation>
+        <translation>Đóng lại sự kiện</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="204"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Liên kết tự động</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="145"/>
@@ -494,6 +504,61 @@ ngày</translation>
         <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
         <translation>Không có sự kiện nào</translation>
+    </message>
+</context>
+<context>
+    <name>ImportDialog</name>
+    <message>
+        <location filename="../ImportDialog.ui" line="6"/>
+        <source>Select calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="44"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="50"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="77"/>
+        <source>Importing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="112"/>
+        <source>%n event(s)</source>
+        <translation>
+            <numerusform>%n sự kiệ</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="113"/>
+        <source>%n task(s)</source>
+        <translation>
+            <numerusform>%n tác vụ</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="114"/>
+        <source>%n note(s)</source>
+        <translation>
+            <numerusform>%n ghi chú</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="126"/>
+        <location filename="../ImportDialog.cpp" line="194"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="187"/>
+        <source>Some items already in calendar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -540,32 +605,32 @@ ngày</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="56"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>Month</source>
         <translation>Tháng</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="59"/>
         <source>Week</source>
         <translation>Tuần</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="58"/>
+        <location filename="../MainWindow.cpp" line="60"/>
         <source>Agenda</source>
         <translation>Tổ chức</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="59"/>
+        <location filename="../MainWindow.cpp" line="61"/>
         <source>Tasks</source>
         <translation>Các tác vụ</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="60"/>
+        <location filename="../MainWindow.cpp" line="62"/>
         <source>Notes</source>
         <translation>Các ghi chú</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="61"/>
+        <location filename="../MainWindow.cpp" line="63"/>
         <source>Settings</source>
         <translation>Thiết lập</translation>
     </message>
@@ -618,6 +683,16 @@ ngày</translation>
         <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
         <translation>Xóa thành phần?</translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="57"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="59"/>
+        <source>Birthdays</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -896,12 +971,12 @@ ngày</translation>
     <message>
         <location filename="../TodoWindow.ui" line="179"/>
         <source>Clone task</source>
-        <translation type="unfinished"></translation>
+        <translation>Sao y tác vụ</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="184"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Liên kết tự động</translation>
     </message>
 </context>
 <context>

@@ -34,7 +34,7 @@
     <message>
         <location filename="../AlarmPickDialog.ui" line="27"/>
         <source>Time in advance</source>
-        <translation type="unfinished"></translation>
+        <translation>Ennen tapahtumaa</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="37"/>
@@ -161,42 +161,52 @@
 <context>
     <name>CalendarEditDialog</name>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="6"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="53"/>
         <source>Edit calendar</source>
         <translation>Muokkaa kalenteria</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="56"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="53"/>
         <source>Color</source>
         <translation>Väri</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="66"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="63"/>
         <source>Visible</source>
         <translation>Näkyvä</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="26"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="46"/>
         <source>Export</source>
         <translation>Vie</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="27"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="47"/>
         <source>Delete</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="28"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="77"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="81"/>
         <source>Save</source>
         <translation>Tallenna</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="129"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="138"/>
         <source>Save file</source>
         <translation>Tallenna tiedosto</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="151"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
         <translation>Poistetaanko kalenteri ja sen tapahtumat, tehtävät sekä muistiinpanot?</translation>
     </message>
@@ -217,7 +227,7 @@
         <translation>Muokkaa kalentereita</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="27"/>
         <source>New</source>
         <translation>Uusi</translation>
     </message>
@@ -479,12 +489,12 @@ päivä</translation>
     <message>
         <location filename="../EventWindow.ui" line="199"/>
         <source>Clone event</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopioi tapahtuma</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="204"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaattiset linkit</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="145"/>
@@ -500,6 +510,64 @@ päivä</translation>
         <location filename="../EventWindow.cpp" line="215"/>
         <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
+        <translation>Ei lisää tapahtumia</translation>
+    </message>
+</context>
+<context>
+    <name>ImportDialog</name>
+    <message>
+        <location filename="../ImportDialog.ui" line="6"/>
+        <source>Select calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="44"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="50"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="77"/>
+        <source>Importing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="112"/>
+        <source>%n event(s)</source>
+        <translation>
+            <numerusform>%n tapahtuma</numerusform>
+            <numerusform>%n tapahtumaa</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="113"/>
+        <source>%n task(s)</source>
+        <translation>
+            <numerusform>%n tehtävä</numerusform>
+            <numerusform>%n tehtävää</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="114"/>
+        <source>%n note(s)</source>
+        <translation>
+            <numerusform>%n muistiinpano</numerusform>
+            <numerusform>%n muistiinpanoa</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="126"/>
+        <location filename="../ImportDialog.cpp" line="194"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="187"/>
+        <source>Some items already in calendar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -547,32 +615,32 @@ päivä</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="56"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>Month</source>
         <translation>Kuukausi</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="59"/>
         <source>Week</source>
         <translation>Viikko</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="58"/>
+        <location filename="../MainWindow.cpp" line="60"/>
         <source>Agenda</source>
         <translation>Merkinnät</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="59"/>
+        <location filename="../MainWindow.cpp" line="61"/>
         <source>Tasks</source>
         <translation>Tehtävät</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="60"/>
+        <location filename="../MainWindow.cpp" line="62"/>
         <source>Notes</source>
         <translation>Muistiinpanot</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="61"/>
+        <location filename="../MainWindow.cpp" line="63"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
@@ -626,6 +694,16 @@ päivä</translation>
         <source>Delete component?</source>
         <translation>Poista komponentti?</translation>
     </message>
+    <message>
+        <location filename="../CWrapper.h" line="57"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="59"/>
+        <source>Birthdays</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecurrencePickDialog</name>
@@ -642,7 +720,7 @@ päivä</translation>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="40"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="61"/>
@@ -743,17 +821,17 @@ päivä</translation>
     <message>
         <location filename="../recurrence/RulePickDialog.ui" line="6"/>
         <source>Select rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse sääntö</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Uusi</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
@@ -766,7 +844,7 @@ päivä</translation>
     <message>
         <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
         <source>Rule %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sääntö %1 %2:sta</translation>
     </message>
 </context>
 <context>
@@ -784,7 +862,7 @@ päivä</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="42"/>
         <source>Alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Hälytysääni</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="52"/>
@@ -906,12 +984,12 @@ päivä</translation>
     <message>
         <location filename="../TodoWindow.ui" line="179"/>
         <source>Clone task</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopioi tehtävä</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="184"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaattiset linkit</translation>
     </message>
 </context>
 <context>
@@ -957,12 +1035,12 @@ päivä</translation>
     <message>
         <location filename="../settings/TunePickDialog.ui" line="6"/>
         <source>Choose alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Valitse hälytysääni</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="17"/>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="18"/>
@@ -972,7 +1050,7 @@ päivä</translation>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="67"/>
         <source>Add alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Lisää hälytysääni</translation>
     </message>
 </context>
 <context>

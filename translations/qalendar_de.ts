@@ -124,7 +124,7 @@
     <message>
         <location filename="../recurrence/ByDayWidget.cpp" line="51"/>
         <source>By week of year</source>
-        <translation>In der Woche des Monats</translation>
+        <translation>In der Woche des Jahres</translation>
     </message>
     <message>
         <location filename="../recurrence/ByDayWidget.cpp" line="53"/>
@@ -161,42 +161,52 @@
 <context>
     <name>CalendarEditDialog</name>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="6"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="53"/>
         <source>Edit calendar</source>
         <translation>Kalender bearbeiten</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="56"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="53"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="66"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="63"/>
         <source>Visible</source>
         <translation>Sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="26"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="46"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="27"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="47"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="28"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="77"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="81"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="129"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="138"/>
         <source>Save file</source>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="151"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
         <translation>Diesen Kalender inkl. seiner Termine, Aufgaben und Notizen löschen?</translation>
     </message>
@@ -217,7 +227,7 @@
         <translation>Kalender bearbeiten</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="27"/>
         <source>New</source>
         <translation>Neu</translation>
     </message>
@@ -479,12 +489,12 @@ tägig</translation>
     <message>
         <location filename="../EventWindow.ui" line="199"/>
         <source>Clone event</source>
-        <translation type="unfinished"></translation>
+        <translation>Ereignis duplizieren</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="204"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische Verknüpfungen</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="145"/>
@@ -501,6 +511,64 @@ tägig</translation>
         <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
         <translation>Keine weiteren Ereignisse</translation>
+    </message>
+</context>
+<context>
+    <name>ImportDialog</name>
+    <message>
+        <location filename="../ImportDialog.ui" line="6"/>
+        <source>Select calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="44"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="50"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="77"/>
+        <source>Importing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="112"/>
+        <source>%n event(s)</source>
+        <translation>
+            <numerusform>%n Ereignis</numerusform>
+            <numerusform>%n Ereignisse</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="113"/>
+        <source>%n task(s)</source>
+        <translation>
+            <numerusform>%n Aufgabe</numerusform>
+            <numerusform>%n Aufgaben</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="114"/>
+        <source>%n note(s)</source>
+        <translation>
+            <numerusform>%n Notiz</numerusform>
+            <numerusform>%n Notizen</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="126"/>
+        <location filename="../ImportDialog.cpp" line="194"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="187"/>
+        <source>Some items already in calendar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -547,32 +615,32 @@ tägig</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="56"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>Month</source>
         <translation>Monat</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="59"/>
         <source>Week</source>
         <translation>Woche</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="58"/>
+        <location filename="../MainWindow.cpp" line="60"/>
         <source>Agenda</source>
         <translation>Planung</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="59"/>
+        <location filename="../MainWindow.cpp" line="61"/>
         <source>Tasks</source>
         <translation>Aufgaben</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="60"/>
+        <location filename="../MainWindow.cpp" line="62"/>
         <source>Notes</source>
         <translation>Notizen</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="61"/>
+        <location filename="../MainWindow.cpp" line="63"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
@@ -625,6 +693,16 @@ tägig</translation>
         <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
         <translation>Komponente löschen?</translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="57"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="59"/>
+        <source>Birthdays</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -906,12 +984,12 @@ tägig</translation>
     <message>
         <location filename="../TodoWindow.ui" line="179"/>
         <source>Clone task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe duplizieren</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="184"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische Verknüpfungen</translation>
     </message>
 </context>
 <context>
@@ -1021,7 +1099,8 @@ tägig</translation>
     <message>
         <location filename="../week/WeekWidget.cpp" line="363"/>
         <source>All day</source>
-        <translation>Ganztägig</translation>
+        <translation>Ganzer
+Tag</translation>
     </message>
 </context>
 </TS>

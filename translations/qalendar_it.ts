@@ -161,44 +161,54 @@
 <context>
     <name>CalendarEditDialog</name>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="6"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="53"/>
         <source>Edit calendar</source>
         <translation>Modifica calendario</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="56"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="53"/>
         <source>Color</source>
         <translation>Colore</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.ui" line="66"/>
+        <location filename="../settings/CalendarEditDialog.ui" line="63"/>
         <source>Visible</source>
         <translation>Visibile</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="26"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="46"/>
         <source>Export</source>
         <translation>Esporta</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="27"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="47"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="28"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="77"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="81"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="128"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="129"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/CalendarEditDialog.cpp" line="138"/>
         <source>Save file</source>
         <translation>Salva file</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
+        <location filename="../settings/CalendarEditDialog.cpp" line="151"/>
         <source>Delete this calendar and its events, tasks and notes?</source>
-        <translation>Cancellare questo calendario e tutti i suoi eventi, compiti e note?</translation>
+        <translation>Eliminare questo calendario e tutti i suoi eventi, attività e note?</translation>
     </message>
 </context>
 <context>
@@ -217,7 +227,7 @@
         <translation>Modifica calendari</translation>
     </message>
     <message>
-        <location filename="../settings/CalendarsConfigDialog.cpp" line="25"/>
+        <location filename="../settings/CalendarsConfigDialog.cpp" line="27"/>
         <source>New</source>
         <translation>Nuovo</translation>
     </message>
@@ -256,7 +266,7 @@
     <message>
         <location filename="../ComponentEditDialog.h" line="29"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -279,7 +289,7 @@ giorno</translation>
     <message>
         <location filename="../ComponentListWidget.cpp" line="73"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -292,7 +302,7 @@ giorno</translation>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="182"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -363,8 +373,8 @@ giorno</translation>
         <location filename="../settings/DetailedCalendarDelegate.h" line="31"/>
         <source>%n task(s)</source>
         <translation>
-            <numerusform>%n compito</numerusform>
-            <numerusform>%n compiti</numerusform>
+            <numerusform>%n attività</numerusform>
+            <numerusform>%n attività</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -474,17 +484,17 @@ giorno</translation>
     <message>
         <location filename="../EventWindow.ui" line="194"/>
         <source>Delete event</source>
-        <translation>Cancella evento</translation>
+        <translation>Elimina evento</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="199"/>
         <source>Clone event</source>
-        <translation type="unfinished"></translation>
+        <translation>Clona evento</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="204"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Link automatici</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="145"/>
@@ -501,6 +511,64 @@ giorno</translation>
         <location filename="../EventWindow.cpp" line="236"/>
         <source>No more events</source>
         <translation>Non ci sono altri eventi</translation>
+    </message>
+</context>
+<context>
+    <name>ImportDialog</name>
+    <message>
+        <location filename="../ImportDialog.ui" line="6"/>
+        <source>Select calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="44"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="50"/>
+        <source>New calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="77"/>
+        <source>Importing aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="112"/>
+        <source>%n event(s)</source>
+        <translation>
+            <numerusform>%n evento</numerusform>
+            <numerusform>%n eventi</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="113"/>
+        <source>%n task(s)</source>
+        <translation>
+            <numerusform>%n attività</numerusform>
+            <numerusform>%n attività</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../ImportDialog.cpp" line="114"/>
+        <source>%n note(s)</source>
+        <translation>
+            <numerusform>%n nota</numerusform>
+            <numerusform>%n note</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="126"/>
+        <location filename="../ImportDialog.cpp" line="194"/>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="187"/>
+        <source>Some items already in calendar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -541,38 +609,38 @@ giorno</translation>
     <message>
         <location filename="../JournalsPlug.cpp" line="120"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../MainWindow.cpp" line="56"/>
+        <location filename="../MainWindow.cpp" line="58"/>
         <source>Month</source>
         <translation>Mese</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="57"/>
+        <location filename="../MainWindow.cpp" line="59"/>
         <source>Week</source>
         <translation>Settimana</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="58"/>
+        <location filename="../MainWindow.cpp" line="60"/>
         <source>Agenda</source>
         <translation>Cose da fare</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="59"/>
+        <location filename="../MainWindow.cpp" line="61"/>
         <source>Tasks</source>
-        <translation>Compiti</translation>
+        <translation>Attività</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="60"/>
+        <location filename="../MainWindow.cpp" line="62"/>
         <source>Notes</source>
         <translation>Note</translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="61"/>
+        <location filename="../MainWindow.cpp" line="63"/>
         <source>Settings</source>
         <translation>Impostazioni</translation>
     </message>
@@ -624,7 +692,17 @@ giorno</translation>
     <message>
         <location filename="../ChangeManager.cpp" line="158"/>
         <source>Delete component?</source>
-        <translation>Cancella elemento?</translation>
+        <translation>Eliminare elemento?</translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="57"/>
+        <source>Private</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CWrapper.h" line="59"/>
+        <source>Birthdays</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -789,12 +867,12 @@ giorno</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="52"/>
         <source>Delete events</source>
-        <translation>Cancella eventi</translation>
+        <translation>Elimina eventi</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="62"/>
         <source>Delete tasks</source>
-        <translation>Cancella compiti</translation>
+        <translation>Elimina attività</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.cpp" line="16"/>
@@ -863,12 +941,12 @@ giorno</translation>
     <message>
         <location filename="../TodoEditDialog.cpp" line="27"/>
         <source>Edit task</source>
-        <translation>Modifica compito</translation>
+        <translation>Modifica attività</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.cpp" line="30"/>
         <source>New task</source>
-        <translation>Nuovo compito</translation>
+        <translation>Nuova attività</translation>
     </message>
 </context>
 <context>
@@ -876,7 +954,7 @@ giorno</translation>
     <message>
         <location filename="../TodoWindow.ui" line="6"/>
         <source>Task</source>
-        <translation>Compito</translation>
+        <translation>Attività</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="41"/>
@@ -896,22 +974,22 @@ giorno</translation>
     <message>
         <location filename="../TodoWindow.ui" line="169"/>
         <source>Edit task</source>
-        <translation>Modifica compito</translation>
+        <translation>Modifica attività</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="174"/>
         <source>Delete task</source>
-        <translation>Cancella compito</translation>
+        <translation>Elimina attività</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="179"/>
         <source>Clone task</source>
-        <translation type="unfinished"></translation>
+        <translation>Clona attività</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="184"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Link automatici</translation>
     </message>
 </context>
 <context>
@@ -919,7 +997,7 @@ giorno</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="33"/>
         <source>New task</source>
-        <translation>Nuovo compito</translation>
+        <translation>Nuova attività</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="40"/>
@@ -929,12 +1007,12 @@ giorno</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="41"/>
         <source>Delete completed</source>
-        <translation>Cancella completati</translation>
+        <translation>Elimina completati</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="78"/>
         <source>Tasks</source>
-        <translation>Compiti</translation>
+        <translation>Attività</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="197"/>
@@ -944,12 +1022,12 @@ giorno</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="198"/>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="223"/>
         <source>Delete completed tasks from all calendars?</source>
-        <translation>Cancella compiti completati da tutti i calendari?</translation>
+        <translation>Elimina attività completate da tutti i calendari?</translation>
     </message>
 </context>
 <context>

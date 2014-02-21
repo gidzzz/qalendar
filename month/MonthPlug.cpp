@@ -1,8 +1,6 @@
 #include "MonthPlug.h"
 
 #include <QGridLayout>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 
 #include <QAction>
 #include <QPainter>
@@ -26,8 +24,8 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     this->date = fromGlobalDate(date);
 
     QGridLayout *mainLayout = new QGridLayout(this);
-    QHBoxLayout *dayLayout  = new QHBoxLayout();
     weekLayout = new QVBoxLayout();
+    dayLayout  = new QHBoxLayout();
 
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
@@ -45,8 +43,8 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     QFont font = this->font();
     font.setPointSize(13);
     font.setBold(true);
-    for (int i = 1; i <= NumWeekdays; i++) {
-        QLabel *dayLabel = new QLabel(QLocale().standaloneDayName(Date::absDayOfWeek(i), QLocale::ShortFormat));
+    for (int i = 0; i < NumWeekdays; i++) {
+        QLabel *dayLabel = new QLabel();
         dayLabel->setAlignment(Qt::AlignCenter);
         dayLabel->setFixedWidth(CellWidth);
         dayLabel->setFont(font);
@@ -58,7 +56,7 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     mainLayout->addLayout(weekLayout, 1, 0);
     mainLayout->addWidget(monthWidget, 1, 1);
 
-    // Se up menu actions
+    // Set up menu actions
     QAction *prevAction = new QAction(tr("Previous month"), this);
     QAction *nextAction = new QAction(tr("Next month"), this);
     QAction *todayAction = new QAction(tr("Jump to today"), this);
@@ -93,6 +91,10 @@ QString MonthPlug::title() const
 
 void MonthPlug::onChange()
 {
+    // Set day names
+    for (int i = 0; i < NumWeekdays; i++)
+        static_cast<QLabel*>(dayLayout->itemAt(i)->widget())->setText(QLocale().standaloneDayName(Date::absDayOfWeek(i+1), QLocale::ShortFormat));
+
     setDate(currentDateLock ? QDate::currentDate() : this->globalDate());
 }
 

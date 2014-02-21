@@ -3,6 +3,9 @@
 
 #include "TemporalPlug.h"
 
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+
 #include <QDate>
 
 #include "MonthWidget.h"
@@ -27,7 +30,8 @@ private:
     QDate date;
 
     MonthWidget *monthWidget;
-    QLayout *weekLayout;
+    QVBoxLayout *weekLayout;
+    QHBoxLayout *dayLayout;
     QPixmap background;
 
     void paintEvent(QPaintEvent *);

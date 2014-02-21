@@ -66,6 +66,16 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QMaemo5ValueButton" name="firstDayButton">
+       <property name="text">
+        <string>First day of week</string>
+       </property>
+       <property name="valueLayout">
+        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="0" column="1">

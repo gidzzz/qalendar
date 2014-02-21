@@ -3,6 +3,8 @@
 #include <QSettings>
 #include <QLocale>
 
+#include "ChangeManager.h"
+
 int Date::m_firstDayOfWeek;
 
 void Date::init()
@@ -17,9 +19,10 @@ int Date::firstDayOfWeek()
 
 void Date::setFirstDayOfWeek(int firstDayOfWeek)
 {
-    m_firstDayOfWeek = firstDayOfWeek;
-
-    QSettings().setValue("Date/FirstDayOfWeek", firstDayOfWeek);
+    if (firstDayOfWeek != m_firstDayOfWeek) {
+        QSettings().setValue("Date/FirstDayOfWeek", m_firstDayOfWeek = firstDayOfWeek);
+        ChangeManager::bump();
+    }
 }
 
 // Map relative (user) to absolute (Qt) day of week

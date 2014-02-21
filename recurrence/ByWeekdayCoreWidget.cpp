@@ -2,6 +2,8 @@
 
 #include "ByWeekdayColumnWidget.h"
 
+#include "Date.h"
+
 ByWeekdayCoreWidget::ByWeekdayCoreWidget(bool reverse, QWidget *parent) :
     QWidget(parent)
 {
@@ -10,8 +12,8 @@ ByWeekdayCoreWidget::ByWeekdayCoreWidget(bool reverse, QWidget *parent) :
     columnLayout->setSpacing(0);
 
     const char *weekdays[] = { "MO", "TU", "WE", "TH", "FR", "SA", "SU" };
-    for (int i = 0; i < 7; i++)
-        columnLayout->addWidget(new ByWeekdayColumnWidget(weekdays[i], reverse, this), 1, Qt::AlignTop);
+    for (int i = 1; i <= 7; i++)
+        columnLayout->addWidget(new ByWeekdayColumnWidget(weekdays[Date::absDayOfWeek(i)-1], reverse, this), 1, Qt::AlignTop);
 }
 
 QString ByWeekdayCoreWidget::enabledRulePart() const

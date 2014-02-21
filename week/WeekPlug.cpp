@@ -11,6 +11,7 @@
 #include "WeekdayButton.h"
 
 #include "ChangeManager.h"
+#include "Date.h"
 
 using namespace Metrics::WeekWidget;
 
@@ -65,7 +66,7 @@ WeekPlug::WeekPlug(QDate date, QWidget *parent) :
 QString WeekPlug::title() const
 {
     int year;
-    int week = this->date.weekNumber(&year);
+    int week = Date::relWeekNumber(this->date, &year);
     return QString(tr("Week %1 (%2)")).arg(week).arg(year);
 }
 
@@ -142,12 +143,12 @@ QDate WeekPlug::toGlobalDate(QDate date)
 
     int year, currentYear;
 
-    return date.weekNumber(&year) == currentDate.weekNumber(&currentYear) && year == currentYear
+    return Date::relWeekNumber(date, &year) == Date::relWeekNumber(currentDate, &currentYear) && year == currentYear
          ? currentDate
          : fromGlobalDate(date);
 }
 
 QDate WeekPlug::fromGlobalDate(QDate globalDate)
 {
-    return globalDate.addDays(1 - globalDate.dayOfWeek());
+    return globalDate.addDays(1 - Date::relDayOfWeek(globalDate.dayOfWeek()));
 }

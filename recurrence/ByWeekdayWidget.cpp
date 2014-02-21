@@ -6,6 +6,7 @@
 #include <QDate>
 
 #include "RecurrenceSectionLabel.h"
+#include "Date.h"
 
 ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
     QFrame(parent),
@@ -24,8 +25,8 @@ ByWeekdayWidget::ByWeekdayWidget(QWidget *parent) :
     daysLayout->setSpacing(0);
 
     // Create a checkable button for each weekday
-    for (int i = 0; i < 7; i++) {
-        QPushButton *dayButton = new QPushButton(QLocale().standaloneDayName(i+1, QLocale::ShortFormat), this);
+    for (int i = 1; i <= 7; i++) {
+        QPushButton *dayButton = new QPushButton(QLocale().standaloneDayName(Date::absDayOfWeek(i), QLocale::ShortFormat), this);
         dayButton->setCheckable(true);
         daysLayout->addWidget(dayButton);
         connect(dayButton, SIGNAL(toggled(bool)), this, SLOT(onDayToggled(bool)));

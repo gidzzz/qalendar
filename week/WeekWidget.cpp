@@ -19,6 +19,7 @@
 #include "WeekLayoutWindow.h"
 
 #include "ChangeManager.h"
+#include "Date.h"
 
 // TODO: Refresh the time indicator from time to time? It can become outdated
 // when staring at the screen for a long time, but it is pretty hard to not
@@ -316,7 +317,7 @@ void WeekWidget::populate()
 QDate WeekWidget::firstDate()
 {
     // Align to the beginning of the week
-    return date.addDays(-date.dayOfWeek() + 1);
+    return date.addDays(1 - Date::relDayOfWeek(date.dayOfWeek()));
 }
 
 // Returns the last day shown by the widget
@@ -362,7 +363,7 @@ void WeekWidget::renderRow(int hour, int baseY, QPainter &painter)
                      Qt::AlignTop|Qt::AlignHCenter|Qt::TextWordWrap,
                      hour < 0 ? tr("All day") : QString("%1:00").arg(QString::number(hour), 2, '0'));
 
-    const int currentDay = QDate::currentDate().dayOfWeek();
+    const int currentDay = Date::relDayOfWeek(QDate::currentDate().dayOfWeek());
     const bool isCurrentWeek = firstDate() <= QDate::currentDate() && QDate::currentDate() < lastDate();
 
     // Draw day cells
@@ -371,7 +372,7 @@ void WeekWidget::renderRow(int hour, int baseY, QPainter &painter)
                            isCurrentWeek && currentDay == d ? pixDayShadeCurrent : pixDayShade);
 
         if (pressedDate.isValid()
-        &&  pressedDate.date().dayOfWeek() == d
+        &&  Date::relDayOfWeek(pressedDate.date().dayOfWeek()) == d
         &&  (pressedAllDay && hour < 0 || !pressedAllDay && pressedDate.time().hour() == hour))
         {
             Painter::drawStretched(painter, pixDayPressed, QRect(x, baseY, CellWidth, cellH));

@@ -26,6 +26,8 @@
 
 #include "MainWindow.h"
 
+#include "Date.h"
+
 int main(int argc, char  *argv[])
 {
     QApplication::setOrganizationName("qalendar");
@@ -75,6 +77,8 @@ int main(int argc, char  *argv[])
     app.installTranslator(&translator);
 
     QLocale::setDefault(lang);
+
+    Date::init();
 
     MainWindow window(runInBackground);
 

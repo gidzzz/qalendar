@@ -3,6 +3,8 @@
 #include <QPixmap>
 #include <QPainter>
 
+#include "Date.h"
+
 #include "Theme.h"
 #include "MonthWidget.h"
 
@@ -28,7 +30,7 @@ void WeekButton::setDate(QDate date)
 {
     this->date = date;
 
-    this->setText(QString(tr("w%1")).arg(QString::number(date.weekNumber()), 2, '0'));
+    this->setText(QString(tr("w%1")).arg(QString::number(Date::relWeekNumber(date)), 2, '0'));
 }
 
 void WeekButton::paintEvent(QPaintEvent *)

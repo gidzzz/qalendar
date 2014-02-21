@@ -11,6 +11,8 @@
 
 #include "DayWindow.h"
 
+#include "Date.h"
+
 #include "Theme.h"
 #include "Metrics.h"
 
@@ -91,7 +93,7 @@ QDate MonthWidget::firstDate()
     const int currentMonth = date.month();
 
     // Align to the beginning of the week
-    QDate first = date.addDays(-date.dayOfWeek() + 1);
+    QDate first = date.addDays(1 - Date::relDayOfWeek(date.dayOfWeek()));
 
     // Repeat until the last week of the previous month is reached
     while (first.month() == currentMonth)

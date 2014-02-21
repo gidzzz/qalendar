@@ -4,35 +4,31 @@
 #include <QDate>
 #include <QDateTime>
 
-namespace Date
+class Date
 {
+public:
     enum Format
     {
         Full,
         Partial
     };
 
-    inline QString formatString(Format format)
-    {
-        switch (format) {
-            case Full:
-                return "dddd d MMMM yyyy";
-            case Partial: {
-                const QString localeShortFormat = QLocale().dateFormat(QLocale::ShortFormat);
-                return localeShortFormat.indexOf('M') < localeShortFormat.indexOf('d') ? "MM/dd" : "dd/MM";
-            }
-        }
-    }
+    static void init();
 
-    inline QString toString(const QDate &date, Format format)
-    {
-        return QLocale().toString(date, formatString(format));
-    }
+    static int firstDayOfWeek();
+    static void setFirstDayOfWeek(int firstDayOfWeek);
 
-    inline QString toString(const QDateTime &date, Format format, bool time = false)
-    {
-        return QLocale().toString(date, formatString(format) + (time ? ", hh:mm" : QString()));
-    }
-}
+    static int absDayOfWeek(int relDay);
+    static int relDayOfWeek(int absDay);
+    static int relWeekNumber(const QDate &date, int *year = NULL);
+
+    static QString toString(const QDate &date, Format format);
+    static QString toString(const QDateTime &date, Format format, bool time = false);
+
+private:
+    static int m_firstDayOfWeek;
+
+    static QString formatString(Format format);
+};
 
 #endif // DATE_H

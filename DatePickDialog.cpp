@@ -68,7 +68,7 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     // Set up the week list
     if (type == Week) {
         int year;
-        int week = date.weekNumber(&year);
+        int week = Date::relWeekNumber(date, &year);
 
         lists[Year]->setCurrentRow(year-minYear);
 
@@ -173,7 +173,7 @@ void DatePickDialog::adjustWeeks()
 
     // Find the first day of the first week
     QDate weekProbe(year(), 1, 1);
-    const int weekday = weekProbe.dayOfWeek();
+    const int weekday = Date::relDayOfWeek(weekProbe.dayOfWeek());
     weekProbe = weekProbe.addDays(weekday > 4 ? (1 + 7-weekday)
                                               : (1 - weekday));
 

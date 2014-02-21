@@ -42,6 +42,7 @@ SOURCES += main.cpp \
     settings/CalendarsConfigDialog.cpp \
     settings/CalendarEditDialog.cpp \
     \
+    Date.cpp \
     ChangeManager.cpp \
     DayWindow.cpp \
     ImportDialog.cpp \
@@ -112,8 +113,8 @@ HEADERS += \
     Metrics.h \
     Roles.h \
     Theme.h \
-    Date.h \
     \
+    Date.h \
     ChangeManager.h \
     ChangeClient.h \
     DayWindow.h \

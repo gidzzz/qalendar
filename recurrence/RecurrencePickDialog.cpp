@@ -9,6 +9,8 @@
 #include "DatePickSelector.h"
 #include "CWrapper.h"
 
+#include "Date.h"
+
 enum Frequency
 {
     Daily = 0,
@@ -36,8 +38,11 @@ RecurrencePickDialog::RecurrencePickDialog(QWidget *parent, CRecurrence *&recurr
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    DatePickSelector *dpsUntil = new DatePickSelector();
-    ui->untilBox->setPickSelector(dpsUntil);
+    ui->untilBox->setPickSelector(new DatePickSelector());
+
+    const char *weekdays[] = { "MO", "TU", "WE", "TH", "FR", "SA", "SU" };
+    for (int i = 1; i <= 7; i++)
+        ui->weekStartBox->addItem(QLocale().standaloneDayName(Date::absDayOfWeek(i), QLocale::LongFormat), weekdays[Date::absDayOfWeek(i)-1]);
 
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setEnabled(bool)));
     connect(ui->enableBox, SIGNAL(toggled(bool)), ui->viewButton,   SLOT(setEnabled(bool)));
@@ -119,6 +124,9 @@ void RecurrencePickDialog::parseRule(const string &rule)
 
     QStringList ruleParts = QString(rule.c_str()).split(';');
 
+    // Select the default week start (Monday) in case the relevant part is missing
+    ui->weekStartBox->setCurrentIndex(ui->weekStartBox->findData("MO"));
+
     foreach (QString part, ruleParts) {
         if (part.startsWith("FREQ=")) {
             ui->frequencyBox->setCurrentIndex(freqFromStr(part.mid(part.indexOf('=')+1)));
@@ -171,6 +179,10 @@ void RecurrencePickDialog::parseRule(const string &rule)
 
         if (part.startsWith("BYMONTH=")) {
             ui->byMonthWidget->parseRulePart(part.mid(part.indexOf('=')+1));
+        } else
+
+        if (part.startsWith("WKST=")) {
+            ui->weekStartBox->setCurrentIndex(ui->weekStartBox->findData(part.mid(part.indexOf('=')+1)));
         } else
 
             qDebug() << "WARNING: could not parse rule part" << part;
@@ -286,6 +298,11 @@ QString RecurrencePickDialog::buildRule()
     QString byMonthString = ui->byMonthWidget->rulePart();
     if (!byMonthString.isEmpty())
         ruleParts.append(QString("BYMONTH=") + byMonthString);
+
+    // Week start
+    QString weekStartString = ui->weekStartBox->itemData(ui->weekStartBox->currentIndex()).toString();
+    if (!weekStartString.isEmpty() && weekStartString != "MO")
+        ruleParts.append(QString("WKST=") + weekStartString);
 
     // Combine all of the above to form the final rule
     return ruleParts.join(";");

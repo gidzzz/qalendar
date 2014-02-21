@@ -186,6 +186,23 @@
           <item>
            <widget class="ByMonthWidget" name="byMonthWidget"/>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="weekStartLayout">
+            <item>
+             <widget class="QLabel" name="weekStartLabel">
+              <property name="text">
+               <string>Week start</string>
+              </property>
+              <property name="indent">
+               <number>8</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="weekStartBox"/>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

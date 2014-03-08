@@ -28,6 +28,8 @@ private:
     CCalendar *calendar;
 
 private slots:
+    void onTypeButtonClicked(int type);
+
     void saveCalendar();
     void exportCalendar();
     void deleteCalendar();

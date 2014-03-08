@@ -24,7 +24,7 @@
         <item>
          <widget class="QPushButton" name="localTypeButton">
           <property name="text">
-           <string notr="true">Local</string>
+           <string>Local</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -34,7 +34,7 @@
         <item>
          <widget class="QPushButton" name="birthdayTypeButton">
           <property name="text">
-           <string notr="true">Birthday</string>
+           <string>Birthday</string>
           </property>
           <property name="checkable">
            <bool>true</bool>

@@ -21,21 +21,16 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    typeGroup = new QButtonGroup(this);
-    typeGroup->addButton(ui->localTypeButton, LOCAL_CALENDAR);
-    typeGroup->addButton(ui->birthdayTypeButton, BIRTHDAY_CALENDAR);
-    ui->localTypeButton->setChecked(true);
-
-    ui->typeWidget->hide();
-
     // Set up the color button
     ColorPickSelector *cps = new ColorPickSelector();
     ui->colorButton->setPickSelector(cps);
 
+    CMulticalendar *mc = CMulticalendar::MCInstance();
+
     if (calendarId) {
         // Load an existing calendar
         int error;
-        calendar = CMulticalendar::MCInstance()->getCalendarById(calendarId, error);
+        calendar = mc->getCalendarById(calendarId, error);
         ui->typeInfo->setText(CWrapper::calendarType(calendar->getCalendarType()));
         ui->nameEdit->setText(QString::fromUtf8(calendar->getCalendarName().c_str()));
         ui->visibleBox->setChecked(calendar->IsShown());
@@ -50,6 +45,9 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
         connect(exportButton, SIGNAL(clicked()), this, SLOT(exportCalendar()));
         connect(deleteButton, SIGNAL(clicked()), this, SLOT(deleteCalendar()));
 
+        // Do not allow calendar type editing
+        ui->typeWidget->hide();
+
         this->setWindowTitle(tr("Edit calendar"));
     } else {
         // Create a new calendar
@@ -57,7 +55,6 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
         ui->visibleBox->setChecked(true);
 
         // Count color occurences
-        CMulticalendar *mc = CMulticalendar::MCInstance();
         vector<CCalendar*> calendars = mc->getListCalFromMc();
         vector<int> colorStats(COLOUR_NEXT_FREE);
         for (unsigned int i = 0; i < calendars.size(); i++)
@@ -71,6 +68,21 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
                 rarestColor = i;
 
         cps->setColor(rarestColor);
+
+        // Try not to allow multiple birthday calendars
+        if (CCalendar *birthdayCalendar = mc->getBirthdayCalendar()) {
+            // Disable the birthday calendar option
+            delete birthdayCalendar;
+            ui->typeWidget->hide();
+        } else {
+            // Enable the birthday calendar option
+            typeGroup = new QButtonGroup(this);
+            typeGroup->addButton(ui->localTypeButton, LOCAL_CALENDAR);
+            typeGroup->addButton(ui->birthdayTypeButton, BIRTHDAY_CALENDAR);
+            ui->localTypeButton->setChecked(true);
+
+            connect(typeGroup, SIGNAL(buttonClicked(int)), this, SLOT(onTypeButtonClicked(int)));
+        }
 
         ui->typeInfo->hide();
 
@@ -102,12 +114,36 @@ void CalendarEditDialog::setCalendarName(QString name)
     ui->nameEdit->setText(name);
 }
 
+void CalendarEditDialog::onTypeButtonClicked(int type)
+{
+    switch (type) {
+        case LOCAL_CALENDAR:
+            if (ui->nameEdit->text() == "cal_ti_smart_birthdays")
+                ui->nameEdit->setText(QString());
+            break;
+        case BIRTHDAY_CALENDAR:
+            if (ui->nameEdit->text().isEmpty())
+                ui->nameEdit->setText("cal_ti_smart_birthdays");
+            break;
+    }
+}
+
 // Create a new calendar or save changes to the existing one
 void CalendarEditDialog::saveCalendar()
 {
-    // TODO: Make it possible to add the birthday calendar
-    /*if (typeGroup->checkedId() == BIRTHDAY_CALENDAR)
-        calendar->setCalendarType(BIRTHDAY_CALENDAR);*/
+    CMulticalendar *mc = CMulticalendar::MCInstance();
+
+    if (typeGroup->checkedId() == BIRTHDAY_CALENDAR) {
+        // Do not allow multiple birthday calendars
+        if (CCalendar *birthdayCalendar = mc->getBirthdayCalendar()) {
+            delete birthdayCalendar;
+            QMaemo5InformationBox::information(this->parentWidget(), tr("Error occurred"));
+            return;
+        }
+        calendar->setCalendarType(BIRTHDAY_CALENDAR);
+    } else {
+        calendar->setCalendarType(LOCAL_CALENDAR);
+    }
 
     calendar->setCalendarName(ui->nameEdit->text().toUtf8().data());
     calendar->setCalendarColor((CalendarColour) static_cast<ColorPickSelector*>(ui->colorButton->pickSelector())->currentColor());
@@ -116,9 +152,9 @@ void CalendarEditDialog::saveCalendar()
     int error;
 
     if (calendar->getCalendarId() > 0) {
-        CMulticalendar::MCInstance()->modifyCalendar(calendar, error);
+        mc->modifyCalendar(calendar, error);
     } else {
-        CMulticalendar::MCInstance()->addCalendar(calendar, error);
+        mc->addCalendar(calendar, error);
     }
 
     ChangeManager::bump();

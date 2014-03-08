@@ -59,7 +59,8 @@ void CalendarsConfigDialog::reload()
         item->setCheckState(calendars[c]->IsShown() ? Qt::Checked : Qt::Unchecked);
 
         int error;
-        item->setData(EventCountRole, mc->getEventCount(calendars[c]->getCalendarId(), error));
+        item->setData(EventCountRole, mc->getEventCount(calendars[c]->getCalendarId(), error) +
+                                    + mc->getBdayEventCount(calendars[c]->getCalendarId(), error));
         item->setData(TodoCountRole, mc->getTodoCount(calendars[c]->getCalendarId(), error));
         item->setData(JournalCountRole, mc->getNoteCount(calendars[c]->getCalendarId(), error));
 

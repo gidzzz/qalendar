@@ -4,8 +4,6 @@
 #include "RotatingDialog.h"
 #include "ui_CalendarEditDialog.h"
 
-#include <QButtonGroup>
-
 #include "CCalendar.h"
 
 class CalendarEditDialog : public RotatingDialog
@@ -22,8 +20,6 @@ public:
 
 private:
     Ui::CalendarEditDialog *ui;
-
-    QButtonGroup *typeGroup;
 
     CCalendar *calendar;
 

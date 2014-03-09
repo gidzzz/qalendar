@@ -44,6 +44,7 @@ SOURCES += main.cpp \
     \
     Date.cpp \
     ChangeManager.cpp \
+    BirthdayCalendar.cpp \
     DayWindow.cpp \
     ImportDialog.cpp \
     TodoEditDialog.cpp \
@@ -117,6 +118,7 @@ HEADERS += \
     Date.h \
     ChangeManager.h \
     ChangeClient.h \
+    BirthdayCalendar.h \
     DayWindow.h \
     ColorCheckDelegate.h \
     ImportDialog.h \
@@ -223,4 +225,4 @@ translations.CONFIG += no_check_exist
 translations.path = $$PKGDATADIR/translations
 
 CONFIG += link_pkgconfig
-PKGCONFIG += calendar-backend gq-gconf
+PKGCONFIG += calendar-backend gq-gconf libebook-1.2

@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QMaemo5InformationBox>
+#include <QButtonGroup>
 
 #include <CalendarErrors.h>
 #include <CMulticalendar.h>
@@ -76,7 +77,7 @@ CalendarEditDialog::CalendarEditDialog(int calendarId, QWidget *parent) :
             ui->typeWidget->hide();
         } else {
             // Enable the birthday calendar option
-            typeGroup = new QButtonGroup(this);
+            QButtonGroup *typeGroup = new QButtonGroup(this);
             typeGroup->addButton(ui->localTypeButton, LOCAL_CALENDAR);
             typeGroup->addButton(ui->birthdayTypeButton, BIRTHDAY_CALENDAR);
             ui->localTypeButton->setChecked(true);
@@ -133,7 +134,7 @@ void CalendarEditDialog::saveCalendar()
 {
     CMulticalendar *mc = CMulticalendar::MCInstance();
 
-    if (typeGroup->checkedId() == BIRTHDAY_CALENDAR) {
+    if (ui->birthdayTypeButton->isChecked()) {
         // Do not allow multiple birthday calendars
         if (CCalendar *birthdayCalendar = mc->getBirthdayCalendar()) {
             delete birthdayCalendar;

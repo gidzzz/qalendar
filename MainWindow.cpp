@@ -20,6 +20,11 @@ MainWindow::MainWindow(bool runInBackground) :
 {
     this->setAttribute(Qt::WA_Maemo5StackedWindow);
 
+    deleteOldComponents();
+
+    if (runInBackground)
+        ChangeManager::enableBirthdayCalendar();
+
     // Layout
     QWidget *centralWidget = new QWidget();
     mainLayout = new QVBoxLayout(centralWidget);
@@ -79,8 +84,6 @@ MainWindow::MainWindow(bool runInBackground) :
     connect(settingsAction, SIGNAL(triggered()), this, SLOT(openSettings()));
 
     menubar->addAction(windowMenu->menuAction());
-
-    deleteOldComponents();
 
     Rotator::acquire()->setSlave(this);
 

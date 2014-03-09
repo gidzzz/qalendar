@@ -13,6 +13,8 @@
 #include <CTodo.h>
 #include <CJournal.h>
 
+#include "BirthdayCalendar.h"
+
 typedef unsigned int Version;
 
 class ChangeClient;
@@ -24,6 +26,8 @@ class ChangeManager : public QObject
 public:
     static Version version();
     static void bump();
+
+    static void enableBirthdayCalendar();
 
     static void activateClient(ChangeClient *client);
     static void deactivateClient(ChangeClient *client);
@@ -50,6 +54,9 @@ private:
 
     static Version m_version;
     static QDate m_date;
+
+    static bool birthdayCalendarEnabled;
+    static BirthdayCalendar *birthdayCalendar;
 
     static ChangeClient *activeClient;
     static QTimer *dateCheckTimer;

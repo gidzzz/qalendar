@@ -19,6 +19,9 @@
 Version ChangeManager::m_version = 1;
 QDate ChangeManager::m_date = QDate::currentDate();
 
+bool ChangeManager::birthdayCalendarEnabled = false;
+BirthdayCalendar* ChangeManager::birthdayCalendar = NULL;
+
 ChangeClient* ChangeManager::activeClient = NULL;
 QTimer* ChangeManager::dateCheckTimer;
 
@@ -32,6 +35,14 @@ ChangeManager::ChangeManager()
 
     QDBusConnection::sessionBus().connect("", "", DBUS_INTERFACE, "dbChange",
                                           this, SLOT(onDbChange(QString,QString)));
+}
+
+// Enable management of the birthday calendar
+void ChangeManager::enableBirthdayCalendar()
+{
+    birthdayCalendarEnabled = true;
+
+    onDbChange("CALENDAR", CMulticalendar::MCInstance()->getApplicationName().c_str());
 }
 
 // Start delivering change notifications to the specified client
@@ -79,10 +90,36 @@ void ChangeManager::checkDate()
 // Handle a database change notification from D-Bus
 void ChangeManager::onDbChange(QString details, QString appName)
 {
-    Q_UNUSED(details);
+    // Check if everything is alright with the birthday calendar after each
+    // calendar change.
+    if (birthdayCalendarEnabled && details.contains("CALENDAR")) {
+        CCalendar *calendar = CMulticalendar::MCInstance()->getBirthdayCalendar();
 
-    // Do not react to updates originating from this application, as they are
-    // handled internally.
+        if (birthdayCalendar) {
+            if (calendar) {
+                if (calendar->getCalendarId() == birthdayCalendar->id()) {
+                    // No change
+                    delete calendar;
+                } else {
+                    // Overtaken by another calendar
+                    delete birthdayCalendar;
+                    birthdayCalendar = new BirthdayCalendar(calendar);
+                }
+            } else {
+                // Removed
+                delete birthdayCalendar;
+                birthdayCalendar = NULL;
+            }
+        } else {
+            if (calendar) {
+                // Created
+                birthdayCalendar = new BirthdayCalendar(calendar);
+            }
+        }
+    }
+
+    // Do not react to other updates originating from this application, as they
+    // are handled internally.
     // NOTE: This check will not recognize updates coming from a different
     // instance of this application.
     if (appName != CMulticalendar::MCInstance()->getApplicationName().c_str())

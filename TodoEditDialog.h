@@ -22,11 +22,9 @@ private:
     CTodo *todo;
 
     bool defaultDue;
-    time_t alarmOffset;
 
 private slots:
     void onDateChanged();
-    void onAlarmChanged();
 
     void saveTodo();
     void deleteTodo();

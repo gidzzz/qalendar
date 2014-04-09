@@ -1,33 +1,152 @@
 #include "AlarmPickSelector.h"
 
+#include <limits>
+
 #include "AlarmPickDialog.h"
 
-AlarmPickSelector::AlarmPickSelector(QObject *parent) : QMaemo5AbstractPickSelector(parent)
+#include "Date.h"
+
+AlarmPickSelector::AlarmPickSelector(int type, QObject *parent) : QMaemo5AbstractPickSelector(parent)
 {
-    secondsBefore = -1;
+    this->type = type == E_AM_EXACTDATETIME ? E_AM_EXACTDATETIME : E_AM_ETIME;
+
+    enabled = false;
+
+    // Before-mode defaults
+    secondsBefore = 0;
+
+    // Trigger-mode defaults
+    referenceStamp = 0;
+    offset = -12 * 60*60;
 }
 
 void AlarmPickSelector::setSecondsBefore(int seconds)
 {
-    secondsBefore = seconds;
+    if (seconds < 0) {
+        enabled = false;
+    } else {
+        enabled = true;
+        type = E_AM_ETIME;
+        secondsBefore = seconds;
+    }
 
     emit selected(currentValueText());
 }
 
-QString AlarmPickSelector::currentValueText() const
+void AlarmPickSelector::setTrigger(int stamp)
 {
-    return textForSeconds(secondsBefore);
+    if (stamp < 0) {
+        enabled = false;
+    } else {
+        enabled = true;
+        type = E_AM_EXACTDATETIME;
+
+        offset = stamp - referenceStamp;
+    }
+
+    emit selected(currentValueText());
 }
 
-QString AlarmPickSelector::textForSeconds(int seconds)
+void AlarmPickSelector::setReferenceDate(const QDateTime &date)
 {
-    if (seconds < 0) return tr("None");
+    referenceStamp = date.toTime_t();
 
-    const int h = seconds / 3600;
-    const int m = seconds % 3600 / 60;
-    const int s = seconds % 60;
+    emit selected(currentValueText());
+}
 
-    QStringList parts;
+void AlarmPickSelector::setAlarm(CAlarm *alarm)
+{
+    if (alarm) {
+        if (alarm->getDuration() == E_AM_EXACTDATETIME) {
+            setTrigger(alarm->getTrigger());
+        } else {
+            setSecondsBefore(alarm->getTimeBefore());
+        }
+    } else {
+        enabled = false;
+    }
+}
+
+// There is no currentAlarm(), because its result would be impossible to forward
+// to CComponent::setAlarm(CAlarm*) due to some obsolete hack in that function
+// overriding the type of todo alarms.
+void AlarmPickSelector::configureAlarm(CComponent *component) const
+{
+    if (!enabled
+    ||  type == E_AM_EXACTDATETIME && triggerStamp() <= (time_t) QDateTime::currentDateTime().toTime_t()) {
+        // WARNING: Setting the alarm to a moment in the past can lead to a segfault
+        component->removeAlarm();
+    } else {
+        component->setAlarm(type == E_AM_EXACTDATETIME ? triggerStamp() : secondsBefore, type);
+    }
+}
+
+QString AlarmPickSelector::currentValueText() const
+{
+    return textForAlarm(type, enabled
+                              ? type == E_AM_EXACTDATETIME ? triggerStamp() : secondsBefore
+                              : -1);
+}
+
+int AlarmPickSelector::currentSecondsBefore() const
+{
+    return enabled && type == E_AM_ETIME ? secondsBefore : -1;
+}
+
+QWidget* AlarmPickSelector::widget(QWidget *parent)
+{
+    AlarmPickDialog *dialog = new AlarmPickDialog(type, secondsBefore, triggerStamp(), parent);
+
+    connect(dialog, SIGNAL(selected(bool,int,int,int)), this, SLOT(onSelected(bool,int,int,int)));
+
+    return dialog;
+}
+
+time_t AlarmPickSelector::triggerStamp() const
+{
+    // Calculate the new alarm trigger value in an under/overflow-proof way
+    // NOTE: toTime_t() is a deceptive name, the return type is uint`
+    if (offset > 0) {
+        return referenceStamp > std::numeric_limits<time_t>::max() - offset
+               ? std::numeric_limits<time_t>::max()
+               : referenceStamp + offset;
+    } else {
+        return referenceStamp < -offset
+               ? 0
+               : referenceStamp + offset;
+    }
+}
+
+void AlarmPickSelector::onSelected(bool enabled, int type, int beforeTime, int triggerTime)
+{
+    setSecondsBefore(beforeTime);
+    setTrigger(triggerTime);
+
+    this->type = type;
+    this->enabled = enabled;
+
+    emit selected(currentValueText());
+}
+
+QString AlarmPickSelector::textForAlarm(CAlarm &alarm)
+{
+    const int type = alarm.getDuration();
+    const int time = type == E_AM_EXACTDATETIME ? alarm.getTrigger() : alarm.getTimeBefore();
+
+    return textForAlarm(type, time);
+}
+
+QString AlarmPickSelector::textForAlarm(int type, int time)
+{
+    if (time < 0)
+        return tr("None");
+
+    if (type == E_AM_EXACTDATETIME)
+        return Date::toString(QDateTime::fromTime_t(time), Date::Full, true);
+
+    const int h = time / 3600;
+    const int m = time % 3600 / 60;
+    const int s = time % 60;
 
     const int numFieldsSet = (bool) h + (bool) m + (bool) s;
 
@@ -43,23 +162,4 @@ QString AlarmPickSelector::textForSeconds(int seconds)
                .arg(QString::number(m), 2, '0')
                .arg(QString::number(s), 2, '0');
     }
-}
-
-int AlarmPickSelector::currentSecondsBefore() const
-{
-    return secondsBefore;
-}
-
-QWidget* AlarmPickSelector::widget(QWidget *parent)
-{
-    AlarmPickDialog *dialog = new AlarmPickDialog(secondsBefore, parent);
-
-    connect(dialog, SIGNAL(selected(int)), this, SLOT(onSelected(int)));
-
-    return dialog;
-}
-
-void AlarmPickSelector::onSelected(int seconds)
-{
-    setSecondsBefore(seconds);
 }

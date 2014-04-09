@@ -44,47 +44,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="alarmBox">
+        <widget class="QMaemo5ValueButton" name="alarmButton">
          <property name="text">
           <string>Alarm</string>
          </property>
         </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="alarmLayout">
-         <item>
-          <widget class="QMaemo5ValueButton" name="alarmDateButton">
-           <property name="visible">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Alarm</string>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>2</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QMaemo5ValueButton" name="alarmTimeButton">
-           <property name="visible">
-            <bool>false</bool>
-           </property>
-           <property name="valueLayout">
-            <enum>QMaemo5ValueButton::ValueBesideText</enum>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>1</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </item>
        <item>
         <widget class="ExpandingTextEdit" name="descriptionEdit">

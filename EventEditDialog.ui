@@ -134,9 +134,6 @@
          <property name="text">
           <string>Alarm</string>
          </property>
-         <property name="valueLayout">
-          <enum>QMaemo5ValueButton::ValueBesideText</enum>
-         </property>
         </widget>
        </item>
        <item>

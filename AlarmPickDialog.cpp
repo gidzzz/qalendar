@@ -1,11 +1,13 @@
 #include "AlarmPickDialog.h"
 
 #include <QPushButton>
-#include <QMaemo5Style>
+#include <QMaemo5TimePickSelector>
 
-#include "CWrapper.h"
+#include <CAlarm.h>
 
-AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
+#include "DatePickSelector.h"
+
+AlarmPickDialog::AlarmPickDialog(int type, int beforeTime, int triggerTime, QWidget *parent) :
     RotatingDialog(parent),
     ui(new Ui::AlarmPickDialog)
 {
@@ -14,21 +16,37 @@ AlarmPickDialog::AlarmPickDialog(int seconds, QWidget *parent) :
 
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    QPalette palette;
-    palette.setColor(QPalette::WindowText, QMaemo5Style::standardColor("SecondaryTextColor"));
-    ui->timeLabel->setPalette(palette);
+    DatePickSelector *dps = new DatePickSelector();
+    QMaemo5TimePickSelector *tps = new QMaemo5TimePickSelector();
+    ui->dateButton->setPickSelector(dps);
+    ui->timeButton->setPickSelector(tps);
 
-    ui->hoursBox->setValue(seconds / 3600);
-    ui->minutesBox->setValue(seconds % 3600 / 60);
-    ui->secondsBox->setValue(seconds % 60);
+    QButtonGroup *typeGroup = new QButtonGroup(this);
+    typeGroup->addButton(ui->beforeButton, E_AM_ETIME);
+    typeGroup->addButton(ui->triggerButton, E_AM_EXACTDATETIME);
+    connect(typeGroup, SIGNAL(buttonClicked(int)), this, SLOT(onTypeButtonClicked(int)));
 
-    ui->minutesBox->setSuccessor(ui->hoursBox);
+    // Set the requested mode
+    if (type == E_AM_EXACTDATETIME) {
+        ui->triggerButton->click();
+    } else {
+        ui->beforeButton->click();
+    }
+
+    // Display time before
+    ui->hoursBox->setValue(beforeTime / 3600);
+    ui->minutesBox->setValue(beforeTime % 3600 / 60);
+    ui->secondsBox->setValue(beforeTime % 60);
+
+    // Display trigger stamp
+    QDateTime date = QDateTime::fromTime_t(triggerTime);
+    dps->setCurrentDate(date.date());
+    tps->setCurrentTime(date.time());
+
     ui->secondsBox->setSuccessor(ui->minutesBox);
+    ui->minutesBox->setSuccessor(ui->hoursBox);
 
-    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->hoursBox, SLOT(setEnabled(bool)));
-    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->minutesBox, SLOT(setEnabled(bool)));
-    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->secondsBox, SLOT(setEnabled(bool)));
-
+    connect(ui->enableBox, SIGNAL(toggled(bool)), ui->configWidget, SLOT(setEnabled(bool)));
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
@@ -41,10 +59,29 @@ AlarmPickDialog::~AlarmPickDialog()
 
 void AlarmPickDialog::accept()
 {
-    emit selected(ui->enableBox->isChecked() ? ui->hoursBox->value() * 3600 +
-                                               ui->minutesBox->value() * 60 +
-                                               ui->secondsBox->value()
-                                             : -1);
+    DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());
+    QMaemo5TimePickSelector *tps = qobject_cast<QMaemo5TimePickSelector*>(ui->timeButton->pickSelector());
+
+    emit selected(ui->enableBox->isChecked(),
+                  ui->triggerButton->isChecked() ? E_AM_EXACTDATETIME : E_AM_ETIME,
+                  ui->hoursBox->value()*3600 + ui->minutesBox->value()*60 + ui->secondsBox->value(),
+                  QDateTime(dps->currentDate(), tps->currentTime()).toTime_t());
 
     QDialog::accept();
+}
+
+void AlarmPickDialog::onTypeButtonClicked(int type)
+{
+    switch (type) {
+        case E_AM_ETIME:
+            ui->triggerWidget->hide();
+            ui->beforeWidget->show();
+            break;
+        case E_AM_EXACTDATETIME:
+            ui->beforeWidget->hide();
+            ui->triggerWidget->show();
+            break;
+    }
+
+    this->adjustSize();
 }

@@ -9,6 +9,8 @@
 
 #include <CAlarm.h>
 
+#include "AlarmPickSelector.h"
+
 #include "CWrapper.h"
 #include "Date.h"
 
@@ -121,7 +123,7 @@ void TodoWindow::reload()
     if (alarm) {
         ui->alarmLabel->show();
         ui->alarmInfo->show();
-        ui->alarmInfo->setText(Date::toString(QDateTime::fromTime_t(alarm->getTrigger()), Date::Full, true));
+        ui->alarmInfo->setText(AlarmPickSelector::textForAlarm(*alarm));
     } else {
         ui->alarmLabel->hide();
         ui->alarmInfo->hide();

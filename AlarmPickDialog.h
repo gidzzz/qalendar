@@ -9,17 +9,20 @@ class AlarmPickDialog : public RotatingDialog
     Q_OBJECT
 
 public:
-    AlarmPickDialog(int seconds, QWidget *parent);
+    AlarmPickDialog(int type, int beforeTime, int triggerTime, QWidget *parent);
     ~AlarmPickDialog();
 
 signals:
-    void selected(int seconds);
+    void selected(bool enabled, int type, int beforeTime, int triggerTime);
 
 public slots:
     void accept();
 
 private:
     Ui::AlarmPickDialog *ui;
+
+private slots:
+    void onTypeButtonClicked(int type);
 };
 
 #endif // ALARMPICKDIALOG_H

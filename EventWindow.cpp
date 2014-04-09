@@ -8,6 +8,7 @@
 #include <QShortcut>
 #include <QTimer>
 
+#include <CAlarm.h>
 #include <CEvent.h>
 #include <CRecurrenceRule.h>
 #include "CWrapper.h"
@@ -174,14 +175,14 @@ void EventWindow::reload()
         ui->repeatInfo->setText(repeatText);
     }
 
-    const int secondsBeforeAlarm = event->getAlarmBefore();
-    if (secondsBeforeAlarm < 0) {
-        ui->alarmLabel->hide();
-        ui->alarmInfo->hide();
-    } else {
+    CAlarm *alarm = event->getAlarm();
+    if (alarm) {
         ui->alarmLabel->show();
         ui->alarmInfo->show();
-        ui->alarmInfo->setText(AlarmPickSelector::textForSeconds(secondsBeforeAlarm));
+        ui->alarmInfo->setText(AlarmPickSelector::textForAlarm(*alarm));
+    } else {
+        ui->alarmLabel->hide();
+        ui->alarmInfo->hide();
     }
 
     int error;

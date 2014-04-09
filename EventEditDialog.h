@@ -27,6 +27,7 @@ private:
     time_t duration;
 
 private slots:
+    void onAllDayChanged(bool enabled);
     void onFromChanged();
     void onToChanged();
 

@@ -185,14 +185,25 @@ void CalendarEditDialog::exportCalendar()
 // Delete the calendar
 void CalendarEditDialog::deleteCalendar()
 {
-    if (QMessageBox::warning(this, " ", tr("Delete this calendar and its events, tasks and notes?"),
-                             QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) == QMessageBox::Yes)
-    {
-        int error;
-        CMulticalendar::MCInstance()->deleteCalendar(calendar->getCalendarId(), error);
+    const int type = calendar->getCalendarType();
 
-        ChangeManager::bump();
+    int error;
 
-        this->accept();
+    if (type == DEFAULT_PRIVATE || type == DEFAULT_SYNC) {
+        if (QMessageBox::warning(this, " ", tr("This calendar cannot be deleted. Delete all calendar content instead?"),
+                                 QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) == QMessageBox::Yes)
+        {
+            CMulticalendar::MCInstance()->clearCalendar(calendar->getCalendarId(), error);
+            ChangeManager::bump();
+            this->accept();
+        }
+    } else {
+        if (QMessageBox::warning(this, " ", tr("Delete this calendar and its events, tasks and notes?"),
+                                 QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) == QMessageBox::Yes)
+        {
+            CMulticalendar::MCInstance()->deleteCalendar(calendar->getCalendarId(), error);
+            ChangeManager::bump();
+            this->accept();
+        }
     }
 }

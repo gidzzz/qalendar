@@ -3,6 +3,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QDateTime>
+#include <QScrollBar>
 
 #include <CMulticalendar.h>
 #include <CJournal.h>
@@ -61,6 +62,8 @@ void JournalsPlug::reload()
 {
     this->sync();
 
+    const int scrollPosition = ui->journalList->verticalScrollBar()->value();
+
     while (ui->journalList->count() > 1) {
         QListWidgetItem *item = ui->journalList->item(1);
         delete qvariant_cast<CJournal*>(item->data(JournalRole));
@@ -96,6 +99,9 @@ void JournalsPlug::reload()
         item->setData(ColorRole, palette[journals[t]->getCalendarId()]);
         ui->journalList->addItem(item);
     }
+
+    // Restore the original view
+    ui->journalList->verticalScrollBar()->setValue(scrollPosition);
 
     emit titleChanged(title());
 }

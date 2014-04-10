@@ -4,6 +4,7 @@
 #include <map>
 
 #include <QPushButton>
+#include <QScrollBar>
 
 #include <CMulticalendar.h>
 #include "CWrapper.h"
@@ -42,7 +43,7 @@ AgendaPlug::~AgendaPlug()
 
 void AgendaPlug::onChange()
 {
-    setDate(currentDateLock ? QDate::currentDate() : this->globalDate());
+    setDate(currentDateLock ? QDate::currentDate() : this->globalDate(), false);
 }
 
 void AgendaPlug::cleanup()
@@ -56,8 +57,14 @@ void AgendaPlug::cleanup()
     components.clear();
 }
 
-void AgendaPlug::reload()
+void AgendaPlug::reload(bool align)
 {
+    // The first time should always be with alignment
+    if (!ui->componentList->model()->rowCount())
+        align = true;
+
+    const int scrollPosition = ui->componentList->verticalScrollBar()->value();
+
     cleanup();
 
     ui->componentList->setDate(this->date);
@@ -158,19 +165,27 @@ void AgendaPlug::reload()
 
     mc->releaseListCalendars(calendars);
 
-    ui->componentList->scrollToItem(todaysHeading, QAbstractItemView::PositionAtTop);
+    if (align) {
+        // Align the view with the heading of the selected day
+        ui->componentList->scrollToItem(todaysHeading, QAbstractItemView::PositionAtTop);
+    } else {
+        // Restore the original view
+        ui->componentList->verticalScrollBar()->setValue(scrollPosition);
+    }
 }
 
-void AgendaPlug::setDate(QDate date)
+void AgendaPlug::setDate(QDate date, bool align)
 {
     this->sync();
+
+    const QDate oldDate = this->date;
 
     this->setGlobalDate(date);
     this->date = fromGlobalDate(date);
 
-    currentDateLock = this->date == fromGlobalDate(QDate::currentDate());;
+    currentDateLock = this->date == fromGlobalDate(QDate::currentDate());
 
-    reload();
+    reload(align || oldDate != this->date);
 }
 
 void AgendaPlug::selectDay()

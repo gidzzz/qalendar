@@ -7,6 +7,7 @@
 
 #include <QPushButton>
 #include <QShortcut>
+#include <QScrollBar>
 
 #include <CMulticalendar.h>
 #include <CTodo.h>
@@ -92,6 +93,8 @@ void DayWindow::reload()
 {
     this->sync();
 
+    const int scrollPosition = ui->componentList->verticalScrollBar()->value();
+
     cleanup();
 
     // Update window title
@@ -141,6 +144,9 @@ void DayWindow::reload()
         item->setData(DateRole, date);
         ui->componentList->addItem(item);
     }
+
+    // Restore the original view
+    ui->componentList->verticalScrollBar()->setValue(scrollPosition);
 }
 
 void DayWindow::setDate(QDate date)

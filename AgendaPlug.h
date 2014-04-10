@@ -22,7 +22,7 @@ public:
 
     void onChange();
 
-    void setDate(QDate date);
+    void setDate(QDate date, bool align = true);
 
 private:
     Ui::AgendaPlug *ui;
@@ -30,7 +30,7 @@ private:
     vector<CComponent*> components;
 
     void cleanup();
-    void reload();
+    void reload(bool align);
 
 private slots:
     void selectDay();

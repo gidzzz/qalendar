@@ -5,6 +5,7 @@
 #include <QMenu>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QScrollBar>
 
 #include <QDateTime>
 #include <QSettings>
@@ -87,6 +88,8 @@ void TodosPlug::reload()
 {
     this->sync();
 
+    const int scrollPosition = ui->todoList->verticalScrollBar()->value();
+
     while (ui->todoList->count() > 1) {
         QListWidgetItem *item = ui->todoList->item(1);
         delete qvariant_cast<CTodo*>(item->data(TodoRole));
@@ -147,6 +150,9 @@ void TodosPlug::reload()
             }
         }
     }
+
+    // Restore the original view
+    ui->todoList->verticalScrollBar()->setValue(scrollPosition);
 
     emit titleChanged(title());
 }

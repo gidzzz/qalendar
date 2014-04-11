@@ -10,6 +10,7 @@
 #include "EventEditDialog.h"
 #include "TodoEditDialog.h"
 #include "JournalEditDialog.h"
+#include "BirthdayEditDialog.h"
 
 #include "ChangeClient.h"
 
@@ -153,8 +154,7 @@ bool ChangeManager::edit(QWidget *parent, CComponent *component)
             ed = new JournalEditDialog(parent, static_cast<CJournal*>(component));
             break;
         case E_BDAY:
-            // TODO: Editable birthdays?
-            QMaemo5InformationBox::information(parent, QObject::tr("Unable to edit birthdays"));
+            ed = new BirthdayEditDialog(parent, static_cast<CBdayEvent*>(component));
             break;
     }
 
@@ -326,6 +326,9 @@ void ChangeManager::modifyComponent(CComponent *component, int calendarId, int &
             break;
         case E_JOURNAL:
             mc->modifyJournal(static_cast<CJournal*>(component), calendarId, error);
+            break;
+        case E_BDAY:
+            mc->modifyBirthDay(static_cast<CBdayEvent*>(component), error);
             break;
     }
 }

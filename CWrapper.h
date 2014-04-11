@@ -8,6 +8,7 @@
 #include <CEvent.h>
 #include <CTodo.h>
 #include <CJournal.h>
+#include <CBdayEvent.h>
 
 #include "ComponentInstance.h"
 
@@ -211,6 +212,16 @@ namespace CWrapper
         if (journal) journal->setCalendarId(calendar->getCalendarId());
         delete calendar;
         return journal;
+    }
+
+    inline CBdayEvent* details(CBdayEvent *event)
+    {
+        int error;
+        CCalendar *calendar = CMulticalendar::MCInstance()->getCalendarById(event->getCalendarId(), error);
+        event = reinterpret_cast<CBdayEvent*>(calendar->getBirthDayEvent(event->getId(), error));
+        if (event) event->setCalendarId(calendar->getCalendarId());
+        delete calendar;
+        return event;
     }
 
     // Adapt the given string to be displayed in one line of a limited length.

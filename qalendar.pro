@@ -49,6 +49,8 @@ SOURCES += main.cpp \
     ImportDialog.cpp \
     TodoEditDialog.cpp \
     EventEditDialog.cpp \
+    JournalEditDialog.cpp \
+    BirthdayEditDialog.cpp \
     AlarmPickSelector.cpp \
     AlarmPickDialog.cpp \
     CalendarPickSelector.cpp \
@@ -57,7 +59,6 @@ SOURCES += main.cpp \
     ColorPickDialog.cpp \
     DatePickSelector.cpp \
     DatePickDialog.cpp \
-    JournalEditDialog.cpp \
     EventWindow.cpp \
     TodoWindow.cpp \
     CalendarListWidget.cpp \
@@ -125,6 +126,8 @@ HEADERS += \
     TodoEditDialog.h \
     TodoDelegate.h \
     EventEditDialog.h \
+    JournalEditDialog.h \
+    BirthdayEditDialog.h \
     AlarmPickSelector.h \
     AlarmPickDialog.h \
     CalendarPickSelector.h \
@@ -139,7 +142,6 @@ HEADERS += \
     DateHeadingWidget.h \
     NewComponentWidget.h \
     CWrapper.h \
-    JournalEditDialog.h \
     JournalDelegate.h \
     EventWindow.h \
     TodoWindow.h \
@@ -174,6 +176,7 @@ FORMS += \
     TodoEditDialog.ui \
     EventEditDialog.ui \
     JournalEditDialog.ui \
+    BirthdayEditDialog.ui \
     AlarmPickDialog.ui \
     CalendarPickDialog.ui \
     ColorPickDialog.ui \

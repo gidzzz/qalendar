@@ -2,6 +2,7 @@
 
 #include <QDebug>
 
+#include <CAlarm.h>
 #include <CMulticalendar.h>
 #include <CRecurrence.h>
 #include "CWrapper.h"
@@ -16,8 +17,6 @@
 // not as important here, because the birthday calendar is enabled only when the
 // background mode is enabled, so the application is initially hidden and the
 // startup time cannot be easily observed.
-
-// TODO: Preserve alarms when modifying events
 
 BirthdayCalendar::BirthdayCalendar(CCalendar *calendar) :
     calendar(calendar),
@@ -63,6 +62,22 @@ BirthdayCalendar::~BirthdayCalendar()
 int BirthdayCalendar::id() const
 {
     return calendar->getCalendarId();
+}
+
+// Load given event's alarm settings from the database and apply them to the instance
+void BirthdayCalendar::loadAlarm(CBdayEvent *event)
+{
+    int error;
+
+    if (CEvent *storedEvent = calendar->getBirthDayEvent(event->getId(), error)) {
+        if (CAlarm *alarm = storedEvent->getAlarm()) {
+            if (alarm->getDuration() == E_AM_EXACTDATETIME) {
+                event->setAlarm(alarm->getTrigger(), E_AM_EXACTDATETIME);
+            } else {
+                event->setAlarm(alarm->getTimeBefore(), E_AM_ETIME);
+            }
+        }
+    }
 }
 
 // Convert EContact to CBdayEvent
@@ -133,6 +148,7 @@ void BirthdayCalendar::onContactsChanged(EBookView *, GList *vcards, BirthdayCal
 
         CBdayEvent *event = toBdayEvent(static_cast<EContact*>(vcards->data));
         event->setId(self->calendar->getExternalToLocalId(event->getId(), true, error));
+        self->loadAlarm(event);
 
         CMulticalendar::MCInstance()->modifyBirthDay(event, error);
 
@@ -237,6 +253,7 @@ void BirthdayCalendar::onSequenceComplete(EBookView *, gint, BirthdayCalendar *s
                     {
                         // Update the event
                         event->setId(localId);
+                        self->loadAlarm(event);
                         CMulticalendar::MCInstance()->modifyBirthDay(event, error);
                         bump = true;
                     }

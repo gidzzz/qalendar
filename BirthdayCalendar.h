@@ -22,6 +22,8 @@ private:
     bool initialized;
     vector<CBdayEvent*> eventBuffer;
 
+    void loadAlarm(CBdayEvent *event);
+
     static CBdayEvent* toBdayEvent(EContact *contact);
 
     static void onContactsAdded   (EBookView *, GList *vcards, BirthdayCalendar *self);

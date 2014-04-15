@@ -165,6 +165,15 @@ void TodoWindow::enableLinks(bool enable)
     ui->descriptionInfo->enableLinks(enable);
 }
 
+void TodoWindow::contextMenuEvent(QContextMenuEvent *e)
+{
+    QMenu *contextMenu = new QMenu(this);
+    contextMenu->setAttribute(Qt::WA_DeleteOnClose);;
+    contextMenu->addAction(tr("Edit"), this, SLOT(editTodo()));
+    contextMenu->addAction(tr("Delete"), this, SLOT(deleteTodo()));
+    contextMenu->exec(e->globalPos());
+}
+
 void TodoWindow::closeEvent(QCloseEvent *e)
 {
     if (todo && todo->getStatus() != ui->doneBox->isChecked()) {

@@ -25,6 +25,7 @@ private:
     void reload();
 
     void changeEvent(QEvent *e);
+    void contextMenuEvent(QContextMenuEvent *e);
     void closeEvent(QCloseEvent *e);
 
 private slots:

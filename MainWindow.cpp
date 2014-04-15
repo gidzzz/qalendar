@@ -103,6 +103,8 @@ MainWindow::MainWindow(bool runInBackground) :
     if (runInBackground) {
         QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
         QDBusConnection::sessionBus().registerObject(DBUS_PATH, this, QDBusConnection::ExportScriptableSlots);
+        // An extra path to cater to the contacts app
+        QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportScriptableSlots);
     } else {
         show();
     }
@@ -289,9 +291,6 @@ void MainWindow::launch_view(uint type, int stamp, QString componentId, int cale
     // * viewing an event from alarm dialog -> -1
     // * viewing a todo from alarm dialog -> -2
 
-    Q_UNUSED(componentId);
-    Q_UNUSED(calendarId);
-
     top_application();
 
     QDate date = stamp < 0 ? QDate() : QDateTime::fromTime_t(stamp).date();
@@ -302,6 +301,19 @@ void MainWindow::launch_view(uint type, int stamp, QString componentId, int cale
         case 3: if (topWindow() == this) showAgenda(date); break;
         case 4: showComponent<CEvent, &CCalendar::getEvent>(calendarId, componentId); break;
         case 5: showComponent<CTodo, &CCalendar::getTodo>(calendarId, componentId); break;
+    }
+}
+
+void MainWindow::open_bday_event(uint, QString contactId)
+{
+    // The first argument seems to always equal 4 (event view?)
+
+    if (CCalendar *calendar = CMulticalendar::MCInstance()->getBirthdayCalendar()) {
+        int error;
+        launch_view(4, -1,
+                    calendar->getExternalToLocalId(string(contactId.toAscii()), true, error).c_str(),
+                    calendar->getCalendarId());
+        delete calendar;
     }
 }
 

@@ -33,6 +33,7 @@ public:
 public slots:
     Q_SCRIPTABLE void top_application();
     Q_SCRIPTABLE void launch_view(uint type, int stamp, QString componentId, int calendarId = 0);
+    Q_SCRIPTABLE void open_bday_event(uint, QString contactId);
     Q_SCRIPTABLE void mime_open(QString uri);
     Q_SCRIPTABLE void deferred_close();
 

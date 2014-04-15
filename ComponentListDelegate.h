@@ -47,16 +47,16 @@ public:
             QFont f = painter->font();
             QRect r = option.rect.adjusted(Margin, Margin, -Margin, -Margin);
 
+            // Get info required for the customized icon
+            QDate date = index.data(DateRole).toDate();
+            QIcon background = QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt()));
+
             // Get info about the component
-            QString summary = CWrapper::simplify(component->getSummary(), TextMaxChars);
+            QString summary = CWrapper::summary(component, date, TextMaxChars);
             QString location = CWrapper::simplify(component->getLocation(), ValueMaxChars);
             QDateTime startDate = QDateTime::fromTime_t(instance->stamp);
             QDateTime endDate   = QDateTime::fromTime_t(instance->end());
             bool alarm = component->getAlarm();
-
-            // Get info required for the customized icon
-            QDate date = index.data(DateRole).toDate();
-            QIcon background = QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt()));
 
             // Draw the background of the icon
             painter->drawPixmap(r.left(), r.top(), IconSize, IconSize, background.pixmap(IconSize, IconSize));

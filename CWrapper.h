@@ -3,6 +3,9 @@
 
 #include <algorithm>
 
+#include <QDate>
+#include <QMetaType>
+
 #include <CMulticalendar.h>
 #include <CCalendar.h>
 #include <CEvent.h>
@@ -11,8 +14,6 @@
 #include <CBdayEvent.h>
 
 #include "ComponentInstance.h"
-
-#include <QMetaType>
 
 Q_DECLARE_METATYPE (CEvent*)
 Q_DECLARE_METATYPE (CTodo*)
@@ -230,6 +231,18 @@ namespace CWrapper
     inline QString simplify(const string &std_str, size_t limit)
     {
         return QString::fromUtf8(std_str.c_str(), qMin(std_str.length(), limit)).replace('\n', ' ');
+    }
+
+    // Some additional processing for summaries
+    inline QString summary(CComponent *component, const QDate &date, size_t limit = 0)
+    {
+        QString summary = limit ? simplify(component->getSummary(), limit)
+                                : QString::fromUtf8(component->getSummary().c_str());
+
+        if (component->getType() == E_BDAY && (!limit || summary.size() < limit))
+            summary += " (" + QString::number(date.year() - component->getStatus()) + ")";
+
+        return summary;
     }
 
     inline const char* calendarType(const int type)

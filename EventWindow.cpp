@@ -128,7 +128,7 @@ void EventWindow::reload()
 
     CEvent *event = instance.event;
 
-    ui->summaryInfo->setText(QString::fromUtf8(event->getSummary().c_str()));
+    ui->summaryInfo->setText(CWrapper::summary(event, QDateTime::fromTime_t(instance.stamp).date()));
     ui->locationInfo->setText(QString::fromUtf8(event->getLocation().c_str()));
 
     QString description = QString::fromUtf8(event->getDescription().c_str());

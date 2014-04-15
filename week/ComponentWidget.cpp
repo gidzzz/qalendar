@@ -73,7 +73,7 @@ void ComponentWidget::paintEvent(QPaintEvent *)
     painter.setPen(QMaemo5Style::standardColor("ReversedTextColor"));
 
     const bool alarm = component->getAlarm();
-    const QString summary = QString::fromUtf8(component->getSummary().c_str());
+    const QString summary = CWrapper::summary(component, QDateTime::fromTime_t(instance->stamp).date());
 
     if (component->getAllDay() || component->getType() != E_EVENT) {
         // All-day event or not an event

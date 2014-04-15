@@ -201,6 +201,7 @@ void TodosPlug::onContextMenuRequested(const QPoint &pos)
     QMenu *contextMenu = new QMenu(this);
     contextMenu->setAttribute(Qt::WA_DeleteOnClose);
     contextMenu->addAction(tr("Edit"), this, SLOT(editCurrentTodo()));
+    contextMenu->addAction(tr("Clone"), this, SLOT(cloneCurrentTodo()));
     contextMenu->addAction(tr("Delete"), this, SLOT(deleteCurrentTodo()));
     contextMenu->exec(this->mapToGlobal(pos));
 }
@@ -208,6 +209,11 @@ void TodosPlug::onContextMenuRequested(const QPoint &pos)
 void TodosPlug::editCurrentTodo()
 {
     ChangeManager::edit(this, qvariant_cast<CTodo*>(ui->todoList->currentItem()->data(TodoRole)));
+}
+
+void TodosPlug::cloneCurrentTodo()
+{
+    ChangeManager::clone(this, qvariant_cast<CTodo*>(ui->todoList->currentItem()->data(TodoRole)));
 }
 
 void TodosPlug::deleteCurrentTodo()

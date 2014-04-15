@@ -47,6 +47,7 @@ private slots:
     void onReleased(bool real = true);
 
     void editComponent();
+    void cloneComponent();
     void deleteComponent();
 };
 

@@ -168,13 +168,13 @@ bool ChangeManager::clone(QWidget *parent, CComponent *component)
 
     switch (component->getType()) {
         case E_EVENT:
-            clone = new CEvent(*static_cast<CEvent*>(component));
+            clone = CWrapper::details(static_cast<CEvent*>(component));
             break;
         case E_TODO:
-            clone = new CTodo(*static_cast<CTodo*>(component));
+            clone = CWrapper::details(static_cast<CTodo*>(component));
             break;
         case E_JOURNAL:
-            clone = new CJournal(*static_cast<CJournal*>(component));
+            clone = CWrapper::details(static_cast<CJournal*>(component));
             break;
         case E_BDAY:
             QMaemo5InformationBox::information(parent, QObject::tr("Unable to edit birthdays"));
@@ -183,7 +183,7 @@ bool ChangeManager::clone(QWidget *parent, CComponent *component)
 
     if (clone) {
         clone->setId(string());
-        return edit(parent, clone);
+        return edit(parent, clone); // The edit dialog will take the ownership of this clone
     } else {
         return false;
     }

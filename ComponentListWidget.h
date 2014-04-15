@@ -37,6 +37,7 @@ private slots:
     void onScrolled(int position);
 
     void editCurrentComponent();
+    void cloneCurrentComponent();
     void deleteCurrentComponent();
 };
 

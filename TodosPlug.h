@@ -35,6 +35,7 @@ private slots:
 
     void onContextMenuRequested(const QPoint &pos);
     void editCurrentTodo();
+    void cloneCurrentTodo();
     void deleteCurrentTodo();
 
     void hideDoneTodos(bool hide);

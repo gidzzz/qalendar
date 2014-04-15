@@ -15,22 +15,23 @@ JournalEditDialog::JournalEditDialog(QWidget *parent, CJournal *journal) :
 {
     ui->setupUi(this);
 
-    if (journal) journal = CWrapper::details(journal);
+    if (journal && !journal->getId().empty()) {
+        journal = CWrapper::details(journal);
+
+        this->setWindowTitle(tr("Edit note"));
+        this->setupDeleteButton(ui->buttonBox, SLOT(deleteJournal()));
+    } else {
+        this->setWindowTitle(tr("New note"));
+    }
 
     CalendarPickSelector *cps = new CalendarPickSelector();
     ui->calendarButton->setPickSelector(cps);
 
     if (journal) {
-        this->setWindowTitle(tr("Edit note"));
-
         // Load component data
         ui->summaryEdit->setPlainText(QString::fromUtf8(journal->getSummary().c_str()));
         cps->setCalendar(journal->getCalendarId());
-
-        this->setupDeleteButton(ui->buttonBox, SLOT(deleteJournal()));
     } else {
-        this->setWindowTitle(tr("New note"));
-
         journal = new CJournal();
 
         // Load last used settings

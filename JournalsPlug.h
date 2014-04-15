@@ -28,6 +28,7 @@ private slots:
 
     void onContextMenuRequested(const QPoint &pos);
     void editCurrentJournal();
+    void cloneCurrentJournal();
     void deleteCurrentJournal();
 };
 

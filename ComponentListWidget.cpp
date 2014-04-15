@@ -70,6 +70,7 @@ void ComponentListWidget::onContextMenuRequested(const QPoint &pos)
     QMenu *contextMenu = new QMenu(this);
     contextMenu->setAttribute(Qt::WA_DeleteOnClose);;
     contextMenu->addAction(tr("Edit"), this, SLOT(editCurrentComponent()));
+    contextMenu->addAction(tr("Clone"), this, SLOT(cloneCurrentComponent()));
     contextMenu->addAction(tr("Delete"), this, SLOT(deleteCurrentComponent()));
     contextMenu->exec(this->mapToGlobal(pos));
 }
@@ -120,14 +121,15 @@ void ComponentListWidget::newTodo()
 
 void ComponentListWidget::editCurrentComponent()
 {
-    CComponent *component = qvariant_cast<ComponentInstance*>(this->currentItem()->data(ComponentRole))->component;
+    ChangeManager::edit(this, qvariant_cast<ComponentInstance*>(this->currentItem()->data(ComponentRole))->component);
+}
 
-    ChangeManager::edit(this, component);
+void ComponentListWidget::cloneCurrentComponent()
+{
+    ChangeManager::clone(this, qvariant_cast<ComponentInstance*>(this->currentItem()->data(ComponentRole))->component);
 }
 
 void ComponentListWidget::deleteCurrentComponent()
 {
-    CComponent *component = qvariant_cast<ComponentInstance*>(this->currentItem()->data(ComponentRole))->component;
-
-    ChangeManager::drop(this, component);
+    ChangeManager::drop(this, qvariant_cast<ComponentInstance*>(this->currentItem()->data(ComponentRole))->component);
 }

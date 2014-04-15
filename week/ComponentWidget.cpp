@@ -179,6 +179,7 @@ void ComponentWidget::contextMenuEvent(QContextMenuEvent *e)
     QMenu *contextMenu = new QMenu(this);
     contextMenu->setAttribute(Qt::WA_DeleteOnClose);
     contextMenu->addAction(tr("Edit"), this, SLOT(editComponent()));
+    contextMenu->addAction(tr("Clone"), this, SLOT(cloneComponent()));
     contextMenu->addAction(tr("Delete"), this, SLOT(deleteComponent()));
     contextMenu->exec(e->globalPos());
 }
@@ -271,6 +272,11 @@ void ComponentWidget::onReleased(bool real)
 void ComponentWidget::editComponent()
 {
     ChangeManager::edit(this, instance->component);
+}
+
+void ComponentWidget::cloneComponent()
+{
+    ChangeManager::clone(this, instance->component);
 }
 
 void ComponentWidget::deleteComponent()

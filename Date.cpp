@@ -5,11 +5,50 @@
 
 #include "ChangeManager.h"
 
+QString Date::m_fullFormat;
+QString Date::m_partialFormat;
 int Date::m_firstDayOfWeek;
 
 void Date::init()
 {
     m_firstDayOfWeek = QSettings().value("Date/FirstDayOfWeek", 1).toInt();
+
+    loadFormatStrings();
+}
+
+QString Date::formatString(Format format)
+{
+    switch (format) {
+        case Full:
+            return QSettings().value("Date/FullFormat").toString();
+        case Partial:
+            return QSettings().value("Date/PartialFormat").toString();
+    }
+}
+
+QString Date::sanitizeFormatString(QString string, Format format)
+{
+    if (string.isEmpty()) {
+        switch (format) {
+            case Full:
+                return "dddd d MMMM yyyy";
+            case Partial:
+                string = QLocale().dateFormat(QLocale::ShortFormat);
+                return string.indexOf('M') < string.indexOf('d') ? "MM/dd" : "dd/MM";
+        }
+    }
+
+    return string;
+}
+
+void Date::setFormatStrings(const QString &fullFormat, const QString &partialFormat)
+{
+    if (fullFormat != formatString(Full) || partialFormat != formatString(Partial)) {
+        QSettings().setValue("Date/FullFormat", fullFormat);
+        QSettings().setValue("Date/PartialFormat", partialFormat);
+        loadFormatStrings();
+        ChangeManager::bump();
+    }
 }
 
 int Date::firstDayOfWeek()
@@ -51,22 +90,26 @@ int Date::relWeekNumber(const QDate &date, int *year)
 
 QString Date::toString(const QDate &date, Format format)
 {
-    return QLocale().toString(date, formatString(format));
+    return QLocale().toString(date, internalFormatString(format));
 }
 
 QString Date::toString(const QDateTime &date, Format format, bool time)
 {
-    return QLocale().toString(date, formatString(format) + (time ? ", hh:mm" : QString()));
+    return QLocale().toString(date, internalFormatString(format) + (time ? ", hh:mm" : QString()));
 }
 
-QString Date::formatString(Format format)
+QString Date::internalFormatString(Format format)
 {
     switch (format) {
         case Full:
-            return "dddd d MMMM yyyy";
-        case Partial: {
-            const QString localeShortFormat = QLocale().dateFormat(QLocale::ShortFormat);
-            return localeShortFormat.indexOf('M') < localeShortFormat.indexOf('d') ? "MM/dd" : "dd/MM";
-        }
+            return m_fullFormat;
+        case Partial:
+            return m_partialFormat;
     }
+}
+
+void Date::loadFormatStrings()
+{
+    m_fullFormat = sanitizeFormatString(formatString(Full), Full);
+    m_partialFormat = sanitizeFormatString(formatString(Partial), Partial);
 }

@@ -15,6 +15,10 @@ public:
 
     static void init();
 
+    static QString formatString(Format format);
+    static QString sanitizeFormatString(QString string, Format format);
+    static void setFormatStrings(const QString &fullFormat, const QString &partialFormat);
+
     static int firstDayOfWeek();
     static void setFirstDayOfWeek(int firstDayOfWeek);
 
@@ -26,9 +30,13 @@ public:
     static QString toString(const QDateTime &date, Format format, bool time = false);
 
 private:
+    static QString m_fullFormat;
+    static QString m_partialFormat;
     static int m_firstDayOfWeek;
 
-    static QString formatString(Format format);
+    static QString internalFormatString(Format format);
+
+    static void loadFormatStrings();
 };
 
 #endif // DATE_H

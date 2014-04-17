@@ -1,6 +1,7 @@
 #include "DateFormatDialog.h"
 
 #include <QPushButton>
+#include <QMaemo5Style>
 
 #include "Date.h"
 
@@ -11,6 +12,14 @@ DateFormatDialog::DateFormatDialog(QWidget *parent) :
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+
+    // Adjust colors
+    QPalette palette;
+    palette.setColor(QPalette::WindowText, QMaemo5Style::standardColor("SecondaryTextColor"));
+    ui->hintsFrame->setPalette(palette);
+    ui->dayInfo->setPalette(palette);
+    ui->monthInfo->setPalette(palette);
+    ui->yearInfo->setPalette(palette);
 
     QPushButton *saveButton = new QPushButton(tr("Save"));
     ui->buttonBox->addButton(saveButton, QDialogButtonBox::AcceptRole);

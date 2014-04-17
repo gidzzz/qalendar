@@ -8,13 +8,19 @@
   <layout class="QGridLayout" name="dialogLayout">
    <item row="0" column="0">
     <layout class="QGridLayout" name="mainLayout">
+     <property name="leftMargin">
+      <number>8</number>
+     </property>
+     <property name="rightMargin">
+      <number>8</number>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="fullFormatLabel">
        <property name="text">
         <string>Full</string>
        </property>
-       <property name="indent">
-        <number>8</number>
+       <property name="alignment">
+        <enum>Qt::AlignTop</enum>
        </property>
       </widget>
      </item>
@@ -30,8 +36,8 @@
        <property name="text">
         <string>Partial</string>
        </property>
-       <property name="indent">
-        <number>8</number>
+       <property name="alignment">
+        <enum>Qt::AlignTop</enum>
        </property>
       </widget>
      </item>
@@ -40,6 +46,78 @@
        <property name="type">
         <enum>Date::Partial</enum>
        </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QFrame" name="hintsFrame">
+       <property name="frameShape">
+        <enum>QFrame::HLine</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <widget class="QWidget" name="hintsWidget">
+       <property name="font">
+        <font>
+         <pointsize>13</pointsize>
+        </font>
+       </property>
+       <layout class="QGridLayout" name="hintsLayout">
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="dayLabel">
+          <property name="text">
+           <string>Day</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="dayInfo">
+          <property name="text">
+           <string notr="true">d dd ddd dddd</string>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="monthLabel">
+          <property name="text">
+           <string>Month</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="monthInfo">
+          <property name="text">
+           <string notr="true">M MM MMM MMMM</string>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="yearLabel">
+          <property name="text">
+           <string>Year</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="yearInfo">
+          <property name="text">
+           <string notr="true">yy yyyy</string>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred"/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>

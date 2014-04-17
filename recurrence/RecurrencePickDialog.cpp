@@ -1,9 +1,8 @@
 #include "RecurrencePickDialog.h"
 
-#include <QDebug>
-
 #include <QPushButton>
 #include <QStringList>
+#include <QDebug>
 
 #include "RulePickSelector.h"
 #include "DatePickSelector.h"

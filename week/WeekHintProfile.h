@@ -143,7 +143,7 @@ public:
         std::sort(widgets.begin(), widgets.end(), widgetUpComparator);
 
         frame.hints.clear();
-        frame.y = frame.y = std::numeric_limits<int>::min();
+        frame.y = std::numeric_limits<int>::min();
 
         // Add a hint for each widget
         for (int w = widgets.size()-1; w >= 0; w--) {

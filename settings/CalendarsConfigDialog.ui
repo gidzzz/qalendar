@@ -6,9 +6,6 @@
    <string>Edit calendars</string>
   </property>
   <layout class="QGridLayout" name="dialogLayout">
-   <property name="margin">
-     <number>0</number>
-   </property>
    <item row="0" column="0">
     <widget class="ExpandingListWidget" name="calendarList">
      <property name="editTriggers">

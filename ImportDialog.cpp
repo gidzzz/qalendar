@@ -83,7 +83,7 @@ void ImportDialog::infoStart()
 {
     // Indicate busyness
     this->setAttribute(Qt::WA_Maemo5ShowProgressIndicator, true);
-    QApplication::processEvents();
+    QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
     infoStep();
 }
@@ -152,7 +152,7 @@ void ImportDialog::importStart()
         // Indicate busyness
         this->setAttribute(Qt::WA_Maemo5ShowProgressIndicator, true);
         this->setEnabled(false);
-        QApplication::processEvents();
+        QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
 
         // Start importing
         importStep();

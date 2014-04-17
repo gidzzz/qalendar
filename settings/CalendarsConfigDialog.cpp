@@ -1,5 +1,7 @@
 #include "CalendarsConfigDialog.h"
 
+#include <QPushButton>
+
 #include <CMulticalendar.h>
 #include <CCalendar.h>
 

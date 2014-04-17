@@ -5,8 +5,6 @@
 
 #include <QGridLayout>
 
-#include <QList>
-
 class ByMonthWidget : public QFrame
 {
     Q_OBJECT

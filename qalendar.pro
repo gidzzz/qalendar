@@ -38,6 +38,8 @@ SOURCES += main.cpp \
     settings/SettingsDialog.cpp \
     settings/TunePickSelector.cpp \
     settings/TunePickDialog.cpp \
+    settings/DateFormatWidget.cpp \
+    settings/DateFormatDialog.cpp \
     settings/CalendarsConfigSelector.cpp \
     settings/CalendarsConfigDialog.cpp \
     settings/CalendarEditDialog.cpp \
@@ -107,6 +109,8 @@ HEADERS += \
     settings/SettingsDialog.h \
     settings/TunePickSelector.h \
     settings/TunePickDialog.h \
+    settings/DateFormatWidget.h \
+    settings/DateFormatDialog.h \
     settings/CalendarsConfigSelector.h \
     settings/CalendarsConfigDialog.h \
     settings/CalendarEditDialog.h \
@@ -168,6 +172,7 @@ FORMS += \
     \
     settings/SettingsDialog.ui \
     settings/TunePickDialog.ui \
+    settings/DateFormatDialog.ui \
     settings/CalendarsConfigDialog.ui \
     settings/CalendarEditDialog.ui \
     \

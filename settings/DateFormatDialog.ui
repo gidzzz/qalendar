@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DateFormatDialog</class>
+ <widget class="QDialog" name="DateFormatDialog">
+  <property name="windowTitle">
+   <string>Date formats</string>
+  </property>
+  <layout class="QGridLayout" name="dialogLayout">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="mainLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="fullFormatLabel">
+       <property name="text">
+        <string>Full</string>
+       </property>
+       <property name="indent">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="DateFormatWidget" name="fullFormatWidget">
+       <property name="type">
+        <enum>Date::Full</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="partialFormatLabel">
+       <property name="text">
+        <string>Partial</string>
+       </property>
+       <property name="indent">
+        <number>8</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="DateFormatWidget" name="partialFormatWidget">
+       <property name="type">
+        <enum>Date::Partial</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DateFormatWidget</class>
+   <extends>QWidget</extends>
+   <header>DateFormatWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

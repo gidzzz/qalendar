@@ -5,6 +5,7 @@
 
 #include <GConfItem>
 
+#include "DateFormatDialog.h"
 #include "CalendarsConfigSelector.h"
 #include "TunePickSelector.h"
 
@@ -42,6 +43,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     daySelector->setCurrentIndex(Date::firstDayOfWeek() - 1);
     ui->firstDayButton->setPickSelector(daySelector);
 
+    connect(ui->dateFormatButton, SIGNAL(clicked()), this, SLOT(openDateFormatDialog()));
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(saveSettings()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
@@ -80,6 +82,11 @@ QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
     }
 
     return selector;
+}
+
+void SettingsDialog::openDateFormatDialog()
+{
+    (new DateFormatDialog(this))->exec();
 }
 
 void SettingsDialog::saveSettings()

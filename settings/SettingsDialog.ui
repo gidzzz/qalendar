@@ -76,6 +76,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="dateFormatButton">
+       <property name="text">
+        <string>Date formats</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item row="0" column="1">

@@ -20,6 +20,7 @@ private:
     QMaemo5ListPickSelector* buildDeleteSelector(int selectValue);
 
 private slots:
+    void openDateFormatDialog();
     void saveSettings();
 };
 

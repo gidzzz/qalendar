@@ -34,12 +34,12 @@
     <message>
         <location filename="../AlarmPickDialog.ui" line="38"/>
         <source>In advance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vooraf</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="48"/>
         <source>Arbitrary</source>
-        <translation type="unfinished"></translation>
+        <translation>Willekeurig</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="66"/>
@@ -186,12 +186,12 @@
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="27"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaal</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="37"/>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="53"/>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="193"/>
         <source>This calendar cannot be deleted. Delete all calendar content instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze kalender kan niet worden verwijderd. In plaats daarvan alle kalender inhoud verwijderen?</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="201"/>
@@ -322,7 +322,7 @@ day</source>
     <message>
         <location filename="../ComponentListWidget.cpp" line="73"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../ComponentListWidget.cpp" line="74"/>
@@ -340,7 +340,7 @@ day</source>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="182"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="183"/>
@@ -353,32 +353,32 @@ day</source>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="6"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum notaties</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="20"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="37"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedeeltelijk</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="72"/>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dag</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="89"/>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Maand</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="106"/>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaar</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.cpp" line="24"/>
@@ -601,12 +601,12 @@ day</source>
     <message>
         <location filename="../EventWindow.cpp" line="270"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="271"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
@@ -705,7 +705,7 @@ day</source>
     <message>
         <location filename="../JournalsPlug.cpp" line="126"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../JournalsPlug.cpp" line="127"/>
@@ -870,7 +870,7 @@ day</source>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="191"/>
         <source>Week start</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin week</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.cpp" line="36"/>
@@ -982,12 +982,12 @@ day</source>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="60"/>
         <source>First day of week</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste dag van de week</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="70"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum notaties</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.cpp" line="19"/>
@@ -1113,12 +1113,12 @@ day</source>
     <message>
         <location filename="../TodoWindow.cpp" line="173"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../TodoWindow.cpp" line="174"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
@@ -1151,7 +1151,7 @@ day</source>
     <message>
         <location filename="../TodosPlug.cpp" line="204"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kloon</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="205"/>

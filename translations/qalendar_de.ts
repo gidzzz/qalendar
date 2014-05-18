@@ -34,12 +34,12 @@
     <message>
         <location filename="../AlarmPickDialog.ui" line="38"/>
         <source>In advance</source>
-        <translation type="unfinished"></translation>
+        <translation>Im Voraus</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="48"/>
         <source>Arbitrary</source>
-        <translation type="unfinished"></translation>
+        <translation>Beliebig</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="66"/>
@@ -186,12 +186,12 @@
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="27"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="37"/>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtstag</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="53"/>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="193"/>
         <source>This calendar cannot be deleted. Delete all calendar content instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Kalender kann nicht entfernt werden. Soll stattdessen der gesamte Inhalt gelöscht werden?</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="201"/>
@@ -323,7 +323,7 @@ tägig</translation>
     <message>
         <location filename="../ComponentListWidget.cpp" line="73"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../ComponentListWidget.cpp" line="74"/>
@@ -341,7 +341,7 @@ tägig</translation>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="182"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="183"/>
@@ -354,32 +354,32 @@ tägig</translation>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="6"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Datumsformate</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="20"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Lang</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="37"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurz</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="72"/>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="89"/>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Monat</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="106"/>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahr</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.cpp" line="24"/>
@@ -602,7 +602,7 @@ tägig</translation>
     <message>
         <location filename="../EventWindow.cpp" line="270"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="271"/>
@@ -665,7 +665,7 @@ tägig</translation>
     <message>
         <location filename="../ImportDialog.cpp" line="187"/>
         <source>Some items already in calendar</source>
-        <translation>Manche Einträge sind bereits im Kalender vorhanden</translation>
+        <translation>Es sind bereits Einträge im Kalender vorhanden</translation>
     </message>
 </context>
 <context>
@@ -706,7 +706,7 @@ tägig</translation>
     <message>
         <location filename="../JournalsPlug.cpp" line="126"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../JournalsPlug.cpp" line="127"/>
@@ -871,7 +871,7 @@ tägig</translation>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="191"/>
         <source>Week start</source>
-        <translation type="unfinished"></translation>
+        <translation>Wochenanfang</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.cpp" line="36"/>
@@ -983,12 +983,12 @@ tägig</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="60"/>
         <source>First day of week</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster Tag der Woche</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="70"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Datumsformate</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.cpp" line="19"/>
@@ -1114,7 +1114,7 @@ tägig</translation>
     <message>
         <location filename="../TodoWindow.cpp" line="173"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../TodoWindow.cpp" line="174"/>
@@ -1152,7 +1152,7 @@ tägig</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="204"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplizieren</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="205"/>

@@ -5,7 +5,8 @@
 
 #include <QDate>
 
-DateFormatWidget::DateFormatWidget(QWidget *parent)
+DateFormatWidget::DateFormatWidget(QWidget *parent) :
+    QWidget(parent)
 {
     // Create subwidgets
     formatEdit = new QLineEdit(this);

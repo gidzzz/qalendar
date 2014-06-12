@@ -101,11 +101,16 @@ CBdayEvent* BirthdayCalendar::toBdayEvent(EContact *contact)
     recurrence.setRrule(vector<string>(1, "FREQ=YEARLY"));
     recurrence.setRtype(E_COMPLEX); // UNTIL part is missing
 
+    // E_CONTACT_NAME_OR_ORG ignores nicknames, chack manually when appropriate
+    const char *summary = static_cast<const char*>(e_contact_get_const(contact, E_CONTACT_NAME_OR_ORG));
+    if (!summary)
+        summary = static_cast<const char*>(e_contact_get_const(contact, E_CONTACT_NICKNAME));
+
     // Create an event and fill the necessary fields
     CBdayEvent *event = new CBdayEvent();
     event->setType(E_BDAY);
     event->setId(static_cast<const char*>(e_contact_get_const(contact, E_CONTACT_UID)));
-    event->setSummary(static_cast<const char*>(e_contact_get_const(contact, E_CONTACT_NAME_OR_ORG)));
+    event->setSummary(summary ? summary : "CONTACT-" + event->getId());
     event->setDateStart(date);
     event->setDateEnd(date);
     event->setAllDay(true);

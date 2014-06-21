@@ -142,6 +142,7 @@ QPixmap MonthWidget::render()
     // Calculate dates
     QDate date = this->date;
     const int currentMonth = date.month();
+    const QDate currentDate = QDate::currentDate();
     date = firstDate();
 
     // Fill the event window with initial entries
@@ -167,18 +168,17 @@ QPixmap MonthWidget::render()
             if (date == pressedDate) {
                 // Pressed
                 painter.drawPixmap(x, y, pixDayPressed);
-            } else if (selectedMonth) {
-                // Current month
-                if (date == QDate::currentDate()) {
-                    // Today
-                    painter.drawPixmap(x, y, pixDayCurrent);
-                } else {
+            } else if (date == currentDate) {
+                // Today
+                painter.drawPixmap(x, y, pixDayCurrent);
+            } else {
+                if (selectedMonth) {
                     // Normal
                     painter.drawPixmap(x, y, pixDay);
+                } else {
+                    // Other month
+                    painter.drawPixmap(x, y, pixDayDimmed);
                 }
-            } else {
-                // Other month
-                painter.drawPixmap(x, y, pixDayDimmed);
             }
 
             const int topMargin = 8;
@@ -189,7 +189,7 @@ QPixmap MonthWidget::render()
             const int baseWidth = (CellWidth - leftMargin - rightMargin) / 4;
 
             // Draw day number
-            painter.setPen(selectedMonth ? (date == QDate::currentDate() ? reversedTextColor : textColor) : dimmedTextColor);
+            painter.setPen(date == currentDate ? reversedTextColor : (selectedMonth ? textColor : dimmedTextColor));
             painter.drawText(x+leftMargin,
                              y+topMargin,
                              CellWidth-leftMargin-rightMargin,

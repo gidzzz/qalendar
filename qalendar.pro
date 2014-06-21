@@ -44,6 +44,8 @@ SOURCES += main.cpp \
     settings/CalendarsConfigDialog.cpp \
     settings/CalendarEditDialog.cpp \
     \
+    Theme.cpp \
+    \
     Date.cpp \
     ChangeManager.cpp \
     BirthdayCalendar.cpp \

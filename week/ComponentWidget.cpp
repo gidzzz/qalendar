@@ -92,24 +92,27 @@ void ComponentWidget::paintEvent(QPaintEvent *)
             // Not an event
 
             // Decide which emblem to use
-            QString emblemName;
+            QPixmap *emblem = NULL;
             switch (component->getType()) {
-                case E_TODO: emblemName = "calendar_todo"; break;
-                case E_BDAY: emblemName = "calendar_birthday"; break;
+                case E_TODO: emblem = Theme::TodoEmblem; break;
+                case E_BDAY: emblem = Theme::BdayEmblem; break;
             }
 
             if (alarm) {
                 // Draw both the type emblem and the alarm emblem
-                painter.drawPixmap(canvasRect.left(), canvasRect.top(),
-                                   QIcon::fromTheme(emblemName).pixmap(EmblemSize, EmblemSize));
+                if (emblem)
+                    painter.drawPixmap(canvasRect.left(),
+                                       canvasRect.top(),
+                                       *emblem);
 
                 painter.drawPixmap(canvasRect.left(), canvasRect.bottom() - EmblemSize,
                                    QIcon::fromTheme("calendar_alarm").pixmap(EmblemSize, EmblemSize));
             } else {
                 // Draw only the type emblem
-                painter.drawPixmap(canvasRect.left(),
-                                   canvasRect.top() + (canvasRect.height() - EmblemSize) / 2,
-                                   QIcon::fromTheme(emblemName).pixmap(EmblemSize, EmblemSize));
+                if (emblem)
+                    painter.drawPixmap(canvasRect.left(),
+                                       canvasRect.top() + (canvasRect.height() - EmblemSize) / 2,
+                                       *emblem);
             }
         }
 

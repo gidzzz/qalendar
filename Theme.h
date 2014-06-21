@@ -1,3 +1,6 @@
+#ifndef THEME_H
+#define THEME_H
+
 #define PNG ".png"
 
 #define PIX_ROOT "/etc/hildon/theme/calendar/"
@@ -20,3 +23,15 @@
 #define PIX_WEEK_TIME_COLUMN PIX_ROOT "calendar_week_time_column" PNG
 
 #define PIX_GENERIC_PRESSED PIX_ROOT "generic_area_pressed" PNG
+
+// NOTE: Manual preparation of emblems is required because of a bug in Qt
+// (https://bugreports.qt-project.org/browse/QTBUG-17953).
+#include <QPixmap>
+namespace Theme
+{
+    extern QPixmap *TodoEmblem;
+    extern QPixmap *BdayEmblem;
+    void init();
+}
+
+#endif // THEME_H

@@ -274,21 +274,16 @@ QPixmap MonthWidget::render()
 
             const int emblemMargin = 6;
 
-            if (todo) {
+            if (todo)
                 // Draw todo emblem
-                QIcon todoEmblem = QIcon::fromTheme("calendar_todo");
                 painter.drawPixmap(x + CellWidth - emblemMargin - EmblemSize - (bday ? EmblemSize + emblemMargin + emblemMargin : 0),
                                    y + emblemMargin,
-                                   todoEmblem.pixmap(EmblemSize, EmblemSize));
-            }
-
-            if (bday) {
+                                   *Theme::TodoEmblem);
+            if (bday)
                 // Draw birthday emblem
-                QIcon bdayEmblem = QIcon::fromTheme("calendar_birthday");
                 painter.drawPixmap(x + CellWidth - emblemMargin - EmblemSize,
                                    y + emblemMargin,
-                                   bdayEmblem.pixmap(EmblemSize, EmblemSize));
-            }
+                                   *Theme::BdayEmblem);
 
             x += CellWidth;
         }

@@ -27,6 +27,7 @@
 #include "MainWindow.h"
 
 #include "Date.h"
+#include "Theme.h"
 
 int main(int argc, char  *argv[])
 {
@@ -79,6 +80,7 @@ int main(int argc, char  *argv[])
     QLocale::setDefault(lang);
 
     Date::init();
+    Theme::init();
 
     MainWindow window(runInBackground);
 

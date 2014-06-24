@@ -177,7 +177,18 @@ bool ChangeManager::clone(QWidget *parent, CComponent *component)
             clone = CWrapper::details(static_cast<CJournal*>(component));
             break;
         case E_BDAY:
-            QMaemo5InformationBox::information(parent, QObject::tr("Unable to edit birthdays"));
+            // Set only fields supported by the editor
+            CBdayEvent *event = CWrapper::details(static_cast<CBdayEvent*>(component));
+            clone = new CEvent();
+            clone->setSummary(event->getSummary());
+            clone->setLocation(event->getLocation());
+            clone->setDescription(event->getDescription());
+            clone->setDateStart(event->getDateStart());
+            clone->setDateEnd(event->getDateEnd());
+            clone->setAllDay(event->getAllDay());
+            clone->setAlarm(event->getAlarm());
+            clone->setRecurrence(event->getRecurrence());
+            delete event;
             break;
     }
 

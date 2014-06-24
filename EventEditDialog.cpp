@@ -70,6 +70,9 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     connect(dpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
     connect(tpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
 
+    QSettings settings;
+    settings.beginGroup("EventEditDialog");
+
     if (event) {
         ui->summaryEdit->setText(QString::fromUtf8(event->getSummary().c_str()));
         ui->locationEdit->setText(QString::fromUtf8(event->getLocation().c_str()));
@@ -85,8 +88,6 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         event = new CEvent();
 
         // Load last used settings
-        QSettings settings;
-        settings.beginGroup("EventEditDialog");
         ui->allDayBox->setChecked(settings.value("AllDay", false).toBool());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
         aps->setSecondsBefore(settings.value("Alarm", -1).toInt());
@@ -94,7 +95,12 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         ui->summaryEdit->setFocus();
     }
 
-    this->setupSaveButton(ui->buttonBox, SLOT(saveEvent()));
+    // Make sure that a valid calendar is selected (for cloned birthdays)
+    if (int calendarId = event->getCalendarId()) {
+        cps->setCalendar(calendarId);
+    } else {
+        cps->setCalendar(settings.value("Calendar", 1).toInt());
+    }
 
     // Make sure that the recurrence exists, as required by the recurrence edit dialog
     if (event->getRecurrence()) {
@@ -104,6 +110,8 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         emptyRecurrence.setRtype(E_DISABLED);
         rps->setRecurrence(&emptyRecurrence);
     }
+
+    this->setupSaveButton(ui->buttonBox, SLOT(saveEvent()));
 
     ui->mainArea->widget()->layout()->activate();
 

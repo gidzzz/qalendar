@@ -2,7 +2,6 @@
 
 #include <limits>
 
-#include <QDateTime>
 #include <QMaemo5TimePickSelector>
 #include <QSettings>
 
@@ -14,6 +13,7 @@
 #include "AlarmPickSelector.h"
 
 #include "ChangeManager.h"
+#include "Date.h"
 
 TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     ComponentEditDialog(parent),
@@ -48,8 +48,9 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     if (todo) {
         ui->summaryEdit->setText(QString::fromUtf8(todo->getSummary().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(todo->getDescription().c_str()));
+        ui->zoneWidget->setCurrentZone(todo->getTzid().c_str());
         ui->doneBox->setChecked(todo->getStatus());
-        dps->setCurrentDate(QDateTime::fromTime_t(todo->getDue()).date());
+        dps->setCurrentDate(Date::toRemote(todo->getDue(), todo->getTzid().c_str()).date());
         cps->setCalendar(todo->getCalendarId());
         aps->setAlarm(todo->getAlarm());
     } else {
@@ -119,10 +120,13 @@ void TodoEditDialog::saveTodo()
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
+    QString zone = ui->zoneWidget->currentZone();
+
     todo->setSummary(ui->summaryEdit->text().toUtf8().data());
     todo->setDescription(ui->descriptionEdit->toPlainText().toUtf8().data());
     todo->setStatus(ui->doneBox->isChecked());
-    todo->setDue(QDateTime(dps->currentDate()).toTime_t());
+    todo->setDue(Date::toUtc(QDateTime(dps->currentDate(), QTime(00,00)), zone));
+    todo->setTzid(zone.toAscii().data());
 
     aps->configureAlarm(todo);
 

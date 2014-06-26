@@ -185,6 +185,7 @@ bool ChangeManager::clone(QWidget *parent, CComponent *component)
             clone->setDescription(event->getDescription());
             clone->setDateStart(event->getDateStart());
             clone->setDateEnd(event->getDateEnd());
+            clone->setTzid(event->getTzid());
             clone->setAllDay(event->getAllDay());
             clone->setAlarm(event->getAlarm());
             clone->setRecurrence(event->getRecurrence());

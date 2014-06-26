@@ -15,6 +15,7 @@
 #include "AlarmPickSelector.h"
 
 #include "ChangeManager.h"
+#include "Date.h"
 
 EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     ComponentEditDialog(parent),
@@ -77,14 +78,19 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     settings.beginGroup("EventEditDialog");
 
     if (event) {
+        const char *zone = event->getTzid().c_str();
+        QDateTime from = Date::toRemote(event->getDateStart(), zone);
+        QDateTime to = Date::toRemote(event->getDateEnd(), zone);
+
         ui->summaryEdit->setText(QString::fromUtf8(event->getSummary().c_str()));
         ui->locationEdit->setText(QString::fromUtf8(event->getLocation().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(event->getDescription().c_str()));
+        ui->zoneWidget->setCurrentZone(event->getTzid().c_str());
         ui->allDayBox->setChecked(event->getAllDay());
-        dpsFrom->setCurrentDate(QDateTime::fromTime_t(event->getDateStart()).date());
-        tpsFrom->setCurrentTime(QDateTime::fromTime_t(event->getDateStart()).time());
-        dpsTo->setCurrentDate(QDateTime::fromTime_t(event->getDateEnd()).date());
-        tpsTo->setCurrentTime(QDateTime::fromTime_t(event->getDateEnd()).time());
+        dpsFrom->setCurrentDate(from.date());
+        tpsFrom->setCurrentTime(from.time());
+        dpsTo->setCurrentDate(to.date());
+        tpsTo->setCurrentTime(to.time());
         cps->setCalendar(event->getCalendarId());
         aps->setAlarm(event->getAlarm());
     } else {
@@ -218,12 +224,15 @@ void EventEditDialog::saveEvent()
     const QDateTime from(dpsFrom->currentDate(), allDay ? QTime(00,00) : tpsFrom->currentTime());
     const QDateTime to(dpsTo->currentDate(), allDay ? QTime(23,59) : tpsTo->currentTime());
 
+    QString zone = ui->zoneWidget->currentZone();
+
     // Set event properties
     event->setSummary(ui->summaryEdit->text().toUtf8().data());
     event->setLocation(ui->locationEdit->text().toUtf8().data());
     event->setDescription(ui->descriptionEdit->toPlainText().toUtf8().data());
-    event->setDateStart(from.toTime_t());
-    event->setDateEnd(to.toTime_t());
+    event->setDateStart(Date::toUtc(from, zone));
+    event->setDateEnd(Date::toUtc(to, zone));
+    event->setTzid(zone.toAscii().data());
     event->setAllDay(allDay);
 
     // Set alarm

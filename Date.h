@@ -26,6 +26,9 @@ public:
     static int relDayOfWeek(int absDay);
     static int relWeekNumber(const QDate &date, int *year = NULL);
 
+    static QDateTime toRemote(time_t t, const QString &zone);
+    static time_t toUtc(const QDateTime &t, const QString &zone);
+
     static QString toString(const QDate &date, Format format);
     static QString toString(const QDateTime &date, Format format, bool time = false);
 

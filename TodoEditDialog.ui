@@ -37,6 +37,9 @@
         </widget>
        </item>
        <item>
+        <widget class="ZoneWidget" name="zoneWidget"/>
+       </item>
+       <item>
         <widget class="QMaemo5ValueButton" name="calendarButton">
          <property name="text">
           <string>Calendar</string>
@@ -71,6 +74,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>ZoneWidget</class>
+   <extends>QMaemo5ValueButton</extends>
+   <header>ZoneWidget.h</header>
+  </customwidget>
   <customwidget>
    <class>ExpandingTextEdit</class>
    <extends>QTextEdit</extends>

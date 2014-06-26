@@ -3,6 +3,8 @@
 #include <QSettings>
 #include <QLocale>
 
+#include <clockd/libtime.h>
+
 #include "ChangeManager.h"
 
 QString Date::m_fullFormat;
@@ -86,6 +88,43 @@ int Date::relWeekNumber(const QDate &date, int *year)
     if (year) *year = givenMid.year();
 
     return firstMid.daysTo(givenMid) / 7 + 1;
+}
+
+QDateTime Date::toRemote(time_t t, const QString &zone)
+{
+    // Treat empty zone as the current zone
+    if (zone.isEmpty())
+        return QDateTime::fromTime_t(t);
+
+    tm tm;
+
+    time_get_remote(t, zone.toAscii(), &tm);
+
+    return QDateTime(QDate(tm.tm_year+1900, tm.tm_mon+1, tm.tm_mday),
+                     QTime(tm.tm_hour, tm.tm_min, tm.tm_sec));
+}
+
+time_t Date::toUtc(const QDateTime &t, const QString &zone)
+{
+    // Treat empty zone as the current zone
+    if (zone.isEmpty())
+       return t.toTime_t();
+
+    tm tm;
+
+    QDate date = t.date();
+    tm.tm_year = date.year() - 1900;
+    tm.tm_mon = date.month() - 1;
+    tm.tm_mday = date.day();
+
+    QTime time = t.time();
+    tm.tm_hour = time.hour();
+    tm.tm_min = time.minute();
+    tm.tm_sec = time.second();
+
+    tm.tm_isdst = -1;
+
+    return time_mktime(&tm, zone.toAscii());
 }
 
 QString Date::toString(const QDate &date, Format format)

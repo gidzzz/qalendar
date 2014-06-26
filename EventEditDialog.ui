@@ -113,6 +113,9 @@
         </layout>
        </item>
        <item>
+        <widget class="ZoneWidget" name="zoneWidget"/>
+       </item>
+       <item>
         <widget class="QMaemo5ValueButton" name="repeatButton">
          <property name="text">
           <string>Repeat</string>
@@ -157,6 +160,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>ZoneWidget</class>
+   <extends>QMaemo5ValueButton</extends>
+   <header>ZoneWidget.h</header>
+  </customwidget>
   <customwidget>
    <class>ExpandingTextEdit</class>
    <extends>QTextEdit</extends>

@@ -67,6 +67,7 @@ SOURCES += main.cpp \
     TodoWindow.cpp \
     CalendarListWidget.cpp \
     ComponentListWidget.cpp \
+    ZoneWidget.cpp \
     LinkLabel.cpp \
     ExpandingTextEdit.cpp \
     Rotator.cpp
@@ -153,6 +154,7 @@ HEADERS += \
     TodoWindow.h \
     CalendarListWidget.h \
     ComponentListWidget.h \
+    ZoneWidget.h \
     ChainedSpinBox.h \
     LinkLabel.h \
     ExpandingTextEdit.h \
@@ -235,4 +237,6 @@ translations.CONFIG += no_check_exist
 translations.path = $$PKGDATADIR/translations
 
 CONFIG += link_pkgconfig
-PKGCONFIG += calendar-backend gq-gconf libebook-1.2
+PKGCONFIG += calendar-backend gq-gconf libebook-1.2 libcityinfo0-0
+
+LIBS += -ltime

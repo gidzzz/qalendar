@@ -37,7 +37,11 @@
         </widget>
        </item>
        <item>
-        <widget class="ZoneWidget" name="zoneWidget"/>
+        <widget class="QMaemo5ValueButton" name="zoneButton">
+         <property name="text">
+          <string>Time zone</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QMaemo5ValueButton" name="calendarButton">
@@ -74,11 +78,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>ZoneWidget</class>
-   <extends>QMaemo5ValueButton</extends>
-   <header>ZoneWidget.h</header>
-  </customwidget>
   <customwidget>
    <class>ExpandingTextEdit</class>
    <extends>QTextEdit</extends>

@@ -10,6 +10,7 @@
 #include "CWrapper.h"
 
 #include "DatePickSelector.h"
+#include "ZonePickSelector.h"
 #include "RecurrencePickSelector.h"
 #include "CalendarPickSelector.h"
 #include "AlarmPickSelector.h"
@@ -52,6 +53,10 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     ui->toDateButton->setPickSelector(dpsTo);
     ui->toTimeButton->setPickSelector(tpsTo);
 
+    // Set up time zone picker
+    ZonePickSelector *zps = new ZonePickSelector();
+    ui->zoneButton->setPickSelector(zps);
+
     // Set up recurrence picker
     RecurrencePickSelector *rps = new RecurrencePickSelector();
     ui->repeatButton->setPickSelector(rps);
@@ -85,12 +90,12 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         ui->summaryEdit->setText(QString::fromUtf8(event->getSummary().c_str()));
         ui->locationEdit->setText(QString::fromUtf8(event->getLocation().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(event->getDescription().c_str()));
-        ui->zoneWidget->setCurrentZone(event->getTzid().c_str());
         ui->allDayBox->setChecked(event->getAllDay());
         dpsFrom->setCurrentDate(from.date());
         tpsFrom->setCurrentTime(from.time());
         dpsTo->setCurrentDate(to.date());
         tpsTo->setCurrentTime(to.time());
+        zps->setCurrentZone(event->getTzid().c_str());
         cps->setCalendar(event->getCalendarId());
         aps->setAlarm(event->getAlarm());
     } else {
@@ -215,6 +220,7 @@ void EventEditDialog::saveEvent()
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
     QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
     QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
+    ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector());
     RecurrencePickSelector *rps = qobject_cast<RecurrencePickSelector*>(ui->repeatButton->pickSelector());
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
@@ -224,7 +230,7 @@ void EventEditDialog::saveEvent()
     const QDateTime from(dpsFrom->currentDate(), allDay ? QTime(00,00) : tpsFrom->currentTime());
     const QDateTime to(dpsTo->currentDate(), allDay ? QTime(23,59) : tpsTo->currentTime());
 
-    QString zone = ui->zoneWidget->currentZone();
+    QString zone = zps->currentZone();
 
     // Set event properties
     event->setSummary(ui->summaryEdit->text().toUtf8().data());

@@ -63,11 +63,12 @@ SOURCES += main.cpp \
     ColorPickDialog.cpp \
     DatePickSelector.cpp \
     DatePickDialog.cpp \
+    ZonePickSelector.cpp \
+    ZonePickDialog.cpp \
     EventWindow.cpp \
     TodoWindow.cpp \
     CalendarListWidget.cpp \
     ComponentListWidget.cpp \
-    ZoneWidget.cpp \
     LinkLabel.cpp \
     ExpandingTextEdit.cpp \
     Rotator.cpp
@@ -145,6 +146,8 @@ HEADERS += \
     DateDayDelegate.h \
     DatePickSelector.h \
     DatePickDialog.h \
+    ZonePickSelector.h \
+    ZonePickDialog.h \
     ComponentListDelegate.h \
     DateHeadingWidget.h \
     NewComponentWidget.h \
@@ -154,7 +157,6 @@ HEADERS += \
     TodoWindow.h \
     CalendarListWidget.h \
     ComponentListWidget.h \
-    ZoneWidget.h \
     ChainedSpinBox.h \
     LinkLabel.h \
     ExpandingTextEdit.h \
@@ -190,6 +192,7 @@ FORMS += \
     CalendarPickDialog.ui \
     ColorPickDialog.ui \
     DatePickDialog.ui \
+    ZonePickDialog.ui \
     EventWindow.ui \
     TodoWindow.ui
 

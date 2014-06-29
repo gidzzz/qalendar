@@ -9,6 +9,7 @@
 #include "CWrapper.h"
 
 #include "DatePickSelector.h"
+#include "ZonePickSelector.h"
 #include "CalendarPickSelector.h"
 #include "AlarmPickSelector.h"
 
@@ -31,12 +32,19 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         this->setWindowTitle(tr("New task"));
     }
 
+    // Set up date picker
     DatePickSelector *dps = new DatePickSelector();
     ui->dateButton->setPickSelector(dps);
 
+    // Set up time zone picker
+    ZonePickSelector *zps = new ZonePickSelector();
+    ui->zoneButton->setPickSelector(zps);
+
+    // Set up calendar picker
     CalendarPickSelector *cps = new CalendarPickSelector();
     ui->calendarButton->setPickSelector(cps);
 
+    // Set up alarm picker
     AlarmPickSelector *aps = new AlarmPickSelector(E_AM_EXACTDATETIME);
     ui->alarmButton->setPickSelector(aps);
 
@@ -48,9 +56,9 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     if (todo) {
         ui->summaryEdit->setText(QString::fromUtf8(todo->getSummary().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(todo->getDescription().c_str()));
-        ui->zoneWidget->setCurrentZone(todo->getTzid().c_str());
         ui->doneBox->setChecked(todo->getStatus());
         dps->setCurrentDate(Date::toRemote(todo->getDue(), todo->getTzid().c_str()).date());
+        zps->setCurrentZone(todo->getTzid().c_str());
         cps->setCalendar(todo->getCalendarId());
         aps->setAlarm(todo->getAlarm());
     } else {
@@ -117,10 +125,11 @@ void TodoEditDialog::onDateChanged()
 void TodoEditDialog::saveTodo()
 {
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());
+    ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector());
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
-    QString zone = ui->zoneWidget->currentZone();
+    QString zone = zps->currentZone();
 
     todo->setSummary(ui->summaryEdit->text().toUtf8().data());
     todo->setDescription(ui->descriptionEdit->toPlainText().toUtf8().data());

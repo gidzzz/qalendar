@@ -35,6 +35,7 @@ ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
     }
     ui->zoneList->sortItems();
 
+    // Highlight the selected zone
     for (int i = 0; i < ui->zoneList->count(); i++) {
         if (ui->zoneList->item(i)->data(Qt::UserRole) == zone) {
             ui->zoneList->setCurrentRow(i);
@@ -42,9 +43,16 @@ ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
         }
     }
 
+    // Set up the default zone button
+    ui->defaultButton->setText(displayName(QString()));
+
     connect(ui->zoneList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(onZoneActivated(QListWidgetItem*)));
+    connect(ui->searchEdit, SIGNAL(textChanged(QString)), this, SLOT(onSearchTextChanged(QString)));
+    connect(ui->defaultButton, SIGNAL(clicked()), this, SLOT(onDefaultClicked()));
 
     this->setFeatures(NULL, NULL);
+
+    ui->searchEdit->setFocus();
 }
 
 ZonePickDialog::~ZonePickDialog()
@@ -73,9 +81,39 @@ void ZonePickDialog::resizeEvent(QResizeEvent *e)
     ui->zoneList->scrollToItem(ui->zoneList->currentItem(), QAbstractItemView::PositionAtCenter);
 }
 
+void ZonePickDialog::keyReleaseEvent(QKeyEvent *e)
+{
+    if (e->key() == Qt::Key_Up || e->key() == Qt::Key_Down) {
+        ui->zoneList->setFocus();
+        return;
+    }
+
+    if (ui->searchEdit->hasFocus() || e->text().isEmpty()) {
+        return;
+    }
+
+    ui->searchEdit->setText(ui->searchEdit->text() + e->text());
+    ui->searchEdit->setFocus();
+}
+
+void ZonePickDialog::onDefaultClicked()
+{
+    emit selected(QString());
+
+    this->close();
+}
+
 void ZonePickDialog::onZoneActivated(QListWidgetItem *item)
 {
     emit selected(item->data(Qt::UserRole).toString());
 
     this->close();
+}
+
+void ZonePickDialog::onSearchTextChanged(const QString &text)
+{
+    for (int i = 0; i < ui->zoneList->count(); i++) {
+        QListWidgetItem *item = ui->zoneList->item(i);
+        item->setHidden(!item->text().contains(text, Qt::CaseInsensitive));
+    }
 }

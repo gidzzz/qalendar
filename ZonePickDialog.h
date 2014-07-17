@@ -4,6 +4,8 @@
 #include "RotatingDialog.h"
 #include "ui_ZonePickDialog.h"
 
+#include <QKeyEvent>
+
 class ZonePickDialog : public RotatingDialog
 {
     Q_OBJECT
@@ -21,9 +23,12 @@ private:
     Ui::ZonePickDialog *ui;
 
     void resizeEvent(QResizeEvent *e);
+    void keyReleaseEvent(QKeyEvent *e);
 
 private slots:
+    void onDefaultClicked();
     void onZoneActivated(QListWidgetItem *item);
+    void onSearchTextChanged(const QString &text);
 };
 
 #endif // ZONEPICKDIALOG_H

@@ -6,6 +6,9 @@
    <string>Time zone</string>
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>5</number>
    </property>
@@ -24,6 +27,23 @@
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="searchLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="searchEdit">
+       <property name="placeholderText">
+        <string>Search</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="defaultButton"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

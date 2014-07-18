@@ -67,6 +67,7 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         // Load last used settings
         QSettings settings;
         settings.beginGroup("TodoEditDialog");
+        zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
 
         // Prepre to calculate the due date
@@ -144,6 +145,7 @@ void TodoEditDialog::saveTodo()
     // Save last used settings
     QSettings settings;
     settings.beginGroup("TodoEditDialog");
+    settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     settings.setValue("Calendar", cps->currentId());
     if (defaultDue)
         settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));

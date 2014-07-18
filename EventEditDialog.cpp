@@ -103,6 +103,7 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
         // Load last used settings
         ui->allDayBox->setChecked(settings.value("AllDay", false).toBool());
+        zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
         aps->setSecondsBefore(settings.value("Alarm", -1).toInt());
 
@@ -264,6 +265,7 @@ void EventEditDialog::saveEvent()
     QSettings settings;
     settings.beginGroup("EventEditDialog");
     settings.setValue("AllDay", ui->allDayBox->isChecked());
+    settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     settings.setValue("Calendar", cps->currentId());
     settings.setValue("Alarm", aps->currentSecondsBefore());
     // NOTE: Sometimes it might be convenient to have the settings saved

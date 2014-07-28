@@ -1,9 +1,12 @@
 #include "ZonePickDialog.h"
 
 #include <QTime>
+#include <QStringBuilder>
 
 #include <cityinfo.h>
 #include <clockd/libtime.h>
+
+#include "ZoneDelegate.h"
 
 ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
     RotatingDialog(parent),
@@ -12,6 +15,8 @@ ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
     ui->setupUi(this);
 
     this->setAttribute(Qt::WA_DeleteOnClose);
+
+    ui->zoneList->setItemDelegate(new ZoneDelegate(ui->zoneList));
 
     // Use libcityinfo to easily obtain the list of time zones (hopefully all of
     // them, otherwise /usr/share/zoneinfo/ might be a better source). Watch out
@@ -24,13 +29,18 @@ ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
 
     // Fill the list
     for (QSet<QString>::const_iterator z = zones.begin(); z != zones.end(); ++z) {
-        // Convert to libc format
-        const QString zone = ':' + *z;
+        // Prepare zone detils for display
+        QString zone = QString(*z).replace('_', ' ');
+        const int namePos = zone.lastIndexOf('/');
+        const QString name = zone.mid(namePos+1);
+        const QString region = namePos > 0 ? zone.left(namePos) : QString();
+        const QString offset = displayOffset(time_get_utc_offset(z->toAscii()));
 
-        // Add item to the list
         QListWidgetItem *item = new QListWidgetItem();
-        item->setText(displayName(zone));
-        item->setData(Qt::UserRole, zone);
+        // Cram all details into one role for easy sorting with QListWidget,
+        // use unit separator for easy extraction.
+        item->setText(name % QChar(31) % region % QChar(31) % offset);
+        item->setData(Qt::UserRole, ':' + *z); // Convert to libc format
         ui->zoneList->addItem(item);
     }
     ui->zoneList->sortItems();
@@ -60,18 +70,18 @@ ZonePickDialog::~ZonePickDialog()
     delete ui;
 }
 
-QString ZonePickDialog::displayName(QString zone)
+QString ZonePickDialog::displayName(const QString &zone)
 {
     if (zone.isEmpty()) return tr("Current");
 
-    const int offset = time_get_utc_offset(zone.toAscii());
-
-    if (zone.startsWith(':'))
-        zone = zone.mid(1).replace('_', ' ');
-
     return QString("%1 (GMT %2)")
-           .arg(zone)
-           .arg((offset > 0 ? '-' : '+') + QTime().addSecs(qAbs(offset)).toString("h:mm"));
+           .arg(zone.startsWith(':') ? zone.mid(1).replace('_', ' ') : zone)
+           .arg(displayOffset(time_get_utc_offset(zone.toAscii())));
+}
+
+QString ZonePickDialog::displayOffset(int offset)
+{
+    return (offset > 0 ? '-' : '+') + QTime().addSecs(qAbs(offset)).toString("h:mm");
 }
 
 void ZonePickDialog::resizeEvent(QResizeEvent *e)

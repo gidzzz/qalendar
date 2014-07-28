@@ -148,6 +148,7 @@ HEADERS += \
     DatePickDialog.h \
     ZonePickSelector.h \
     ZonePickDialog.h \
+    ZoneDelegate.h \
     ComponentListDelegate.h \
     DateHeadingWidget.h \
     NewComponentWidget.h \

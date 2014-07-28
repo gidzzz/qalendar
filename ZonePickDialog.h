@@ -14,7 +14,8 @@ public:
     ZonePickDialog(QWidget *parent, const QString &zone);
     ~ZonePickDialog();
 
-    static QString displayName(QString zone);
+    static QString displayName(const QString &zone);
+    static QString displayOffset(int offset);
 
 signals:
     void selected(QString zone);

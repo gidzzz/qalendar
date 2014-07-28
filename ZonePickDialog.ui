@@ -41,6 +41,9 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="searchClearButton"/>
+     </item>
+     <item>
       <widget class="QPushButton" name="defaultButton"/>
      </item>
     </layout>

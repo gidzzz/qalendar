@@ -53,11 +53,15 @@ ZonePickDialog::ZonePickDialog(QWidget *parent, const QString &zone) :
         }
     }
 
+    // Set up the search clear button
+    ui->searchClearButton->setIcon(QIcon::fromTheme("general_close"));
+
     // Set up the default zone button
     ui->defaultButton->setText(displayName(QString()));
 
     connect(ui->zoneList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(onZoneActivated(QListWidgetItem*)));
     connect(ui->searchEdit, SIGNAL(textChanged(QString)), this, SLOT(onSearchTextChanged(QString)));
+    connect(ui->searchClearButton, SIGNAL(clicked()), ui->searchEdit, SLOT(clear()));
     connect(ui->defaultButton, SIGNAL(clicked()), this, SLOT(onDefaultClicked()));
 
     this->setFeatures(NULL, NULL);

@@ -26,6 +26,8 @@ private:
 
     time_t duration;
 
+    void updateAlarmReference();
+
 private slots:
     void onAllDayChanged(bool enabled);
     void onFromChanged();

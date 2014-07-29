@@ -40,6 +40,9 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     AlarmPickSelector *aps = new AlarmPickSelector(E_AM_EXACTDATETIME);
     ui->alarmButton->setPickSelector(aps);
 
+    // Make sure that AlarmPickSelector's reference date is set
+    onDateChanged();
+
     connect(dps, SIGNAL(selected(QString)), this, SLOT(onDateChanged()));
 
     if (todo) {

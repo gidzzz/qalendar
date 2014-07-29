@@ -63,6 +63,9 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     AlarmPickSelector *aps = new AlarmPickSelector(E_AM_ETIME);
     ui->alarmButton->setPickSelector(aps);
 
+    // Make sure that AlarmPickSelector's reference date is set
+    updateAlarmReference();
+
     // Enable field constraints
     connect(ui->allDayBox, SIGNAL(toggled(bool)), this, SLOT(onAllDayChanged(bool)));
     connect(dpsFrom, SIGNAL(selected(QString)), this, SLOT(onFromChanged()));
@@ -142,16 +145,21 @@ void EventEditDialog::setAllDay(bool allDay)
     ui->allDayBox->setChecked(allDay);
 }
 
+void EventEditDialog::updateAlarmReference()
+{
+    DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
+    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
+    AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
+
+    aps->setReferenceDate(QDateTime(dpsFrom->currentDate(), ui->allDayBox->isChecked() ? QTime(00,00) : tpsFrom->currentTime()));
+}
+
 void EventEditDialog::onAllDayChanged(bool enabled)
 {
     ui->fromTimeButton->setHidden(enabled);
     ui->toTimeButton->setHidden(enabled);
 
-    DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
-    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
-    AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
-
-    aps->setReferenceDate(QDateTime(dpsFrom->currentDate(), enabled ? QTime(00,00) : tpsFrom->currentTime()));
+    updateAlarmReference();
 }
 
 void EventEditDialog::onFromChanged()
@@ -160,7 +168,6 @@ void EventEditDialog::onFromChanged()
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
     QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
     QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
-    AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
     QDateTime from(dpsFrom->currentDate(), tpsFrom->currentTime());
 
@@ -172,7 +179,7 @@ void EventEditDialog::onFromChanged()
     dpsTo->setCurrentDate(to.date());
     tpsTo->setCurrentTime(to.time());
 
-    aps->setReferenceDate(QDateTime(dpsFrom->currentDate(), ui->allDayBox->isChecked() ? QTime(00,00) : tpsFrom->currentTime()));
+    updateAlarmReference();
 }
 
 void EventEditDialog::onToChanged()

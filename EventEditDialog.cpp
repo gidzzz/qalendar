@@ -33,6 +33,8 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         this->setWindowTitle(tr("New event"));
     }
 
+    QSettings settings;
+
     // 'From' and 'to' are by default the same, equal to current time
     QDateTime currentDateTime = QDateTime::currentDateTime();
     duration = 0;
@@ -54,8 +56,14 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     ui->toTimeButton->setPickSelector(tpsTo);
 
     // Set up time zone picker
-    ZonePickSelector *zps = new ZonePickSelector();
-    ui->zoneButton->setPickSelector(zps);
+    ZonePickSelector *zps;
+    if (settings.value("TimeZones", false).toBool()) {
+        zps = new ZonePickSelector();
+        ui->zoneButton->setPickSelector(zps);
+    } else {
+        zps = NULL;
+        ui->zoneButton->hide();
+    }
 
     // Set up recurrence picker
     RecurrencePickSelector *rps = new RecurrencePickSelector();
@@ -79,13 +87,24 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     connect(dpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
     connect(tpsTo, SIGNAL(selected(QString)), this, SLOT(onToChanged()));
 
-    QSettings settings;
+    // Global settings have been dealt with, switch to local scope
     settings.beginGroup("EventEditDialog");
 
     if (event) {
-        const char *zone = event->getTzid().c_str();
-        QDateTime from = Date::toRemote(event->getDateStart(), zone);
-        QDateTime to = Date::toRemote(event->getDateEnd(), zone);
+        // Configure time
+        QDateTime from;
+        QDateTime to;
+        if (zps) {
+            // Display time in the selected time zone
+            const char *zone = event->getTzid().c_str();
+            from = Date::toRemote(event->getDateStart(), zone);
+            to = Date::toRemote(event->getDateEnd(), zone);
+            zps->setCurrentZone(event->getTzid().c_str());
+        } else {
+            // Display local time
+            from = QDateTime::fromTime_t(event->getDateStart());
+            to = QDateTime::fromTime_t(event->getDateEnd());
+        }
 
         ui->summaryEdit->setText(QString::fromUtf8(event->getSummary().c_str()));
         ui->locationEdit->setText(QString::fromUtf8(event->getLocation().c_str()));
@@ -95,7 +114,6 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         tpsFrom->setCurrentTime(from.time());
         dpsTo->setCurrentDate(to.date());
         tpsTo->setCurrentTime(to.time());
-        zps->setCurrentZone(event->getTzid().c_str());
         cps->setCalendar(event->getCalendarId());
         aps->setAlarm(event->getAlarm());
     } else {
@@ -103,9 +121,10 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
         // Load last used settings
         ui->allDayBox->setChecked(settings.value("AllDay", false).toBool());
-        zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
         aps->setSecondsBefore(settings.value("Alarm", -1).toInt());
+        if (zps)
+            zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
 
         ui->summaryEdit->setFocus();
     }
@@ -216,6 +235,10 @@ void EventEditDialog::onToChanged()
 
 void EventEditDialog::saveEvent()
 {
+    // Prepare for saving settings
+    QSettings settings;
+    settings.beginGroup("EventEditDialog");
+
     // Get pick selectors
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
@@ -231,16 +254,23 @@ void EventEditDialog::saveEvent()
     const QDateTime from(dpsFrom->currentDate(), allDay ? QTime(00,00) : tpsFrom->currentTime());
     const QDateTime to(dpsTo->currentDate(), allDay ? QTime(23,59) : tpsTo->currentTime());
 
-    QString zone = zps->currentZone();
-
     // Set event properties
     event->setSummary(ui->summaryEdit->text().toUtf8().data());
     event->setLocation(ui->locationEdit->text().toUtf8().data());
     event->setDescription(ui->descriptionEdit->toPlainText().toUtf8().data());
-    event->setDateStart(Date::toUtc(from, zone));
-    event->setDateEnd(Date::toUtc(to, zone));
-    event->setTzid(zone.toAscii().data());
     event->setAllDay(allDay);
+
+    // Set time
+    if (zps) {
+        const QString zone = zps->currentZone();
+        event->setDateStart(Date::toUtc(from, zone));
+        event->setDateEnd(Date::toUtc(to, zone));
+        event->setTzid(zone.toAscii().data());
+        settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
+    } else {
+        event->setDateStart(from.toTime_t());
+        event->setDateEnd(from.toTime_t());
+    }
 
     // Set alarm
     aps->configureAlarm(event);
@@ -262,10 +292,7 @@ void EventEditDialog::saveEvent()
     ChangeManager::save(event, cps->currentId());
 
     // Save last used settings
-    QSettings settings;
-    settings.beginGroup("EventEditDialog");
     settings.setValue("AllDay", ui->allDayBox->isChecked());
-    settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     settings.setValue("Calendar", cps->currentId());
     settings.setValue("Alarm", aps->currentSecondsBefore());
     // NOTE: Sometimes it might be convenient to have the settings saved

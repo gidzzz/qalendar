@@ -32,13 +32,21 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         this->setWindowTitle(tr("New task"));
     }
 
+    QSettings settings;
+
     // Set up date picker
     DatePickSelector *dps = new DatePickSelector();
     ui->dateButton->setPickSelector(dps);
 
     // Set up time zone picker
-    ZonePickSelector *zps = new ZonePickSelector();
-    ui->zoneButton->setPickSelector(zps);
+    ZonePickSelector *zps;
+    if (settings.value("TimeZones", false).toBool()) {
+        zps = new ZonePickSelector();
+        ui->zoneButton->setPickSelector(zps);
+    } else {
+        zps = NULL;
+        ui->zoneButton->hide();
+    }
 
     // Set up calendar picker
     CalendarPickSelector *cps = new CalendarPickSelector();
@@ -54,21 +62,31 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     connect(dps, SIGNAL(selected(QString)), this, SLOT(onDateChanged()));
 
     if (todo) {
+        // Configure time
+        QDateTime due;
+        if (zps) {
+            // Display time in the selected time zone
+            due = Date::toRemote(todo->getDue(), todo->getTzid().c_str());
+            zps->setCurrentZone(todo->getTzid().c_str());
+        } else {
+            // Display local time
+            due = QDateTime::fromTime_t(todo->getDue());
+        }
+
         ui->summaryEdit->setText(QString::fromUtf8(todo->getSummary().c_str()));
         ui->descriptionEdit->setPlainText(QString::fromUtf8(todo->getDescription().c_str()));
         ui->doneBox->setChecked(todo->getStatus());
-        dps->setCurrentDate(Date::toRemote(todo->getDue(), todo->getTzid().c_str()).date());
-        zps->setCurrentZone(todo->getTzid().c_str());
+        dps->setCurrentDate(due.date());
         cps->setCalendar(todo->getCalendarId());
         aps->setAlarm(todo->getAlarm());
     } else {
         todo = new CTodo();
 
         // Load last used settings
-        QSettings settings;
         settings.beginGroup("TodoEditDialog");
-        zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
+        if (zps)
+            zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
 
         // Prepre to calculate the due date
         const time_t dueOffset = settings.value("DueOffset", 0).toInt() * 24*60*60;
@@ -125,27 +143,38 @@ void TodoEditDialog::onDateChanged()
 
 void TodoEditDialog::saveTodo()
 {
+    // Prepare for saving settings
+    QSettings settings;
+    settings.beginGroup("TodoEditDialog");
+
+    // Get pick selectors
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());
     ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector());
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
-    QString zone = zps->currentZone();
-
+    // Set todo properties
     todo->setSummary(ui->summaryEdit->text().toUtf8().data());
     todo->setDescription(ui->descriptionEdit->toPlainText().toUtf8().data());
     todo->setStatus(ui->doneBox->isChecked());
-    todo->setDue(Date::toUtc(QDateTime(dps->currentDate(), QTime(00,00)), zone));
-    todo->setTzid(zone.toAscii().data());
 
+    // Set time
+    const QDateTime due = QDateTime(dps->currentDate(), QTime(00,00));
+    if (zps) {
+        const QString zone = zps->currentZone();
+        todo->setDue(Date::toUtc(due, zone));
+        todo->setTzid(zone.toAscii().data());
+        settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
+    } else {
+        todo->setDue(due.toTime_t());
+    }
+
+    // Set alarm
     aps->configureAlarm(todo);
 
     ChangeManager::save(todo, cps->currentId());
 
     // Save last used settings
-    QSettings settings;
-    settings.beginGroup("TodoEditDialog");
-    settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     settings.setValue("Calendar", cps->currentId());
     if (defaultDue)
         settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));

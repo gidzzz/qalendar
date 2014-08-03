@@ -43,6 +43,9 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     daySelector->setCurrentIndex(Date::firstDayOfWeek() - 1);
     ui->firstDayButton->setPickSelector(daySelector);
 
+    // Editable time zones
+    ui->zonesBox->setChecked(settings.value("TimeZones", false).toBool());
+
     connect(ui->dateFormatButton, SIGNAL(clicked()), this, SLOT(openDateFormatDialog()));
     connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(saveSettings()));
 
@@ -101,6 +104,7 @@ void SettingsDialog::saveSettings()
     QSettings settings;
     settings.setValue("DeleteEventsAfter", des->model()->index(des->currentIndex(), 0).data(Qt::UserRole).toInt());
     settings.setValue("DeleteTodosAfter", dts->model()->index(dts->currentIndex(), 0).data(Qt::UserRole).toInt());
+    settings.setValue("TimeZones", ui->zonesBox->isChecked());
 
     Date::setFirstDayOfWeek(fds->model()->index(fds->currentIndex(), 0).data(Qt::UserRole).toInt());
 

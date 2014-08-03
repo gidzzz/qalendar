@@ -10,68 +10,88 @@
   </property>
   <layout class="QGridLayout" name="dialogLayout">
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="settingsLayout">
-     <property name="spacing">
-      <number>0</number>
+    <widget class="QScrollArea" name="mainArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-     <item>
-      <widget class="QMaemo5ValueButton" name="calendarsButton">
-       <property name="text">
-        <string>Edit calendars</string>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Minimum"/>
+     </property>
+     <widget class="QWidget" name="mainWidget">
+      <layout class="QVBoxLayout" name="mainLayout">
+       <property name="margin">
+        <number>0</number>
        </property>
-       <property name="valueLayout">
-        <enum>QMaemo5ValueButton::ValueBesideText</enum>
+       <property name="spacing">
+        <number>0</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QMaemo5ValueButton" name="tuneButton">
-       <property name="text">
-        <string>Alarm tone</string>
-       </property>
-       <property name="valueLayout">
-        <enum>QMaemo5ValueButton::ValueBesideText</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QMaemo5ValueButton" name="deleteEventsButton">
-       <property name="text">
-        <string>Delete events</string>
-       </property>
-       <property name="valueLayout">
-        <enum>QMaemo5ValueButton::ValueBesideText</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QMaemo5ValueButton" name="deleteTodosButton">
-       <property name="text">
-        <string>Delete tasks</string>
-       </property>
-       <property name="valueLayout">
-        <enum>QMaemo5ValueButton::ValueBesideText</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QMaemo5ValueButton" name="firstDayButton">
-       <property name="text">
-        <string>First day of week</string>
-       </property>
-       <property name="valueLayout">
-        <enum>QMaemo5ValueButton::ValueBesideText</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="dateFormatButton">
-       <property name="text">
-        <string>Date formats</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+       <item>
+        <widget class="QMaemo5ValueButton" name="calendarsButton">
+         <property name="text">
+          <string>Edit calendars</string>
+         </property>
+         <property name="valueLayout">
+          <enum>QMaemo5ValueButton::ValueBesideText</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QMaemo5ValueButton" name="tuneButton">
+         <property name="text">
+          <string>Alarm tone</string>
+         </property>
+         <property name="valueLayout">
+          <enum>QMaemo5ValueButton::ValueBesideText</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QMaemo5ValueButton" name="deleteEventsButton">
+         <property name="text">
+          <string>Delete events</string>
+         </property>
+         <property name="valueLayout">
+          <enum>QMaemo5ValueButton::ValueBesideText</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QMaemo5ValueButton" name="deleteTodosButton">
+         <property name="text">
+          <string>Delete tasks</string>
+         </property>
+         <property name="valueLayout">
+          <enum>QMaemo5ValueButton::ValueBesideText</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QMaemo5ValueButton" name="firstDayButton">
+         <property name="text">
+          <string>First day of week</string>
+         </property>
+         <property name="valueLayout">
+          <enum>QMaemo5ValueButton::ValueBesideText</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="zonesBox">
+         <property name="text">
+          <string>Editable time zones</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="dateFormatButton">
+         <property name="text">
+          <string>Date formats</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
    <item row="0" column="1">
     <widget class="QDialogButtonBox" name="buttonBox">

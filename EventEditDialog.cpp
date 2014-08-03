@@ -35,23 +35,15 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
     QSettings settings;
 
-    // 'From' and 'to' are by default the same, equal to current time
-    QDateTime currentDateTime = QDateTime::currentDateTime();
-    duration = 0;
-
     // Set up 'from' date pickers
     DatePickSelector *dpsFrom = new DatePickSelector();
     QMaemo5TimePickSelector *tpsFrom = new QMaemo5TimePickSelector();
-    dpsFrom->setCurrentDate(currentDateTime.date());
-    tpsFrom->setCurrentTime(currentDateTime.time());
     ui->fromDateButton->setPickSelector(dpsFrom);
     ui->fromTimeButton->setPickSelector(tpsFrom);
 
     // Set up 'to' date pickers
     DatePickSelector *dpsTo = new DatePickSelector();
     QMaemo5TimePickSelector *tpsTo = new QMaemo5TimePickSelector();
-    dpsTo->setCurrentDate(currentDateTime.date());
-    tpsTo->setCurrentTime(currentDateTime.time());
     ui->toDateButton->setPickSelector(dpsTo);
     ui->toTimeButton->setPickSelector(tpsTo);
 
@@ -76,6 +68,14 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     // Set up alarm picker
     AlarmPickSelector *aps = new AlarmPickSelector(E_AM_ETIME);
     ui->alarmButton->setPickSelector(aps);
+
+    // 'From' and 'to' are by default the same, equal to current time
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    dpsFrom->setCurrentDate(currentDateTime.date());
+    tpsFrom->setCurrentTime(currentDateTime.time());
+    dpsTo->setCurrentDate(currentDateTime.date());
+    tpsTo->setCurrentTime(currentDateTime.time());
+    duration = 0;
 
     // Make sure that AlarmPickSelector's reference date is set
     updateAlarmReference();
@@ -123,8 +123,22 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         ui->allDayBox->setChecked(settings.value("AllDay", false).toBool());
         cps->setCalendar(settings.value("Calendar", 1).toInt());
         aps->setSecondsBefore(settings.value("Alarm", -1).toInt());
-        if (zps)
-            zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
+
+        // Some additional processing for time zones
+        if (zps) {
+            const QString zone = settings.value("TimeZone", QString()).toString();
+            if (!zone.isEmpty()) {
+                // Display time in the selected time zone
+                currentDateTime = Date::toRemote(currentDateTime.toTime_t(), zone);
+                dpsFrom->setCurrentDate(currentDateTime.date());
+                tpsFrom->setCurrentTime(currentDateTime.time());
+                dpsTo->setCurrentDate(currentDateTime.date());
+                tpsTo->setCurrentTime(currentDateTime.time());
+
+                // Load last used setting
+                zps->setCurrentZone(zone);
+            }
+        }
 
         ui->summaryEdit->setFocus();
     }
@@ -164,6 +178,15 @@ EventEditDialog::~EventEditDialog()
 // Set the value of date/time selectors
 void EventEditDialog::setFromTo(QDateTime from, QDateTime to)
 {
+    // Convert time if time zones are enabled
+    if (ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector())) {
+        const QString zone = zps->currentZone();
+        if (!zone.isEmpty()) {
+            from = Date::toRemote(from.toTime_t(), zone);
+            to = Date::toRemote(to.toTime_t(), zone);
+        }
+    }
+
     qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector())->setCurrentDate(from.date());
     qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector())->setCurrentTime(from.time());
 

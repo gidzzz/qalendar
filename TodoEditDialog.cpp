@@ -85,13 +85,23 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         // Load last used settings
         settings.beginGroup("TodoEditDialog");
         cps->setCalendar(settings.value("Calendar", 1).toInt());
-        if (zps)
-            zps->setCurrentZone(settings.value("TimeZone", QString()).toString());
 
         // Prepre to calculate the due date
         const time_t dueOffset = settings.value("DueOffset", 0).toInt() * 24*60*60;
-        const time_t currentStamp = QDateTime::currentDateTime().toTime_t();
+        time_t currentStamp = QDateTime::currentDateTime().toTime_t();
         QDateTime due;
+
+        // Some additional processing for time zones
+        if (zps) {
+            const QString zone = settings.value("TimeZone", QString()).toString();
+            if (!zone.isEmpty()) {
+                // Display time in the selected time zone
+                currentStamp = Date::toRemote(currentStamp, zone).toTime_t();
+
+                // Load last used setting
+                zps->setCurrentZone(zone);
+            }
+        }
 
         // Calculate the due date in an under/overflow-proof way
         if (dueOffset > 0) {
@@ -128,6 +138,13 @@ TodoEditDialog::~TodoEditDialog()
 
 void TodoEditDialog::setDue(QDate due)
 {
+    // Convert time if time zones are enabled
+    if (ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector())) {
+        const QString zone = zps->currentZone();
+        if (!zone.isEmpty())
+            due = Date::toRemote(QDateTime(due, QTime(00,00)).toTime_t(), zone).date();
+    }
+
     qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector())->setCurrentDate(due);
 
     defaultDue = false;

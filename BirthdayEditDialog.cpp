@@ -27,7 +27,7 @@ BirthdayEditDialog::BirthdayEditDialog(QWidget *parent, CBdayEvent *event) :
     // Set up alarm picker
     AlarmPickSelector *aps = new AlarmPickSelector(E_AM_EXACTDATETIME);
     aps->setReferenceDate(closestDate);
-    aps->setAlarm(event->getAlarm());
+    aps->setAlarm(event->getAlarm(), QString());
     ui->alarmButton->setPickSelector(aps);
 
     this->setupSaveButton(ui->buttonBox, SLOT(saveEvent()));
@@ -46,7 +46,7 @@ BirthdayEditDialog::~BirthdayEditDialog()
 
 void BirthdayEditDialog::saveEvent()
 {
-    qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector())->configureAlarm(event);
+    qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector())->configureAlarm(event, QString());
 
     ChangeManager::save(event);
 

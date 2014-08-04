@@ -63,10 +63,12 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
 
     if (todo) {
         // Configure time
+        QString zone;
         QDateTime due;
         if (zps) {
             // Display time in the selected time zone
-            due = Date::toRemote(todo->getDue(), todo->getTzid().c_str());
+            zone = todo->getTzid().c_str();
+            due = Date::toRemote(todo->getDue(), zone);
             zps->setCurrentZone(todo->getTzid().c_str());
         } else {
             // Display local time
@@ -78,7 +80,7 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         ui->doneBox->setChecked(todo->getStatus());
         dps->setCurrentDate(due.date());
         cps->setCalendar(todo->getCalendarId());
-        aps->setAlarm(todo->getAlarm());
+        aps->setAlarm(todo->getAlarm(), zone);
     } else {
         todo = new CTodo();
 
@@ -177,8 +179,9 @@ void TodoEditDialog::saveTodo()
 
     // Set time
     const QDateTime due = QDateTime(dps->currentDate(), QTime(00,00));
+    QString zone;
     if (zps) {
-        const QString zone = zps->currentZone();
+        zone = zps->currentZone();
         todo->setDue(Date::toUtc(due, zone));
         todo->setTzid(zone.toAscii().data());
         settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
@@ -187,7 +190,7 @@ void TodoEditDialog::saveTodo()
     }
 
     // Set alarm
-    aps->configureAlarm(todo);
+    aps->configureAlarm(todo, zone);
 
     ChangeManager::save(todo, cps->currentId());
 

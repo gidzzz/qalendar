@@ -22,9 +22,9 @@ public:
     void setReferenceDate(const QDateTime &date);
     void setSecondsBefore(int seconds);
     void setTrigger(int stamp);
-    void setAlarm(CAlarm *alarm);
+    void setAlarm(CAlarm *alarm, const QString &zone);
 
-    void configureAlarm(CComponent *component) const;
+    void configureAlarm(CComponent *component, const QString &zone) const;
 
     static QString textForAlarm(CAlarm &alarm);
     static QString textForAlarm(int type, int time);

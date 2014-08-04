@@ -92,11 +92,12 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
     if (event) {
         // Configure time
+        QString zone;
         QDateTime from;
         QDateTime to;
         if (zps) {
             // Display time in the selected time zone
-            const char *zone = event->getTzid().c_str();
+            zone = event->getTzid().c_str();
             from = Date::toRemote(event->getDateStart(), zone);
             to = Date::toRemote(event->getDateEnd(), zone);
             zps->setCurrentZone(event->getTzid().c_str());
@@ -115,7 +116,7 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         dpsTo->setCurrentDate(to.date());
         tpsTo->setCurrentTime(to.time());
         cps->setCalendar(event->getCalendarId());
-        aps->setAlarm(event->getAlarm());
+        aps->setAlarm(event->getAlarm(), zone);
     } else {
         event = new CEvent();
 
@@ -284,8 +285,9 @@ void EventEditDialog::saveEvent()
     event->setAllDay(allDay);
 
     // Set time
+    QString zone;
     if (zps) {
-        const QString zone = zps->currentZone();
+        zone = zps->currentZone();
         event->setDateStart(Date::toUtc(from, zone));
         event->setDateEnd(Date::toUtc(to, zone));
         event->setTzid(zone.toAscii().data());
@@ -296,7 +298,7 @@ void EventEditDialog::saveEvent()
     }
 
     // Set alarm
-    aps->configureAlarm(event);
+    aps->configureAlarm(event, zone);
     // NOTE: It might be a good idea to notify the user if the alarm was in the
     // past and impossible to set, or add some constraints in the alarm picker.
 

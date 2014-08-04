@@ -54,11 +54,11 @@ void AlarmPickSelector::setReferenceDate(const QDateTime &date)
     emit selected(currentValueText());
 }
 
-void AlarmPickSelector::setAlarm(CAlarm *alarm)
+void AlarmPickSelector::setAlarm(CAlarm *alarm, const QString &zone)
 {
     if (alarm) {
         if (alarm->getDuration() == E_AM_EXACTDATETIME) {
-            setTrigger(alarm->getTrigger());
+            setTrigger(Date::toRemote(alarm->getTrigger(), zone).toTime_t());
         } else {
             setSecondsBefore(alarm->getTimeBefore());
         }
@@ -70,15 +70,25 @@ void AlarmPickSelector::setAlarm(CAlarm *alarm)
 // There is no currentAlarm(), because its result would be impossible to forward
 // to CComponent::setAlarm(CAlarm*) due to some obsolete hack in that function
 // overriding the type of todo alarms.
-void AlarmPickSelector::configureAlarm(CComponent *component) const
+void AlarmPickSelector::configureAlarm(CComponent *component, const QString &zone) const
 {
-    if (!enabled
-    ||  type == E_AM_EXACTDATETIME && triggerStamp() <= (time_t) QDateTime::currentDateTime().toTime_t()) {
-        // WARNING: Setting the alarm to a moment in the past can lead to a segfault
-        component->removeAlarm();
-    } else {
-        component->setAlarm(type == E_AM_EXACTDATETIME ? triggerStamp() : secondsBefore, type);
+    if (enabled) {
+        if (type == E_AM_EXACTDATETIME) {
+            // Convert the trigger to the desired time zone
+            time_t triggerStamp = Date::toUtc(QDateTime::fromTime_t(this->triggerStamp()), zone);
+
+            // WARNING: Setting the alarm to a moment in the past can lead to a segfault
+            if (triggerStamp > (time_t) QDateTime::currentDateTime().toTime_t()) {
+                component->setAlarm(triggerStamp, E_AM_EXACTDATETIME);
+                return;
+            }
+        } else {
+            component->setAlarm(secondsBefore, E_AM_ETIME);
+            return;
+        }
     }
+
+    component->removeAlarm();
 }
 
 QString AlarmPickSelector::currentValueText() const

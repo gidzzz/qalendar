@@ -27,7 +27,15 @@ private:
     int numUndone;
     int numTotal;
 
+    QSet<int> visibleGroups;
+
+    QString statusString(int numOverdue, int numUndone, int numTotal) const;
+
     void reload();
+    void populateSingle(vector<CCalendar*> &calendars, bool hideDone, const QDate &date);
+    void populateGroups(vector<CCalendar*> &calendars, bool hideDone, const QDate &date);
+    void updateCounters(CTodo *todo, const QDate &date);
+    QListWidgetItem* createItem(CTodo *todo, int color, const QDate &date) const;
 
 private slots:
     void onTodoActivated(QListWidgetItem *item = 0);
@@ -39,6 +47,7 @@ private slots:
     void deleteCurrentTodo();
 
     void hideDoneTodos(bool hide);
+    void enableGroups(bool enable);
     void cleanTodos();
 };
 

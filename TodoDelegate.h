@@ -24,6 +24,10 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
     {
+        // Use the default delegate for group headings
+        if (index.data(HeadingRole).toBool())
+            return QStyledItemDelegate::paint(painter, option, index);
+
         using namespace Metrics::Item;
         using namespace Metrics::Pixmap;
 
@@ -73,6 +77,12 @@ public:
         }
 
         painter->restore();
+    }
+
+    bool editorEvent(QEvent *e, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
+    {
+        // Group headings should not be checkable
+        return index.data(HeadingRole).toBool() ? false : ColorCheckDelegate::editorEvent(e, model, option, index);
     }
 };
 

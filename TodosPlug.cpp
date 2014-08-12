@@ -39,12 +39,17 @@ TodosPlug::TodosPlug(QWidget *parent) :
     settings.beginGroup("TodosPlug");
 
     QAction *hideAction = new QAction(tr("Hide completed"), this);
+    QAction *groupAction = new QAction(tr("Group by calendar"), this);
     QAction *cleanAction = new QAction(tr("Delete completed"), this);
     hideAction->setCheckable(true);
+    groupAction->setCheckable(true);
     hideAction->setChecked(settings.value("HideDone", false).toBool());
+    groupAction->setChecked(settings.value("GroupByCalendar", false).toBool());
     actions.append(hideAction);
+    actions.append(groupAction);
     actions.append(cleanAction);
     connect(hideAction, SIGNAL(toggled(bool)), this, SLOT(hideDoneTodos(bool)));
+    connect(groupAction, SIGNAL(toggled(bool)), this, SLOT(enableGroups(bool)));
     connect(cleanAction, SIGNAL(triggered()), this, SLOT(cleanTodos()));
 
     connect(newTodoButton, SIGNAL(clicked()), this, SLOT(onTodoActivated()));
@@ -63,6 +68,16 @@ TodosPlug::~TodosPlug()
 
 QString TodosPlug::title() const
 {
+    return tr("Tasks") + statusString(numOverdue, numUndone, numTotal);
+}
+
+void TodosPlug::onChange()
+{
+    reload();
+}
+
+QString TodosPlug::statusString(int numOverdue, int numUndone, int numTotal) const
+{
     QString status;
 
     if (numTotal) {
@@ -76,93 +91,204 @@ QString TodosPlug::title() const
         status = " (" + status;
     }
 
-    return tr("Tasks") + status;
-}
-
-void TodosPlug::onChange()
-{
-    reload();
+    return status;
 }
 
 void TodosPlug::reload()
 {
     this->sync();
 
+    // Save current view
     const int scrollPosition = ui->todoList->verticalScrollBar()->value();
 
-    while (ui->todoList->count() > 1) {
-        QListWidgetItem *item = ui->todoList->item(1);
+    // Clear the existing items
+    for (int i = ui->todoList->count()-1; i > 0; i--) {
+        QListWidgetItem *item = ui->todoList->item(i);
         delete qvariant_cast<CTodo*>(item->data(TodoRole));
         delete item;
     }
-
-    CMulticalendar *mc = CMulticalendar::MCInstance();
-    vector<CCalendar*> calendars = mc->getListCalFromMc();
-    vector<CTodo*> todos;
-    map<int,int> palette;
-
-    // Iterate over a list of calendars to get all todo items
-    for (unsigned int i = 0; i < calendars.size(); i++) {
-        if (!calendars[i]->IsShown()) continue;
-        int error;
-        vector<CTodo*> todosPart = calendars[i]->getTodos(error);
-        for (unsigned int t = 0; t < todosPart.size(); t++)
-            todosPart[t]->setCalendarId(calendars[i]->getCalendarId()); // This is not done automatically
-
-        todos.insert(todos.end(), todosPart.begin(), todosPart.end());
-
-        palette[calendars[i]->getCalendarId()] = calendars[i]->getCalendarColor();
-    }
-
-    mc->releaseListCalendars(calendars);
-
-    CWrapper::sort(todos);
-
-    // The date used for marking overdue tasks
-    QDate date = QDate::currentDate();
+    numOverdue = 0;
+    numUndone = 0;
+    numTotal = 0;
 
     // Load display settings
     QSettings settings;
     settings.beginGroup("TodosPlug");
     const bool hideDone = settings.value("HideDone", false).toBool();
+    const bool enableGroups = settings.value("GroupByCalendar", false).toBool();
 
-    numOverdue = 0;
-    numUndone = 0;
-    numTotal = todos.size();
+    // The date used for marking overdue tasks
+    const QDate date = QDate::currentDate();
 
-    // Iterate over a list of todos and add them to the list widget
-    for (unsigned int i = 0; i < todos.size(); i++) {
-        if (hideDone && todos[i]->getStatus()) {
-            delete todos[i];
-        } else {
-            QListWidgetItem *item = new QListWidgetItem();
-            item->setData(TodoRole, QVariant::fromValue(todos[i]));
-            item->setData(ColorRole, palette[todos[i]->getCalendarId()]);
-            item->setData(DateRole, date);
-            item->setCheckState(todos[i]->getStatus() ? Qt::Checked : Qt::Unchecked);
-            ui->todoList->addItem(item);
+    CMulticalendar *mc = CMulticalendar::MCInstance();
+    vector<CCalendar*> calendars = mc->getListCalFromMc();
 
-            if (!todos[i]->getStatus()) {
-                numUndone++;
-                if (QDateTime::fromTime_t(todos[i]->getDue()).date() < date) {
-                    numOverdue++;
-                }
-            }
-        }
-    }
+    enableGroups ? populateGroups(calendars, hideDone, date)
+                 : populateSingle(calendars, hideDone, date);
+
+    mc->releaseListCalendars(calendars);
 
     // Restore the original view
     ui->todoList->verticalScrollBar()->setValue(scrollPosition);
 
+    // The title could have changed
     emit titleChanged(title());
+}
+
+void TodosPlug::populateSingle(vector<CCalendar*> &calendars, bool hideDone, const QDate &date)
+{
+    vector<CTodo*> todos;
+    map<int,int> palette;
+
+    // Collect todos from all calendars
+    for (unsigned int c = 0; c < calendars.size(); c++) {
+        // Skip hidden calendars
+        if (!calendars[c]->IsShown()) continue;
+
+        // Get all todos from the calendar
+        int error;
+        vector<CTodo*> todosPart = calendars[c]->getTodos(error);
+        for (unsigned int t = 0; t < todosPart.size(); t++)
+            todosPart[t]->setCalendarId(calendars[c]->getCalendarId()); // This is not done automatically
+
+        // Add the todos to the combined list
+        todos.insert(todos.end(), todosPart.begin(), todosPart.end());
+
+        // Remember calendar color
+        palette[calendars[c]->getCalendarId()] = calendars[c]->getCalendarColor();
+    }
+
+    CWrapper::sort(todos);
+
+    // Display the collected todos
+    for (unsigned int t = 0; t < todos.size(); t++) {
+        if (hideDone && todos[t]->getStatus()) {
+            // Reject and delete
+            delete todos[t];
+        } else {
+            // Accept for display
+            ui->todoList->addItem(createItem(todos[t], palette[todos[t]->getCalendarId()], date));
+        }
+        updateCounters(todos[t], date);
+    }
+}
+
+void TodosPlug::populateGroups(vector<CCalendar*> &calendars, bool hideDone, const QDate &date)
+{
+    QSet<int> groups;
+    int lastOverdue = 0;
+    int lastUndone = 0;
+    int lastTotal = 0;
+
+    CWrapper::sort(calendars, false);
+
+    // Create a group from each calendar
+    for (unsigned int c = 0; c < calendars.size(); c++) {
+        // Skip hidden calendars
+        if (!calendars[c]->IsShown()) continue;
+
+        // Get all todos from the calendar
+        int error;
+        vector<CTodo*> todosPart = calendars[c]->getTodos(error);
+        CWrapper::sort(todosPart);
+
+        QListWidgetItem *heading = NULL;
+        int groupSize = 0;
+
+        // Display collected todos
+        for (unsigned int t = 0; t < todosPart.size(); t++) {
+            if (hideDone && todosPart[t]->getStatus()) {
+                // Reject and delete
+                delete todosPart[t];
+            } else {
+                // Accept for display
+                todosPart[t]->setCalendarId(calendars[c]->getCalendarId()); // This is not done automatically
+
+                // Add a heading if it does not exist yet
+                if (!heading) {
+                    heading = new QListWidgetItem();
+                    heading->setData(HeadingRole, true);
+                    heading->setData(IdRole, calendars[c]->getCalendarId());
+                    ui->todoList->addItem(heading);
+
+                    groups.insert(calendars[c]->getCalendarId());
+                }
+
+                // Add todo item
+                QListWidgetItem *item = createItem(todosPart[t], calendars[c]->getCalendarColor(), date);
+                ui->todoList->addItem(item);
+                if (!visibleGroups.contains(calendars[c]->getCalendarId()))
+                    item->setHidden(true);
+                groupSize++;
+            }
+            updateCounters(todosPart[t], date);
+        }
+
+        // Update the heading and counters
+        if (heading) {
+            heading->setText(QString::fromUtf8(calendars[c]->getCalendarName().c_str())
+                           + statusString(numOverdue - lastOverdue,
+                                          numUndone - lastUndone,
+                                          numTotal - lastTotal));
+            heading->setData(TodoCountRole, groupSize);
+
+            lastOverdue = numOverdue;
+            lastUndone = numUndone;
+            lastTotal = numTotal;
+        }
+    }
+
+    // Remove old, nonexistent groups
+    visibleGroups.intersect(groups);
+}
+
+void TodosPlug::updateCounters(CTodo *todo, const QDate &date)
+{
+    numTotal++;
+
+    if (!todo->getStatus()) {
+        numUndone++;
+        if (QDateTime::fromTime_t(todo->getDue()).date() < date)
+            numOverdue++;
+    }
+}
+
+QListWidgetItem* TodosPlug::createItem(CTodo *todo, int color, const QDate &date) const
+{
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setData(TodoRole, QVariant::fromValue(todo));
+    item->setData(ColorRole, color);
+    item->setData(DateRole, date);
+    item->setCheckState(todo->getStatus() ? Qt::Checked : Qt::Unchecked);
+    return item;
 }
 
 void TodosPlug::onTodoActivated(QListWidgetItem *item)
 {
     CTodo *todo = NULL;
 
-    if (item)
-        todo = qvariant_cast<CTodo*>(item->data(TodoRole));
+    if (item) {
+        if (item->data(HeadingRole).toBool()) {
+            // Group heading -- toggle visibility
+            const int id = item->data(IdRole).toInt();
+            const int size = item->data(TodoCountRole).toInt();
+            const bool hide = visibleGroups.contains(id);
+
+            for (int i = 1; i <= size; i++)
+                ui->todoList->item(ui->todoList->row(item)+i)->setHidden(hide);
+
+            if (hide) {
+                visibleGroups.remove(id);
+            } else {
+                visibleGroups.insert(id);
+            }
+
+            return;
+        } else {
+            // Todo item -- get the underlying object
+            todo = qvariant_cast<CTodo*>(item->data(TodoRole));
+        }
+    }
 
     if (todo) {
         (new TodoWindow(todo, this))->show();
@@ -226,6 +352,15 @@ void TodosPlug::hideDoneTodos(bool hide)
     QSettings settings;
     settings.beginGroup("TodosPlug");
     settings.setValue("HideDone", hide);
+
+    reload();
+}
+
+void TodosPlug::enableGroups(bool enable)
+{
+    QSettings settings;
+    settings.beginGroup("TodosPlug");
+    settings.setValue("GroupByCalendar", enable);
 
     reload();
 }

@@ -210,6 +210,8 @@ void TodosPlug::populateGroups(vector<CCalendar*> &calendars, bool hideDone, con
                     heading->setFlags(heading->flags() & ~Qt::ItemIsUserCheckable);
                     heading->setData(HeadingRole, true);
                     heading->setData(IdRole, calendars[c]->getCalendarId());
+                    heading->setData(NameRole, QString::fromUtf8(calendars[c]->getCalendarName().c_str()));
+                    heading->setData(ColorRole, calendars[c]->getCalendarColor());
                     ui->todoList->addItem(heading);
 
                     groups.insert(calendars[c]->getCalendarId());
@@ -227,11 +229,10 @@ void TodosPlug::populateGroups(vector<CCalendar*> &calendars, bool hideDone, con
 
         // Update the heading and counters
         if (heading) {
-            heading->setText(QString::fromUtf8(calendars[c]->getCalendarName().c_str())
-                           + statusString(numOverdue - lastOverdue,
+            heading->setData(TodoCountRole, groupSize);
+            heading->setData(DetailsRole, statusString(numOverdue - lastOverdue,
                                           numUndone - lastUndone,
                                           numTotal - lastTotal));
-            heading->setData(TodoCountRole, groupSize);
 
             lastOverdue = numOverdue;
             lastUndone = numUndone;

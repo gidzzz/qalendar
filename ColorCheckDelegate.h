@@ -32,6 +32,10 @@ public:
         painter->drawPixmap(r.left(), r.top(),
                             QIcon::fromTheme(CWrapper::colorIcon(index.data(ColorRole).toInt())).pixmap(IconSize, IconSize));
 
+        // Disable checkbox for uncheckable items
+        if (!(index.flags() & Qt::ItemIsUserCheckable))
+            return;
+
         // Draw the checkbox
         painter->drawPixmap(r.left() + checkOffset,
                             r.top()  + checkOffset,
@@ -49,6 +53,10 @@ public:
 
     bool editorEvent(QEvent *e, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
     {
+        // Disable editing for uncheckable items
+        if (!(index.flags() & Qt::ItemIsUserCheckable))
+            return false;
+
         using namespace Metrics::Item;
         using namespace Metrics::Pixmap;
 

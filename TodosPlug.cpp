@@ -207,6 +207,7 @@ void TodosPlug::populateGroups(vector<CCalendar*> &calendars, bool hideDone, con
                 // Add a heading if it does not exist yet
                 if (!heading) {
                     heading = new QListWidgetItem();
+                    heading->setFlags(heading->flags() & ~Qt::ItemIsUserCheckable);
                     heading->setData(HeadingRole, true);
                     heading->setData(IdRole, calendars[c]->getCalendarId());
                     ui->todoList->addItem(heading);

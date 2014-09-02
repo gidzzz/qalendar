@@ -78,12 +78,6 @@ public:
 
         painter->restore();
     }
-
-    bool editorEvent(QEvent *e, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index)
-    {
-        // Group headings should not be checkable
-        return index.data(HeadingRole).toBool() ? false : ColorCheckDelegate::editorEvent(e, model, option, index);
-    }
 };
 
 #endif // TODODELEGATE_H

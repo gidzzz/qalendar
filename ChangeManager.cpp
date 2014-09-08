@@ -18,6 +18,7 @@
 
 #include "MainWindow.h"
 #include "CWrapper.h"
+#include "Metrics.h"
 
 Version ChangeManager::m_version = 1;
 QDate ChangeManager::m_date = QDate::currentDate();
@@ -230,7 +231,26 @@ bool ChangeManager::clone(QWidget *parent, CComponent *component)
 // Delete the component
 bool ChangeManager::drop(QWidget *parent, CComponent *component)
 {
-    if (QMessageBox::warning(parent, " ", QObject::tr("Delete component?"),
+    using namespace Metrics::Item;
+
+    QString title;
+    switch (component->getType()) {
+        case E_EVENT:
+            title = tr("Delete event?");
+            break;
+        case E_TODO:
+            title = tr("Delete task?");
+            break;
+        case E_JOURNAL:
+            title = tr("Delete note?");
+            break;
+        default:
+            title = tr("Delete component?");
+            break;
+    }
+
+    if (QMessageBox::warning(parent, " ",
+                             title + '\n' + CWrapper::simplify(component->getSummary(), TextMaxChars),
                              QMessageBox::Yes|QMessageBox::No|QMessageBox::Cancel) != QMessageBox::Yes)
     {
         return false;

@@ -7,6 +7,8 @@
 
 #include <CalendarErrors.h>
 
+#include <clockd/libtime.h>
+
 #include "EventEditDialog.h"
 #include "TodoEditDialog.h"
 #include "JournalEditDialog.h"
@@ -36,6 +38,9 @@ ChangeManager::ChangeManager()
 
     QDBusConnection::sessionBus().connect("", "", DBUS_INTERFACE, "dbChange",
                                           this, SLOT(onDbChange(QString,QString)));
+
+    QDBusConnection::systemBus().connect("", "", CLOCKD_INTERFACE, CLOCKD_TIME_CHANGED,
+                                         this, SLOT(onTimeChanged()));
 }
 
 // Enable management of the birthday calendar
@@ -124,6 +129,19 @@ void ChangeManager::onDbChange(QString details, QString appName)
     // NOTE: This check will not recognize updates coming from a different
     // instance of this application.
     if (appName != CMulticalendar::MCInstance()->getApplicationName().c_str())
+        bump();
+}
+
+// Handle a time change notification from D-Bus
+void ChangeManager::onTimeChanged()
+{
+    // Update time configuration
+    time_get_synced();
+
+    // Detect time zone changes
+    const string currentZone = CMulticalendar::getSystemTimeZone();
+    CMulticalendar::reloadSystemTimezone();
+    if (currentZone != CMulticalendar::getSystemTimeZone())
         bump();
 }
 

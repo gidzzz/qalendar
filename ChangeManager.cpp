@@ -141,8 +141,16 @@ void ChangeManager::onTimeChanged()
     // Detect time zone changes
     const string currentZone = CMulticalendar::getSystemTimeZone();
     CMulticalendar::reloadSystemTimezone();
-    if (currentZone != CMulticalendar::getSystemTimeZone())
+    if (currentZone != CMulticalendar::getSystemTimeZone()) {
         bump();
+        // Birthday calendar may need an update in the new time zone
+        if (birthdayCalendar) {
+            if (CCalendar *calendar = CMulticalendar::MCInstance()->getBirthdayCalendar()) {
+                delete birthdayCalendar;
+                birthdayCalendar = new BirthdayCalendar(calendar);
+            }
+        }
+    }
 }
 
 // Bump the database state version

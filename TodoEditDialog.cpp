@@ -2,7 +2,6 @@
 
 #include <limits>
 
-#include <QMaemo5TimePickSelector>
 #include <QSettings>
 
 #include <CAlarm.h>

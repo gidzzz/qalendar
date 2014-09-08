@@ -2,7 +2,6 @@
 
 #include <limits>
 
-#include <QMaemo5TimePickSelector>
 #include <QSettings>
 
 #include <CAlarm.h>
@@ -10,6 +9,7 @@
 #include "CWrapper.h"
 
 #include "DatePickSelector.h"
+#include "TimePickSelector.h"
 #include "ZonePickSelector.h"
 #include "RecurrencePickSelector.h"
 #include "CalendarPickSelector.h"
@@ -37,13 +37,13 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
 
     // Set up 'from' date pickers
     DatePickSelector *dpsFrom = new DatePickSelector();
-    QMaemo5TimePickSelector *tpsFrom = new QMaemo5TimePickSelector();
+    TimePickSelector *tpsFrom = new TimePickSelector();
     ui->fromDateButton->setPickSelector(dpsFrom);
     ui->fromTimeButton->setPickSelector(tpsFrom);
 
     // Set up 'to' date pickers
     DatePickSelector *dpsTo = new DatePickSelector();
-    QMaemo5TimePickSelector *tpsTo = new QMaemo5TimePickSelector();
+    TimePickSelector *tpsTo = new TimePickSelector();
     ui->toDateButton->setPickSelector(dpsTo);
     ui->toTimeButton->setPickSelector(tpsTo);
 
@@ -189,10 +189,10 @@ void EventEditDialog::setFromTo(QDateTime from, QDateTime to)
     }
 
     qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector())->setCurrentDate(from.date());
-    qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector())->setCurrentTime(from.time());
+    qobject_cast<TimePickSelector*>(ui->fromTimeButton->pickSelector())->setCurrentTime(from.time());
 
     qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector())->setCurrentDate(to.date());
-    qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector())->setCurrentTime(to.time());
+    qobject_cast<TimePickSelector*>(ui->toTimeButton->pickSelector())->setCurrentTime(to.time());
 }
 
 void EventEditDialog::setAllDay(bool allDay)
@@ -203,7 +203,7 @@ void EventEditDialog::setAllDay(bool allDay)
 void EventEditDialog::updateAlarmReference()
 {
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
-    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
+    TimePickSelector *tpsFrom = qobject_cast<TimePickSelector*>(ui->fromTimeButton->pickSelector());
     AlarmPickSelector *aps = qobject_cast<AlarmPickSelector*>(ui->alarmButton->pickSelector());
 
     aps->setReferenceDate(QDateTime(dpsFrom->currentDate(), ui->allDayBox->isChecked() ? QTime(00,00) : tpsFrom->currentTime()));
@@ -221,8 +221,8 @@ void EventEditDialog::onFromChanged()
 {
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
-    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
-    QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
+    TimePickSelector *tpsFrom = qobject_cast<TimePickSelector*>(ui->fromTimeButton->pickSelector());
+    TimePickSelector *tpsTo = qobject_cast<TimePickSelector*>(ui->toTimeButton->pickSelector());
 
     QDateTime from(dpsFrom->currentDate(), tpsFrom->currentTime());
 
@@ -241,8 +241,8 @@ void EventEditDialog::onToChanged()
 {
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
-    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
-    QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
+    TimePickSelector *tpsFrom = qobject_cast<TimePickSelector*>(ui->fromTimeButton->pickSelector());
+    TimePickSelector *tpsTo = qobject_cast<TimePickSelector*>(ui->toTimeButton->pickSelector());
 
     QDateTime from(dpsFrom->currentDate(), tpsFrom->currentTime());
     QDateTime to(dpsTo->currentDate(), tpsTo->currentTime());
@@ -266,8 +266,8 @@ void EventEditDialog::saveEvent()
     // Get pick selectors
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
-    QMaemo5TimePickSelector *tpsFrom = qobject_cast<QMaemo5TimePickSelector*>(ui->fromTimeButton->pickSelector());
-    QMaemo5TimePickSelector *tpsTo = qobject_cast<QMaemo5TimePickSelector*>(ui->toTimeButton->pickSelector());
+    TimePickSelector *tpsFrom = qobject_cast<TimePickSelector*>(ui->fromTimeButton->pickSelector());
+    TimePickSelector *tpsTo = qobject_cast<TimePickSelector*>(ui->toTimeButton->pickSelector());
     ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector());
     RecurrencePickSelector *rps = qobject_cast<RecurrencePickSelector*>(ui->repeatButton->pickSelector());
     CalendarPickSelector *cps = qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector());

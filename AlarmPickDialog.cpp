@@ -1,11 +1,11 @@
 #include "AlarmPickDialog.h"
 
 #include <QPushButton>
-#include <QMaemo5TimePickSelector>
 
 #include <CAlarm.h>
 
 #include "DatePickSelector.h"
+#include "TimePickSelector.h"
 
 AlarmPickDialog::AlarmPickDialog(int type, int beforeTime, int triggerTime, QWidget *parent) :
     RotatingDialog(parent),
@@ -17,7 +17,7 @@ AlarmPickDialog::AlarmPickDialog(int type, int beforeTime, int triggerTime, QWid
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     DatePickSelector *dps = new DatePickSelector();
-    QMaemo5TimePickSelector *tps = new QMaemo5TimePickSelector();
+    TimePickSelector *tps = new TimePickSelector();
     ui->dateButton->setPickSelector(dps);
     ui->timeButton->setPickSelector(tps);
 
@@ -60,7 +60,7 @@ AlarmPickDialog::~AlarmPickDialog()
 void AlarmPickDialog::accept()
 {
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());
-    QMaemo5TimePickSelector *tps = qobject_cast<QMaemo5TimePickSelector*>(ui->timeButton->pickSelector());
+    TimePickSelector *tps = qobject_cast<TimePickSelector*>(ui->timeButton->pickSelector());
 
     emit selected(ui->enableBox->isChecked(),
                   ui->triggerButton->isChecked() ? E_AM_EXACTDATETIME : E_AM_ETIME,

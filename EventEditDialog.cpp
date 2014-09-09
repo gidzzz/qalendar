@@ -91,6 +91,9 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
     settings.beginGroup("EventEditDialog");
 
     if (event) {
+        // Do not change the default settings when editing an existing todo
+        saveDefaults = false;
+
         // Configure time
         QString zone;
         QDateTime from;
@@ -119,6 +122,8 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         aps->setAlarm(event->getAlarm(), zone);
     } else {
         event = new CEvent();
+
+        saveDefaults = true;
 
         // Load last used settings
         ui->allDayBox->setChecked(settings.value("AllDay", false).toBool());
@@ -259,10 +264,6 @@ void EventEditDialog::onToChanged()
 
 void EventEditDialog::saveEvent()
 {
-    // Prepare for saving settings
-    QSettings settings;
-    settings.beginGroup("EventEditDialog");
-
     // Get pick selectors
     DatePickSelector *dpsFrom = qobject_cast<DatePickSelector*>(ui->fromDateButton->pickSelector());
     DatePickSelector *dpsTo = qobject_cast<DatePickSelector*>(ui->toDateButton->pickSelector());
@@ -291,7 +292,6 @@ void EventEditDialog::saveEvent()
         event->setDateStart(Date::toUtc(from, zone));
         event->setDateEnd(Date::toUtc(to, zone));
         event->setTzid(zone.toAscii().data());
-        settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     } else {
         event->setDateStart(from.toTime_t());
         event->setDateEnd(from.toTime_t());
@@ -317,9 +317,15 @@ void EventEditDialog::saveEvent()
     ChangeManager::save(event, cps->currentId());
 
     // Save last used settings
-    settings.setValue("AllDay", ui->allDayBox->isChecked());
-    settings.setValue("Calendar", cps->currentId());
-    settings.setValue("Alarm", aps->currentSecondsBefore());
+    if (saveDefaults) {
+        QSettings settings;
+        settings.beginGroup("EventEditDialog");
+        settings.setValue("AllDay", ui->allDayBox->isChecked());
+        settings.setValue("Calendar", cps->currentId());
+        settings.setValue("Alarm", aps->currentSecondsBefore());
+        if (zps)
+            settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
+    }
     // NOTE: Sometimes it might be convenient to have the settings saved
     // regardless of the way in which the window was closed (save/cancel).
     // NOTE: Another possibly useful thing would be to have the last used

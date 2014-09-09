@@ -18,7 +18,7 @@
 TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     ComponentEditDialog(parent),
     ui(new Ui::TodoEditDialog),
-    defaultDue(true)
+    saveDue(true)
 {
     ui->setupUi(this);
 
@@ -61,6 +61,9 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
     connect(dps, SIGNAL(selected(QString)), this, SLOT(onDateChanged()));
 
     if (todo) {
+        // Do not change the default settings when editing an existing todo
+        saveDefaults = false;
+
         // Configure time
         QString zone;
         QDateTime due;
@@ -82,6 +85,8 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         aps->setAlarm(todo->getAlarm(), zone);
     } else {
         todo = new CTodo();
+
+        saveDefaults = true;
 
         // Load last used settings
         settings.beginGroup("TodoEditDialog");
@@ -148,7 +153,7 @@ void TodoEditDialog::setDue(QDate due)
 
     qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector())->setCurrentDate(due);
 
-    defaultDue = false;
+    saveDue = false;
 }
 
 void TodoEditDialog::onDateChanged()
@@ -161,10 +166,6 @@ void TodoEditDialog::onDateChanged()
 
 void TodoEditDialog::saveTodo()
 {
-    // Prepare for saving settings
-    QSettings settings;
-    settings.beginGroup("TodoEditDialog");
-
     // Get pick selectors
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());
     ZonePickSelector *zps = qobject_cast<ZonePickSelector*>(ui->zoneButton->pickSelector());
@@ -183,7 +184,6 @@ void TodoEditDialog::saveTodo()
         zone = zps->currentZone();
         todo->setDue(Date::toUtc(due, zone));
         todo->setTzid(zone.toAscii().data());
-        settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     } else {
         todo->setDue(due.toTime_t());
     }
@@ -194,9 +194,15 @@ void TodoEditDialog::saveTodo()
     ChangeManager::save(todo, cps->currentId());
 
     // Save last used settings
-    settings.setValue("Calendar", cps->currentId());
-    if (defaultDue)
-        settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));
+    if (saveDefaults) {
+        QSettings settings;
+        settings.beginGroup("TodoEditDialog");
+        settings.setValue("Calendar", cps->currentId());
+        if (saveDue)
+            settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));
+        if (zps)
+            settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
+    }
     // TODO: Save alarm settings? What date/time to use?
 
     this->accept();

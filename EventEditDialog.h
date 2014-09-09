@@ -24,6 +24,8 @@ private:
 
     CEvent *event;
 
+    bool saveDefaults;
+
     time_t duration;
 
     void updateAlarmReference();

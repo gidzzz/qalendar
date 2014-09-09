@@ -19,6 +19,8 @@ private:
 
     CJournal *journal;
 
+    bool saveDefaults;
+
 private slots:
     void saveJournal();
     void deleteJournal();

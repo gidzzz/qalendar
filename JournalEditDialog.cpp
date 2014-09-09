@@ -28,11 +28,16 @@ JournalEditDialog::JournalEditDialog(QWidget *parent, CJournal *journal) :
     ui->calendarButton->setPickSelector(cps);
 
     if (journal) {
+        // Do not set the default settings when editing an existing todo
+        saveDefaults = false;
+
         // Load component data
         ui->summaryEdit->setPlainText(QString::fromUtf8(journal->getSummary().c_str()));
         cps->setCalendar(journal->getCalendarId());
     } else {
         journal = new CJournal();
+
+        saveDefaults = true;
 
         // Load last used settings
         QSettings settings;
@@ -72,9 +77,11 @@ void JournalEditDialog::saveJournal()
 
     ChangeManager::save(journal, cps->currentId());
 
-    QSettings settings;
-    settings.beginGroup("JournalEditDialog");
-    settings.setValue("Calendar", cps->currentId());
+    if (saveDefaults) {
+        QSettings settings;
+        settings.beginGroup("JournalEditDialog");
+        settings.setValue("Calendar", cps->currentId());
+    }
 
     this->accept();
 }

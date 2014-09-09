@@ -21,7 +21,8 @@ private:
 
     CTodo *todo;
 
-    bool defaultDue;
+    bool saveDefaults;
+    bool saveDue;
 
 private slots:
     void onDateChanged();

@@ -67,12 +67,11 @@ void ComponentListWidget::onContextMenuRequested(const QPoint &pos)
     // Ignore the button and day headings
     if (this->currentItem()->data(ComponentRole).isNull()) return;
 
-    QMenu *contextMenu = new QMenu(this);
-    contextMenu->setAttribute(Qt::WA_DeleteOnClose);;
-    contextMenu->addAction(tr("Edit"), this, SLOT(editCurrentComponent()));
-    contextMenu->addAction(tr("Clone"), this, SLOT(cloneCurrentComponent()));
-    contextMenu->addAction(tr("Delete"), this, SLOT(deleteCurrentComponent()));
-    contextMenu->exec(this->mapToGlobal(pos));
+    QMenu contextMenu(this);
+    contextMenu.addAction(tr("Edit"), this, SLOT(editCurrentComponent()));
+    contextMenu.addAction(tr("Clone"), this, SLOT(cloneCurrentComponent()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(deleteCurrentComponent()));
+    contextMenu.exec(this->mapToGlobal(pos));
 }
 
 void ComponentListWidget::onComponentActivated(QListWidgetItem *item)

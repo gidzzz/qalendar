@@ -264,10 +264,9 @@ void EventWindow::enableLinks(bool enable)
 
 void EventWindow::contextMenuEvent(QContextMenuEvent *e)
 {
-    QMenu *contextMenu = new QMenu(this);
-    contextMenu->setAttribute(Qt::WA_DeleteOnClose);;
-    contextMenu->addAction(tr("Edit"), this, SLOT(editEvent()));
-    contextMenu->addAction(tr("Clone"), this, SLOT(cloneEvent()));
-    contextMenu->addAction(tr("Delete"), this, SLOT(deleteEvent()));
-    contextMenu->exec(e->globalPos());
+    QMenu contextMenu(this);
+    contextMenu.addAction(tr("Edit"), this, SLOT(editEvent()));
+    contextMenu.addAction(tr("Clone"), this, SLOT(cloneEvent()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(deleteEvent()));
+    contextMenu.exec(e->globalPos());
 }

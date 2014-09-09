@@ -120,12 +120,11 @@ void JournalsPlug::onContextMenuRequested(const QPoint &pos)
 {
     if (ui->journalList->currentItem()->data(JournalRole).isNull()) return;
 
-    QMenu *contextMenu = new QMenu(this);
-    contextMenu->setAttribute(Qt::WA_DeleteOnClose);
-    contextMenu->addAction(tr("Edit"), this, SLOT(editCurrentJournal()));
-    contextMenu->addAction(tr("Clone"), this, SLOT(cloneCurrentJournal()));
-    contextMenu->addAction(tr("Delete"), this, SLOT(deleteCurrentJournal()));
-    contextMenu->exec(this->mapToGlobal(pos));
+    QMenu contextMenu(this);
+    contextMenu.addAction(tr("Edit"), this, SLOT(editCurrentJournal()));
+    contextMenu.addAction(tr("Clone"), this, SLOT(cloneCurrentJournal()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(deleteCurrentJournal()));
+    contextMenu.exec(this->mapToGlobal(pos));
 }
 
 void JournalsPlug::editCurrentJournal()

@@ -167,12 +167,11 @@ void TodoWindow::enableLinks(bool enable)
 
 void TodoWindow::contextMenuEvent(QContextMenuEvent *e)
 {
-    QMenu *contextMenu = new QMenu(this);
-    contextMenu->setAttribute(Qt::WA_DeleteOnClose);;
-    contextMenu->addAction(tr("Edit"), this, SLOT(editTodo()));
-    contextMenu->addAction(tr("Clone"), this, SLOT(cloneTodo()));
-    contextMenu->addAction(tr("Delete"), this, SLOT(deleteTodo()));
-    contextMenu->exec(e->globalPos());
+    QMenu contextMenu(this);
+    contextMenu.addAction(tr("Edit"), this, SLOT(editTodo()));
+    contextMenu.addAction(tr("Clone"), this, SLOT(cloneTodo()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(deleteTodo()));
+    contextMenu.exec(e->globalPos());
 }
 
 void TodoWindow::closeEvent(QCloseEvent *e)

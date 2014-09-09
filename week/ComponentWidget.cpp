@@ -179,12 +179,11 @@ void ComponentWidget::paintEvent(QPaintEvent *)
 
 void ComponentWidget::contextMenuEvent(QContextMenuEvent *e)
 {
-    QMenu *contextMenu = new QMenu(this);
-    contextMenu->setAttribute(Qt::WA_DeleteOnClose);
-    contextMenu->addAction(tr("Edit"), this, SLOT(editComponent()));
-    contextMenu->addAction(tr("Clone"), this, SLOT(cloneComponent()));
-    contextMenu->addAction(tr("Delete"), this, SLOT(deleteComponent()));
-    contextMenu->exec(e->globalPos());
+    QMenu contextMenu(this);
+    contextMenu.addAction(tr("Edit"), this, SLOT(editComponent()));
+    contextMenu.addAction(tr("Clone"), this, SLOT(cloneComponent()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(deleteComponent()));
+    contextMenu.exec(e->globalPos());
 }
 
 void ComponentWidget::mousePressEvent(QMouseEvent *e)

@@ -15,6 +15,7 @@ public:
     ~TodoEditDialog();
 
     void setDue(QDate due);
+    void setCalendar(int calendarId);
 
 private:
     Ui::TodoEditDialog *ui;

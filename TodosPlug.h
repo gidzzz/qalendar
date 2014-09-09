@@ -42,6 +42,7 @@ private slots:
     void onTodoChanged(QListWidgetItem *item);
 
     void onContextMenuRequested(const QPoint &pos);
+    void newTodoForCurrentGroup();
     void editCurrentTodo();
     void cloneCurrentTodo();
     void deleteCurrentTodo();

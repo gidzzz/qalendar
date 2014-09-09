@@ -324,13 +324,23 @@ void TodosPlug::onTodoChanged(QListWidgetItem *item)
 
 void TodosPlug::onContextMenuRequested(const QPoint &pos)
 {
-    if (ui->todoList->currentItem()->data(TodoRole).isNull()) return;
+    QListWidgetItem *item = ui->todoList->currentItem();
 
     QMenu contextMenu(this);
-    contextMenu.addAction(tr("Edit"), this, SLOT(editCurrentTodo()));
-    contextMenu.addAction(tr("Clone"), this, SLOT(cloneCurrentTodo()));
-    contextMenu.addAction(tr("Delete"), this, SLOT(deleteCurrentTodo()));
+    if (item->data(HeadingRole).toBool()) {
+        contextMenu.addAction(tr("New task"), this, SLOT(newTodoForCurrentGroup()));
+    } else {
+        if (item->data(TodoRole).isNull()) return;
+        contextMenu.addAction(tr("Edit"), this, SLOT(editCurrentTodo()));
+        contextMenu.addAction(tr("Clone"), this, SLOT(cloneCurrentTodo()));
+        contextMenu.addAction(tr("Delete"), this, SLOT(deleteCurrentTodo()));
+    }
     contextMenu.exec(this->mapToGlobal(pos));
+}
+
+void TodosPlug::newTodoForCurrentGroup()
+{
+    ChangeManager::newTodo(this, ui->todoList->currentItem()->data(IdRole).toInt());
 }
 
 void TodosPlug::editCurrentTodo()

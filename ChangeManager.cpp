@@ -304,6 +304,16 @@ bool ChangeManager::newTodo(QWidget *parent, QDate due)
     return ed->exec() == QDialog::Accepted;
 }
 
+// Show editor with a new task, configure calendar
+bool ChangeManager::newTodo(QWidget *parent, int calendarId)
+{
+    TodoEditDialog *ed = new TodoEditDialog(parent);
+
+    ed->setCalendar(calendarId);
+
+    return ed->exec() == QDialog::Accepted;
+}
+
 // Show editor with a new task
 bool ChangeManager::newTodo(QWidget *parent)
 {

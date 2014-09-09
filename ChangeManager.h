@@ -42,6 +42,7 @@ public:
 
     static bool newTodo(QWidget *parent);
     static bool newTodo(QWidget *parent, QDate due);
+    static bool newTodo(QWidget *parent, int calendarId);
 
     static bool newJournal(QWidget *parent);
 

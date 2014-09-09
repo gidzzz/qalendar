@@ -157,6 +157,11 @@ void TodoEditDialog::setDue(QDate due)
     saveDue = false;
 }
 
+void TodoEditDialog::setCalendar(int calendarId)
+{
+    qobject_cast<CalendarPickSelector*>(ui->calendarButton->pickSelector())->setCalendar(calendarId);
+}
+
 void TodoEditDialog::onDateChanged()
 {
     DatePickSelector *dps = qobject_cast<DatePickSelector*>(ui->dateButton->pickSelector());

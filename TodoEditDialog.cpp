@@ -91,6 +91,7 @@ TodoEditDialog::TodoEditDialog(QWidget *parent, CTodo *todo) :
         // Load last used settings
         settings.beginGroup("TodoEditDialog");
         cps->setCalendar(settings.value("Calendar", 1).toInt());
+        aps->setSecondsBefore(settings.value("Alarm", -1).toInt());
 
         // Prepre to calculate the due date
         const time_t dueOffset = settings.value("DueOffset", 0).toInt() * 24*60*60;
@@ -198,12 +199,12 @@ void TodoEditDialog::saveTodo()
         QSettings settings;
         settings.beginGroup("TodoEditDialog");
         settings.setValue("Calendar", cps->currentId());
+        settings.setValue("Alarm", aps->currentSecondsBefore());
         if (saveDue)
             settings.setValue("DueOffset", QDate::currentDate().daysTo(dps->currentDate()));
         if (zps)
             settings.setValue("TimeZone", zone == CMulticalendar::getSystemTimeZone().c_str() ? QString() : zone);
     }
-    // TODO: Save alarm settings? What date/time to use?
 
     this->accept();
 }

@@ -316,9 +316,7 @@ void TodosPlug::onTodoChanged(QListWidgetItem *item)
     // Make changes persistent
     ChangeManager::save(todo);
 
-    // NOTE: Reloading the whole list might be bad for performance reasons,
-    // but it should at least be sorted. Reloading the whole list also has
-    // an unpleasant side effect of resetting scrollbar position.
+    // NOTE: Reloading the whole list might be bad for performance reasons.
     reload();
 }
 

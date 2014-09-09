@@ -118,8 +118,14 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         tpsFrom->setCurrentTime(from.time());
         dpsTo->setCurrentDate(to.date());
         tpsTo->setCurrentTime(to.time());
-        cps->setCalendar(event->getCalendarId());
         aps->setAlarm(event->getAlarm(), zone);
+
+        // Calendar needs special treating in case of cloned birthdays
+        if (int calendarId = event->getCalendarId()) {
+            cps->setCalendar(calendarId);
+        } else {
+            cps->setCalendar(settings.value("Calendar", 1).toInt());
+        }
     } else {
         event = new CEvent();
 
@@ -147,13 +153,6 @@ EventEditDialog::EventEditDialog(QWidget *parent, CEvent *event) :
         }
 
         ui->summaryEdit->setFocus();
-    }
-
-    // Make sure that a valid calendar is selected (for cloned birthdays)
-    if (int calendarId = event->getCalendarId()) {
-        cps->setCalendar(calendarId);
-    } else {
-        cps->setCalendar(settings.value("Calendar", 1).toInt());
     }
 
     // Make sure that the recurrence exists, as required by the recurrence edit dialog

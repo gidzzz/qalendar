@@ -263,7 +263,7 @@ QString RecurrencePickDialog::buildRule()
             ruleParts.append(QString("UNTIL=") + QDateTime(dpsUntil->currentDate(), QTime(23,59)).toUTC().toString("yyyyMMddThhmmssZ"));
             break;
         }
-        case 2: { //Count
+        case 2: { // Count
             ruleParts.append(QString("COUNT=") + QString::number(ui->countBox->value()));
             break;
         }

@@ -69,15 +69,8 @@ void BirthdayCalendar::loadAlarm(CBdayEvent *event)
 {
     int error;
 
-    if (CEvent *storedEvent = calendar->getBirthDayEvent(event->getId(), error)) {
-        if (CAlarm *alarm = storedEvent->getAlarm()) {
-            if (alarm->getDuration() == E_AM_EXACTDATETIME) {
-                event->setAlarm(alarm->getTrigger(), E_AM_EXACTDATETIME);
-            } else {
-                event->setAlarm(alarm->getTimeBefore(), E_AM_ETIME);
-            }
-        }
-    }
+    if (CEvent *storedEvent = calendar->getBirthDayEvent(event->getId(), error))
+        event->setAlarm(storedEvent->getAlarm());
 }
 
 // Convert EContact to CBdayEvent

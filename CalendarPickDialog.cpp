@@ -29,9 +29,9 @@ CalendarPickDialog::~CalendarPickDialog()
 
 void CalendarPickDialog::resizeEvent(QResizeEvent *e)
 {
-    ui->calendarList->scrollToItem(ui->calendarList->currentItem(), QAbstractItemView::PositionAtCenter);
-
     RotatingDialog::resizeEvent(e);
+
+    ui->calendarList->scrollToItem(ui->calendarList->currentItem(), QAbstractItemView::PositionAtCenter);
 }
 
 void CalendarPickDialog::onCalendarActivated(QListWidgetItem *item)

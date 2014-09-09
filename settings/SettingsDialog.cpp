@@ -59,12 +59,10 @@ SettingsDialog::~SettingsDialog()
 
 QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
 {
-    QMaemo5ListPickSelector *selector;
-    QStandardItemModel *model;
-    QStandardItem *item;
+    QMaemo5ListPickSelector *selector = new QMaemo5ListPickSelector();
+    QStandardItemModel *model = new QStandardItemModel(0, 1, selector);
 
-    selector = new QMaemo5ListPickSelector();
-    model = new QStandardItemModel(0, 1, selector);
+    QStandardItem *item;
     item = new QStandardItem(tr("Never")); item->setData(0, Qt::UserRole);
     model->appendRow(item);
     item = new QStandardItem(tr("Older than %n week(s)", "", 1)); item->setData(60*60*24*7, Qt::UserRole);
@@ -75,6 +73,7 @@ QMaemo5ListPickSelector* SettingsDialog::buildDeleteSelector(int selectValue)
     model->appendRow(item);
     item = new QStandardItem(tr("Older than %n year(s)", "", 1)); item->setData(60*60*24*366, Qt::UserRole);
     model->appendRow(item);
+
     selector->setModel(model);
 
     for (int i = 0; i < model->rowCount(); i++) {

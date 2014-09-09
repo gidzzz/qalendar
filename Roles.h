@@ -3,7 +3,7 @@
 
 enum DataRole
 {
-    IdRole = Qt::UserRole,
+    IdRole = Qt::UserRole + 1,
     NameRole,
     TypeRole,
     ColorRole,

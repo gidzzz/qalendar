@@ -293,7 +293,7 @@ void EventEditDialog::saveEvent()
         event->setTzid(zone.toAscii().data());
     } else {
         event->setDateStart(from.toTime_t());
-        event->setDateEnd(from.toTime_t());
+        event->setDateEnd(to.toTime_t());
     }
 
     // Set alarm

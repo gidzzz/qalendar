@@ -282,17 +282,17 @@
     <message>
         <location filename="../ChangeManager.cpp" line="239"/>
         <source>Delete event?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ereignis löschen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="242"/>
         <source>Delete task?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe löschen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="245"/>
         <source>Delete note?</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz löschen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
@@ -521,7 +521,7 @@ tägig</translation>
     <message>
         <location filename="../EventEditDialog.ui" line="118"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="125"/>
@@ -1006,7 +1006,7 @@ tägig</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeitbare Zeitzonen</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>
@@ -1064,7 +1064,7 @@ tägig</translation>
     <message>
         <location filename="../TodoEditDialog.ui" line="42"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.ui" line="49"/>
@@ -1166,7 +1166,7 @@ tägig</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="42"/>
         <source>Group by calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach Kalender gruppieren</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="43"/>
@@ -1277,17 +1277,17 @@ Tag</translation>
     <message>
         <location filename="../ZonePickDialog.ui" line="6"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.ui" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.cpp" line="79"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuell</translation>
     </message>
 </context>
 </TS>

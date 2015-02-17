@@ -47,6 +47,9 @@ EventWindow::EventWindow(ComponentInstance *instance, QWidget *parent) :
     ui->descriptionFrame->setPalette(palette);
     ui->descriptionInfo->setPalette(palette);
 
+    connect(ui->mainWidget, SIGNAL(swipedRight()), this, SLOT(gotoPrevEvent()));
+    connect(ui->mainWidget, SIGNAL(swipedLeft()), this, SLOT(gotoNextEvent()));
+
     connect(ui->prevAction, SIGNAL(triggered()), this, SLOT(gotoPrevEvent()));
     connect(ui->nextAction, SIGNAL(triggered()), this, SLOT(gotoNextEvent()));
 

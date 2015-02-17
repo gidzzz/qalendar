@@ -10,7 +10,7 @@ class GestureWidget : public QWidget
     Q_OBJECT
 
 public:
-    GestureWidget(QWidget *parent) :
+    GestureWidget(QWidget *parent = NULL) :
         QWidget(parent)
     {
     }

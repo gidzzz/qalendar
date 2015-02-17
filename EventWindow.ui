@@ -6,7 +6,7 @@
    <string>Event</string>
   </property>
   <widget class="VerticalScrollArea" name="scrollArea">
-   <widget class="QWidget" name="mainWidget">
+   <widget class="GestureWidget" name="mainWidget">
     <layout class="QVBoxLayout" name="mainLayout">
      <property name="spacing">
       <number>16</number>
@@ -212,6 +212,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>GestureWidget</class>
+   <extends>QWidget</extends>
+   <header>GestureWidget.h</header>
+  </customwidget>
   <customwidget>
    <class>VerticalScrollArea</class>
    <extends>QScrollArea</extends>

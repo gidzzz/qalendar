@@ -56,8 +56,8 @@ WeekPlug::WeekPlug(QDate date, QWidget *parent) :
     connect(jumpAction, SIGNAL(triggered()), this, SLOT(selectWeek()));
     connect(eventAction, SIGNAL(triggered()), this, SLOT(newEvent()));
 
-    connect(weekWidget, SIGNAL(swipedPrev()), this, SLOT(gotoPrevWeek()));
-    connect(weekWidget, SIGNAL(swipedNext()), this, SLOT(gotoNextWeek()));
+    connect(weekWidget, SIGNAL(swipedRight()), this, SLOT(gotoPrevWeek()));
+    connect(weekWidget, SIGNAL(swipedLeft()), this, SLOT(gotoNextWeek()));
 
     connect(new QShortcut(QKeySequence(Qt::Key_Left), this), SIGNAL(activated()), this, SLOT(gotoPrevWeek()));
     connect(new QShortcut(QKeySequence(Qt::Key_Right), this), SIGNAL(activated()), this, SLOT(gotoNextWeek()));

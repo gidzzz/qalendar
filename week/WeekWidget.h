@@ -1,7 +1,7 @@
 #ifndef WEEKWIDGET_H
 #define WEEKWIDGET_H
 
-#include <QWidget>
+#include "GestureWidget.h"
 
 #include <QDate>
 #include <QDateTime>
@@ -23,11 +23,10 @@ namespace Metrics
     {
         const int NumWeekdays = 7;
         const int TimeWidth = 62;
-        const int SwipeThold = 140;
     }
 }
 
-class WeekWidget : public QWidget
+class WeekWidget : public GestureWidget
 {
     Q_OBJECT
 
@@ -49,10 +48,6 @@ public:
     QDate firstDate();
     QDate lastDate();
 
-signals:
-    void swipedPrev();
-    void swipedNext();
-
 private:
     QDate date;
 
@@ -61,7 +56,6 @@ private:
     WeekHintProfile hintProfile;
 
     QDateTime pressedDate;
-    QPoint pressedPoint;
     bool pressedAllDay;
 
     void cleanup();

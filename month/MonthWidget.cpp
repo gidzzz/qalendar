@@ -20,10 +20,9 @@ using namespace Metrics::MonthWidget;
 using namespace Metrics::Pixmap;
 
 const int EventHeight = 6;
-const int SwipeThold = 70;
 
 MonthWidget::MonthWidget(QDate date, QWidget *parent) :
-    QWidget(parent),
+    GestureWidget(parent),
     date(date)
 {
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -302,7 +301,8 @@ void MonthWidget::paintEvent(QPaintEvent *)
 
 void MonthWidget::mousePressEvent(QMouseEvent *e)
 {
-    pressedPoint = e->pos();
+    GestureWidget::mousePressEvent(e);
+
     pressedDate = mapToDate(e->pos());
 
     this->update();
@@ -313,39 +313,14 @@ void MonthWidget::mouseReleaseEvent(QMouseEvent *e)
     if (mapToDate(e->pos()) == pressedDate)
         (new DayWindow(mapToDate(e->pos()), this))->show();
 
-    forgetPress();
+    GestureWidget::mouseReleaseEvent(e);
 
     this->update();
 }
 
-void MonthWidget::mouseMoveEvent(QMouseEvent *e)
-{
-    if (pressedPoint.isNull()) return;
-
-    const int dx = e->pos().x() - pressedPoint.x();
-    const int dy = e->pos().y() - pressedPoint.y();
-
-    if (qAbs(dx) > qAbs(dy*2)) { // Horizontal motion
-        if (dx > SwipeThold) {
-            forgetPress();
-            emit swipedPrevFar();
-        } else if (dx < -SwipeThold) {
-            forgetPress();
-            emit swipedNextFar();
-        }
-    } else if (qAbs(dy) > qAbs(dx*2)){ // Vertical motion
-        if (dy > SwipeThold) {
-            forgetPress();
-            emit swipedPrev();
-        } else if (dy < -SwipeThold) {
-            forgetPress();
-            emit swipedNext();
-        }
-    }
-}
-
 void MonthWidget::forgetPress()
 {
-    pressedPoint = QPoint();
+    GestureWidget::forgetPress();
+
     pressedDate = QDate();
 }

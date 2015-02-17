@@ -36,7 +36,7 @@ const int SpacingHeight = 2;
 const int SpacingWidth  = 3;
 
 WeekWidget::WeekWidget(QWidget *parent) :
-    QWidget(parent),
+    GestureWidget(parent),
     allDaySlots(1)
 {
 }
@@ -408,7 +408,8 @@ void WeekWidget::paintEvent(QPaintEvent *e)
 
 void WeekWidget::mousePressEvent(QMouseEvent *e)
 {
-    pressedPoint = e->pos();
+    GestureWidget::mousePressEvent(e);
+
     pressedDate = mapToDate(e->pos());
     pressedAllDay = inAllDay(e->pos());
 
@@ -428,7 +429,7 @@ void WeekWidget::mouseReleaseEvent(QMouseEvent *e)
                                 pressedAllDay);
     } else {
         // Toggle view between current time and all-day row
-        if (!pressedPoint.isNull() && this->parentWidget()) {
+        if (!this->pressedPoint.isNull() && this->parentWidget()) {
             if (QScrollArea *scrollArea = qobject_cast<QScrollArea*>(this->parentWidget()->parentWidget())) {
                 QScrollBar *scrollBar = scrollArea->verticalScrollBar();
                 const QTime currentTime = QTime::currentTime();
@@ -453,25 +454,17 @@ void WeekWidget::mouseReleaseEvent(QMouseEvent *e)
         }
     }
 
-    forgetPress();
+    GestureWidget::mouseReleaseEvent(e);
 
     this->update();
 }
 
 void WeekWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    if (pressedPoint.isNull()) return;
-
     // This discards a fake move event when scrolling starts
     if (e->pos() == QPoint(-1000,-1000)) return;
 
-    if (e->pos().x() - pressedPoint.x() > SwipeThold) {
-        forgetPress();
-        emit swipedPrev();
-    } else if (e->pos().x() - pressedPoint.x() < -SwipeThold) {
-        forgetPress();
-        emit swipedNext();
-    }
+    GestureWidget::mouseMoveEvent(e);
 }
 
 // Maps a coordinate in the widget space to the corresponding day and hour
@@ -498,6 +491,7 @@ bool WeekWidget::inAllDay(const QPoint &pos)
 
 void WeekWidget::forgetPress()
 {
-    pressedPoint = QPoint();
+    GestureWidget::forgetPress();
+
     pressedDate = QDateTime();
 }

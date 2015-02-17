@@ -166,6 +166,7 @@ HEADERS += \
     ComponentInstance.h \
     VerticalScrollArea.h \
     ExpandingListWidget.h \
+    GestureWidget.h \
     RotatingDialog.h \
     ComponentEditDialog.h \
     Rotator.h \

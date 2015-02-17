@@ -31,8 +31,6 @@ private:
     ComponentWidget *master;
     QList<ComponentWidget*> slaves;
 
-    QPoint pressedPoint;
-
     void paintEvent(QPaintEvent *);
 
     void contextMenuEvent(QContextMenuEvent *e);

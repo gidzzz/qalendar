@@ -188,14 +188,18 @@ void ComponentWidget::contextMenuEvent(QContextMenuEvent *e)
 
 void ComponentWidget::mousePressEvent(QMouseEvent *e)
 {
-    pressedPoint = e->pos();
+    // WeekWidget's normal behavior should not be tiggered, we only want to use
+    // the gesture detection feature, so a call to its base class is necessary.
+    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
+        weekWidget->GestureWidget::mousePressEvent(e);
 
     QAbstractButton::mousePressEvent(e);
 }
 
 void ComponentWidget::mouseReleaseEvent(QMouseEvent *e)
 {
-    pressedPoint = QPoint(); // Forget press
+    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
+        weekWidget->GestureWidget::mouseReleaseEvent(e);
 
     QAbstractButton::mouseReleaseEvent(e);
 
@@ -206,25 +210,9 @@ void ComponentWidget::mouseReleaseEvent(QMouseEvent *e)
 
 void ComponentWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    using namespace Metrics::WeekWidget;
-
-    if (pressedPoint.isNull()) return;
-
-    // This discards a fake move event when scrolling starts
-    if (e->pos() == QPoint(-1000,-1000)) return;
-
-    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget())) {
-        if (e->pos().x() - pressedPoint.x() > SwipeThold) {
-            pressedPoint = QPoint(); // Forget press
-            emit weekWidget->swipedPrev();
-        } else if (e->pos().x() - pressedPoint.x() < -SwipeThold) {
-            pressedPoint = QPoint(); // Forget press
-            emit weekWidget->swipedNext();
-        }
-    }
+    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
+        weekWidget->GestureWidget::mouseMoveEvent(e);
 }
-
-
 
 void ComponentWidget::onClicked()
 {

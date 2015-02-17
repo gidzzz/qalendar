@@ -1,7 +1,7 @@
 #ifndef MONTHWIDGET_H
 #define MONTHWIDGET_H
 
-#include <QWidget>
+#include "GestureWidget.h"
 
 #include <QDate>
 #include <QDateTime>
@@ -26,7 +26,7 @@ namespace Metrics
     }
 }
 
-class MonthWidget : public QWidget
+class MonthWidget : public GestureWidget
 {
     Q_OBJECT
 
@@ -37,13 +37,7 @@ public:
     QDate firstDate();
     QDate lastDate();
 
-signals:
-    void swipedPrev();
-    void swipedNext();
-    void swipedPrevFar();
-    void swipedNextFar();
-
-protected:
+private:
     QDate date;
 
     void reload();
@@ -51,12 +45,10 @@ protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
 
     void forgetPress();
 
     QDate pressedDate;
-    QPoint pressedPoint;
 
     QDate mapToDate(const QPoint &pos);
 

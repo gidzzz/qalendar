@@ -73,10 +73,10 @@ MonthPlug::MonthPlug(QDate date, QWidget *parent) :
     connect(jumpAction, SIGNAL(triggered()), this, SLOT(selectMonth()));
     connect(eventAction, SIGNAL(triggered()), this, SLOT(newEvent()));
 
-    connect(monthWidget, SIGNAL(swipedPrev()), this, SLOT(gotoPrevMonth()));
-    connect(monthWidget, SIGNAL(swipedNext()), this, SLOT(gotoNextMonth()));
-    connect(monthWidget, SIGNAL(swipedPrevFar()), this, SLOT(gotoPrevYear()));
-    connect(monthWidget, SIGNAL(swipedNextFar()), this, SLOT(gotoNextYear()));
+    connect(monthWidget, SIGNAL(swipedDown()), this, SLOT(gotoPrevMonth()));
+    connect(monthWidget, SIGNAL(swipedUp()), this, SLOT(gotoNextMonth()));
+    connect(monthWidget, SIGNAL(swipedRight()), this, SLOT(gotoPrevYear()));
+    connect(monthWidget, SIGNAL(swipedLeft()), this, SLOT(gotoNextYear()));
 
     connect(new QShortcut(QKeySequence(Qt::Key_Up), this), SIGNAL(activated()), this, SLOT(gotoPrevMonth()));
     connect(new QShortcut(QKeySequence(Qt::Key_Down), this), SIGNAL(activated()), this, SLOT(gotoNextMonth()));

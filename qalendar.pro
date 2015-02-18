@@ -208,6 +208,7 @@ TRANSLATIONS = \
     translations/qalendar_it.ts \
     translations/qalendar_nl.ts \
     translations/qalendar_pl.ts \
+    translations/qalendar_sl_SI.ts \
     translations/qalendar_uk.ts \
     translations/qalendar_vi.ts
 

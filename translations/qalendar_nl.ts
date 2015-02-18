@@ -282,17 +282,17 @@
     <message>
         <location filename="../ChangeManager.cpp" line="239"/>
         <source>Delete event?</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebeurtenis verwijderen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="242"/>
         <source>Delete task?</source>
-        <translation type="unfinished"></translation>
+        <translation>Taak verwijderen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="245"/>
         <source>Delete note?</source>
-        <translation type="unfinished"></translation>
+        <translation>Notitie verwijderen?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
@@ -520,7 +520,7 @@ day</source>
     <message>
         <location filename="../EventEditDialog.ui" line="118"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdzone</translation>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="125"/>
@@ -606,33 +606,33 @@ day</source>
         <translation>Automatische verwijzingen</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Van</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Op</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Geen gebeurtenissen meer</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Bewerken</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation>Kloon</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
@@ -1005,7 +1005,7 @@ day</source>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanpasbare tijdzones</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>
@@ -1063,7 +1063,7 @@ day</source>
     <message>
         <location filename="../TodoEditDialog.ui" line="42"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdzone</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.ui" line="49"/>
@@ -1165,7 +1165,7 @@ day</source>
     <message>
         <location filename="../TodosPlug.cpp" line="42"/>
         <source>Group by calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Groepeer op kalender</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="43"/>
@@ -1275,17 +1275,17 @@ day</source>
     <message>
         <location filename="../ZonePickDialog.ui" line="6"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijdzone</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.ui" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.cpp" line="79"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig</translation>
     </message>
 </context>
 </TS>

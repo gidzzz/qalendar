@@ -600,33 +600,33 @@ ngày</translation>
         <translation>Liên kết tự động</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Từ</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Vào</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Không có sự kiện nào</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Chỉnh sửa</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Xóa</translation>
     </message>

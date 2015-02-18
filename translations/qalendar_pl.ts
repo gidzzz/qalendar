@@ -614,33 +614,33 @@ dzień</translation>
         <translation>Automatyczne linki</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Od</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Dnia</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Nie ma więcej zdarzeń</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation>Powiel</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>

@@ -282,17 +282,17 @@
     <message>
         <location filename="../ChangeManager.cpp" line="239"/>
         <source>Delete event?</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer l&apos;évènement?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="242"/>
         <source>Delete task?</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la tâche?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="245"/>
         <source>Delete note?</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer la note?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
@@ -521,7 +521,7 @@ journée</translation>
     <message>
         <location filename="../EventEditDialog.ui" line="118"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone horaire</translation>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="125"/>
@@ -607,33 +607,33 @@ journée</translation>
         <translation>Liens automatiques</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Du</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Le</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Plus d&apos;évènements</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Modifier</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation>Dupliquer</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -1006,7 +1006,7 @@ journée</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les zones horaires</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>
@@ -1064,7 +1064,7 @@ journée</translation>
     <message>
         <location filename="../TodoEditDialog.ui" line="42"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone horaire</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.ui" line="49"/>
@@ -1166,7 +1166,7 @@ journée</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="42"/>
         <source>Group by calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Grouper par calendrier</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="43"/>
@@ -1276,17 +1276,17 @@ journée</translation>
     <message>
         <location filename="../ZonePickDialog.ui" line="6"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone horaire</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.ui" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.cpp" line="79"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Courant</translation>
     </message>
 </context>
 </TS>

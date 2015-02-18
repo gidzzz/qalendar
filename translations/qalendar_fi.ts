@@ -282,22 +282,22 @@
     <message>
         <location filename="../ChangeManager.cpp" line="239"/>
         <source>Delete event?</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaanko tapahtuma?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="242"/>
         <source>Delete task?</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaanko tehtävä?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="245"/>
         <source>Delete note?</source>
-        <translation type="unfinished"></translation>
+        <translation>Poistetaanko muistiinpano?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
         <source>Delete component?</source>
-        <translation>Poista komponentti?</translation>
+        <translation>Poistetaanko komponentti?</translation>
     </message>
 </context>
 <context>
@@ -521,7 +521,7 @@ päivä</translation>
     <message>
         <location filename="../EventEditDialog.ui" line="118"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aikavyöhyke</translation>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="125"/>
@@ -607,33 +607,33 @@ päivä</translation>
         <translation>Automaattiset linkit</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Alkaa</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Ajankohta</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Ei lisää tapahtumia</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Muokkaa</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation>Kopioi</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Poista</translation>
     </message>
@@ -1006,7 +1006,7 @@ päivä</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Muokattavat aikavyöhykkeet</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>
@@ -1064,7 +1064,7 @@ päivä</translation>
     <message>
         <location filename="../TodoEditDialog.ui" line="42"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aikavyöhyke</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.ui" line="49"/>
@@ -1166,7 +1166,7 @@ päivä</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="42"/>
         <source>Group by calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Ryhmittele kalenteri</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="43"/>
@@ -1196,7 +1196,7 @@ päivä</translation>
     <message>
         <location filename="../TodosPlug.cpp" line="379"/>
         <source>Delete completed tasks from all calendars?</source>
-        <translation>Poista suoritetut tehtävät kaikista kalentereista?</translation>
+        <translation>Poistetaanko suoritetut tehtävät kaikista kalentereista?</translation>
     </message>
 </context>
 <context>
@@ -1276,17 +1276,17 @@ päivä</translation>
     <message>
         <location filename="../ZonePickDialog.ui" line="6"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Aikavyöhyke</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.ui" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hae</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.cpp" line="79"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Nykyinen</translation>
     </message>
 </context>
 </TS>

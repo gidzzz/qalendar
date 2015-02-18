@@ -297,7 +297,7 @@
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
         <source>Delete component?</source>
-        <translation>Komponente löschen?</translation>
+        <translation>Eintrag löschen?</translation>
     </message>
 </context>
 <context>
@@ -607,33 +607,33 @@ tägig</translation>
         <translation>Automatische Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>From</source>
         <translation>Von</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="146"/>
+        <location filename="../EventWindow.cpp" line="149"/>
         <source>On</source>
         <translation>Am</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="216"/>
-        <location filename="../EventWindow.cpp" line="237"/>
+        <location filename="../EventWindow.cpp" line="219"/>
+        <location filename="../EventWindow.cpp" line="240"/>
         <source>No more events</source>
         <translation>Keine weiteren Ereignisse</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="268"/>
+        <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="269"/>
+        <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
         <translation>Duplizieren</translation>
     </message>
     <message>
-        <location filename="../EventWindow.cpp" line="270"/>
+        <location filename="../EventWindow.cpp" line="273"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -1006,7 +1006,7 @@ tägig</translation>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation>Bearbeitbare Zeitzonen</translation>
+        <translation>Editierbare Zeitzonen</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>

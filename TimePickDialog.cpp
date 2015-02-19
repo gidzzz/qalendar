@@ -8,7 +8,7 @@
 // TODO: Support for 12-hour format, also in other places
 
 TimePickDialog::TimePickDialog(QTime time, QWidget *parent) :
-    DateTimePickDialog(parent)
+    DateTimePickDialog(tr("Now"), parent)
 {
     setWindowTitle(tr("Select time"));
 
@@ -33,8 +33,7 @@ TimePickDialog::TimePickDialog(QTime time, QWidget *parent) :
     connect(hList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     connect(mList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
 
-    hList->setCurrentRow(time.hour());
-    mList->setCurrentRow(time.minute());
+    setTime(time);
 }
 
 QTime TimePickDialog::time()
@@ -42,10 +41,23 @@ QTime TimePickDialog::time()
     return QTime(row(hList), row(mList));
 }
 
+void TimePickDialog::setTime(const QTime &time)
+{
+    hList->setCurrentRow(time.hour());
+    mList->setCurrentRow(time.minute());
+}
+
 void TimePickDialog::centerView()
 {
     centerView(hList);
     centerView(mList);
+}
+
+void TimePickDialog::reset()
+{
+    setTime(QTime::currentTime());
+
+    centerView();
 }
 
 void TimePickDialog::accept()

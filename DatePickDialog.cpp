@@ -13,7 +13,7 @@ const int MaxYear = 2037;
 // TODO: Fix premature item activation
 
 DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
-    DateTimePickDialog(parent),
+    DateTimePickDialog(tr("Today"), parent),
     type(type)
 {
     setWindowTitle(tr("Select date"));
@@ -53,6 +53,21 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     scrollers.append(Scroller(yList, 4, MinYear));
     connect(yList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
 
+    setDate(date);
+
+    // Weeks vary with year
+    if (type == Week) {
+        connect(yList, SIGNAL(itemSelectionChanged()), this, SLOT(adjustWeeks()));
+    }
+    // Days vary with month and year
+    if (type == Day) {
+        connect(mList, SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
+        connect(yList,  SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
+    }
+}
+
+void DatePickDialog::setDate(const QDate &date)
+{
     // Set up the year list
     if (type != Week) {
         yList->setCurrentRow(date.year()-MinYear);
@@ -70,15 +85,11 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
 
         adjustWeeks();
         wList->setCurrentRow(week-1);
-
-        connect(yList, SIGNAL(itemSelectionChanged()), this, SLOT(adjustWeeks()));
     }
     // Set up the day list
     if (type == Day) {
         adjustDays();
         dList->setCurrentRow(date.day()-1);
-        connect(mList, SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
-        connect(yList,  SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
     }
 }
 
@@ -184,6 +195,13 @@ QDate DatePickDialog::date()
         default:
             return QDate();
     }
+}
+
+void DatePickDialog::reset()
+{
+    setDate(QDate::currentDate());
+
+    centerView();
 }
 
 void DatePickDialog::accept()

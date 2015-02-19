@@ -4,15 +4,24 @@
 #include <QScrollBar>
 #include <QAbstractKineticScroller>
 
-DateTimePickDialog::DateTimePickDialog(QWidget *parent) :
+DateTimePickDialog::DateTimePickDialog(const QString &resetText, QWidget *parent) :
     RotatingDialog(parent),
     ui(new Ui::DateTimePickDialog),
     resizeCount(0)
 {
     ui->setupUi(this);
-    ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
 
-    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    QPushButton *resetButton = new QPushButton(resetText);
+    QPushButton *acceptButton = new QPushButton(tr("Done"));
+
+    resetButton->setAutoDefault(false);
+    acceptButton->setDefault(true);
+
+    ui->buttonBox->addButton(resetButton, QDialogButtonBox::ActionRole);
+    ui->buttonBox->addButton(acceptButton, QDialogButtonBox::ActionRole);
+
+    connect(resetButton, SIGNAL(clicked()), this, SLOT(reset()));
+    connect(acceptButton, SIGNAL(clicked()), this, SLOT(accept()));
 
     this->setFeatures(ui->dialogLayout, ui->buttonBox);
 }

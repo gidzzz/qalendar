@@ -14,7 +14,7 @@ class DateTimePickDialog : public RotatingDialog
     Q_OBJECT
 
 public:
-    DateTimePickDialog(QWidget *parent);
+    DateTimePickDialog(const QString &resetText, QWidget *parent);
 
 protected:
     Ui::DateTimePickDialog *ui;
@@ -27,7 +27,9 @@ protected:
     int row(QListWidget *listWidget);
     void centerView(QListWidget *listWidget);
 
+protected slots:
     virtual void centerView() = 0;
+    virtual void reset() = 0;
 
 private:
     QList<int> scrollersInput;

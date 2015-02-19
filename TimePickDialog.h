@@ -25,9 +25,12 @@ private:
     QListWidget *hList;
     QListWidget *mList;
 
+    void setTime(const QTime &time);
+
 private slots:
     void centerView();
 
+    void reset();
     void accept();
 };
 

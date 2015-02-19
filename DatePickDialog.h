@@ -38,6 +38,8 @@ private:
     QListWidget *mList;
     QListWidget *yList;
 
+    void setDate(const QDate &date);
+
     int day();
     int month();
     int year();
@@ -47,6 +49,7 @@ private slots:
     void adjustDays();
     void adjustWeeks();
 
+    void reset();
     void accept();
 };
 

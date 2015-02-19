@@ -33,7 +33,10 @@ signals:
 private:
     Type type;
 
-    QListWidget *lists[TypeCount];
+    QListWidget *dList;
+    QListWidget *wList;
+    QListWidget *mList;
+    QListWidget *yList;
 
     int day();
     int month();

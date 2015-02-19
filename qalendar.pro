@@ -65,6 +65,7 @@ SOURCES += main.cpp \
     DatePickSelector.cpp \
     DatePickDialog.cpp \
     TimePickSelector.cpp \
+    TimePickDialog.cpp \
     ZonePickSelector.cpp \
     ZonePickDialog.cpp \
     EventWindow.cpp \
@@ -150,6 +151,7 @@ HEADERS += \
     DatePickSelector.h \
     DatePickDialog.h \
     TimePickSelector.h \
+    TimePickDialog.h \
     ZonePickSelector.h \
     ZonePickDialog.h \
     ZoneDelegate.h \

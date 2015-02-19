@@ -1,10 +1,5 @@
 #include "DatePickDialog.h"
 
-#include <QPushButton>
-#include <QScrollBar>
-
-#include <QAbstractKineticScroller>
-
 #include "ExpandingListWidget.h"
 #include "DateDayDelegate.h"
 
@@ -18,13 +13,10 @@ const int maxYear = 2037;
 // TODO: Fix premature item activation
 
 DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
-    RotatingDialog(parent),
-    ui(new Ui::DatePickDialog),
-    type(type),
-    resizeCount(0)
+    DateTimePickDialog(parent),
+    type(type)
 {
-    ui->setupUi(this);
-    ui->buttonBox->addButton(new QPushButton(tr("Done")), QDialogButtonBox::AcceptRole);
+    setWindowTitle(tr("Select date"));
 
     // Make sure that the provided date is in the supported range
     date = qBound(QDate(minYear, 1, 1), date, QDate(maxYear, 12, 31));
@@ -84,51 +76,24 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
         connect(lists[Month], SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
         connect(lists[Year],  SIGNAL(itemSelectionChanged()), this, SLOT(adjustDays()));
     }
-
-    connect(ui->buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-
-    this->setFeatures(ui->dialogLayout, ui->buttonBox);
-}
-
-void DatePickDialog::resizeEvent(QResizeEvent *e)
-{
-    // HACK: Make the scroll-to-item work by waiting for the lists to be properly resized before scrolling
-    if (++resizeCount == 2)
-        centerView();
-
-    QDialog::resizeEvent(e);
 }
 
 void DatePickDialog::centerView()
 {
-    const int itemHeight = lists[Year]->visualItemRect(lists[Year]->item(0)).height();
-
     // Scroll day list
-    if (type == Day) {
-        lists[Day]->property("kineticScroller").value<QAbstractKineticScroller*>()
-                  ->scrollTo(QPoint(0, qBound(0,
-                                              row(Day) * itemHeight + (itemHeight - lists[Day]->height()) / 2,
-                                              lists[Day]->verticalScrollBar()->maximum())));
-    }
+    if (type == Day)
+        centerView(lists[Day]);
+
     // Scroll week list
-    if (type == Week) {
-        lists[Week]->property("kineticScroller").value<QAbstractKineticScroller*>()
-                   ->scrollTo(QPoint(0, qBound(0,
-                                               row(Week) * itemHeight + (itemHeight - lists[Week]->height()) / 2,
-                                               lists[Week]->verticalScrollBar()->maximum())));
-    }
+    if (type == Week)
+        centerView(lists[Week]);
+
     // Scroll month list
-    if (type == Month || type == Day) {
-        lists[Month]->property("kineticScroller").value<QAbstractKineticScroller*>()
-                    ->scrollTo(QPoint(0, qBound(0,
-                                                row(Month) * itemHeight + (itemHeight - lists[Month]->height()) / 2,
-                                                lists[Month]->verticalScrollBar()->maximum())));
-    }
+    if (type == Month || type == Day)
+        centerView(lists[Month]);
+
     // Scroll year list
-    lists[Year]->property("kineticScroller").value<QAbstractKineticScroller*>()
-               ->scrollTo(QPoint(0, qBound(0,
-                                           row(Year) * itemHeight + (itemHeight - lists[Year]->height()) / 2,
-                                           lists[Year]->verticalScrollBar()->maximum())));
+    centerView(lists[Year]);
 }
 
 void DatePickDialog::adjustDays()
@@ -140,7 +105,7 @@ void DatePickDialog::adjustDays()
         for (int i = initialDays; i < targetDays; i++)
             lists[Day]->addItem(QString::number(i+1));
     } else if (initialDays > targetDays) {
-        bool reselect = row(Day) >= targetDays;
+        bool reselect = row(lists[Day]) >= targetDays;
 
         for (int i = initialDays; i > targetDays; i--)
             delete lists[Day]->item(i-1);
@@ -162,7 +127,7 @@ void DatePickDialog::adjustWeeks()
         for (int i = initialWeeks; i < targetWeeks; i++)
             lists[Week]->addItem(QString::number(i+1));
     } else if (initialWeeks > targetWeeks) {
-        bool reselect = row(Week) >= targetWeeks;
+        bool reselect = row(lists[Week]) >= targetWeeks;
 
         for (int i = initialWeeks; i > targetWeeks; i--)
             delete lists[Week]->item(i-1);
@@ -186,26 +151,19 @@ void DatePickDialog::adjustWeeks()
     }
 }
 
-int DatePickDialog::row(Type type)
-{
-    const QList<QListWidgetItem*> selection = lists[type]->selectedItems();
-
-    return selection.isEmpty() ? -1 : lists[type]->row(selection.first());
-}
-
 int DatePickDialog::day()
 {
-    return row(Day) + 1;
+    return row(lists[Day]) + 1;
 }
 
 int DatePickDialog::month()
 {
-    return row(Month) + 1;
+    return row(lists[Month]) + 1;
 }
 
 int DatePickDialog::year()
 {
-    return row(Year) + minYear;
+    return row(lists[Year]) + minYear;
 }
 
 QDate DatePickDialog::date()
@@ -214,7 +172,7 @@ QDate DatePickDialog::date()
         case Day:
             return QDate(year(), month(), day());
         case Week:
-            return QDate(year(), 1, 4).addDays(row(Week)*7);
+            return QDate(year(), 1, 4).addDays(row(lists[Week])*7);
         case Month:
             return QDate(year(), month(), 1);
         case Year:
@@ -228,5 +186,5 @@ void DatePickDialog::accept()
 {
     emit selected(date());
 
-    QDialog::accept();
+    DateTimePickDialog::accept();
 }

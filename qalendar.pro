@@ -61,6 +61,7 @@ SOURCES += main.cpp \
     CalendarPickDialog.cpp \
     ColorPickSelector.cpp \
     ColorPickDialog.cpp \
+    DateTimePickDialog.cpp \
     DatePickSelector.cpp \
     DatePickDialog.cpp \
     TimePickSelector.cpp \
@@ -145,6 +146,7 @@ HEADERS += \
     ColorPickDialog.h \
     CalendarDelegate.h \
     DateDayDelegate.h \
+    DateTimePickDialog.h \
     DatePickSelector.h \
     DatePickDialog.h \
     TimePickSelector.h \
@@ -195,7 +197,7 @@ FORMS += \
     AlarmPickDialog.ui \
     CalendarPickDialog.ui \
     ColorPickDialog.ui \
-    DatePickDialog.ui \
+    DateTimePickDialog.ui \
     ZonePickDialog.ui \
     EventWindow.ui \
     TodoWindow.ui

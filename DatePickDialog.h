@@ -1,16 +1,17 @@
 #ifndef DATEPICKDIALOG_H
 #define DATEPICKDIALOG_H
 
-#include "RotatingDialog.h"
-#include "ui_DatePickDialog.h"
+#include "DateTimePickDialog.h"
 
 #include <QListWidget>
 
 #include <QDate>
 
-class DatePickDialog : public RotatingDialog
+class DatePickDialog : public DateTimePickDialog
 {
     Q_OBJECT
+
+    using DateTimePickDialog::centerView;
 
 public:
     enum Type
@@ -30,16 +31,9 @@ signals:
     void selected(QDate date);
 
 private:
-    Ui::DatePickDialog *ui;
-
     Type type;
 
     QListWidget *lists[TypeCount];
-
-    int resizeCount;
-    void resizeEvent(QResizeEvent *e);
-
-    int row(Type type);
 
     int day();
     int month();

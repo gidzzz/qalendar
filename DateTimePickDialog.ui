@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DatePickDialog</class>
- <widget class="QDialog" name="DatePickDialog">
-  <property name="windowTitle">
-   <string>Select date</string>
-  </property>
+ <class>DateTimePickDialog</class>
+ <widget class="QDialog" name="DateTimePickDialog">
   <layout class="QGridLayout" name="dialogLayout">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="listLayout">

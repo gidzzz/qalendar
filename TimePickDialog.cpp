@@ -27,6 +27,9 @@ TimePickDialog::TimePickDialog(QTime time, QWidget *parent) :
     ui->listLayout->addWidget(hList);
     ui->listLayout->addWidget(mList);
 
+    scrollers.append(Scroller(hList, 2, 0));
+    scrollers.append(Scroller(mList, 2, 0));
+
     connect(hList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     connect(mList, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
 

@@ -174,7 +174,8 @@ HEADERS += \
     RotatingDialog.h \
     ComponentEditDialog.h \
     Rotator.h \
-    Painter.h
+    Painter.h \
+    Scroller.h
 
 FORMS += \
     AgendaPlug.ui \

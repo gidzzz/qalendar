@@ -26,12 +26,14 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
         lists[Day] = new ExpandingListWidget(this);
         lists[Day]->setItemDelegate(new DateDayDelegate(lists[Day]));
         ui->listLayout->addWidget(lists[Day]);
+        scrollers.append(Scroller(lists[Day], 2, 1));
         connect(lists[Day], SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     }
     // Create the week list
     if (type == Week) {
         lists[Week] = new ExpandingListWidget(this);
         ui->listLayout->addWidget(lists[Week]);
+        scrollers.append(Scroller(lists[Week], 2, 1));
         connect(lists[Week], SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     }
     // Create the month list
@@ -40,6 +42,7 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
         for (int m = 1; m <= 12; m++)
             lists[Month]->addItem(QLocale().standaloneMonthName(m));
         ui->listLayout->addWidget(lists[Month]);
+        scrollers.append(Scroller(lists[Month], 2, 1));
         connect(lists[Month], SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
     }
     // Create the year list
@@ -47,6 +50,7 @@ DatePickDialog::DatePickDialog(Type type, QDate date, QWidget *parent) :
     for (int y = minYear; y <= maxYear; y++)
         lists[Year]->addItem(QString::number(y));
     ui->listLayout->addWidget(lists[Year]);
+    scrollers.append(Scroller(lists[Year], 4, minYear));
     connect(lists[Year], SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(centerView()));
 
     // Set up the year list

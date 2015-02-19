@@ -5,6 +5,9 @@
 #include "ui_DateTimePickDialog.h"
 
 #include <QListWidget>
+#include <QKeyEvent>
+
+#include "Scroller.h"
 
 class DateTimePickDialog : public RotatingDialog
 {
@@ -16,6 +19,9 @@ public:
 protected:
     Ui::DateTimePickDialog *ui;
 
+    QList<Scroller> scrollers;
+
+    void keyPressEvent(QKeyEvent *e);
     void resizeEvent(QResizeEvent *e);
 
     int row(QListWidget *listWidget);
@@ -24,6 +30,8 @@ protected:
     virtual void centerView() = 0;
 
 private:
+    QList<int> scrollersInput;
+
     int resizeCount;
 };
 

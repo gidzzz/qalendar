@@ -417,19 +417,27 @@ day</source>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.cpp" line="27"/>
-        <source>Done</source>
-        <translation>Готово</translation>
+        <location filename="../DatePickDialog.cpp" line="16"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="181"/>
+        <location filename="../DatePickDialog.cpp" line="161"/>
         <source>Week %1 (%2 - %3)</source>
         <translation>Тиждень %1 (%2 - %3)</translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.ui" line="6"/>
+        <location filename="../DatePickDialog.cpp" line="19"/>
         <source>Select date</source>
         <translation>Виберіть дату</translation>
+    </message>
+</context>
+<context>
+    <name>DateTimePickDialog</name>
+    <message>
+        <location filename="../DateTimePickDialog.cpp" line="15"/>
+        <source>Done</source>
+        <translation>Готово</translation>
     </message>
 </context>
 <context>
@@ -1060,6 +1068,19 @@ day</source>
             <numerusform>Старші за %n роки</numerusform>
             <numerusform>Старші за %n років</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>TimePickDialog</name>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="11"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="13"/>
+        <source>Select time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

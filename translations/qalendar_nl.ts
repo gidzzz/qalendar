@@ -412,19 +412,27 @@ day</source>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.cpp" line="27"/>
-        <source>Done</source>
-        <translation>Gereed</translation>
+        <location filename="../DatePickDialog.cpp" line="16"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="181"/>
+        <location filename="../DatePickDialog.cpp" line="161"/>
         <source>Week %1 (%2 - %3)</source>
         <translation>Week %1 (%2 - %3)</translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.ui" line="6"/>
+        <location filename="../DatePickDialog.cpp" line="19"/>
         <source>Select date</source>
         <translation>Selecteer datum</translation>
+    </message>
+</context>
+<context>
+    <name>DateTimePickDialog</name>
+    <message>
+        <location filename="../DateTimePickDialog.cpp" line="15"/>
+        <source>Done</source>
+        <translation>Gereed</translation>
     </message>
 </context>
 <context>
@@ -1046,6 +1054,19 @@ day</source>
             <numerusform>Ouder dan %n jaar</numerusform>
             <numerusform>Ouder dan %n jaar</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>TimePickDialog</name>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="11"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="13"/>
+        <source>Select time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

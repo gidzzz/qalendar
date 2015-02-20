@@ -412,18 +412,26 @@ day</source>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.cpp" line="27"/>
-        <source>Done</source>
+        <location filename="../DatePickDialog.cpp" line="16"/>
+        <source>Today</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="181"/>
+        <location filename="../DatePickDialog.cpp" line="161"/>
         <source>Week %1 (%2 - %3)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.ui" line="6"/>
+        <location filename="../DatePickDialog.cpp" line="19"/>
         <source>Select date</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>DateTimePickDialog</name>
+    <message>
+        <location filename="../DateTimePickDialog.cpp" line="15"/>
+        <source>Done</source>
         <translation></translation>
     </message>
 </context>
@@ -1046,6 +1054,19 @@ day</source>
             <numerusform>Older than %n year</numerusform>
             <numerusform>Older than %n years</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>TimePickDialog</name>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="11"/>
+        <source>Now</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="13"/>
+        <source>Select time</source>
+        <translation></translation>
     </message>
 </context>
 <context>

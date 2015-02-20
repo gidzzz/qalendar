@@ -409,19 +409,27 @@ ngày</translation>
 <context>
     <name>DatePickDialog</name>
     <message>
-        <location filename="../DatePickDialog.cpp" line="27"/>
-        <source>Done</source>
-        <translation>Hoàn tất</translation>
+        <location filename="../DatePickDialog.cpp" line="16"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.cpp" line="181"/>
+        <location filename="../DatePickDialog.cpp" line="161"/>
         <source>Week %1 (%2 - %3)</source>
         <translation>Tuần %1 (%2 - %3)</translation>
     </message>
     <message>
-        <location filename="../DatePickDialog.ui" line="6"/>
+        <location filename="../DatePickDialog.cpp" line="19"/>
         <source>Select date</source>
         <translation>Chọn ngày</translation>
+    </message>
+</context>
+<context>
+    <name>DateTimePickDialog</name>
+    <message>
+        <location filename="../DateTimePickDialog.cpp" line="15"/>
+        <source>Done</source>
+        <translation>Hoàn tất</translation>
     </message>
 </context>
 <context>
@@ -1034,6 +1042,19 @@ ngày</translation>
         <translation>
             <numerusform>Cũ hơn %n năm</numerusform>
         </translation>
+    </message>
+</context>
+<context>
+    <name>TimePickDialog</name>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="11"/>
+        <source>Now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../TimePickDialog.cpp" line="13"/>
+        <source>Select time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

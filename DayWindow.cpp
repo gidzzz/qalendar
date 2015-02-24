@@ -39,6 +39,9 @@ DayWindow::DayWindow(QDate date, QWidget *parent) :
     connect(ncw->eventButton, SIGNAL(clicked()), ui->componentList, SLOT(newEvent()));
     connect(ncw->todoButton,  SIGNAL(clicked()), ui->componentList, SLOT(newTodo()));
 
+    connect(ui->mainWidget, SIGNAL(swipedRight()), this, SLOT(gotoPrevDay()));
+    connect(ui->mainWidget, SIGNAL(swipedLeft()), this, SLOT(gotoNextDay()));
+
     connect(ui->prevAction, SIGNAL(triggered()), this, SLOT(gotoPrevDay()));
     connect(ui->nextAction, SIGNAL(triggered()), this, SLOT(gotoNextDay()));
     connect(ui->todayAction, SIGNAL(triggered()), this, SLOT(gotoToday()));

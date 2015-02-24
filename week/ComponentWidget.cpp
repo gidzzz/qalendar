@@ -190,16 +190,16 @@ void ComponentWidget::mousePressEvent(QMouseEvent *e)
 {
     // WeekWidget's normal behavior should not be tiggered, we only want to use
     // the gesture detection feature, so a call to its base class is necessary.
-    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
-        weekWidget->GestureWidget::mousePressEvent(e);
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mousePressEvent(e);
 
     QAbstractButton::mousePressEvent(e);
 }
 
 void ComponentWidget::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
-        weekWidget->GestureWidget::mouseReleaseEvent(e);
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mouseReleaseEvent(e);
 
     QAbstractButton::mouseReleaseEvent(e);
 
@@ -210,8 +210,8 @@ void ComponentWidget::mouseReleaseEvent(QMouseEvent *e)
 
 void ComponentWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    if (WeekWidget *weekWidget = qobject_cast<WeekWidget*>(this->parentWidget()))
-        weekWidget->GestureWidget::mouseMoveEvent(e);
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mouseMoveEvent(e);
 }
 
 void ComponentWidget::onClicked()

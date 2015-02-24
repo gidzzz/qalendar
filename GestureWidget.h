@@ -15,14 +15,7 @@ public:
     {
     }
 
-signals:
-    void swipedUp();
-    void swipedDown();
-    void swipedLeft();
-    void swipedRight();
-
-protected:
-    QPoint pressedPoint;
+    // Mouse event handlers are public to make forwarding possible
 
     void mousePressEvent(QMouseEvent *e)
     {
@@ -60,6 +53,15 @@ protected:
             }
         }
     }
+
+signals:
+    void swipedUp();
+    void swipedDown();
+    void swipedLeft();
+    void swipedRight();
+
+protected:
+    QPoint pressedPoint;
 
     virtual void forgetPress()
     {

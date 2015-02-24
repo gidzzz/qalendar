@@ -49,11 +49,28 @@ bool ComponentListWidget::viewportEvent(QEvent *e)
     return QListWidget::viewportEvent(e);
 }
 
+void ComponentListWidget::mousePressEvent(QMouseEvent *e)
+{
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mousePressEvent(e);
+
+    QListWidget::mousePressEvent(e);
+}
+
 void ComponentListWidget::mouseReleaseEvent(QMouseEvent *e)
 {
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mouseReleaseEvent(e);
+
     QListWidget::mouseReleaseEvent(e);
 
     this->clearSelection();
+}
+
+void ComponentListWidget::mouseMoveEvent(QMouseEvent *e)
+{
+    if (GestureWidget *gestureWidget = qobject_cast<GestureWidget*>(this->parentWidget()))
+        gestureWidget->GestureWidget::mouseMoveEvent(e);
 }
 
 void ComponentListWidget::onContextMenuRequested(const QPoint &pos)

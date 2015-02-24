@@ -30,11 +30,6 @@ class WeekWidget : public GestureWidget
 {
     Q_OBJECT
 
-    // Allow the component widget to drectly emit signals from this class to
-    // reduce the number of signal-slot connections, which otherwise could
-    // be very high
-    friend class ComponentWidget;
-
     // Allow week hint widgets to access hint profiles
     friend class WeekHintWidget;
 
@@ -47,6 +42,10 @@ public:
     void setDate(QDate date);
     QDate firstDate();
     QDate lastDate();
+
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *e);
 
 private:
     QDate date;
@@ -64,9 +63,6 @@ private:
     void populate();
 
     void paintEvent(QPaintEvent *);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *e);
 
     QDateTime mapToDate(const QPoint &pos);
     bool inAllDay(const QPoint &pos);

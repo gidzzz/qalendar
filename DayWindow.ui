@@ -2,7 +2,7 @@
 <ui version="4.0">
  <class>DayWindow</class>
  <widget class="QMainWindow" name="DayWindow">
-  <widget class="QWidget" name="mainWidget">
+  <widget class="GestureWidget" name="mainWidget">
    <layout class="QVBoxLayout" name="mainLayout">
     <property name="leftMargin">
      <number>5</number>
@@ -52,6 +52,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>GestureWidget</class>
+   <extends>QWidget</extends>
+   <header>GestureWidget.h</header>
+  </customwidget>
   <customwidget>
    <class>ComponentListWidget</class>
    <extends>QListWidget</extends>

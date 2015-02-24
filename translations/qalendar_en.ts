@@ -338,17 +338,17 @@ day</source>
 <context>
     <name>ComponentListWidget</name>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="71"/>
+        <location filename="../ComponentListWidget.cpp" line="88"/>
         <source>Edit</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="72"/>
+        <location filename="../ComponentListWidget.cpp" line="89"/>
         <source>Clone</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="73"/>
+        <location filename="../ComponentListWidget.cpp" line="90"/>
         <source>Delete</source>
         <translation></translation>
     </message>

@@ -339,17 +339,17 @@ tägig</translation>
 <context>
     <name>ComponentListWidget</name>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="71"/>
+        <location filename="../ComponentListWidget.cpp" line="88"/>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="72"/>
+        <location filename="../ComponentListWidget.cpp" line="89"/>
         <source>Clone</source>
         <translation>Duplizieren</translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="73"/>
+        <location filename="../ComponentListWidget.cpp" line="90"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -415,7 +415,7 @@ tägig</translation>
     <message>
         <location filename="../DatePickDialog.cpp" line="16"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute</translation>
     </message>
     <message>
         <location filename="../DatePickDialog.cpp" line="161"/>
@@ -1062,12 +1062,12 @@ tägig</translation>
     <message>
         <location filename="../TimePickDialog.cpp" line="11"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Jetzt</translation>
     </message>
     <message>
         <location filename="../TimePickDialog.cpp" line="13"/>
         <source>Select time</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhrzeit auswählen</translation>
     </message>
 </context>
 <context>

@@ -339,17 +339,17 @@ päivä</translation>
 <context>
     <name>ComponentListWidget</name>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="71"/>
+        <location filename="../ComponentListWidget.cpp" line="88"/>
         <source>Edit</source>
         <translation>Muokkaa</translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="72"/>
+        <location filename="../ComponentListWidget.cpp" line="89"/>
         <source>Clone</source>
         <translation>Kopioi</translation>
     </message>
     <message>
-        <location filename="../ComponentListWidget.cpp" line="73"/>
+        <location filename="../ComponentListWidget.cpp" line="90"/>
         <source>Delete</source>
         <translation>Poista</translation>
     </message>

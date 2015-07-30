@@ -423,7 +423,7 @@ dan</translation>
     <message>
         <location filename="../DatePickDialog.cpp" line="16"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Danes</translation>
     </message>
     <message>
         <location filename="../DatePickDialog.cpp" line="161"/>
@@ -1088,12 +1088,12 @@ dan</translation>
     <message>
         <location filename="../TimePickDialog.cpp" line="11"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdaj</translation>
     </message>
     <message>
         <location filename="../TimePickDialog.cpp" line="13"/>
         <source>Select time</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi čas</translation>
     </message>
 </context>
 <context>

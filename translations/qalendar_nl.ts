@@ -414,7 +414,7 @@ day</source>
     <message>
         <location filename="../DatePickDialog.cpp" line="16"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <location filename="../DatePickDialog.cpp" line="161"/>
@@ -1061,12 +1061,12 @@ day</source>
     <message>
         <location filename="../TimePickDialog.cpp" line="11"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu</translation>
     </message>
     <message>
         <location filename="../TimePickDialog.cpp" line="13"/>
         <source>Select time</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer tijd</translation>
     </message>
 </context>
 <context>

@@ -415,7 +415,7 @@ journée</translation>
     <message>
         <location filename="../DatePickDialog.cpp" line="16"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Aujourd&apos;hui</translation>
     </message>
     <message>
         <location filename="../DatePickDialog.cpp" line="161"/>
@@ -1062,12 +1062,12 @@ journée</translation>
     <message>
         <location filename="../TimePickDialog.cpp" line="11"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Maintenant</translation>
     </message>
     <message>
         <location filename="../TimePickDialog.cpp" line="13"/>
         <source>Select time</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner l&apos;heure</translation>
     </message>
 </context>
 <context>

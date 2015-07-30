@@ -34,12 +34,12 @@
     <message>
         <location filename="../AlarmPickDialog.ui" line="38"/>
         <source>In advance</source>
-        <translation type="unfinished"></translation>
+        <translation>Заздалегідь</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="48"/>
         <source>Arbitrary</source>
-        <translation type="unfinished"></translation>
+        <translation>Довільний час</translation>
     </message>
     <message>
         <location filename="../AlarmPickDialog.ui" line="66"/>
@@ -189,12 +189,12 @@
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="27"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Місцево</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="37"/>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>День народження</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.ui" line="53"/>
@@ -219,7 +219,7 @@
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="90"/>
         <source>New calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити календар</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="94"/>
@@ -230,7 +230,7 @@
         <location filename="../settings/CalendarEditDialog.cpp" line="141"/>
         <location filename="../settings/CalendarEditDialog.cpp" line="166"/>
         <source>Error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Виникла помилка</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="175"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="193"/>
         <source>This calendar cannot be deleted. Delete all calendar content instead?</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей календар видалити неможливо. Бажаєте видалити увесь його вміст?</translation>
     </message>
     <message>
         <location filename="../settings/CalendarEditDialog.cpp" line="201"/>
@@ -286,17 +286,17 @@
     <message>
         <location filename="../ChangeManager.cpp" line="239"/>
         <source>Delete event?</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити подію?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="242"/>
         <source>Delete task?</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити завдання?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="245"/>
         <source>Delete note?</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити нотатку?</translation>
     </message>
     <message>
         <location filename="../ChangeManager.cpp" line="248"/>
@@ -350,7 +350,7 @@ day</source>
     <message>
         <location filename="../ComponentListWidget.cpp" line="89"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../ComponentListWidget.cpp" line="90"/>
@@ -368,7 +368,7 @@ day</source>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="184"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../week/ComponentWidget.cpp" line="185"/>
@@ -381,32 +381,32 @@ day</source>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="6"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Формати дат</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="20"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Повністю</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="37"/>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Частково</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="72"/>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>День</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="89"/>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Місяць</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.ui" line="106"/>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Рік</translation>
     </message>
     <message>
         <location filename="../settings/DateFormatDialog.cpp" line="24"/>
@@ -419,7 +419,7 @@ day</source>
     <message>
         <location filename="../DatePickDialog.cpp" line="16"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Сьогодні</translation>
     </message>
     <message>
         <location filename="../DatePickDialog.cpp" line="161"/>
@@ -536,7 +536,7 @@ day</source>
     <message>
         <location filename="../EventEditDialog.ui" line="118"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Часовий пояс</translation>
     </message>
     <message>
         <location filename="../EventEditDialog.ui" line="125"/>
@@ -614,12 +614,12 @@ day</source>
     <message>
         <location filename="../EventWindow.ui" line="202"/>
         <source>Clone event</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати подію</translation>
     </message>
     <message>
         <location filename="../EventWindow.ui" line="207"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичні зв’язки</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="149"/>
@@ -640,12 +640,12 @@ day</source>
     <message>
         <location filename="../EventWindow.cpp" line="271"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="272"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../EventWindow.cpp" line="273"/>
@@ -658,22 +658,22 @@ day</source>
     <message>
         <location filename="../ImportDialog.ui" line="6"/>
         <source>Select calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати календар</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="44"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортувати</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="50"/>
         <source>New calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий календар</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="77"/>
         <source>Importing aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Імпортування перервано</translation>
     </message>
     <message numerus="yes">
         <location filename="../ImportDialog.cpp" line="112"/>
@@ -706,12 +706,12 @@ day</source>
         <location filename="../ImportDialog.cpp" line="126"/>
         <location filename="../ImportDialog.cpp" line="194"/>
         <source>Error occurred</source>
-        <translation type="unfinished"></translation>
+        <translation>Виникла помилка</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="187"/>
         <source>Some items already in calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Деякі компоненти вже є в календарі</translation>
     </message>
 </context>
 <context>
@@ -752,7 +752,7 @@ day</source>
     <message>
         <location filename="../JournalsPlug.cpp" line="125"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../JournalsPlug.cpp" line="126"/>
@@ -826,7 +826,7 @@ day</source>
     <message>
         <location filename="../NewComponentWidget.h" line="24"/>
         <source>New event</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати подію</translation>
     </message>
 </context>
 <context>
@@ -834,12 +834,12 @@ day</source>
     <message>
         <location filename="../CWrapper.h" line="59"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Приватний</translation>
     </message>
     <message>
         <location filename="../CWrapper.h" line="61"/>
         <source>Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Дні народження</translation>
     </message>
 </context>
 <context>
@@ -857,7 +857,7 @@ day</source>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="34"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вигляд</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="55"/>
@@ -907,7 +907,7 @@ day</source>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.ui" line="188"/>
         <source>Week start</source>
-        <translation type="unfinished"></translation>
+        <translation>Початок тижня</translation>
     </message>
     <message>
         <location filename="../recurrence/RecurrencePickDialog.cpp" line="36"/>
@@ -963,17 +963,17 @@ day</source>
     <message>
         <location filename="../recurrence/RulePickDialog.ui" line="6"/>
         <source>Select rule</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати правило</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="16"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="17"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <location filename="../recurrence/RulePickDialog.cpp" line="18"/>
@@ -986,7 +986,7 @@ day</source>
     <message>
         <location filename="../recurrence/RulePickSelector.cpp" line="14"/>
         <source>Rule %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Правило %1 з %2</translation>
     </message>
 </context>
 <context>
@@ -1004,7 +1004,7 @@ day</source>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="41"/>
         <source>Alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Звук сповіщення</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="51"/>
@@ -1019,17 +1019,17 @@ day</source>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="71"/>
         <source>First day of week</source>
-        <translation type="unfinished"></translation>
+        <translation>Перший день тижня</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="81"/>
         <source>Editable time zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінні часові пояси</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.ui" line="88"/>
         <source>Date formats</source>
-        <translation type="unfinished"></translation>
+        <translation>Формати дат</translation>
     </message>
     <message>
         <location filename="../settings/SettingsDialog.cpp" line="19"/>
@@ -1075,12 +1075,12 @@ day</source>
     <message>
         <location filename="../TimePickDialog.cpp" line="11"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Зараз</translation>
     </message>
     <message>
         <location filename="../TimePickDialog.cpp" line="13"/>
         <source>Select time</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати час</translation>
     </message>
 </context>
 <context>
@@ -1098,7 +1098,7 @@ day</source>
     <message>
         <location filename="../TodoEditDialog.ui" line="42"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Часовий пояс</translation>
     </message>
     <message>
         <location filename="../TodoEditDialog.ui" line="49"/>
@@ -1161,22 +1161,22 @@ day</source>
     <message>
         <location filename="../TodoWindow.ui" line="179"/>
         <source>Clone task</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати завдання</translation>
     </message>
     <message>
         <location filename="../TodoWindow.ui" line="184"/>
         <source>Automatic links</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматичні зв’язки</translation>
     </message>
     <message>
         <location filename="../TodoWindow.cpp" line="171"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати</translation>
     </message>
     <message>
         <location filename="../TodoWindow.cpp" line="172"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../TodoWindow.cpp" line="173"/>
@@ -1200,7 +1200,7 @@ day</source>
     <message>
         <location filename="../TodosPlug.cpp" line="42"/>
         <source>Group by calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Згрупувати за календарем</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="43"/>
@@ -1220,7 +1220,7 @@ day</source>
     <message>
         <location filename="../TodosPlug.cpp" line="333"/>
         <source>Clone</source>
-        <translation type="unfinished"></translation>
+        <translation>Клонувати</translation>
     </message>
     <message>
         <location filename="../TodosPlug.cpp" line="334"/>
@@ -1238,12 +1238,12 @@ day</source>
     <message>
         <location filename="../settings/TunePickDialog.ui" line="6"/>
         <source>Choose alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати звук сповіщення</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="17"/>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробиці</translation>
     </message>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="18"/>
@@ -1253,7 +1253,7 @@ day</source>
     <message>
         <location filename="../settings/TunePickDialog.cpp" line="67"/>
         <source>Add alarm tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Додати звук сповіщення</translation>
     </message>
 </context>
 <context>
@@ -1310,17 +1310,17 @@ day</source>
     <message>
         <location filename="../ZonePickDialog.ui" line="6"/>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Часовий пояс</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.ui" line="39"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Пошук</translation>
     </message>
     <message>
         <location filename="../ZonePickDialog.cpp" line="79"/>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Поточні події</translation>
     </message>
 </context>
 </TS>

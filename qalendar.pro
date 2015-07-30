@@ -208,11 +208,13 @@ FORMS += \
 TRANSLATIONS = \
     translations/qalendar_de.ts \
     translations/qalendar_en.ts \
+    translations/qalendar_es.ts \
     translations/qalendar_fi.ts \
     translations/qalendar_fr.ts \
     translations/qalendar_it.ts \
     translations/qalendar_nl.ts \
     translations/qalendar_pl.ts \
+    translations/qalendar_ru.ts \
     translations/qalendar_sl_SI.ts \
     translations/qalendar_uk.ts \
     translations/qalendar_vi.ts
